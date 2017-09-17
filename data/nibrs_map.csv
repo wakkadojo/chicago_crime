@@ -8,7 +8,7 @@ code,description,is_index,crime_type
 6,06,Larceny,True,Property
 7,07,Motor Vehicle Theft,True,Property
 8,09,Arson,True,Property
-9,01B,Involuntary Manslaughter,False,Violent
+9,01B,Involuntary Manslaughter,False,Other
 10,08A,Simple Assault,False,Violent
 11,08B,Simple Battery,False,Violent
 12,10,Forgery & Counterfeiting,False,Property
