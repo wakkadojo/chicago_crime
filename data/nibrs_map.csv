@@ -8,21 +8,21 @@ code,description,is_index,crime_type
 6,06,Larceny,True,Property
 7,07,Motor Vehicle Theft,True,Property
 8,09,Arson,True,Property
-9,01B,Involuntary Manslaughter,False,Other
+9,01B,Involuntary Manslaughter,False,Violent
 10,08A,Simple Assault,False,Violent
 11,08B,Simple Battery,False,Violent
 12,10,Forgery & Counterfeiting,False,Property
 13,11,Fraud,False,Property
 14,12,Embezzlement,False,Property
 15,13,Stolen Property,False,Property
-16,14,Vandalism,False,Other
-17,15,Weapons Violation,False,Other
-18,16,Prostitution ,False,Other
-19,17,Criminal Sexual Abuse,False,Other
-20,18,Drug Abuse,False,Other
-21,19,Gambling,False,Other
-22,20,Offenses Against Family,False,Other
-23,22,Liquor License,False,Other
-24,24,Disorderly Conduct,False,Other
-25,26,Misc Non-Index Offense,False,Other
+16,14,Vandalism,False,Property
+17,15,Weapons Violation,False,Society
+18,16,Prostitution ,False,Society
+19,17,Criminal Sexual Abuse,False,Society
+20,18,Drug Abuse,False,Society
+21,19,Gambling,False,Society
+22,20,Offenses Against Family,False,Society
+23,22,Liquor License,False,Society
+24,24,Disorderly Conduct,False,Society
+25,26,Misc Non-Index Offense,False,Society
 
