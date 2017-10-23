@@ -1,0 +1,311 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!-- for d3 legends -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.13.0/d3-legend.js"></script>
+
+    <!-- Post Content -->
+    <article>
+      <div class="container">
+        <div class="row">
+          <!-- <div class="col-lg-8 col-md-10 mx-auto"> -->
+          <div class="col-md-10 mx-auto">
+
+            <h2 class="section-heading">Summary</h2>
+            <ul>
+                <li> Crime has come down across the city
+                <li> While crime has come down, the inequality has noticeably increased
+            </ul>
+
+<svg width="600" height="300"></svg>
+
+<style> 
+.d3axis { font-size: 14px; }
+</style>
+
+<script type="text/javascript">
+
+    var svg = d3.select("svg"),
+        margin = {top: 20, right: 20, bottom: 60, left: 110},
+        width = svg.attr("width") - margin.left - margin.right,
+        height = svg.attr("height") - margin.top - margin.bottom,
+        g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scaleTime().range([0, width]),
+        y = d3.scaleLinear().range([height, 0]),
+        z = d3.scaleOrdinal(d3.schemeCategory10);        
+
+    var line = d3.line()
+        .x(d => x(d.key))
+        .y(d => y(+d.value))
+        .defined(d => d.value != 0)
+
+    var timeParse = d3.timeParse("%Y-%m");
+
+    var get_type_line_class   = function(type) { return type + "_data_line"; }
+        get_type_legend_class = function(type) { return type + "_data_legend"; }
+
+    var type_mouseover = function(type) {
+        d3.select("." + get_type_line_class(type)).style("stroke-width", "3");
+        d3.select("." + get_type_legend_class(type)).select("text").style("font-weight", "bold");
+    }
+
+    var type_mouseout = function(type) {
+        d3.select("." + get_type_line_class(type)).style("stroke-width", "1.25");
+        d3.select("." + get_type_legend_class(type)).select("text").style("font-weight", "normal");
+    }
+
+    d3.csv("static/data/chicago_crimes_percapita.csv", function(csv_data) {
+
+        csv_data.forEach(function(d) { 
+            d.time = d.time // Do not parse here: if we do nest turns it back to str anyway, parse later
+            d.crime_intensity = d.crime_intensity == "" ? null : +d.crime_intensity;
+        })
+        
+        var type_nest = d3.nest()
+            .key(d => d.crime_type)
+            .key(d => d.time)
+            .rollup(leaves =>
+                d3.sum(leaves, d => d.crime_intensity)
+            )
+            .entries(csv_data);
+        
+        // After grouping, convert string dates we grouped on to datetime objects
+        type_nest.forEach(function(type) {
+            type.values.forEach(function(d) {
+                d.key = timeParse(d.key)
+            })
+        })
+
+        x.domain(d3.extent(type_nest[0].values, d => d.key));
+        y.domain([0, d3.max(type_nest[0].values, d => d.value)]);
+        z.domain(type_nest.map(type => type.key));
+
+        // Begin make legend
+        var ordinal_legend_entries = d3.scaleOrdinal()
+            .domain(type_nest.map(type => type.key))
+            .range(type_nest.map(type => z(type.key)))
+
+        var legend = g.append("g")
+            .attr("class", "legend_ordinal")
+            .attr("transform", "translate(20, " + (height - margin.bottom) + ")");
+
+        var legend_ordinal = d3.legendColor()
+            .shape("rect")
+            .shapePadding("16")
+            .shapeHeight("3")
+            .scale(ordinal_legend_entries)
+            .on("cellover", function() { 
+                var type = d3.select(this).text();
+                type_mouseover(type);
+            })
+            .on("cellout", function() {
+                var type = d3.select(this).text();
+                type_mouseout(type);
+            });
+
+
+        g.select(".legend_ordinal")
+            .attr("class", "d3axis")
+            .call(legend_ordinal);
+        
+        // After we make the class lets add tags to the labels
+        d3.selectAll(".legendCells").selectAll(".cell").each(function() {
+            var type = d3.select(this).select("text").text();
+            d3.select(this).attr("class", get_type_legend_class(type));
+        });
+
+        // End make legend
+
+        // begin plot each crime type over time
+        type_nest.forEach(function(type) {
+
+            var data = type.values
+            var key = type.key
+
+            g.append("g")
+                .attr("class", "d3axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x)
+                    .tickFormat(d3.timeFormat("%Y-%m"))
+                )
+                .call(d3.axisBottom(x))
+                .append("text")
+                .attr("text-anchor", "middle")
+                .attr("transform", "translate(" + (width/2.0) + "," + 2*margin.bottom/3 + ")")
+                .attr("fill", "black")
+                .text("time");
+           
+            g.append("g")
+                .attr("class", "d3axis")
+                .call(d3.axisLeft(y).ticks(4))
+                .append("text")
+                .attr("text-anchor", "middle")
+                .attr("y", -margin.left/2)
+                .attr("x", -height/2)
+                .attr("transform", "rotate(-90)")
+                .attr("fill", "black")
+                .text("crime intensity");
+
+            g.append("path")
+                .datum(data)
+                .attr("class", get_type_line_class(key))
+                .attr("d", line)
+                .style("stroke-width", "1.25")
+                .style("stroke", z(key))
+                .attr("fill", "none")
+                .on("mouseover", function() { type_mouseover(key); })
+                .on("mouseout", function() { type_mouseout(key); });
+
+        })
+        // end plot each crime type over time
+
+    });
+
+</script>
+
+<script type="text/javascript">
+    
+    /*
+    var svg = d3.select("svg"),
+        margin = {top: 20, right: 20, bottom: 50, left: 80},
+        width = svg.attr("width") - margin.left - margin.right,
+        height = svg.attr("height") - margin.top - margin.bottom,
+        g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+    var x = d3.scaleTime().range([0, width]),
+        y = d3.scaleLinear().range([height, 0]),
+        z = d3.scaleOrdinal(d3.schemeCategory10);        
+
+    var parseTime = d3.timeParse("%Y-%m");
+
+    var line = d3.line()
+        .x(function(d) { return x(d.time); })
+        .y(function(d) { return y(d.Property); })
+        .defined(function(d) { return d.Property != null; })
+
+    var temp = null;
+
+    d3.json("static/data/crime_type_agg.json", function(data) {
+
+        data.forEach(function(d) {
+            d.time = parseTime(d.time.qyear + "-" + d.time.month);
+        });
+
+        var dataCols = d3.keys(data[0]).filter(name => name != 'time');
+
+        x.domain(d3.extent(data, function(d) { return d.time; }));
+        y.domain([0, d3.max(data, function(d) { return d.Property; })]);
+
+        g.append("path")
+            .attr("d", line(data))
+            .style("stroke-width", "2")
+            .style("stroke", "blue")
+            .attr("fill", "none")
+            ;
+
+        // Add the X Axis
+        g.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x)
+                .tickFormat(d3.timeFormat("%Y-%m"))
+            )
+            .call(d3.axisBottom(x))
+            //.selectAll("text")	
+            //.attr("dx", "-.8em")
+            //.attr("dy", ".15em")
+            //.attr("transform", "rotate(-65)")
+            .append("text")
+            .attr("text-anchor", "middle")
+            .attr("transform", "translate(" + (width/2.0) + "," + 2*margin.bottom/3 + ")")
+            .attr("fill", "black")
+            .text("time")
+            ;
+       
+        // Add the Y Axis
+        g.append("g")
+            //.attr("class", "axis")
+            .call(d3.axisLeft(y).ticks(4))
+            .append("text")
+            .attr("text-anchor", "middle")
+            .attr("y", -margin.left/2)
+            .attr("x", -height/2)
+            .attr("transform", "rotate(-90)")
+            .attr("fill", "black")
+            .text("crime intensity")
+            ;
+
+    });
+       */ 
+
+</script>
+            
+            
+            <h2 class="section-heading">Sizing Up a Crime</h2>
+            <ul>
+                <li> Discussion about how to look at crimes: severity of crime and per person 
+                <li> Discuss data sourcing: intensity and population
+                <li> table of crime intensity
+                <li> discussion: what does intensity measure
+                <li> Example of murder versus disorderly conduct of count versus weighted
+                <li> How did I get weights
+            </ul>
+            
+            <h2 class="section-heading">Crime Overview</h2>
+            <ul>
+                <li> Rolling mean to avoid seasonality
+                <li> Graph of total to category to FBI code name
+                <li> Effects of income
+                <li> Effects of race
+            </ul>
+            
+            <h2 class="section-heading">Crime Inequality</h2>
+            <ul>
+                <li> How to determine inequality: who is impacted and geographic proxy
+                <li> What is the Gini coefficient: top x% crime scroller
+                <li> [Optional] Analysis of time of day?
+            </ul>
+            
+            <h2 class="section-heading">Explore the City</h2>
+            <ul>
+                <li> Plot of crime versus income now and in past + diff
+                <li> Geography graph
+                <li> Auto text: Crime summary + change, race, income changes
+            </ul>
+            
+            <h2 class="section-heading">Next Steps</h2>
+            <ul>
+                <li> Holistic measurements of wealth, including real estate value, foreclosures + how to source it
+                <li> Effects of education + how to source it
+                <li> Better measurement of income + how to source it (IRS)
+                <li> Get a better measure of crime severity + how to source it
+            </ul>
+
+            <h2 class="section-heading">Data Sources and Source Code</h2>
+            <ul>
+                <li> Hey
+            </ul>
+            
+            <h2 class="section-heading">Related Work by Others</h2>
+            <ul>
+                <li> Hey
+            </ul>
+
+
+            <blockquote>The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.</blockquote>
+
+            <a href="#">
+              <img class="img-fluid" src="static/img/post-sample-image.jpg" alt="">
+            </a>
+            <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
+
+            <p>Placeholder text by
+              <a href="http://spaceipsum.com/">Space Ipsum</a>. Photographs by
+              <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+{% endblock %}
