@@ -99,14 +99,15 @@
         })
 
         var type_stack_gen = d3.stack()
-            .keys(type_nest.map(d => d.key));
+            .keys(type_nest.map(d => d.key))
+            .order(d3.stackOrderReverse); // Reverse to match rendering orientation
 
         var type_stack = type_stack_gen(type_flat);
 
         //x.domain(d3.extent(type_nest[0].values, d => d.key));
         //y.domain([0, d3.max(type_nest[0].values, d => d.value)]);
         x.domain(d3.extent(type_stack[0].filter(d => d.data.time.getFullYear() > 2001).map(d => d.data.time)));
-        y.domain([0, d3.max(type_stack[type_stack.length - 1].map(d => d[1]))]);
+        y.domain([0, d3.max(type_stack[0].map(d => d[1]))]);
         z.domain(type_nest.map(type => type.key));
 
         // Begin make legend
