@@ -12,6 +12,8 @@
           <!-- <div class="col-lg-8 col-md-10 mx-auto"> -->
           <div class="col-md-10 mx-auto">
 
+            <p>Dont forget to turn off debug flask</p>
+
             <h2 class="section-heading">Summary</h2>
             <ul>
                 <li> Crime has come down across the city
@@ -21,7 +23,7 @@
 <svg width="600" height="300"></svg>
 
 <style> 
-.d3axis { font-size: 14px; }
+.d3axis { font-size: 14px; font-weight: 300; }
 </style>
 
 <script type="text/javascript">
@@ -35,6 +37,12 @@
     var x = d3.scaleTime().range([0, width]),
         y = d3.scaleLinear().range([height, 0]),
         z = d3.scaleOrdinal(d3.schemeCategory10);        
+        
+    var area = d3.area()
+        .x(d => x(d.data.time))
+        .y0(d => y(d[0]))
+        .y1(d => y(d[1]))
+        .defined(d => d.data.time.getFullYear() > 2001)
 
     var line = d3.line()
         .x(d => x(d.key))
@@ -43,17 +51,20 @@
 
     var timeParse = d3.timeParse("%Y-%m");
 
-    var get_type_line_class   = function(type) { return type + "_data_line"; }
-        get_type_legend_class = function(type) { return type + "_data_legend"; }
+    var get_crime_type_line_id   = function(type) { return type + "_type_line"; }
+        get_crime_type_area_id   = function(type) { return type + "_type_area"; }
+        get_crime_type_legend_id = function(type) { return type + "_type_legend"; }
 
-    var type_mouseover = function(type) {
-        d3.select("." + get_type_line_class(type)).style("stroke-width", "3");
-        d3.select("." + get_type_legend_class(type)).select("text").style("font-weight", "bold");
+    var crime_type_mouseover = function(type) {
+        d3.select("#" + get_crime_type_area_id(type)).style("opacity", "1");
+        d3.select("#" + get_crime_type_legend_id(type)).select("text").style("font-weight", "bold");
+        d3.select("#" + get_crime_type_legend_id(type)).select("rect").style("opacity", "1");
     }
 
-    var type_mouseout = function(type) {
-        d3.select("." + get_type_line_class(type)).style("stroke-width", "1.25");
-        d3.select("." + get_type_legend_class(type)).select("text").style("font-weight", "normal");
+    var crime_type_mouseout = function(type) {
+        d3.select("#" + get_crime_type_area_id(type)).style("opacity", "0.4");
+        d3.select("#" + get_crime_type_legend_id(type)).select("text").style("font-weight", null);
+        d3.select("#" + get_crime_type_legend_id(type)).select("rect").style("opacity", "0.4");
     }
 
     d3.csv("static/data/chicago_crimes_percapita.csv", function(csv_data) {
@@ -62,7 +73,7 @@
             d.time = d.time // Do not parse here: if we do nest turns it back to str anyway, parse later
             d.crime_intensity = d.crime_intensity == "" ? null : +d.crime_intensity;
         })
-        
+
         var type_nest = d3.nest()
             .key(d => d.crime_type)
             .key(d => d.time)
@@ -70,7 +81,7 @@
                 d3.sum(leaves, d => d.crime_intensity)
             )
             .entries(csv_data);
-        
+
         // After grouping, convert string dates we grouped on to datetime objects
         type_nest.forEach(function(type) {
             type.values.forEach(function(d) {
@@ -78,8 +89,24 @@
             })
         })
 
-        x.domain(d3.extent(type_nest[0].values, d => d.key));
-        y.domain([0, d3.max(type_nest[0].values, d => d.value)]);
+        var type_flat = type_nest[0].values.map(function(d, i) {
+            var time_point_dict = {}
+            time_point_dict["time"] = type_nest[0].values[i].key;
+            type_nest.forEach(function(d) {
+                time_point_dict[d.key] = d.values[i].value;
+            })
+            return time_point_dict;
+        })
+
+        var type_stack_gen = d3.stack()
+            .keys(type_nest.map(d => d.key));
+
+        var type_stack = type_stack_gen(type_flat);
+
+        //x.domain(d3.extent(type_nest[0].values, d => d.key));
+        //y.domain([0, d3.max(type_nest[0].values, d => d.value)]);
+        x.domain(d3.extent(type_stack[0].filter(d => d.data.time.getFullYear() > 2001).map(d => d.data.time)));
+        y.domain([0, d3.max(type_stack[type_stack.length - 1].map(d => d[1]))]);
         z.domain(type_nest.map(type => type.key));
 
         // Begin make legend
@@ -89,20 +116,17 @@
 
         var legend = g.append("g")
             .attr("class", "legend_ordinal")
-            .attr("transform", "translate(20, " + (height - margin.bottom) + ")");
+            .attr("transform", "translate(" + (width - margin.right - 80) + "," + margin.top/2 + ")")
 
         var legend_ordinal = d3.legendColor()
-            .shape("rect")
-            .shapePadding("16")
-            .shapeHeight("3")
             .scale(ordinal_legend_entries)
             .on("cellover", function() { 
                 var type = d3.select(this).text();
-                type_mouseover(type);
+                crime_type_mouseover(type);
             })
             .on("cellout", function() {
                 var type = d3.select(this).text();
-                type_mouseout(type);
+                crime_type_mouseout(type);
             });
 
 
@@ -110,123 +134,32 @@
             .attr("class", "d3axis")
             .call(legend_ordinal);
         
-        // After we make the class lets add tags to the labels
+        // After we make the class lets add tags to the labels and also specify opacity
         d3.selectAll(".legendCells").selectAll(".cell").each(function() {
+            // id
             var type = d3.select(this).select("text").text();
-            d3.select(this).attr("class", get_type_legend_class(type));
+            d3.select(this).attr("id", get_crime_type_legend_id(type));
+            // swatch
+            d3.select(this).select("rect").style("opacity", "0.4");
         });
-
         // End make legend
 
-        // begin plot each crime type over time
-        type_nest.forEach(function(type) {
-
-            var data = type.values
-            var key = type.key
-
-            g.append("g")
-                .attr("class", "d3axis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x)
-                    .tickFormat(d3.timeFormat("%Y-%m"))
-                )
-                .call(d3.axisBottom(x))
-                .append("text")
-                .attr("text-anchor", "middle")
-                .attr("transform", "translate(" + (width/2.0) + "," + 2*margin.bottom/3 + ")")
-                .attr("fill", "black")
-                .text("time");
-           
-            g.append("g")
-                .attr("class", "d3axis")
-                .call(d3.axisLeft(y).ticks(4))
-                .append("text")
-                .attr("text-anchor", "middle")
-                .attr("y", -margin.left/2)
-                .attr("x", -height/2)
-                .attr("transform", "rotate(-90)")
-                .attr("fill", "black")
-                .text("crime intensity");
-
-            g.append("path")
-                .datum(data)
-                .attr("class", get_type_line_class(key))
-                .attr("d", line)
-                .style("stroke-width", "1.25")
-                .style("stroke", z(key))
-                .attr("fill", "none")
-                .on("mouseover", function() { type_mouseover(key); })
-                .on("mouseout", function() { type_mouseout(key); });
-
-        })
-        // end plot each crime type over time
-
-    });
-
-</script>
-
-<script type="text/javascript">
-    
-    /*
-    var svg = d3.select("svg"),
-        margin = {top: 20, right: 20, bottom: 50, left: 80},
-        width = svg.attr("width") - margin.left - margin.right,
-        height = svg.attr("height") - margin.top - margin.bottom,
-        g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
-    var x = d3.scaleTime().range([0, width]),
-        y = d3.scaleLinear().range([height, 0]),
-        z = d3.scaleOrdinal(d3.schemeCategory10);        
-
-    var parseTime = d3.timeParse("%Y-%m");
-
-    var line = d3.line()
-        .x(function(d) { return x(d.time); })
-        .y(function(d) { return y(d.Property); })
-        .defined(function(d) { return d.Property != null; })
-
-    var temp = null;
-
-    d3.json("static/data/crime_type_agg.json", function(data) {
-
-        data.forEach(function(d) {
-            d.time = parseTime(d.time.qyear + "-" + d.time.month);
-        });
-
-        var dataCols = d3.keys(data[0]).filter(name => name != 'time');
-
-        x.domain(d3.extent(data, function(d) { return d.time; }));
-        y.domain([0, d3.max(data, function(d) { return d.Property; })]);
-
-        g.append("path")
-            .attr("d", line(data))
-            .style("stroke-width", "2")
-            .style("stroke", "blue")
-            .attr("fill", "none")
-            ;
-
-        // Add the X Axis
+        // Begin make axes
         g.append("g")
+            .attr("class", "d3axis")
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x)
                 .tickFormat(d3.timeFormat("%Y-%m"))
             )
             .call(d3.axisBottom(x))
-            //.selectAll("text")	
-            //.attr("dx", "-.8em")
-            //.attr("dy", ".15em")
-            //.attr("transform", "rotate(-65)")
             .append("text")
             .attr("text-anchor", "middle")
             .attr("transform", "translate(" + (width/2.0) + "," + 2*margin.bottom/3 + ")")
             .attr("fill", "black")
-            .text("time")
-            ;
+            .text("time");
        
-        // Add the Y Axis
         g.append("g")
-            //.attr("class", "axis")
+            .attr("class", "d3axis")
             .call(d3.axisLeft(y).ticks(4))
             .append("text")
             .attr("text-anchor", "middle")
@@ -234,15 +167,47 @@
             .attr("x", -height/2)
             .attr("transform", "rotate(-90)")
             .attr("fill", "black")
-            .text("crime intensity")
-            ;
+            .text("crime intensity");
+        // End make axes
+
+        // begin plot each crime type over time
+        g.selectAll("svg")
+            .data(type_stack)
+            .enter()
+            .append("path")
+            .data(type_stack)
+            .attr("d", d => area(d))
+            .attr("id", d => get_crime_type_area_id(d.key))
+            .style("fill", d => z(d.key))
+            .style("opacity", "0.4")
+            .on("mouseover", function(d) { crime_type_mouseover(d.key); })
+            .on("mouseout", function(d) { crime_type_mouseout(d.key); });
+        // end plot each crime type over time
+
+        // Below is older non-stacked plot
+        /*
+        type_nest.forEach(function(type) {
+
+            var data = type.values
+            var key = type.key
+
+            g.append("path")
+                .datum(data)
+                .attr("id", get_crime_type_line_id(key))
+                .attr("d", line)
+                .style("stroke-width", "1.25")
+                .style("stroke", z(key))
+                .attr("fill", "none")
+                .on("mouseover", function() { crime_type_mouseover(key); })
+                .on("mouseout", function() { crime_type_mouseout(key); });
+
+        })
+        */
 
     });
-       */ 
 
 </script>
-            
-            
+
             <h2 class="section-heading">Sizing Up a Crime</h2>
             <ul>
                 <li> Discussion about how to look at crimes: severity of crime and per person 
