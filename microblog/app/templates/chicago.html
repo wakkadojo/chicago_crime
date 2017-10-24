@@ -16,7 +16,7 @@
 
             <h2 class="section-heading">Summary</h2>
             <ul>
-                <li> Crime has come down across the city
+                <li> Crime has come down across the city but there is a recent resurgence
                 <li> While crime has come down, the inequality has noticeably increased
             </ul>
 
@@ -67,53 +67,34 @@
         d3.select("#" + get_crime_type_legend_id(type)).select("rect").style("opacity", "0.4");
     }
 
-    d3.csv("static/data/chicago_crimes_percapita.csv", function(csv_data) {
+    d3.csv("static/data/chicago_crimes_percapita_crimetype.csv", function(csv_data) {
 
-        csv_data.forEach(function(d) { 
-            d.time = d.time // Do not parse here: if we do nest turns it back to str anyway, parse later
-            d.crime_intensity = d.crime_intensity == "" ? null : +d.crime_intensity;
+        csv_data.forEach(function(row) { 
+            Object.keys(row).forEach(function(key) {
+                if(key == 'time') {
+                    row[key] = timeParse(row[key]);
+                } else {
+                    row[key] = row[key] == "" ? null : +row[key];
+                } 
+            });
         })
 
-        var type_nest = d3.nest()
-            .key(d => d.crime_type)
-            .key(d => d.time)
-            .rollup(leaves =>
-                d3.sum(leaves, d => d.crime_intensity)
-            )
-            .entries(csv_data);
-
-        // After grouping, convert string dates we grouped on to datetime objects
-        type_nest.forEach(function(type) {
-            type.values.forEach(function(d) {
-                d.key = timeParse(d.key)
-            })
-        })
-
-        var type_flat = type_nest[0].values.map(function(d, i) {
-            var time_point_dict = {}
-            time_point_dict["time"] = type_nest[0].values[i].key;
-            type_nest.forEach(function(d) {
-                time_point_dict[d.key] = d.values[i].value;
-            })
-            return time_point_dict;
-        })
-
+        var stack_keys = Object.keys(csv_data[0]).filter(d => d != 'time');
+        
         var type_stack_gen = d3.stack()
-            .keys(type_nest.map(d => d.key))
+            .keys(stack_keys)
             .order(d3.stackOrderReverse); // Reverse to match rendering orientation
 
-        var type_stack = type_stack_gen(type_flat);
-
-        //x.domain(d3.extent(type_nest[0].values, d => d.key));
-        //y.domain([0, d3.max(type_nest[0].values, d => d.value)]);
+        var type_stack = type_stack_gen(csv_data);
+        
         x.domain(d3.extent(type_stack[0].filter(d => d.data.time.getFullYear() > 2001).map(d => d.data.time)));
         y.domain([0, d3.max(type_stack[0].map(d => d[1]))]);
-        z.domain(type_nest.map(type => type.key));
+        z.domain(stack_keys);
 
         // Begin make legend
         var ordinal_legend_entries = d3.scaleOrdinal()
-            .domain(type_nest.map(type => type.key))
-            .range(type_nest.map(type => z(type.key)))
+            .domain(type_stack.map(d => d.key))
+            .range(type_stack.map(d => z(d.key)))
 
         var legend = g.append("g")
             .attr("class", "legend_ordinal")
@@ -129,7 +110,6 @@
                 var type = d3.select(this).text();
                 crime_type_mouseout(type);
             });
-
 
         g.select(".legend_ordinal")
             .attr("class", "d3axis")
