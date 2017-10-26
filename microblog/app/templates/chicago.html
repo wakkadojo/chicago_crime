@@ -3,7 +3,9 @@
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <!-- for d3 legends -->
+    <!--
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.13.0/d3-legend.js"></script>
+    -->
 
     <!-- Post Content -->
     <article>
@@ -60,21 +62,22 @@
         get_crime_type_legend_id = function(type) { return type + "_type_legend"; }
         get_crime_detail_area_id = function(type) { return type + "_type_detail_area"; }
         get_crime_detail_legend_id = function(type) { return type + "_type_detail_legend"; }
+        get_crime_detail_area_explanation_id = function() { return "type_detail_area_explanation"; }
 
     var crime_type_mouseover = function(type) {
-        d3.select("#" + get_crime_type_area_id(type)).style("opacity", "1");
-        d3.select("#" + get_crime_type_legend_id(type)).select("text").style("font-weight", "bold");
-        d3.select("#" + get_crime_type_legend_id(type)).select("rect").style("opacity", "1");
+        d3.select("#" + get_crime_type_area_id(type)).style("opacity", "0.8");
+        d3.select("#" + get_crime_type_legend_id(type)).style("font-weight", "bold");
         d3.selectAll("#" + get_crime_detail_area_id(type)).style("opacity", "0.5");
         d3.selectAll("#" + get_crime_detail_legend_id(type)).style("opacity", "1");
+        d3.selectAll("#" + get_crime_detail_area_explanation_id()).style("opacity", "0");
     }
 
     var crime_type_mouseout = function(type) {
         d3.select("#" + get_crime_type_area_id(type)).style("opacity", "0.5");
-        d3.select("#" + get_crime_type_legend_id(type)).select("text").style("font-weight", null);
-        d3.select("#" + get_crime_type_legend_id(type)).select("rect").style("opacity", "0.5");
+        d3.select("#" + get_crime_type_legend_id(type)).style("font-weight", null);
         d3.selectAll("#" + get_crime_detail_area_id(type)).style("opacity", "0");
         d3.selectAll("#" + get_crime_detail_legend_id(type)).style("opacity", "0");
+        d3.selectAll("#" + get_crime_detail_area_explanation_id()).style("opacity", "1");
     }
 
     d3.csv("static/data/chicago_crimes_percapita_crimetype.csv", function(csv_data) {
@@ -100,40 +103,6 @@
         x.domain(d3.extent(type_stack[0].filter(d => d.data.time.getFullYear() > 2001).map(d => d.data.time)));
         y.domain([0, d3.max(type_stack[0].map(d => d[1]))]);
         z.domain(stack_keys);
-
-        // Begin make legend
-        var ordinal_legend_entries = d3.scaleOrdinal()
-            .domain(type_stack.map(d => d.key))
-            .range(type_stack.map(d => z(d.key)))
-
-        var legend = crime_type_g.append("g")
-            .attr("class", "legend_ordinal")
-            .attr("transform", "translate(" + (width - margin.right - 80) + "," + margin.top/2 + ")")
-
-        var legend_ordinal = d3.legendColor()
-            .scale(ordinal_legend_entries)
-            .on("cellover", function() { 
-                var type = d3.select(this).text();
-                crime_type_mouseover(type);
-            })
-            .on("cellout", function() {
-                var type = d3.select(this).text();
-                crime_type_mouseout(type);
-            });
-
-        crime_type_g.select(".legend_ordinal")
-            .attr("class", "d3axis")
-            .call(legend_ordinal);
-        
-        // After we make the class lets add tags to the labels and also specify opacity
-        d3.selectAll(".legendCells").selectAll(".cell").each(function() {
-            // id
-            var type = d3.select(this).select("text").text();
-            d3.select(this).attr("id", get_crime_type_legend_id(type));
-            // swatch
-            d3.select(this).select("rect").style("opacity", "0.5");
-        });
-        // End make legend
 
         // Begin make axes
         crime_type_g.append("g")
@@ -162,6 +131,17 @@
         // End make axes
 
         // begin plot each crime type over time
+        // is there a more "d3-ish" way to do this than a loop?
+        // Find the first non-null element to indicate where to place our tags
+        var start_idx = 0
+        for(i = 0; i < type_stack[0].length; i++) {
+            if(type_stack[0][i][1] != 0.0) {
+                start_idx = i;
+                break;
+            }
+        }
+
+        // begin plot each crime type over time
         crime_type_g.selectAll("svg")
             .data(type_stack)
             .enter()
@@ -170,6 +150,20 @@
             .attr("id", d => get_crime_type_area_id(d.key))
             .style("fill", d => z(d.key))
             .style("opacity", "0.5")
+            .on("mouseover", function(d) { crime_type_mouseover(d.key); })
+            .on("mouseout", function(d) { crime_type_mouseout(d.key); });
+
+        // labels
+        crime_type_g.selectAll("svg")
+            .data(type_stack)
+            .enter()
+            .append("text")
+            .attr("id", d => get_crime_type_legend_id(d.key))
+            .attr("x", 6)
+            .attr("y", d => y((d[start_idx][0] + d[start_idx][1])/2))
+            .attr("class", "d3axis")
+            .style("alignment-baseline",  "middle")
+            .text(d => d.key)
             .on("mouseover", function(d) { crime_type_mouseover(d.key); })
             .on("mouseout", function(d) { crime_type_mouseout(d.key); });
         // end plot each crime type over time
@@ -241,6 +235,18 @@
             .attr("fill", "black")
             .text("crime intensity");
         // End make axes
+
+        // Mini explanation
+        crime_type_g.append("g")
+            .append("text")
+            .attr("x", width/2)
+            .attr("id", get_crime_detail_area_explanation_id())
+            .attr("y", 3*height/4 + margin.top)
+            .attr("class", "d3axis")
+            .style("text-anchor", "middle")
+            .style("font-weight", "bold")
+            .style("fill", "Gray")
+            .text("Hover over crime type above for detail");
 
         // begin plot each crime type over time
         // is there a more "d3-ish" way to do this than a loop?
