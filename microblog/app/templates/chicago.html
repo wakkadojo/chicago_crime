@@ -14,22 +14,146 @@
           <!-- <div class="col-lg-8 col-md-10 mx-auto"> -->
           <div class="col-md-10 mx-auto">
 
-            <p>Dont forget to turn off debug flask</p>
-
-            <h2 class="section-heading">Summary</h2>
-            <ul>
-                <li> Crime has come down across the city but there is a recent resurgence
-                <li> While crime has come down, the inequality has noticeably increased
-            </ul>
-
-<svg width="600" height="600" id="crime_type_svg"></svg>
-
+<p>Dont forget to turn off debug flask</p>
 <!-- TODO: migrate style touches! --> 
 <style> 
 .d3axis { font-size: 14px; font-weight: 300; }
 </style>
 
+
+            <h2 class="section-heading">Summary</h2>
+
+<p>
+While crime in Chicago has generally decreased dramatically over the last 15 years, how is the progress distributed among the population? How is it distributed among the type of crime? These questions are the motivation for the investigations outlined below, where we analyze overall crime through time in the city, and how the "crime inequality" in the city as varied since the early 2000's.
+<p>
+
+<p>
+In line with the general understanding of recent crime reduction, we indeed see a decline in crime by a marked 30% over the last 15 years (though there has also been a slight resurgence over the last few years). In the figure below, we show the "crime intensity" for the 3 major crime types: crimes against Property, Violent crimes, and crimes against Society. Subesequent breakdowns can be seen by hovering your cursor over a type. We soon will elaborate more on the "crime intensity", but for now think of it as a measurement of how many years would be served per person per year if the average prison sentence was served in full for each crime committed.
+</p>
+
+            <svg width="600" height="600" id="crime_type_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
             <script type="text/javascript" src="static/js/d3viz/crime_type_summary.js"></script>
+
+<p>
+However, while crime has fallen, it has not fallen uniformly throughout the city. In fact, those feeling the worst crime are feeling a higher fraction now than they have in the past. By looking at how crime is distributed geographically throughout the city, we can get a sense of how concentrated crime is over time. 
+</p>
+
+<p>
+Again, this will be elaborated below, but the clear signal can be seen when looking at how much crime is felt by the worst 20%. Among all crimes ("Total") since 2002, crime concentration among the worst 20% went from 37% of all crime to 42%. See the figure below how crime concentration among this top 20% has changed among the major crime categories.
+</p>
+
+<p style="color: red;">
+Show worst compared to best instead? 
+</p>
+
+            <svg width="600" height="300" id="crime_worst_pct_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+
+            <script type="text/javascript">
+
+function make_crime_concentration() {
+
+    var crime_type_svg = d3.select("#crime_worst_pct_svg"),
+        margin = {top: 20, right: 20, bottom: 60, left: 110},
+        width = crime_type_svg.attr("width") - margin.left - margin.right,
+        height = crime_type_svg.attr("height") - margin.top - margin.bottom,
+        crime_type_g = crime_type_svg
+            .append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scaleTime().range([0, width]),
+        y = d3.scaleLinear().range([height, 0]),
+        z = d3.scaleOrdinal(d3.schemeCategory10);        
+
+    var line = d3.line()
+        .x(d => x(d.time))
+        .y(d => y(d.total_crime_pct));
+        
+    var timeParse = d3.timeParse("%Y-%m");
+
+    d3.csv("static/data/chicago_crime_top_20_pct.csv", function(csv_data) {
+        
+        csv_data.forEach(function(row) { 
+            row.time = timeParse(row.time);
+            row.total_crime_pct = +row.total_crime_pct;
+        })
+
+        var worst_pct_nest = d3.nest()
+            .key(d => d.crime_type)
+            .entries(csv_data);
+        
+        // loop over each crime type and find the one that hadn the highest concentration
+        var highest_crime_concentration = d3.max(
+            worst_pct_nest.map(type => d3.max(
+                type.values.map(d => d.total_crime_pct)
+            ))
+        );
+        
+        x.domain(d3.extent(worst_pct_nest[0].values.map(d => d.time)))
+        y.domain([0.3, highest_crime_concentration]);
+        z.domain(worst_pct_nest.map(d => d.key));
+
+        // Begin make axes
+        crime_type_g.append("g")
+            .attr("class", "d3axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x)
+                .tickFormat(d3.timeFormat("%Y-%m"))
+            )
+            .call(d3.axisBottom(x))
+            .append("text")
+            .attr("text-anchor", "middle")
+            .attr("transform", "translate(" + (width/2.0) + "," + 2*margin.bottom/3 + ")")
+            .attr("fill", "black")
+            .text("time");
+       
+        crime_type_g.append("g")
+            .attr("class", "d3axis")
+            .call(d3.axisLeft(y).ticks(4))
+            .append("text")
+            .attr("text-anchor", "middle")
+            .attr("y", -margin.left/2)
+            .attr("x", -height/2)
+            .attr("transform", "rotate(-90)")
+            .attr("fill", "black")
+            .text("Fraction of crime in worst 20%");
+        // End make axes
+        
+        // begin plot each crime type over time
+        // Data
+        crime_type_g.selectAll("svg")
+            .data(worst_pct_nest)
+            .enter()
+            .append("path")
+            .attr("d", d => line(d.values))
+            .attr("fill", "none")
+            .attr("stroke", d => z(d.key))
+            .style("stroke-width", "2");
+
+        // Text above
+        crime_type_g.selectAll("svg")
+            .data(worst_pct_nest)
+            .enter()
+            .append("text")
+            .attr("class", "d3axis")
+            .attr("x", 6)
+            .attr("y", d => y(d.values[0].total_crime_pct) - 8)
+            .text(d => d.key);
+        // end plot each crime type over time
+
+        // begin mouseover pct crime
+        /*
+        crime_type_g.append("rect")
+            .attr("width", width)
+            .attr("height", height)
+            .style("fill", "none")
+        */
+        // end mouseover pct crime
+    });
+
+}
+
+make_crime_concentration();
+
+            </script>
 
             <h2 class="section-heading">Sizing Up a Crime</h2>
             <ul>

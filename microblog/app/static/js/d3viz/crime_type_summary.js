@@ -16,13 +16,11 @@ var area = d3.area()
     .x(d => x(d.data.time))
     .y0(d => y(d[0]))
     .y1(d => y(d[1]))
-    .defined(d => d.data.time.getFullYear() > 2001)
 
 var area_bot = d3.area()
     .x(d => x(d.data.time))
     .y0(d => y_bot(d[0]))
     .y1(d => y_bot(d[1]))
-    .defined(d => d.data.time.getFullYear() > 2001)
 
 var timeParse = d3.timeParse("%Y-%m");
 
@@ -99,16 +97,7 @@ d3.csv("static/data/chicago_crimes_percapita_crimetype.csv", function(csv_data) 
         .text("crime intensity");
     // End make axes
 
-    // begin plot each crime type over time
-    // is there a more "d3-ish" way to do this than a loop?
-    // Find the first non-null element to indicate where to place our tags
     var start_idx = 0
-    for(i = 0; i < type_stack[0].length; i++) {
-        if(type_stack[0][i][1] != 0.0) {
-            start_idx = i;
-            break;
-        }
-    }
 
     // begin plot each crime type over time
     crime_type_g.selectAll("svg")
@@ -215,18 +204,9 @@ d3.csv("static/data/chicago_crimes_percapita_crimelevel.csv", function(csv_data)
         .style("text-anchor", "middle")
         .style("font-weight", "bold")
         .style("fill", "Gray")
-        .text("Hover over crime type above for detail");
+        .text("Hover over above crime type for detail");
 
-    // begin plot each crime type over time
-    // is there a more "d3-ish" way to do this than a loop?
-    // Find the first non-null element to indicate where to place our tags
     var start_idx = 0
-    for(i = 0; i < type_stacks["Property"][0].length; i++) {
-        if(type_stacks["Property"][0][i][1] != 0.0) {
-            start_idx = i;
-            break;
-        }
-    }
 
     // stacked plot
     for(let key in type_stacks) {
