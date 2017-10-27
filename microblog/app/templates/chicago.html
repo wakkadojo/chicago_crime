@@ -3,9 +3,7 @@
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <!-- for d3 legends -->
-    <!--
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.13.0/d3-legend.js"></script>
-    -->
 
     <!-- Post Content -->
     <article>
@@ -27,10 +25,12 @@ While crime in Chicago has generally decreased dramatically over the last 15 yea
 <p>
 
 <p>
-In line with the general understanding of recent crime reduction, we indeed see a decline in crime by a marked 30% over the last 15 years (though there has also been a slight resurgence over the last few years). In the figure below, we show the "crime intensity" for the 3 major crime types: crimes against Property, Violent crimes, and crimes against Society. Subesequent breakdowns can be seen by hovering your cursor over a category.
+We measure "Crime Intensity" in Chicago since 2002 broken into its major categories: Property Crime, Violent Crime, and Crime Against Society. We will soon elaborate more on "Crime Intensity", but for now think of it as:
 </p>
+ <blockquote style="text-align: center;">Crime Intensity = (# years served) / person if average prison sentence served in full for every crime reported</blockquote>
 
-<p>We soon will elaborate more on the "crime intensity", but for now think of it as a measurement of how many years would be served per person per year if the average prison sentence was served in full for each crime committed.
+<p>
+In line with the generally known reduction in crime, this analysis indeed shows a decline in crime by a marked 30% over the last 15 years (though there has also been a slight resurgence over the last few years). Feel free to explore the data in the figure below.
 </p>
 
             <svg width="600" height="600" id="crime_type_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
@@ -43,11 +43,7 @@ However, while crime has fallen, it has not fallen uniformly throughout the city
 <p>
 Again, the nature of this measurement will be elaborated below, but the signal can be seen when clearly looking at how much crime is felt by the worst 20%. Among all crimes ("Total") since 2002, crime concentration among the worst 20% went from 37% of all crime to 42%. In the figure below you can see how crime concentration among the 20% experiencing the most crime has changed among the major crime categories.
 </p>
-
-<p style="color: red;">
-Show worst compared to best instead? 
-</p>
-
+            
             <svg width="600" height="300" id="crime_worst_pct_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
 
             <script type="text/javascript">
@@ -55,7 +51,7 @@ Show worst compared to best instead?
 function make_crime_concentration() {
 
     var crime_type_svg = d3.select("#crime_worst_pct_svg"),
-        margin = {top: 20, right: 20, bottom: 60, left: 110},
+        margin = {top: 50, right: 20, bottom: 60, left: 110},
         width = crime_type_svg.attr("width") - margin.left - margin.right,
         height = crime_type_svg.attr("height") - margin.top - margin.bottom,
         crime_type_g = crime_type_svg
@@ -67,16 +63,18 @@ function make_crime_concentration() {
 
     var line = d3.line()
         .x(d => x(d.time))
-        .y(d => y(d.total_crime_pct));
+        .y(d => y(d.top_bot_crime_ratio));
         
-    var timeParse = d3.timeParse("%Y-%m"),
-        bisectDate = d3.bisector(d => d).left
+    var timeParse = d3.timeParse("%Y-%m");
 
-    d3.csv("static/data/chicago_crime_top_20_pct.csv", function(csv_data) {
+    var get_crime_type_data_id = function(type) { return type + "_data_intensity_ratio_id"; }
+    var get_crime_type_legend_id = function(type) { return type + "_legend_intensity_ratio_id"; }
+
+    d3.csv("static/data/chicago_crime_20_pct_top_bot.csv", function(csv_data) {
         
         csv_data.forEach(function(row) { 
             row.time = timeParse(row.time);
-            row.total_crime_pct = +row.total_crime_pct;
+            row.top_bot_crime_ratio = +row.top_bot_crime_ratio;
         })
 
         var worst_pct_nest = d3.nest()
@@ -86,12 +84,12 @@ function make_crime_concentration() {
         // loop over each crime type and find the one that hadn the highest concentration
         var highest_crime_concentration = d3.max(
             worst_pct_nest.map(type => d3.max(
-                type.values.map(d => d.total_crime_pct)
+                type.values.map(d => d.top_bot_crime_ratio)
             ))
         );
         
         x.domain(d3.extent(worst_pct_nest[0].values.map(d => d.time)))
-        y.domain([0.3, highest_crime_concentration]);
+        y.domain([0, highest_crime_concentration]);
         z.domain(worst_pct_nest.map(d => d.key));
 
         // Begin make axes
@@ -117,11 +115,10 @@ function make_crime_concentration() {
             .attr("x", -height/2)
             .attr("transform", "rotate(-90)")
             .attr("fill", "black")
-            .text("Fraction of crime in worst 20%");
+            .text("Worst quintile / best quintile");
         // End make axes
         
         // begin plot each crime type over time
-        // Data
         crime_type_g.selectAll("svg")
             .data(worst_pct_nest)
             .enter()
@@ -129,36 +126,44 @@ function make_crime_concentration() {
             .attr("d", d => line(d.values))
             .attr("fill", "none")
             .attr("stroke", d => z(d.key))
+            .attr("id", d => get_crime_type_data_id(d.key))
             .style("stroke-width", "2");
 
-        // Text above
-        crime_type_g.selectAll("svg")
-            .data(worst_pct_nest)
-            .enter()
-            .append("text")
-            .attr("class", "d3axis")
-            .attr("x", d => x(d.values[0].time) + 6)
-            .attr("y", d => y(d.values[0].total_crime_pct) - 8)
-            .text(d => d.key);
         // end plot each crime type over time
-        /*
-        var focus = crime_type_g.append("g")
-            .append("text")
-            
-        // begin mouseover pct crime
-        crime_type_g.append("rect")
-            .attr("width", width)
-            .attr("height", height)
-            .style("fill", "none")
-            .style("pointer-events", "all")
-            .on("mousemove", function(d) {
-                var x0 = x.invert(d3.mouse(this)[0]),
-                    i = bisectDate(worst_pct_nest[0].values.map(d => d.time), x0, 1)
 
-                // loop and change focus
-            });
-        // end mouseover pct crime
-        */
+        // Begin legend
+        crime_type_g
+            .append("g")
+            .attr("class", "legend_ordinal");
+
+        var scale_ordinal = d3.scaleOrdinal()
+            .domain(z.domain())
+            .range(z.range());
+
+        var legend_ordinal = d3.legendColor()
+            .orient("horizontal")
+            .labelOffset("-18")
+            .shape("line")
+            .shapeWidth("80")
+            .scale(scale_ordinal)
+            .on("cellclick", d => console.log(d));
+
+        crime_type_g.select(".legend_ordinal")
+            .attr("class", "d3axis")
+            .call(legend_ordinal);
+
+        // set line width
+        d3.selectAll(".legendCells")
+            .selectAll("line")
+            .style("opacity", "0.5")
+            .style("stroke-width", "5")
+
+        // set offset
+        var legend_width = d3.select(".legendCells").node().getBBox().width;
+
+        d3.selectAll(".legendCells")
+            .attr("transform", "translate(" +  (width - legend_width)/2 + "," + -margin.top/2 + ")")
+        // End Legend
     });
 
 }
