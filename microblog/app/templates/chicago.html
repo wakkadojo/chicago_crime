@@ -41,136 +41,16 @@ However, while crime has fallen, it has not fallen uniformly throughout the city
 </p>
 
 <p>
-Again, the nature of this measurement will be elaborated below, but the signal can be seen when clearly looking at how much crime is felt by the worst 20%. Among all crimes ("Total") since 2002, crime concentration among the worst 20% went from 37% of all crime to 42%. In the figure below you can see how crime concentration among the 20% experiencing the most crime has changed among the major crime categories.
+Again, the nature of this measurement will be elaborated below, but the signal can be seen when clearly looking at how much crime is felt by the worst quintie (worst 20%) as compared to the safest quintile. Among all crimes ("Total") since 2002, crime concentration among the worst areas went from 4.5x that of the safest areas to 5.5x. This was mainly driven by an increase in Property Crime concentration.
+</p>
+
+<p>
+This can be explored in the figure below by clicking the different categories in the legend.
 </p>
             
             <svg width="600" height="300" id="crime_worst_pct_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
 
-            <script type="text/javascript">
-
-function make_crime_concentration() {
-
-    var crime_type_svg = d3.select("#crime_worst_pct_svg"),
-        margin = {top: 50, right: 20, bottom: 60, left: 110},
-        width = crime_type_svg.attr("width") - margin.left - margin.right,
-        height = crime_type_svg.attr("height") - margin.top - margin.bottom,
-        crime_type_g = crime_type_svg
-            .append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    var x = d3.scaleTime().range([0, width]),
-        y = d3.scaleLinear().range([height, 0]),
-        z = d3.scaleOrdinal(d3.schemeCategory10);        
-
-    var line = d3.line()
-        .x(d => x(d.time))
-        .y(d => y(d.top_bot_crime_ratio));
-        
-    var timeParse = d3.timeParse("%Y-%m");
-
-    var get_crime_type_data_id = function(type) { return type + "_data_intensity_ratio_id"; }
-    var get_crime_type_legend_id = function(type) { return type + "_legend_intensity_ratio_id"; }
-
-    d3.csv("static/data/chicago_crime_20_pct_top_bot.csv", function(csv_data) {
-        
-        csv_data.forEach(function(row) { 
-            row.time = timeParse(row.time);
-            row.top_bot_crime_ratio = +row.top_bot_crime_ratio;
-        })
-
-        var worst_pct_nest = d3.nest()
-            .key(d => d.crime_type)
-            .entries(csv_data);
-        
-        // loop over each crime type and find the one that hadn the highest concentration
-        var highest_crime_concentration = d3.max(
-            worst_pct_nest.map(type => d3.max(
-                type.values.map(d => d.top_bot_crime_ratio)
-            ))
-        );
-        
-        x.domain(d3.extent(worst_pct_nest[0].values.map(d => d.time)))
-        y.domain([0, highest_crime_concentration]);
-        z.domain(worst_pct_nest.map(d => d.key));
-
-        // Begin make axes
-        crime_type_g.append("g")
-            .attr("class", "d3axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x)
-                .tickFormat(d3.timeFormat("%Y-%m"))
-            )
-            .call(d3.axisBottom(x))
-            .append("text")
-            .attr("text-anchor", "middle")
-            .attr("transform", "translate(" + (width/2.0) + "," + 2*margin.bottom/3 + ")")
-            .attr("fill", "black")
-            .text("time");
-       
-        crime_type_g.append("g")
-            .attr("class", "d3axis")
-            .call(d3.axisLeft(y).ticks(4))
-            .append("text")
-            .attr("text-anchor", "middle")
-            .attr("y", -margin.left/2)
-            .attr("x", -height/2)
-            .attr("transform", "rotate(-90)")
-            .attr("fill", "black")
-            .text("Worst quintile / best quintile");
-        // End make axes
-        
-        // begin plot each crime type over time
-        crime_type_g.selectAll("svg")
-            .data(worst_pct_nest)
-            .enter()
-            .append("path")
-            .attr("d", d => line(d.values))
-            .attr("fill", "none")
-            .attr("stroke", d => z(d.key))
-            .attr("id", d => get_crime_type_data_id(d.key))
-            .style("stroke-width", "2");
-
-        // end plot each crime type over time
-
-        // Begin legend
-        crime_type_g
-            .append("g")
-            .attr("class", "legend_ordinal");
-
-        var scale_ordinal = d3.scaleOrdinal()
-            .domain(z.domain())
-            .range(z.range());
-
-        var legend_ordinal = d3.legendColor()
-            .orient("horizontal")
-            .labelOffset("-18")
-            .shape("line")
-            .shapeWidth("80")
-            .scale(scale_ordinal)
-            .on("cellclick", d => console.log(d));
-
-        crime_type_g.select(".legend_ordinal")
-            .attr("class", "d3axis")
-            .call(legend_ordinal);
-
-        // set line width
-        d3.selectAll(".legendCells")
-            .selectAll("line")
-            .style("opacity", "0.5")
-            .style("stroke-width", "5")
-
-        // set offset
-        var legend_width = d3.select(".legendCells").node().getBBox().width;
-
-        d3.selectAll(".legendCells")
-            .attr("transform", "translate(" +  (width - legend_width)/2 + "," + -margin.top/2 + ")")
-        // End Legend
-    });
-
-}
-
-make_crime_concentration();
-
-            </script>
+            <script type="text/javascript" src = "static/js/d3viz/crime_concentration_summary.js"></script>
 
             <h2 class="section-heading">Sizing Up a Crime</h2>
             <ul>
