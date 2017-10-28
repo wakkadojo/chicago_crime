@@ -205,7 +205,7 @@ var make_crime_intensity_time = function() {
             .style("text-anchor", "middle")
             .style("font-weight", "bold")
             .style("fill", "Gray")
-            .text("Hover over above crime type for detail");
+            .text("Hover over crime category above for detail");
 
         var start_idx = 0
 
