@@ -32,7 +32,7 @@ We measure "Crime Intensity" in Chicago since 2002 broken into its major categor
  <blockquote style="text-align: center;">Crime Intensity = (# years served) / person if average prison sentence served in full for every crime reported</blockquote>
 
 <p>
-In line with the generally known reduction in crime, this analysis indeed shows a decline in crime by a marked 30% over the last 15 years (though there has also been a slight resurgence over the last few years). Feel free to explore the data in the figure below.
+In line with the generally known reduction in crime, this analysis indeed shows a decline in crime by a marked 30% over the last 15 years (though there has also been a slight resurgence over the last few years). This is largely due to a decrease in Property Crime and Crimes against Society; Violent Crimes have remained closer to their 2002 levels. Feel free to explore the data in the figure below.
 </p>
 
             <svg width="600" height="600" id="crime_type_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
@@ -50,7 +50,7 @@ Again, the nature of this measurement will be elaborated below, but the signal c
 This can be explored in the figure below by clicking the different categories in the legend.
 </p>
             
-            <svg width="600" height="300" id="crime_worst_pct_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+            <svg width="600" height="400" id="crime_worst_pct_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
 
             <script type="text/javascript" src = "static/js/d3viz/crime_concentration_summary.js"></script>
             
@@ -61,216 +61,289 @@ This can be explored in the figure below by clicking the different categories in
                 <li> Auto text: Crime summary + change, race, income changes
             </ul>
 
-            <svg width="400" height = "600" id="crime_geo_svg" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
+            <svg width="600" height = "500" id="crime_geo_svg" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
+            <svg width="600" height = "300" id="crime_geo_detail_svg" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
             <script type="text/javascript">
 
-var geo_svg = d3.select("#crime_geo_svg")
-    width = geo_svg.attr("width")
-    height = geo_svg.attr("height")
+function explore_city_container() {
 
-var map_width = width,
-    map_height = height/2.0;
+    var geo_svg = d3.select("#crime_geo_svg"),
+        map_margin = {top: 60, right: 60},
+        map_width = geo_svg.attr("width") - map_margin.right,
+        map_height = geo_svg.attr("height") - map_margin.top;
 
-var timeParse = d3.timeParse("%Y-%m");
+    var map_color = d3.scaleSequential(d3.interpolateBlues);
+    var color_saturate_factor = 0.6;
 
-var map_color = d3.scaleSequential(d3.interpolateBlues);
+    // Begin map 2002/2017 selection
+    function get_map_button_id(year) { return "map_button_" + year + "_id"; }
 
-var color_saturate_factor = 0.5;
+    geo_svg
+        .append("g")
+        .attr("class", "button_map");
+    var map_button_scale_ordinal = d3.scaleOrdinal()
+        .domain(["2002", "2017"])
+        .range(["black", "black"]);
+    var map_button_ordinal = d3.legendColor()
+        .orient("horizontal")
+        .labelOffset("-18")
+        .shape("line")
+        .shapeWidth("120")
+        .scale(map_button_scale_ordinal)
+        .on("cellclick", d => update_map(d));
+    geo_svg.select(".button_map")
+        .attr("class", "d3axis")
+        .call(map_button_ordinal);
+    // set legend id
+    geo_svg.selectAll(".legendCells")
+        .selectAll(".cell")
+        .attr("id", d => get_map_button_id(d))
+    // set line characteristics
+    geo_svg.selectAll(".legendCells")
+        .selectAll("line")
+        .style("stroke-width", "5")
+    // set offset
+    var map_legend_width = geo_svg.select(".legendCells").node().getBBox().width;
+    geo_svg.selectAll(".legendCells")
+        .attr("transform", "translate(" +  (map_width - map_legend_width + map_margin.right)/2 + "," + map_margin.top/2 + ")")
+    // End map 2002/2017 selection
 
-// for the graph below the map
-var margin = {top: 90, right: 20, bottom: 60, left: 90},
-    detail_width = geo_svg.attr("width") - margin.left - margin.right,
-    detail_height = geo_svg.attr("height") - map_height - margin.top - margin.bottom,
-    intensity_g = geo_svg
-        .append("g").attr("transform", "translate(" + margin.left + "," + (margin.top + map_height) + ")");
+    // Begin detail breakout declarations
+    var timeParse = d3.timeParse("%Y-%m");
+    var geo_detail_svg = d3.select("#crime_geo_detail_svg"),
+        margin = {top: 90, right: 20, bottom: 60, left: 90},
+        detail_width = geo_detail_svg.attr("width") - margin.left - margin.right,
+        detail_height = geo_detail_svg.attr("height") - margin.top - margin.bottom,
+        intensity_g = geo_detail_svg
+            .append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var x = d3.scaleTime().range([0, detail_width]),
-    y = d3.scaleLinear().range([detail_height, 0])
-    detail_color = d3.scaleOrdinal()
-        .domain([0, 1])
-        .range([d3.schemeCategory10[0], "black"]);
+    var x = d3.scaleTime().range([0, detail_width]),
+        y = d3.scaleLinear().range([detail_height, 0])
+        detail_color = d3.scaleOrdinal()
+            .domain([0, 1])
+            .range([d3.schemeCategory10[0], "black"]);
 
-var line = d3.line()
-    .x(d => x(d.time))
-    .y(d => y(d.crime_intensity));
-// end stuff for graph below map
+    var line = d3.line()
+        .x(d => x(d.time))
+        .y(d => y(d.crime_intensity));
 
-// Begin intensity detail legend
-intensity_g
-    .append("g")
-    .attr("class", "legend_intensity_detail");
+    // Begin intensity detail legend
+    intensity_g
+        .append("g")
+        .attr("class", "legend_intensity_detail");
+    var detail_scale_ordinal = d3.scaleOrdinal()
+        .domain(["Hyde Park", "Chicago"])
+        .range(detail_color.range());
+    var detail_legend_ordinal = d3.legendColor()
+        .orient("horizontal")
+        .labelOffset("-18")
+        .shape("line")
+        .shapeWidth("120")
+        .scale(detail_scale_ordinal)
+        .on("cellclick", d => update_plot_type(d));
+    intensity_g.select(".legend_intensity_detail")
+        .attr("class", "d3axis")
+        .call(detail_legend_ordinal);
+    // set legend id
+    intensity_g.selectAll(".legendCells")
+        .selectAll(".cell")
+        .attr("id", "crime_detail_legend_id")
+    // set line characteristics
+    intensity_g.selectAll(".legendCells")
+        .selectAll("line")
+        .style("stroke-width", "5")
+    // set offset
+    var legend_width = intensity_g.select(".legendCells").node().getBBox().width;
+    intensity_g.selectAll(".legendCells")
+        .attr("transform", "translate(" +  (detail_width - legend_width)/2 + "," + -margin.top/3 + ")")
+    // End Legend
+    // End detail breakout declarations
 
-var detail_scale_ordinal = d3.scaleOrdinal()
-    .domain(["Hyde Park", "Chicago"])
-    .range(detail_color.range());
+    d3.json("static/data/chicago_geo.json", function(neighb_data) {
 
-var detail_legend_ordinal = d3.legendColor()
-    .orient("horizontal")
-    .labelOffset("-18")
-    .shape("line")
-    .shapeWidth("120")
-    .scale(detail_scale_ordinal)
-    .on("cellclick", d => update_plot_type(d));
+        var projection = d3.geoMercator()
+            .fitExtent([[0, map_margin.top], [map_width, map_height + map_margin.top]], neighb_data);
 
-intensity_g.select(".legend_intensity_detail")
-    .attr("class", "d3axis")
-    .call(detail_legend_ordinal);
+        var path = d3.geoPath()
+            .projection(projection);
 
-// set legend id
-intensity_g.selectAll(".legendCells")
-    .selectAll(".cell")
-    .attr("id", "crime_detail_legend_id")
+        var color_scale_max = color_saturate_factor*d3.max(neighb_data.features.map(d => d.properties.crime_intensity_2002))
 
-// set line characteristics
-intensity_g.selectAll(".legendCells")
-    .selectAll("line")
-    .style("stroke-width", "5")
+        map_color.domain([0, color_scale_max]);
 
-// set offset
-var legend_width = intensity_g.select(".legendCells").node().getBBox().width;
-
-intensity_g.selectAll(".legendCells")
-    .attr("transform", "translate(" +  (detail_width - legend_width)/2 + "," + -margin.top/3 + ")")
-// End Legend
-
-d3.json("static/data/chicago_geo.json", function(neighb_data) {
-
-    var projection = d3.geoMercator()
-        .fitExtent([[0, 0], [map_width, map_height]], neighb_data);
-
-    var path = d3.geoPath()
-        .projection(projection);
-
-    map_color.domain([0, color_saturate_factor*d3.max(neighb_data.features.map(d => d.properties.crime_intensity_2017))]);
-
-    // draw the map
-    geo_svg.append("g").selectAll("path")
-        .data(neighb_data.features)
-        .enter()
-        .append("path")
-        .attr("d", path)
-        .attr("stroke-width", "1")
-        .attr("stroke", "black")
-        .attr("fill", d => map_color(d.properties.crime_intensity_2017))
-        .on("mouseover", function(d) { 
-            d3.select(this)
-                .transition()
-                .attr("fill", d3.color("red").darker());
-            update_city_detail(d.properties.community);
-        }).on("mouseout", function(d) {
-            d3.select(this)
-                .transition()
-                .attr("fill", d => map_color(d.properties.crime_intensity_2017));
-        });
-    
-    d3.csv('static/data/neighb_intensity/HYDE PARK_intensity.csv', function(csv_data) {
-
-        var parsed_data = [[], []]
-        csv_data.forEach(function(row) { 
-            row.time = timeParse(row.time);
-            row.neighb_crime_intensity = +row.neighb_crime_intensity;
-            row.city_crime_intensity = +row.city_crime_intensity;
-            parsed_data[0].push({"time" : row.time, "crime_intensity" : row.neighb_crime_intensity});
-            parsed_data[1].push({"time" : row.time, "crime_intensity" : row.city_crime_intensity});
-        });
-        
-        x.domain(d3.extent(csv_data.map(d => d.time)));
-        y.domain([0, d3.max([d3.max(parsed_data[0], d => d.crime_intensity), d3.max(parsed_data[1], d => d.crime_intensity)])]);
-
-        // begin plot axes
-        intensity_g.append("g")
-            .attr("class", "d3axis")
-            .attr("transform", "translate(0," + detail_height + ")")
-            .attr("id", "intensity_detail_x_axis")
-            .call(d3.axisBottom(x).ticks(3))
-            .append("text")
-            .attr("text-anchor", "middle")
-            .attr("transform", "translate(" + detail_width/2.0 + "," + 2*margin.bottom/3 + ")")
-            .attr("fill", "black")
-            .text("time");
-
-        intensity_g.append("g")
-            .attr("class", "d3axis")
-            .attr("id", "intensity_detail_y_axis")
-            .call(d3.axisLeft(y).ticks(3))
-            .append("text")
-            .attr("text-anchor", "middle")
-            .attr("y", -margin.left/2)
-            .attr("x", -detail_height/2)
-            .attr("transform", "rotate(-90)")
-            .attr("fill", "black")
-            .text("Crime intensity");
-        // end plot axes
-
-        intensity_g.selectAll("svg")
-            .data(parsed_data)
-            .enter()
-            .append("g")
-            .attr("id", "intensity_detail_line")
-            .append("path")
-            .attr("d", d => line(d))
-            .attr("fill", "none")
-            .attr("stroke", function(d, i) { return detail_color(i); })
-            .attr("stroke-width", "2");
-        
-    });
-
-});
-
-function update_city_detail(neighb) {
-
-    // Update data
-    d3.csv('static/data/neighb_intensity/' + neighb + '_intensity.csv', function(csv_data) {
-        
-        var parsed_data = [[], []]
-        csv_data.forEach(function(row) { 
-            row.time = timeParse(row.time);
-            row.neighb_crime_intensity = +row.neighb_crime_intensity;
-            row.city_crime_intensity = +row.city_crime_intensity;
-            parsed_data[0].push({"time" : row.time, "crime_intensity" : row.neighb_crime_intensity});
-            parsed_data[1].push({"time" : row.time, "crime_intensity" : row.city_crime_intensity});
-        });
-
-        x.domain(d3.extent(csv_data.map(d => d.time)));
-        y.domain([0, d3.max([d3.max(parsed_data[0], d => d.crime_intensity), d3.max(parsed_data[1], d => d.crime_intensity)])]);
-
-        // Begin make axes
-        intensity_g.select("#intensity_detail_x_axis")
-            .transition()
-            .call(d3.axisBottom(x).ticks(3))
-       
-        intensity_g.select("#intensity_detail_y_axis")
-            .transition()
-            .call(d3.axisLeft(y).ticks(3))
-        // End make axes
-        
-        // begin plot each crime type over time
-        var svg_temp = intensity_g
-            .selectAll("#intensity_detail_line")
-            .selectAll("path")
-            .data(parsed_data)
-
-        svg_temp
+        // draw the map
+        geo_svg.append("g").selectAll("path")
+            .data(neighb_data.features)
             .enter()
             .append("path")
-            .merge(svg_temp)
-            .transition()
-            .attr("d", d => line(d))
-            .attr("fill", "none")
-            .attr("stroke", function(d, i) { return detail_color(i); })
-            .attr("stroke-width", "2");
+            .attr("d", path)
+            .attr("stroke-width", "1")
+            .attr("stroke", "black")
+            .attr("fill", d => map_color(d.properties.crime_intensity_2017))
+            .on("mouseover", function(d) { 
+                d3.select(this)
+                    .transition()
+                    .attr("fill", d3.color("red").darker());
+                update_city_detail(d.properties.community);
+            }).on("mouseout", function(d) {
+                d3.select(this)
+                    .transition()
+                    .attr("fill", d => map_color(d.properties.crime_intensity_2017));
+            });
 
-        svg_temp.exit().remove();
-        // end plot each crime type over time
+        update_map("2017"); // act as initializer
 
-        // update the legend
-        intensity_g.select(".legendCells")
-            .select("text")
-            .style("text-transform", "capitalize")
-            .text(neighb.toLowerCase())
+        // draw gradient legend
+        /*
+        var map_legend_w = map_margin.right, 
+            map_legend_h = map_height;
+        var map_key = geo_svg.append("svg")
+            .attr("width", map_legend_w)
+            .attr("height", map_legend_h);
+        var map_legend = map_key
+            .append("defs").append("svg:linearGradient").attr("id", "map_legend_gradient").attr("x1", "100%").attr("y1", "0%").attr("x2", "100%").attr("y2", "100%").attr("spreadMethod", "pad");
+        map_legend.append("stop").attr("offset", "0%").attr("stop-color", "#B30000").attr("stop-opacity", 1);
+        map_legend.append("stop").attr("offset", "100%").attr("stop-color", "#FEE8c8").attr("stop-opacity", 1);
+        map_key.append("rect").attr("width", map_legend_w).attr("height", map_legend_h).style("fill", "url(#gradient)").attr("transform", "translate(0,10)");
+        var map_legend_y = d3.scale.linear().range([300, 0]).domain([1, 100]);
+        var map_legend_yAxis = d3.svg.axis().scale(map_legend_y).orient("right");
+        map_legend_key.append("g").attr("class", "map_legend_y axis").attr("transform", "translate(41,10)").call(map_legend_yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 30).attr("dy", ".71em").style("text-anchor", "end").text("axis title");
+        */
+
+        // initialize the detail graph
+        d3.csv('static/data/neighb_intensity/HYDE PARK_intensity.csv', function(csv_data) {
+
+            var parsed_data = [[], []]
+            csv_data.forEach(function(row) { 
+                row.time = timeParse(row.time);
+                row.neighb_crime_intensity = +row.neighb_crime_intensity;
+                row.city_crime_intensity = +row.city_crime_intensity;
+                parsed_data[0].push({"time" : row.time, "crime_intensity" : row.neighb_crime_intensity});
+                parsed_data[1].push({"time" : row.time, "crime_intensity" : row.city_crime_intensity});
+            });
+            
+            x.domain(d3.extent(csv_data.map(d => d.time)));
+            y.domain([0, d3.max([d3.max(parsed_data[0], d => d.crime_intensity), d3.max(parsed_data[1], d => d.crime_intensity)])]);
+
+            // begin plot axes
+            intensity_g.append("g")
+                .attr("class", "d3axis")
+                .attr("transform", "translate(0," + detail_height + ")")
+                .attr("id", "intensity_detail_x_axis")
+                .call(d3.axisBottom(x).ticks(3))
+                .append("text")
+                .attr("text-anchor", "middle")
+                .attr("transform", "translate(" + detail_width/2.0 + "," + 2*margin.bottom/3 + ")")
+                .attr("fill", "black")
+                .text("time");
+
+            intensity_g.append("g")
+                .attr("class", "d3axis")
+                .attr("id", "intensity_detail_y_axis")
+                .call(d3.axisLeft(y).ticks(3))
+                .append("text")
+                .attr("text-anchor", "middle")
+                .attr("y", -margin.left/2)
+                .attr("x", -detail_height/2)
+                .attr("transform", "rotate(-90)")
+                .attr("fill", "black")
+                .text("Crime intensity");
+            // end plot axes
+
+            intensity_g.selectAll("svg")
+                .data(parsed_data)
+                .enter()
+                .append("g")
+                .attr("id", "intensity_detail_line")
+                .append("path")
+                .attr("d", d => line(d))
+                .attr("fill", "none")
+                .attr("stroke", function(d, i) { return detail_color(i); })
+                .attr("stroke-width", "2");
+            
+        });
+
     });
+
+    function update_map(year) {
+
+        var legend_cells = geo_svg.selectAll(".legendCells").transition();
+        var target_button = geo_svg.selectAll("#" + get_map_button_id(year)).transition();
+
+        // update buttons -- reset
+        legend_cells.selectAll("line")
+            .style("opacity", "0.5");
+        legend_cells.selectAll("text")
+            .style("font-weight", null);
+
+        // update buttons -- select one and highlight
+        target_button.selectAll("line")
+            .style("opacity", "1.0");
+        target_button.selectAll("text")
+            .style("font-weight", "bold");
+
+        // update graph
+        geo_svg.selectAll("path").transition()
+            .attr("fill", d => map_color(d.properties["crime_intensity_" + year]))
+    }
+
+    function update_city_detail(neighb) {
+
+        // Update data
+        d3.csv('static/data/neighb_intensity/' + neighb + '_intensity.csv', function(csv_data) {
+            
+            var parsed_data = [[], []]
+            csv_data.forEach(function(row) { 
+                row.time = timeParse(row.time);
+                row.neighb_crime_intensity = +row.neighb_crime_intensity;
+                row.city_crime_intensity = +row.city_crime_intensity;
+                parsed_data[0].push({"time" : row.time, "crime_intensity" : row.neighb_crime_intensity});
+                parsed_data[1].push({"time" : row.time, "crime_intensity" : row.city_crime_intensity});
+            });
+
+            x.domain(d3.extent(csv_data.map(d => d.time)));
+            y.domain([0, d3.max([d3.max(parsed_data[0], d => d.crime_intensity), d3.max(parsed_data[1], d => d.crime_intensity)])]);
+
+            // Begin update axes
+            intensity_g.select("#intensity_detail_x_axis")
+                .transition()
+                .call(d3.axisBottom(x).ticks(3))
+           
+            intensity_g.select("#intensity_detail_y_axis")
+                .transition()
+                .call(d3.axisLeft(y).ticks(3))
+            // End update axes
+            
+            // begin plot each crime type over time
+            var svg_temp = intensity_g
+                .selectAll("#intensity_detail_line")
+                .selectAll("path")
+                .data(parsed_data)
+
+            svg_temp
+                .enter()
+                .append("path")
+                .merge(svg_temp)
+                .transition()
+                .attr("d", d => line(d))
+                .attr("fill", "none")
+                .attr("stroke", function(d, i) { return detail_color(i); })
+                .attr("stroke-width", "2");
+
+            svg_temp.exit().remove();
+            // end plot each crime type over time
+
+            // update the legend
+            intensity_g.select(".legendCells")
+                .select("text")
+                .style("text-transform", "capitalize")
+                .text(neighb.toLowerCase())
+        });
+    }
+
 }
 
+explore_city_container();
 
             </script>
 
