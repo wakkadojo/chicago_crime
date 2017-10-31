@@ -45,12 +45,12 @@ function make_crime_concentration() {
         .call(legend_ordinal);
 
     // set legend id
-    d3.selectAll(".legendCells")
+    crime_type_g.selectAll(".legendCells")
         .selectAll(".cell")
         .attr("id", d => get_crime_type_legend_id(d))
 
     // set line characteristics
-    d3.selectAll(".legendCells")
+    crime_type_g.selectAll(".legendCells")
         .selectAll("line")
         .style("opacity", "0.5")
         .style("stroke-width", "5")
@@ -58,7 +58,7 @@ function make_crime_concentration() {
     // set offset
     var legend_width = d3.select(".legendCells").node().getBBox().width;
 
-    d3.selectAll(".legendCells")
+    crime_type_g.selectAll(".legendCells")
         .attr("transform", "translate(" +  (width - legend_width)/2 + "," + -margin.top/2 + ")")
     // End Legend
     // End static assignments
@@ -122,7 +122,6 @@ function make_crime_concentration() {
 
     function update_plot_type(type) {
 
-
         // Update data
         d3.csv("static/data/" + type + "_crimes_top_bot_20.csv", function(csv_data) {
             
@@ -163,8 +162,8 @@ function make_crime_concentration() {
 
     function update_active_legend(type) {
         
-        var legendCells = d3.selectAll(".legendCells").transition();
-        var targetLegend = d3.selectAll("#" + get_crime_type_legend_id(type)).transition();
+        var legendCells = crime_type_g.selectAll(".legendCells").transition();
+        var targetLegend = crime_type_g.selectAll("#" + get_crime_type_legend_id(type)).transition();
         
         // dim all
         legendCells.selectAll("line")
