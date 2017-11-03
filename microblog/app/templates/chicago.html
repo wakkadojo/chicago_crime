@@ -15,9 +15,11 @@
           <div class="col-md-10 mx-auto">
 
 <p style="color: red;">Dont forget to turn off debug flask</p>
+
 <!-- TODO: migrate style touches! --> 
 <style> 
 .d3axis { font-size: 14px; font-weight: 300; }
+.map_legend_area { fill: url(#gradient_fill_map_legend); stroke-width: 0px; }
 </style>
 
 <h2 class="section-heading">Summary</h2>
@@ -61,24 +63,24 @@ This can be explored in the figure below by clicking the different categories in
                 <li> Auto text: Crime summary + change, race, income changes
             </ul>
 
-            <svg width="600" height = "500" id="crime_geo_svg" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
+            <svg width="600" height = "500" id="crime_chi_map_int_svg" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
             <svg width="600" height = "300" id="crime_geo_detail_svg" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
             <script type="text/javascript">
 
 function explore_city_container() {
 
-    var geo_svg = d3.select("#crime_geo_svg"),
+    var chi_map_int_svg = d3.select("#crime_chi_map_int_svg"),
         map_margin = {top: 60, right: 60},
-        map_width = geo_svg.attr("width") - map_margin.right,
-        map_height = geo_svg.attr("height") - map_margin.top;
+        map_width = chi_map_int_svg.attr("width") - map_margin.right,
+        map_height = chi_map_int_svg.attr("height") - map_margin.top;
 
     var map_color = d3.scaleSequential(d3.interpolateBlues);
-    var color_saturate_factor = 0.6;
+    var color_saturate_factor = 0.75;
 
     // Begin map 2002/2017 selection
     function get_map_button_id(year) { return "map_button_" + year + "_id"; }
 
-    geo_svg
+    chi_map_int_svg
         .append("g")
         .attr("class", "button_map");
     var map_button_scale_ordinal = d3.scaleOrdinal()
@@ -91,20 +93,20 @@ function explore_city_container() {
         .shapeWidth("120")
         .scale(map_button_scale_ordinal)
         .on("cellclick", d => update_map(d));
-    geo_svg.select(".button_map")
+    chi_map_int_svg.select(".button_map")
         .attr("class", "d3axis")
         .call(map_button_ordinal);
     // set legend id
-    geo_svg.selectAll(".legendCells")
+    chi_map_int_svg.selectAll(".legendCells")
         .selectAll(".cell")
         .attr("id", d => get_map_button_id(d))
     // set line characteristics
-    geo_svg.selectAll(".legendCells")
+    chi_map_int_svg.selectAll(".legendCells")
         .selectAll("line")
         .style("stroke-width", "5")
     // set offset
-    var map_legend_width = geo_svg.select(".legendCells").node().getBBox().width;
-    geo_svg.selectAll(".legendCells")
+    var map_legend_width = chi_map_int_svg.select(".legendCells").node().getBBox().width;
+    chi_map_int_svg.selectAll(".legendCells")
         .attr("transform", "translate(" +  (map_width - map_legend_width + map_margin.right)/2 + "," + map_margin.top/2 + ")")
     // End map 2002/2017 selection
 
@@ -159,6 +161,10 @@ function explore_city_container() {
     // End Legend
     // End detail breakout declarations
 
+    ////////////
+    // Begin reading in data for graphs/plots
+    ////////////
+
     d3.json("static/data/chicago_geo.json", function(neighb_data) {
 
         var projection = d3.geoMercator()
@@ -171,8 +177,10 @@ function explore_city_container() {
 
         map_color.domain([0, color_scale_max]);
 
-        // draw the map
-        geo_svg.append("g").selectAll("path")
+        // draw the map of crime intensity
+        chi_map_int_svg.append("g")
+            .attr("class", "chicago_map")
+            .selectAll("path")
             .data(neighb_data.features)
             .enter()
             .append("path")
@@ -193,82 +201,72 @@ function explore_city_container() {
 
         update_map("2017"); // act as initializer
 
-        // draw gradient legend
-        /*
-        var map_legend_w = map_margin.right, 
-            map_legend_h = map_height;
-        var map_key = geo_svg.append("svg")
-            .attr("width", map_legend_w)
-            .attr("height", map_legend_h);
-        var map_legend = map_key
-            .append("defs").append("svg:linearGradient").attr("id", "map_legend_gradient").attr("x1", "100%").attr("y1", "0%").attr("x2", "100%").attr("y2", "100%").attr("spreadMethod", "pad");
-        map_legend.append("stop").attr("offset", "0%").attr("stop-color", "#B30000").attr("stop-opacity", 1);
-        map_legend.append("stop").attr("offset", "100%").attr("stop-color", "#FEE8c8").attr("stop-opacity", 1);
-        map_key.append("rect").attr("width", map_legend_w).attr("height", map_legend_h).style("fill", "url(#gradient)").attr("transform", "translate(0,10)");
-        var map_legend_y = d3.scale.linear().range([300, 0]).domain([1, 100]);
-        var map_legend_yAxis = d3.svg.axis().scale(map_legend_y).orient("right");
-        map_legend_key.append("g").attr("class", "map_legend_y axis").attr("transform", "translate(41,10)").call(map_legend_yAxis).append("text").attr("transform", "rotate(-90)").attr("y", 30).attr("dy", ".71em").style("text-anchor", "end").text("axis title");
-        */
+        // draw gradient legend for crime intensity -- do this here since it dep's on data
+        // TODO: PUT THIS IN A FUNCTION
+        var map_intensity_legend_width = 10,
+            map_intensity_legend_height = 300;
 
-        // initialize the detail graph
-        d3.csv('static/data/neighb_intensity/HYDE PARK_intensity.csv', function(csv_data) {
+        //Extra scale since the color scale is interpolated
+        var countScale = d3.scaleLinear()
+            .domain([0, 1])
+            .range([0, map_intensity_legend_height])
 
-            var parsed_data = [[], []]
-            csv_data.forEach(function(row) { 
-                row.time = timeParse(row.time);
-                row.neighb_crime_intensity = +row.neighb_crime_intensity;
-                row.city_crime_intensity = +row.city_crime_intensity;
-                parsed_data[0].push({"time" : row.time, "crime_intensity" : row.neighb_crime_intensity});
-                parsed_data[1].push({"time" : row.time, "crime_intensity" : row.city_crime_intensity});
-            });
-            
-            x.domain(d3.extent(csv_data.map(d => d.time)));
-            y.domain([0, d3.max([d3.max(parsed_data[0], d => d.crime_intensity), d3.max(parsed_data[1], d => d.crime_intensity)])]);
+        //Calculate the variables for the temp gradient
+        var numStops = 10;
+        countRange = countScale.domain();
+        countRange[2] = countRange[1] - countRange[0];
+        countPoint = [];
+        for(var i = 0; i < numStops; i++) {
+            countPoint.push(i * countRange[2]/(numStops-1) + countRange[0]);
+        }//for i
 
-            // begin plot axes
-            intensity_g.append("g")
-                .attr("class", "d3axis")
-                .attr("transform", "translate(0," + detail_height + ")")
-                .attr("id", "intensity_detail_x_axis")
-                .call(d3.axisBottom(x).ticks(3))
-                .append("text")
-                .attr("text-anchor", "middle")
-                .attr("transform", "translate(" + detail_width/2.0 + "," + 2*margin.bottom/3 + ")")
-                .attr("fill", "black")
-                .text("time");
+        chi_map_int_svg.append("defs")
+            .append("linearGradient")
+            .attr("id", "gradient_fill_map_legend")
+            //.attr("gradientUnits", "userSpaceOnUse")
+            .attr("x1", "0%").attr("y1", "0%")
+            .attr("x2", "0%").attr("y2", "100%")
+          .selectAll("stop")
+            .data(d3.range(numStops))
+            .enter()
+            .append("stop")
+            .attr("offset", function(d, i) { return countScale(countPoint[i])/map_intensity_legend_height; })
+            .attr("stop-color", function(d, i) { return d3.scaleSequential(d3.interpolateBlues)(1 - countPoint[i]); });
 
-            intensity_g.append("g")
-                .attr("class", "d3axis")
-                .attr("id", "intensity_detail_y_axis")
-                .call(d3.axisLeft(y).ticks(3))
-                .append("text")
-                .attr("text-anchor", "middle")
-                .attr("y", -margin.left/2)
-                .attr("x", -detail_height/2)
-                .attr("transform", "rotate(-90)")
-                .attr("fill", "black")
-                .text("Crime intensity");
-            // end plot axes
+        var map_intensity_legend = chi_map_int_svg.append("g")
+            .attr("id", "map_intensity_legend")
+            .attr("class", "d3axis")
+            .attr("transform", "translate(" + (map_width - map_margin.right) + "," + map_height/2 + ")");
 
-            intensity_g.selectAll("svg")
-                .data(parsed_data)
-                .enter()
-                .append("g")
-                .attr("id", "intensity_detail_line")
-                .append("path")
-                .attr("d", d => line(d))
-                .attr("fill", "none")
-                .attr("stroke", function(d, i) { return detail_color(i); })
-                .attr("stroke-width", "2");
-            
-        });
+        map_intensity_legend.append("rect")
+            .attr("x", 0)
+            .attr("y", -map_intensity_legend_height/2 + map_margin.top)
+            .attr("width", map_intensity_legend_width)
+            .attr("height", map_intensity_legend_height)
+            .style("stroke", "black")
+            .style("fill", "url(#gradient_fill_map_legend)")
+        
+        map_intensity_legend.append("g")
+            .attr("class", "d3axis")
+            .call(d3.axisRight(d3.scaleLinear().domain([0, color_scale_max]).range([map_intensity_legend_height, 0])).ticks(4))
+            .attr("transform", "translate(" + 
+                (map_intensity_legend_width - 0.5) + "," + 
+                (-map_intensity_legend_height/2 + map_margin.top - 0.5) + ")")
+            .append("text")
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .attr("y", map_intensity_legend_width + 40)
+            .attr("x", (-map_intensity_legend_height/2))
+            .attr("fill", "black")
+            .text("Crime intensity");
+        // end draw map of crime intensity
 
     });
 
     function update_map(year) {
 
-        var legend_cells = geo_svg.selectAll(".legendCells").transition();
-        var target_button = geo_svg.selectAll("#" + get_map_button_id(year)).transition();
+        var legend_cells = chi_map_int_svg.selectAll(".legendCells").transition();
+        var target_button = chi_map_int_svg.selectAll("#" + get_map_button_id(year)).transition();
 
         // update buttons -- reset
         legend_cells.selectAll("line")
@@ -283,9 +281,63 @@ function explore_city_container() {
             .style("font-weight", "bold");
 
         // update graph
-        geo_svg.selectAll("path").transition()
+        chi_map_int_svg.selectAll(".chicago_map").selectAll("path").transition()
             .attr("fill", d => map_color(d.properties["crime_intensity_" + year]))
     }
+
+    // initialize the detail graph
+    d3.csv('static/data/neighb_intensity/HYDE PARK_intensity.csv', function(csv_data) {
+
+        var parsed_data = [[], []]
+        csv_data.forEach(function(row) { 
+            row.time = timeParse(row.time);
+            row.neighb_crime_intensity = +row.neighb_crime_intensity;
+            row.city_crime_intensity = +row.city_crime_intensity;
+            parsed_data[0].push({"time" : row.time, "crime_intensity" : row.neighb_crime_intensity});
+            parsed_data[1].push({"time" : row.time, "crime_intensity" : row.city_crime_intensity});
+        });
+        
+        x.domain(d3.extent(csv_data.map(d => d.time)));
+        y.domain([0, d3.max([d3.max(parsed_data[0], d => d.crime_intensity), d3.max(parsed_data[1], d => d.crime_intensity)])]);
+
+        // begin plot axes
+        intensity_g.append("g")
+            .attr("class", "d3axis")
+            .attr("transform", "translate(0," + detail_height + ")")
+            .attr("id", "intensity_detail_x_axis")
+            .call(d3.axisBottom(x).ticks(3))
+            .append("text")
+            .attr("text-anchor", "middle")
+            .attr("transform", "translate(" + detail_width/2.0 + "," + 2*margin.bottom/3 + ")")
+            .attr("fill", "black")
+            .text("time");
+
+        intensity_g.append("g")
+            .attr("class", "d3axis")
+            .attr("id", "intensity_detail_y_axis")
+            .call(d3.axisLeft(y).ticks(3))
+            .append("text")
+            .attr("text-anchor", "middle")
+            .attr("y", -margin.left/2)
+            .attr("x", -detail_height/2)
+            .attr("transform", "rotate(-90)")
+            .attr("fill", "black")
+            .text("Crime intensity");
+        // end plot axes
+
+        intensity_g.selectAll("svg")
+            .data(parsed_data)
+            .enter()
+            .append("g")
+            .attr("id", "intensity_detail_line")
+            .append("path")
+            .attr("d", d => line(d))
+            .attr("fill", "none")
+            .attr("stroke", function(d, i) { return detail_color(i); })
+            .attr("stroke-width", "2");
+        
+    });
+
 
     function update_city_detail(neighb) {
 
