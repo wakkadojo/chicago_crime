@@ -71,36 +71,54 @@ This can be explored in the figure below by clicking the different categories in
             <script type="text/javascript">
 
 var ineq_map_svg = d3.select("#crime_ineq_selected_map"),
+    margin = {top: 20, bottom: 20, left: 20, right: 20}
     width = ineq_map_svg.attr("width"),
     height = ineq_map_svg.attr("height");
 
 var x = d3.scaleLinear(),
     y = d3.scaleLinear(),
-    r = d3.scaleLinear();
+    r = d3.scaleSqrt().range([0, 14]),
+    color = d3.scaleOrdinal(d3.schemeCategory10);
 
-d3.csv("static/data/chicago_attributes_no_geo.csv", function(csv_data) {
+var projection = d3.geoMercator()
 
-    csv_data.forEach(function(row) {
-        Object.keys(row).forEach(function(key) {
-            if(!isNaN(parseFloat(+row[key])) && isFinite(+row[key]))
-                row[key] = +row[key]
-        });
+
+
+d3.json("static/data/chicago_centroid.json", function(neighb_data) {
+
+    projection.fitExtent([[0, margin.bottom], [width, height-margin.top]], neighb_data)
+
+    // plot chicago outline
+    d3.json("static/data/chicago_outline.json", function(outline) {
+        
+        var path = d3.geoPath()
+            .projection(projection);
+
+        ineq_map_svg.append("g")
+            .selectAll("path")
+            .data(outline.features)
+            .enter()
+            .append("path")
+            .attr("d", path)
+            .attr("stroke-width", "1")
+            .attr("fill", "none")
+            .attr("stroke", "black");
+
     });
 
-    var neighb_centers = {
-        "type": "MultiPoint", 
-        "coordinates": csv_data.map(d => [d.center_x, d.center_y])
-    };
+    r.domain([0, d3.max(neighb_data.features.map(d => d.properties.population))]);
+    color.domain(neighb_data.features.map(d => d.properties.primary_race))
 
-    var projection = d3.geoMercator()
-        .fitExtent([[0, 0], [width, height]], neighb_centers)
-
-    var path = d3.geoPath()
-        .projection(projection)
-
-    console.log(neighb_centers);
-    console.log(path);
-    console.log(path(neighb_centers.coordinates[0][0], 0));
+    ineq_map_svg.append("g")
+        .selectAll("circle")
+        .data(neighb_data.features)
+        .enter()
+        .append("circle")
+        .attr("cx", d => projection(d.geometry.coordinates)[0])
+        .attr("cy", d => projection(d.geometry.coordinates)[1])
+        .attr("r", d => r(d.properties.population))
+        .attr("fill", d => color(d.properties.primary_race))
+        .style("opacity", "0.5")
 
 });
 
