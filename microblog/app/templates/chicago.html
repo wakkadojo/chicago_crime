@@ -45,7 +45,7 @@ However, while crime has fallen, it has not fallen uniformly throughout the city
 </p>
 
 <p>
-Again, the nature of this measurement will be elaborated below, but the signal can be seen when clearly looking at how much crime is felt by the worst quintie (worst 20%) as compared to the safest quintile. Among all crimes ("Total") since 2002, crime concentration among the worst areas went from 4.5x that of the safest areas to 5.5x. This was mainly driven by an increase in Property Crime concentration.
+Again, the nature of this measurement will be elaborated below, but the signal can be seen when clearly looking at how much crime is felt by the worst quintie (worst 20%) as compared to the safest quintile. Among all crimes ("Total") since 2002, crime concentration among the worst areas went from 4.5x that of the safest areas to 5.5x. This was driven by an increase in crime inequality across the board (there was no single category driver).
 </p>
 
 <p>
@@ -66,6 +66,45 @@ This can be explored in the figure below by clicking the different categories in
             <svg width="600" height = "500" id="crime_chi_map_int_svg" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
             <svg width="600" height = "300" id="crime_geo_detail_svg" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
             <script type="text/javascript" src="static/js/d3viz/crime_intensity_map.js"></script>
+
+            <svg width="600" height="300" id="crime_ineq_selected_map" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
+            <script type="text/javascript">
+
+var ineq_map_svg = d3.select("#crime_ineq_selected_map"),
+    width = ineq_map_svg.attr("width"),
+    height = ineq_map_svg.attr("height");
+
+var x = d3.scaleLinear(),
+    y = d3.scaleLinear(),
+    r = d3.scaleLinear();
+
+d3.csv("static/data/chicago_attributes_no_geo.csv", function(csv_data) {
+
+    csv_data.forEach(function(row) {
+        Object.keys(row).forEach(function(key) {
+            if(!isNaN(parseFloat(+row[key])) && isFinite(+row[key]))
+                row[key] = +row[key]
+        });
+    });
+
+    var neighb_centers = {
+        "type": "MultiPoint", 
+        "coordinates": csv_data.map(d => [d.center_x, d.center_y])
+    };
+
+    var projection = d3.geoMercator()
+        .fitExtent([[0, 0], [width, height]], neighb_centers)
+
+    var path = d3.geoPath()
+        .projection(projection)
+
+    console.log(neighb_centers);
+    console.log(path);
+    console.log(path(neighb_centers.coordinates[0][0], 0));
+
+});
+
+            </script>
 
             <h2 class="section-heading">Sizing Up a Crime</h2>
             <ul>
