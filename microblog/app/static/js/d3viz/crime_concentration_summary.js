@@ -2,31 +2,18 @@ function make_crime_concentration() {
 
     var timeParse = d3.timeParse("%Y-%m");
 
-    var cols_crime_level_plot = new Set(["High crime", "Chicago avg", "Low crime"]);
+    var cols_crime_level_plot = new Set(["High crime areas", "Chicago avg", "Low crime areas"]);
 
     function csv_preprocess(d) {
         return {
             "time"                : timeParse(d.time),
-            "top_bot_crime_ratio" : (+d.crime_top_pct)/(+d.crime_bot_pct),
-            "High crime"          : +d.crime_top_avg,
-            "Low crime"           : +d.crime_bot_avg,
+            "High crime areas"    : +d.crime_top_avg,
+            "Low crime areas"     : +d.crime_bot_avg,
             "Chicago avg"         : +d.chicago_crime
         }
     }
 
-    // TODO: Migrate to library
-    // For every column in the csv, create a timeseries of the value in the column
-    // This is similar to nest but allows time preprocessing (since nest will convert the time to a string)
-    function csv_timeseries_to_tall(csv_data, cols_to_plot) {
-        return Object.keys(csv_data[0]).filter(key => cols_to_plot.has(key)).map(function(id) {
-            return {
-                id     : id,
-                values : csv_data.map(function(d) { return { time : d.time, value : d[id] }; })
-            };
-        });
-    }
-
-    var crime_type_svg = d3.select("#crime_worst_pct_svg"),
+    var crime_type_svg = d3.select("#crime_top_bot_timeseries_svg"),
         margin = {top: 50, right: 20, bottom: 60, left: 110},
         width = crime_type_svg.attr("width") - margin.left - margin.right,
         height = crime_type_svg.attr("height") - margin.top - margin.bottom,
@@ -36,16 +23,17 @@ function make_crime_concentration() {
     var x = d3.scaleTime().range([0, width]),
         y = d3.scaleLinear().range([height, 0]),
         z = d3.scaleOrdinal(d3.schemeCategory10);
+   
+    // static assignment 
+    z.domain(['Property', 'Society', 'Violent', 'Total']);
 
     var line = d3.line()
         .x(d => x(d.time))
         .y(d => y(d.value));
 
-    var get_crime_type_data_id = function(type) { return type + "_data_intensity_ratio_id"; }
-    var get_crime_type_legend_id = function(type) { return type + "_legend_intensity_ratio_id"; }
+    var get_crime_type_data_id = function(type) { return type + "_data_intensity_top_bot_id"; }
+    var get_crime_type_legend_id = function(type) { return type + "_legend_intensity_top_bot_id"; }
     
-    // Begin static assignments
-    z.domain(['Property', 'Society', 'Violent', 'Total']);
 
     // Begin legend
     crime_type_g
@@ -85,15 +73,56 @@ function make_crime_concentration() {
     crime_type_g.selectAll(".legendCells")
         .attr("transform", "translate(" +  (width - legend_width)/2 + "," + -margin.top/2 + ")")
     // End Legend
-    // End static assignments
 
     initialize_plot_type("Total");
+
+    function make_auto_text(csv_data, type) {
+
+        var crime_change_arr = csv_data.map(function(d) {
+            return {
+                id     : d.id,
+                values : {
+                    start_year   : d.values[0].time.getFullYear(),
+                    value_start  : d.values[0].value,
+                    value_end    : d.values[d.values.length - 1].value,
+                    change_ratio : d.values[d.values.length - 1].value/d.values[0].value - 1.0
+                }
+            }
+        });
+
+        var crime_change = {}
+        crime_change_arr.forEach(function(d) {
+            crime_change[d.id] = d.values;
+        });
+
+        // calcs for auto text below
+        var crime_type_description = (type == "Society" ? "rate of crime against Society" : type + " crime"),
+            high_low_ratio_start = (crime_change["High crime areas"].value_start / crime_change["Low crime areas"].value_start).toFixed(1),
+            high_low_ratio_end = (crime_change["High crime areas"].value_end / crime_change["Low crime areas"].value_end).toFixed(1),
+            value_change = Math.abs(high_low_ratio_end - high_low_ratio_start).toFixed(1),
+            ratio_is_up = high_low_ratio_start < high_low_ratio_end ? "up" : "down",
+            inequality_incr_decr = high_low_ratio_start < high_low_ratio_end ? "increase" : "decrease",
+            start_year = crime_change["High crime areas"].start_year,
+            low_reduction = Math.abs(crime_change["Low crime areas"].change_ratio*100).toFixed(0) + "%",
+            high_reduction = Math.abs(crime_change["High crime areas"].change_ratio*100).toFixed(0) + "%",
+            low_high_red_compare = low_reduction < high_reduction ? "less significant" : "more significant";
+
+        var auto_text = 
+            "Areas with high <b>" + crime_type_description + "</b> experience <b>" + high_low_ratio_end + "x</b> " +
+            "the crime as low crime areas. This inequality is <b>" + ratio_is_up + " " + value_change + "x</b> from " +
+            start_year + ". This <b>" + inequality_incr_decr + "</b> is because low crime areas saw a crime reduction of " +
+            "<b>" + low_reduction + "</b>, which is a <b>" + low_high_red_compare + "</b> decrease than the " + 
+            "<b>" + high_reduction + "</b> reduction  seen in high crime areas."
+
+        return auto_text;
+
+    }
 
     function initialize_plot_type(type) {
     
         d3.csv("static/data/" + type + "_crimes_top_bot_25.csv", csv_preprocess, function(csv_data) {
 
-            csv_data = csv_timeseries_to_tall(csv_data, cols_crime_level_plot);
+            csv_data = csv_timeseries_col_split(csv_data, cols_crime_level_plot);
 
             x.domain(d3.extent(csv_data[0].values.map(d => d.time)));
             y.domain([0, d3.max(csv_data.map(d => d3.max(d.values.map(col => col.value))))]);
@@ -106,7 +135,7 @@ function make_crime_concentration() {
                 .call(d3.axisBottom(x))
                 .append("text")
                 .attr("text-anchor", "middle")
-                .attr("transform", "translate(" + (width/2.0) + "," + 2*margin.bottom/3 + ")")
+                .attr("transform", "translate(" + (width/2.0) + "," + 40 + ")")
                 .attr("fill", "black")
                 .text("time");
            
@@ -120,21 +149,37 @@ function make_crime_concentration() {
                 .attr("x", -height/2)
                 .attr("transform", "rotate(-90)")
                 .attr("fill", "black")
-                .text("Worst quintile / best quintile");
+                .text("Crime intensity");
             // End make axes
-            
+
+            // auto text
+            d3.select("#crime_top_bot_autotext_div")
+                .html(make_auto_text(csv_data, type))
+
             // begin plot each crime type over time
-            crime_type_g.selectAll("svg")
+            crime_type_g.append("g")
+                .attr("id", "crime_type_top_bot_path")
+                .selectAll("path")
                 .data(csv_data)
                 .enter()
-                .append("g")
-                .attr("id", "crime_type_top_bot_25_path")
                 .append("path")
                 .attr("d", d => line(d.values))
                 .attr("fill", "none")
                 .attr("stroke", z(type))
-                .style("opacity", d => d.id == "Chicago avg" ? "1" : "0.5")
+                .style("opacity", d => d.id == "Chicago avg" ? "1" : "0.4")
                 .style("stroke-width", "2");
+
+            // labels
+            crime_type_g.append("g")
+                .attr("id", "crime_type_top_bot_text")
+                .selectAll("text")
+                .data(csv_data)
+                .enter()
+                .append("text")
+                .attr("transform", d => "translate(6," + (y(d.values[0].value) + 16) + ")")
+                .attr("fill", "black")
+                .attr("class", "d3axis")
+                .text(d => d.id);
 
             // end plot each crime type over time
         });
@@ -147,7 +192,7 @@ function make_crime_concentration() {
         // Update data
         d3.csv("static/data/" + type + "_crimes_top_bot_25.csv", csv_preprocess, function(csv_data) {
 
-            csv_data = csv_timeseries_to_tall(csv_data, cols_crime_level_plot);
+            csv_data = csv_timeseries_col_split(csv_data, cols_crime_level_plot);
             
             x.domain(d3.extent(csv_data[0].values.map(d => d.time)));
             y.domain([0, d3.max(csv_data.map(d => d3.max(d.values.map(col => col.value))))]);
@@ -163,22 +208,43 @@ function make_crime_concentration() {
             // End make axes
             
             // begin plot each crime type over time
-            var svg_temp = crime_type_g
-                .selectAll("#crime_type_top_bot_25_path")
+            var svg_temp_path = crime_type_g
+                .selectAll("#crime_type_top_bot_path")
                 .selectAll("path")
                 .data(csv_data);
 
-            svg_temp.enter()
+            svg_temp_path.enter()
                 .append("path")
-                .merge(svg_temp)
+                .merge(svg_temp_path)
                 .transition()
                 .attr("d", d => line(d.values))
                 .attr("fill", "none")
                 .attr("stroke", z(type))
-                .style("opacity", d => d.id == "Chicago avg" ? "1" : "0.5")
+                .style("opacity", d => d.id == "Chicago avg" ? "1" : "0.4")
                 .style("stroke-width", "2");
 
-            svg_temp.exit().remove();
+            svg_temp_path.exit().remove();
+           
+            // labels 
+            var svg_temp_text = crime_type_g
+                .selectAll("#crime_type_top_bot_text")
+                .selectAll("text")
+                .data(csv_data);
+
+            svg_temp_text.enter()
+                .append("text")
+                .merge(svg_temp_text)
+                .transition()
+                .attr("transform", d => "translate(6," + (y(d.values[0].value) + 16) + ")")
+                .attr("fill", "black")
+                .attr("class", "d3axis")
+                .text(d => d.id);
+
+            svg_temp_text.exit().remove();
+
+            // begin make auto text
+            d3.select("#crime_top_bot_autotext_div")
+                .html(make_auto_text(csv_data, type))
 
             // end plot each crime type over time
         });

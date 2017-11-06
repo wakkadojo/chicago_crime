@@ -6,6 +6,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.13.0/d3-legend.js"></script>
     <!-- for chromatic/cts color scale -->
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <!-- for utility functions -->
+    <script src="static/js/d3viz/util.js"></script>
     
     <!-- Post Content -->
     <article>
@@ -19,6 +21,7 @@
 <!-- TODO: migrate style touches! --> 
 <style> 
 .d3axis { font-size: 14px; font-weight: 300; }
+.autotext { font-size: 16px; font-weight: 300; line-height: 1.1 }
 .map_legend_area { fill: url(#gradient_fill_map_legend); stroke-width: 0px; }
 </style>
 
@@ -52,8 +55,8 @@ Again, the nature of this measurement will be elaborated below, but the signal c
 This can be explored in the figure below by clicking the different categories in the legend.
 </p>
             
-            <svg width="600" height="400" id="crime_worst_pct_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
-
+            <svg width="600" height="300" id="crime_top_bot_timeseries_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+            <div id="crime_top_bot_autotext_div" class="autotext" style="width: 600; height: 300; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
             <script type="text/javascript" src="static/js/d3viz/crime_concentration_summary.js"></script>
             
             <h2 class="section-heading">Explore the City</h2>
