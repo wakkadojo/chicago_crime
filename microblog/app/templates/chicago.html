@@ -56,7 +56,47 @@ This can be explored in the figure below by clicking the different categories in
 </p>
             
             <svg width="600" height="300" id="crime_top_bot_timeseries_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
-            <div id="crime_top_bot_autotext_div" class="autotext" style="width: 600; height: 300; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
+            <table id="crime_top_bot_summary_tbl" cellpadding="5" class="d3axis" style="width: 600; margin-left: auto; margin-right: auto; display: table;">
+            <tr style="border-bottom: 0.75px solid black;">
+                <td></td>
+                <td colspan=4 style="text-align: center;">
+                Ratio of (crime in most severe 25%) to (crime in least severe 25%)
+                </td>
+            <tr>
+            <tr style="border-bottom: 1.5px solid black;">
+                <th></th>
+                <th id="Property_tbl_column">Property</th>
+                <th id="Society_tbl_column"> Society</th>
+                <th id="Violent_tbl_column"> Violent</th>
+                <th id="Total_tbl_column">   Total</th>
+            </tr>
+            <tr>
+                <td>2002</td>
+                <th id="Property_tbl_column"></th>
+                <th id="Society_tbl_column"></th>
+                <th id="Violent_tbl_column"></th>
+                <th id="Total_tbl_column"></th>
+            </tr>
+            <tr>
+                <td>2017</td>
+                <th id="Property_tbl_column"></th>
+                <th id="Society_tbl_column"></th>
+                <th id="Violent_tbl_column"></th>
+                <th id="Total_tbl_column"></th>
+            </tr>
+            <tr style="border-bottom: 0.75px solid black;">
+                <td>Change</td>
+                <th id="Property_tbl_column"></th>
+                <th id="Society_tbl_column"></th>
+                <th id="Violent_tbl_column"></th>
+                <th id="Total_tbl_column"></th>
+            </tr>
+            </table>
+            <p>
+            </p> 
+
+            <div id="crime_top_bot_autotext_div" class="autotext" style="width: 600; height: 100; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
+
             <script type="text/javascript" src="static/js/d3viz/crime_concentration_summary.js"></script>
             
             <h2 class="section-heading">Explore the City</h2>

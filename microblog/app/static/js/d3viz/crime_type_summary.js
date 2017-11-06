@@ -1,7 +1,7 @@
 var make_crime_intensity_time = function() {
 
     var crime_type_svg = d3.select("#crime_type_svg"),
-        margin = {top: 20, right: 20, bottom: 60, left: 110},
+        margin = {top: 20, right: 20, bottom: 60, left: 80},
         width = crime_type_svg.attr("width") - margin.left - margin.right,
         height = crime_type_svg.attr("height") - margin.top - margin.bottom,
         crime_type_g = crime_type_svg
@@ -91,11 +91,11 @@ var make_crime_intensity_time = function() {
             .call(d3.axisLeft(y).ticks(4))
             .append("text")
             .attr("text-anchor", "middle")
-            .attr("y", -margin.left/2)
+            .attr("y", -2*margin.left/3)
             .attr("x", -height/4)
             .attr("transform", "rotate(-90)")
             .attr("fill", "black")
-            .text("crime intensity");
+            .text("Crime intensity");
         // End make axes
 
         var start_idx = 0
@@ -188,11 +188,11 @@ var make_crime_intensity_time = function() {
             .call(d3.axisLeft(y_bot).ticks(4))
             .append("text")
             .attr("text-anchor", "middle")
-            .attr("y", -margin.left/2)
+            .attr("y", -2*margin.left/3)
             .attr("x", -height/4 - height/2 - margin.top)
             .attr("transform", "rotate(-90)")
             .attr("fill", "black")
-            .text("crime intensity");
+            .text("Crime intensity");
         // End make axes
 
         // Mini explanation

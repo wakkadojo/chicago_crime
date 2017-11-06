@@ -2,19 +2,19 @@ function make_crime_concentration() {
 
     var timeParse = d3.timeParse("%Y-%m");
 
-    var cols_crime_level_plot = new Set(["High crime areas", "Chicago avg", "Low crime areas"]);
+    var cols_crime_level_plot = new Set(["Crime in worst 25%", "Chicago average", "Crime in best 25%"]);
 
     function csv_preprocess(d) {
         return {
             "time"                : timeParse(d.time),
-            "High crime areas"    : +d.crime_top_avg,
-            "Low crime areas"     : +d.crime_bot_avg,
-            "Chicago avg"         : +d.chicago_crime
+            "Crime in worst 25%"    : +d.crime_top_avg,
+            "Crime in best 25%"     : +d.crime_bot_avg,
+            "Chicago average"         : +d.chicago_crime
         }
     }
 
     var crime_type_svg = d3.select("#crime_top_bot_timeseries_svg"),
-        margin = {top: 50, right: 20, bottom: 60, left: 110},
+        margin = {top: 50, right: 20, bottom: 60, left: 80},
         width = crime_type_svg.attr("width") - margin.left - margin.right,
         height = crime_type_svg.attr("height") - margin.top - margin.bottom,
         crime_type_g = crime_type_svg
@@ -96,22 +96,22 @@ function make_crime_concentration() {
         });
 
         // calcs for auto text below
-        var crime_type_description = (type == "Society" ? "rate of crime against Society" : type + " crime"),
-            high_low_ratio_start = (crime_change["High crime areas"].value_start / crime_change["Low crime areas"].value_start).toFixed(1),
-            high_low_ratio_end = (crime_change["High crime areas"].value_end / crime_change["Low crime areas"].value_end).toFixed(1),
+        var crime_type_description = (type == "Society" ? "rates of crime against Society" : type + " crime"),
+            high_low_ratio_start = (crime_change["Crime in worst 25%"].value_start / crime_change["Crime in best 25%"].value_start).toFixed(1),
+            high_low_ratio_end = (crime_change["Crime in worst 25%"].value_end / crime_change["Crime in best 25%"].value_end).toFixed(1),
             value_change = Math.abs(high_low_ratio_end - high_low_ratio_start).toFixed(1),
-            ratio_is_up = high_low_ratio_start < high_low_ratio_end ? "up" : "down",
-            inequality_incr_decr = high_low_ratio_start < high_low_ratio_end ? "increase" : "decrease",
-            start_year = crime_change["High crime areas"].start_year,
-            low_reduction = Math.abs(crime_change["Low crime areas"].change_ratio*100).toFixed(0) + "%",
-            high_reduction = Math.abs(crime_change["High crime areas"].change_ratio*100).toFixed(0) + "%",
+            ratio_is_up = parseFloat(high_low_ratio_start) < parseFloat(high_low_ratio_end) ? "up" : "down",
+            inequality_incr_decr = parseFloat(high_low_ratio_start) < parseFloat(high_low_ratio_end) ? "increase" : "decrease",
+            start_year = crime_change["Crime in worst 25%"].start_year,
+            low_reduction = Math.abs(crime_change["Crime in best 25%"].change_ratio*100).toFixed(0) + "%",
+            high_reduction = Math.abs(crime_change["Crime in worst 25%"].change_ratio*100).toFixed(0) + "%",
             low_high_red_compare = low_reduction < high_reduction ? "less significant" : "more significant";
 
         var auto_text = 
             "Areas with high <b>" + crime_type_description + "</b> experience <b>" + high_low_ratio_end + "x</b> " +
-            "the crime as low crime areas. This inequality is <b>" + ratio_is_up + " " + value_change + "x</b> from " +
-            start_year + ". This <b>" + inequality_incr_decr + "</b> is because low crime areas saw a crime reduction of " +
-            "<b>" + low_reduction + "</b>, which is a <b>" + low_high_red_compare + "</b> decrease than the " + 
+            "the crime as low crime areas. Inequality is <b>" + ratio_is_up + " " + value_change + "x</b> from " +
+            start_year + ". The <b>" + inequality_incr_decr + "</b> in inequality is because low crime areas saw a crime reduction " +
+            "of <b>" + low_reduction + "</b>, which is a <b>" + low_high_red_compare + "</b> decrease than the " + 
             "<b>" + high_reduction + "</b> reduction  seen in high crime areas."
 
         return auto_text;
@@ -145,7 +145,7 @@ function make_crime_concentration() {
                 .call(d3.axisLeft(y).ticks(5))
                 .append("text")
                 .attr("text-anchor", "middle")
-                .attr("y", -margin.left/2)
+                .attr("y", -2*margin.left/3)
                 .attr("x", -height/2)
                 .attr("transform", "rotate(-90)")
                 .attr("fill", "black")
@@ -166,7 +166,7 @@ function make_crime_concentration() {
                 .attr("d", d => line(d.values))
                 .attr("fill", "none")
                 .attr("stroke", z(type))
-                .style("opacity", d => d.id == "Chicago avg" ? "1" : "0.4")
+                .style("opacity", d => d.id == "Chicago average" ? "1" : "0.4")
                 .style("stroke-width", "2");
 
             // labels
@@ -220,7 +220,7 @@ function make_crime_concentration() {
                 .attr("d", d => line(d.values))
                 .attr("fill", "none")
                 .attr("stroke", z(type))
-                .style("opacity", d => d.id == "Chicago avg" ? "1" : "0.4")
+                .style("opacity", d => d.id == "Chicago average" ? "1" : "0.4")
                 .style("stroke-width", "2");
 
             svg_temp_path.exit().remove();
