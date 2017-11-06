@@ -20,9 +20,35 @@
 
 <!-- TODO: migrate style touches! --> 
 <style> 
-.d3axis { font-size: 14px; font-weight: 300; }
-.autotext { font-size: 16px; font-weight: 300; line-height: 1.1 }
-.map_legend_area { fill: url(#gradient_fill_map_legend); stroke-width: 0px; }
+.d3axis { 
+    font-size: 14px; 
+    font-weight: 300; 
+}
+.autotext { 
+    font-size: 16px; 
+    font-weight: 300; 
+    line-height: 1.1;
+}
+
+.map_legend_area { 
+    fill: url(#gradient_fill_map_legend); 
+    stroke-width: 0px; 
+}
+
+#crime_top_bot_summary_tbl td, th { 
+    text-align: left; 
+}
+
+#tbl_top_bot_start_year,
+#tbl_top_bot_end_year {
+    text-indent: 2.0em;
+}
+
+#crime_top_bot_summary_tbl th + th, 
+#crime_top_bot_summary_tbl th + td, 
+#crime_top_bot_summary_tbl td + td { 
+    text-align: center; 
+}
 </style>
 
 <h2 class="section-heading">Summary</h2>
@@ -56,40 +82,40 @@ This can be explored in the figure below by clicking the different categories in
 </p>
             
             <svg width="600" height="300" id="crime_top_bot_timeseries_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
-            <table id="crime_top_bot_summary_tbl" cellpadding="5" class="d3axis" style="width: 600; margin-left: auto; margin-right: auto; display: table;">
-            <tr style="border-bottom: 0.75px solid black;">
+            <table id="crime_top_bot_summary_tbl" cellpadding="5" class="d3axis" style="width: 600; margin-left: auto; margin-right: auto; display: table; table-layout: fixed; border-top: 0.75px solid black; border-bottom: 0.75px solid black;">
+            <tr>
                 <td></td>
                 <td colspan=4 style="text-align: center;">
                 Ratio of (crime in most severe 25%) to (crime in least severe 25%)
                 </td>
-            <tr>
-            <tr style="border-bottom: 1.5px solid black;">
+            </tr>
+            <tr id="top_bot_tbl_header" style="border-bottom: 1.5px solid black;">
                 <th></th>
                 <th id="Property_tbl_column">Property</th>
-                <th id="Society_tbl_column"> Society</th>
-                <th id="Violent_tbl_column"> Violent</th>
-                <th id="Total_tbl_column">   Total</th>
+                <th id="Society_tbl_column">Society</th>
+                <th id="Violent_tbl_column">Violent</th>
+                <th id="Total_tbl_column">Total</th>
             </tr>
-            <tr>
-                <td>2002</td>
-                <th id="Property_tbl_column"></th>
-                <th id="Society_tbl_column"></th>
-                <th id="Violent_tbl_column"></th>
-                <th id="Total_tbl_column"></th>
+            <tr id="top_bot_tbl_change">
+                <th>Change</th>
+                <td id="Property_tbl_column"></td>
+                <td id="Society_tbl_column"></td>
+                <td id="Violent_tbl_column"></td>
+                <td id="Total_tbl_column"></td>
             </tr>
-            <tr>
-                <td>2017</td>
-                <th id="Property_tbl_column"></th>
-                <th id="Society_tbl_column"></th>
-                <th id="Violent_tbl_column"></th>
-                <th id="Total_tbl_column"></th>
+            <tr id="top_bot_tbl_endpoint">
+                <th id="tbl_top_bot_end_year">&nbsp;</th>
+                <td id="Property_tbl_column"></td>
+                <td id="Society_tbl_column"></td>
+                <td id="Violent_tbl_column"></td>
+                <td id="Total_tbl_column"></td>
             </tr>
-            <tr style="border-bottom: 0.75px solid black;">
-                <td>Change</td>
-                <th id="Property_tbl_column"></th>
-                <th id="Society_tbl_column"></th>
-                <th id="Violent_tbl_column"></th>
-                <th id="Total_tbl_column"></th>
+            <tr id="top_bot_tbl_start">
+                <th id="tbl_top_bot_start_year">&nbsp;</th>
+                <td id="Property_tbl_column"></td>
+                <td id="Society_tbl_column"></td>
+                <td id="Violent_tbl_column"></td>
+                <td id="Total_tbl_column"></td>
             </tr>
             </table>
             <p>

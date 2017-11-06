@@ -1,17 +1,10 @@
 function make_crime_concentration() {
 
+    var crime_types = ['Property', 'Society', 'Violent', 'Total'];
+
     var timeParse = d3.timeParse("%Y-%m");
 
     var cols_crime_level_plot = new Set(["Crime in worst 25%", "Chicago average", "Crime in best 25%"]);
-
-    function csv_preprocess(d) {
-        return {
-            "time"                : timeParse(d.time),
-            "Crime in worst 25%"    : +d.crime_top_avg,
-            "Crime in best 25%"     : +d.crime_bot_avg,
-            "Chicago average"         : +d.chicago_crime
-        }
-    }
 
     var crime_type_svg = d3.select("#crime_top_bot_timeseries_svg"),
         margin = {top: 50, right: 20, bottom: 60, left: 80},
@@ -25,7 +18,7 @@ function make_crime_concentration() {
         z = d3.scaleOrdinal(d3.schemeCategory10);
    
     // static assignment 
-    z.domain(['Property', 'Society', 'Violent', 'Total']);
+    z.domain(crime_types);
 
     var line = d3.line()
         .x(d => x(d.time))
@@ -75,7 +68,103 @@ function make_crime_concentration() {
     // End Legend
 
     initialize_plot_type("Total");
+    initialize_summary_table();
 
+    function csv_single_type_preprocess(d) {
+        return {
+            "time"                : timeParse(d.time),
+            "Crime in worst 25%"  : +d.crime_top_avg,
+            "Crime in best 25%"   : +d.crime_bot_avg,
+            "Chicago average"     : +d.chicago_crime
+        }
+    }
+
+    function initialize_summary_table() {
+
+        function get_value(csv_nest, crime_type, time_type, variable) {
+            
+            var target_row = csv_nest
+                .filter(d => d.key == crime_type)[0].values // crime type search
+                .filter(d => d.key == time_type)[0].values  // time type search
+                .filter(d => d.key == variable)[0].values;  // variable search
+
+            return target_row.length == 1 ? target_row[0] : null; 
+        }
+        
+        d3.csv("static/data/crimes_top_bot_25_endpoints.csv", function(csv_data) {
+            
+            var csv_nest = d3.nest()
+                .key(d => d.crime_type)
+                .key(d => d.time_type)
+                .key(d => d.variable)
+                .entries(csv_data)
+
+            // label the years
+            d3.select("#tbl_top_bot_start_year")
+                .text(get_value(csv_nest, crime_types[0], "start", "crime_bot_avg").year);
+            d3.select("#tbl_top_bot_end_year")
+                .text(get_value(csv_nest, crime_types[0], "endpoint", "crime_bot_avg").year);
+           
+            // fill in the table
+            for(var i in crime_types) {
+                var ct = crime_types[i];
+                var top_crime_start = get_value(csv_nest, ct, "start", "crime_top_avg").value,
+                    bot_crime_start = get_value(csv_nest, ct, "start", "crime_bot_avg").value,
+                    top_crime_end   = get_value(csv_nest, ct, "endpoint", "crime_top_avg").value,
+                    bot_crime_end   = get_value(csv_nest, ct, "endpoint", "crime_bot_avg").value;
+
+                var crime_ratio_start = top_crime_start / bot_crime_start,
+                    crime_ratio_end   = top_crime_end / bot_crime_end;
+
+                d3.select("#top_bot_tbl_start")
+                    .select("#" + ct + "_tbl_column")
+                    .text(crime_ratio_start.toFixed(1) + "x");
+                d3.select("#top_bot_tbl_endpoint")
+                    .select("#" + ct + "_tbl_column")
+                    .text(crime_ratio_end.toFixed(1) + "x");
+                d3.select("#top_bot_tbl_change")
+                    .select("#" + ct + "_tbl_column")
+                    .text(
+                        (crime_ratio_end < crime_ratio_start ? "-" : "+") + 
+                        Math.abs(crime_ratio_end.toFixed(1) - crime_ratio_start.toFixed(1)).toFixed(1) + "x"
+                    );
+
+                // mouse interactions
+                d3.selectAll("#" + ct + "_tbl_column")
+                    .on("click", function(d) {
+                        var type = d3.select(this).attr("id").split("_")[0];   
+                        update_plot_type(type);
+                    })
+
+            } 
+
+        });
+
+        update_summary_table("Total");
+
+    }
+
+    function update_summary_table(type) {
+
+        // reset color
+        d3.selectAll("#crime_top_bot_summary_tbl")
+            .selectAll("th")
+            .style("background-color", null);
+        d3.selectAll("#crime_top_bot_summary_tbl")
+            .selectAll("td")
+            .style("background-color", null);
+
+        // set new color
+        d3.selectAll("#" + type + "_tbl_column")
+            .transition()
+            .style("background-color", function() {
+                var color = d3.color(z(type));
+                color.opacity = 0.2;
+                return color;
+            });
+    }
+
+    // Open question: have this reference the endpoint output or continue referencing the timeseries? 
     function make_auto_text(csv_data, type) {
 
         var crime_change_arr = csv_data.map(function(d) {
@@ -120,7 +209,7 @@ function make_crime_concentration() {
 
     function initialize_plot_type(type) {
     
-        d3.csv("static/data/" + type + "_crimes_top_bot_25.csv", csv_preprocess, function(csv_data) {
+        d3.csv("static/data/" + type + "_crimes_top_bot_25.csv", csv_single_type_preprocess, function(csv_data) {
 
             csv_data = csv_timeseries_col_split(csv_data, cols_crime_level_plot);
 
@@ -190,7 +279,7 @@ function make_crime_concentration() {
     function update_plot_type(type) {
 
         // Update data
-        d3.csv("static/data/" + type + "_crimes_top_bot_25.csv", csv_preprocess, function(csv_data) {
+        d3.csv("static/data/" + type + "_crimes_top_bot_25.csv", csv_single_type_preprocess, function(csv_data) {
 
             csv_data = csv_timeseries_col_split(csv_data, cols_crime_level_plot);
             
@@ -250,6 +339,7 @@ function make_crime_concentration() {
         });
 
         update_active_legend(type);
+        update_summary_table(type);
 
     }
 
