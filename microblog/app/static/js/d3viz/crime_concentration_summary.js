@@ -4,7 +4,7 @@ function make_crime_concentration() {
 
     var timeParse = d3.timeParse("%Y-%m");
 
-    var cols_crime_level_plot = new Set(["Crime in worst 25%", "Chicago average", "Crime in best 25%"]);
+    var cols_crime_level_plot = new Set(["Crime in most severe 25%", "Chicago average", "Crime in least severe 25%"]);
 
     var crime_type_svg = d3.select("#crime_top_bot_timeseries_svg"),
         margin = {top: 50, right: 20, bottom: 60, left: 80},
@@ -72,10 +72,10 @@ function make_crime_concentration() {
 
     function csv_single_type_preprocess(d) {
         return {
-            "time"                : timeParse(d.time),
-            "Crime in worst 25%"  : +d.crime_top_avg,
-            "Crime in best 25%"   : +d.crime_bot_avg,
-            "Chicago average"     : +d.chicago_crime
+            "time"                       : timeParse(d.time),
+            "Crime in most severe 25%"   : +d.crime_top_avg,
+            "Crime in least severe 25%"  : +d.crime_bot_avg,
+            "Chicago average"            : +d.chicago_crime
         }
     }
 
@@ -186,14 +186,14 @@ function make_crime_concentration() {
 
         // calcs for auto text below
         var crime_type_description = (type == "Society" ? "rates of crime against Society" : type + " crime"),
-            high_low_ratio_start = (crime_change["Crime in worst 25%"].value_start / crime_change["Crime in best 25%"].value_start).toFixed(1),
-            high_low_ratio_end = (crime_change["Crime in worst 25%"].value_end / crime_change["Crime in best 25%"].value_end).toFixed(1),
+            high_low_ratio_start = (crime_change["Crime in most severe 25%"].value_start / crime_change["Crime in least severe 25%"].value_start).toFixed(1),
+            high_low_ratio_end = (crime_change["Crime in most severe 25%"].value_end / crime_change["Crime in least severe 25%"].value_end).toFixed(1),
             value_change = Math.abs(high_low_ratio_end - high_low_ratio_start).toFixed(1),
             ratio_is_up = parseFloat(high_low_ratio_start) < parseFloat(high_low_ratio_end) ? "up" : "down",
             inequality_incr_decr = parseFloat(high_low_ratio_start) < parseFloat(high_low_ratio_end) ? "increase" : "decrease",
-            start_year = crime_change["Crime in worst 25%"].start_year,
-            low_reduction = Math.abs(crime_change["Crime in best 25%"].change_ratio*100).toFixed(0) + "%",
-            high_reduction = Math.abs(crime_change["Crime in worst 25%"].change_ratio*100).toFixed(0) + "%",
+            start_year = crime_change["Crime in most severe 25%"].start_year,
+            low_reduction = Math.abs(crime_change["Crime in least severe 25%"].change_ratio*100).toFixed(0) + "%",
+            high_reduction = Math.abs(crime_change["Crime in most severe 25%"].change_ratio*100).toFixed(0) + "%",
             low_high_red_compare = low_reduction < high_reduction ? "less significant" : "more significant";
 
         var auto_text = 

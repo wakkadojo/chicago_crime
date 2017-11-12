@@ -24,10 +24,11 @@
     font-size: 14px; 
     font-weight: 300; 
 }
+
 .autotext { 
     font-size: 16px; 
     font-weight: 300; 
-    line-height: 1.1;
+    line-height: 1.4;
 }
 
 .map_legend_area { 
@@ -49,6 +50,15 @@
 #crime_top_bot_summary_tbl td + td { 
     text-align: center; 
 }
+
+.archetype_name_tbl {
+    font-size: 14px;
+    font-weight: bold;
+}
+.archetype_description_tbl {
+    font-size: 14px;
+}
+
 </style>
 
 <h2 class="section-heading">Summary</h2>
@@ -118,8 +128,9 @@ This can be explored in the figure below by clicking the different categories in
                 <td id="Total_tbl_column"></td>
             </tr>
             </table>
-            <p>
-            </p> 
+
+            <!-- slight break before autotext -->
+            <p></p> 
 
             <div id="crime_top_bot_autotext_div" class="autotext" style="width: 600; height: 100; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
 
@@ -132,67 +143,204 @@ This can be explored in the figure below by clicking the different categories in
                 <li> Auto text: Crime summary + change, race, income changes
             </ul>
 
-            <svg width="600" height = "500" id="crime_chi_map_int_svg" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
-            <svg width="600" height = "300" id="crime_geo_detail_svg" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
-            <script type="text/javascript" src="static/js/d3viz/crime_intensity_map.js"></script>
+            <table id="crime_archetype_tbl" cellpadding="5" class="d3axis" style="width: 600; margin-left: auto; margin-right: auto; display: table; table-layout: fixed; border-top: 0.75px solid black; border-bottom: 0.75px solid black;">
+                <tr>
+                <th class="archetype_name_tbl" style="text-align: center; border-bottom: 1.5px solid black;" colspan=2>Three Worlds in Chicago</th>
+                </tr>
+                <tr>
+                <td id="affluents_arch_cell" class="archetype_selector_cell">
+                    <div class="archetype_name_tbl">The Affluents</div>
+                    <div class="archetype_description_tbl">Growing population of top-earners seeing the best improvements in crime and income</div>
+                </td>
+                    <td rowspan=3>
+                        <svg width="300" height="300" id="crime_ineq_selected_map" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
+                    </td>
+                </tr>
+                <tr><td id="working_arch_cell" class="archetype_selector_cell">
+                    <div class="archetype_name_tbl">The Diverse Working Class</div>
+                    <div class="archetype_description_tbl">Middle class of Chicago experiencing modest income and marked crime improvements</div>
+                </td></tr>
+                <tr><td id="distressed_arch_cell" class="archetype_selector_cell">
+                    <div class="archetype_name_tbl">The Distressed</div>
+                    <div class="archetype_description_tbl">Crime flat or decreasing slower than Chicago average with flat or decreasing incomes</div>
+                </td></tr>
+            </table>
 
-            <svg width="600" height="300" id="crime_ineq_selected_map" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
+            <!-- slight break before autotext -->
+            <p></p> 
+            
+            <div id="archetype_autotext_div" class="autotext" style="width: 600; height: 200; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
+
             <script type="text/javascript">
 
-var ineq_map_svg = d3.select("#crime_ineq_selected_map"),
-    margin = {top: 20, bottom: 20, left: 20, right: 20}
-    width = ineq_map_svg.attr("width"),
-    height = ineq_map_svg.attr("height");
+var first_arch_selected = "affluents";
 
-var x = d3.scaleLinear(),
-    y = d3.scaleLinear(),
-    r = d3.scaleSqrt().range([0, 14]),
-    color = d3.scaleOrdinal(d3.schemeCategory10);
+function get_archetype_bubble_id(archetype) { return archetype + "_archetype_map_bubble_id"; }
 
-var projection = d3.geoMercator()
+function init_pop_map() {
 
+    var ineq_map_svg = d3.select("#crime_ineq_selected_map"),
+        margin = {top: 20, bottom: 20, left: 20, right: 20}
+        width = ineq_map_svg.attr("width"),
+        height = ineq_map_svg.attr("height");
 
+    var x = d3.scaleLinear(),
+        y = d3.scaleLinear(),
+        r = d3.scaleSqrt().range([0, 14]),
+        color = d3.scaleOrdinal(d3.schemeCategory10);
 
-d3.json("static/data/chicago_centroid.json", function(neighb_data) {
+    var projection = d3.geoMercator()
 
-    projection.fitExtent([[0, margin.bottom], [width, height-margin.top]], neighb_data)
+    d3.json("static/data/chicago_centroid.json", function(neighb_data) {
 
-    // plot chicago outline
-    d3.json("static/data/chicago_outline.json", function(outline) {
-        
-        var path = d3.geoPath()
-            .projection(projection);
+        projection.fitExtent([[0, margin.bottom], [width, height-margin.top]], neighb_data)
+
+        // plot chicago outline
+        d3.json("static/data/chicago_outline.json", function(outline) {
+            
+            var path = d3.geoPath()
+                .projection(projection);
+
+            ineq_map_svg.append("g")
+                .selectAll("path")
+                .data(outline.features)
+                .enter()
+                .append("path")
+                .attr("d", path)
+                .attr("stroke-width", "1")
+                .attr("fill", "none")
+                .attr("stroke", "black");
+
+        });
+
+        r.domain([0, d3.max(neighb_data.features.map(d => d.properties.population))]);
+        color.domain(neighb_data.features.map(d => d.properties.primary_race));
+
+        // Draw map
+        ineq_map_svg.append("g")
+            .selectAll("circle")
+            .data(neighb_data.features)
+            .enter()
+            .append("circle")
+            .attr("cx", d => projection(d.geometry.coordinates)[0])
+            .attr("cy", d => projection(d.geometry.coordinates)[1])
+            .attr("r", d => r(d.properties.population))
+            .attr("fill", d => color(d.properties.primary_race))
+            .attr("id", d => get_archetype_bubble_id(d.properties.archetype))
+            .style("opacity", "0.4");
+
+        // Draw legend
+        var ordinal = d3.scaleOrdinal()
+            .domain(color.domain())
+            .range(color.range());
 
         ineq_map_svg.append("g")
-            .selectAll("path")
-            .data(outline.features)
-            .enter()
-            .append("path")
-            .attr("d", path)
-            .attr("stroke-width", "1")
-            .attr("fill", "none")
-            .attr("stroke", "black");
+            .attr("class", "race_legend_ordinal")
+            .attr("transform", "translate(" + (width - margin.right - 70) + "," + (margin.top/2) + ")");
+
+        var legend_ordinal = d3.legendColor()
+            .scale(ordinal)
+
+        ineq_map_svg.select(".race_legend_ordinal")
+            .call(legend_ordinal);
+
+        // initiate to click on first arch
+        update_pop_map(first_arch_selected);
+    });
+}
+
+function update_pop_map(type) {
+
+    // set opacity of all
+    d3.selectAll("#crime_ineq_selected_map")
+        .selectAll("circle")
+        .style("opacity", "0.4")
+
+    // darken selected
+    d3.selectAll("#crime_ineq_selected_map")
+        .selectAll("#" + get_archetype_bubble_id(type))
+        .transition()
+        .style("opacity", "1.0");
+}
+
+function arch_tbl_cell_click() {
+
+    d3.select("#crime_archetype_tbl")
+        .selectAll(".archetype_selector_cell")
+        .on("click", function(d) {
+            var cell = d3.select(this)
+            var type = cell.attr("id").split("_")[0];
+
+            d3.select("#crime_archetype_tbl")
+                    .selectAll("td")
+                    .transition()
+                    .style("background-color", null);
+
+            cell.transition()
+                .style("background-color", "Gainsboro");
+            
+            update_pop_map(type);
+            make_autotext(type);
+        })
+
+    // initiate to click on first arch
+    d3.select("#crime_archetype_tbl")
+        .select("#" + first_arch_selected + "_arch_cell")
+        .style("background-color", "Gainsboro");
+}
+
+function make_autotext(type) {
+
+    function get_dominant_value(val, arch_data) {
+        var total_pop = d3.sum(arch_data.map(d => d.population));
+
+        var nested_values = d3.nest()
+            .key(d => d[val])
+            .rollup(leaves => d3.sum(leaves, d => d.population)/total_pop)
+            .entries(arch_data)
+            .sort(function(a, b) { return d3.descending(a.value, b.value); })
+
+        return nested_values[0].value > 0.5 ? nested_values[0].key : null;
+    }
+    
+    d3.json("static/data/chicago_centroid.json", function(neighb_data) {
+
+        var arch_data = neighb_data.features.map(d => d.properties)
+            .filter(d => d.archetype == type);
+
+        var race_raw = get_dominant_value("primary_race", arch_data),
+            race = race_raw == null ? "mixed" : race,
+            uptick = get_dominant_value("uptick", arch_data),
+            elevated = get_dominant_value("elevated_category", arch_data),
+            pop_chg = get_dominant_value("population_change", arch_data),
+            crime_chg = get_dominant_value("long_term_crime", arch_data),
+            income = get_dominant_value("income_level", arch_data);
+    
+        d3.select("#archetype_autotext_div")
+            .text("the dominant race for " + type + " is " + race + ".");
 
     });
 
-    r.domain([0, d3.max(neighb_data.features.map(d => d.properties.population))]);
-    color.domain(neighb_data.features.map(d => d.properties.primary_race))
+}
 
-    ineq_map_svg.append("g")
-        .selectAll("circle")
-        .data(neighb_data.features)
-        .enter()
-        .append("circle")
-        .attr("cx", d => projection(d.geometry.coordinates)[0])
-        .attr("cy", d => projection(d.geometry.coordinates)[1])
-        .attr("r", d => r(d.properties.population))
-        .attr("fill", d => color(d.properties.primary_race))
-        .style("opacity", "0.5")
+function init_autotext() {
+    make_autotext(first_arch_selected);
+}
 
-});
+init_pop_map();
+arch_tbl_cell_click();
+init_autotext();
 
             </script>
 
+            <p>
+            Something here explaining above. Below can see crime trends by neighborhood.
+            </p>
+
+            <svg width="600" height = "500" id="crime_chi_map_int_svg" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
+            <svg width="600" height = "300" id="crime_geo_detail_svg" style="margin-left: auto; margin-right: auto; display: block; shape-rendering: optimizeSpeed;"></svg>
+            <script type="text/javascript" src="static/js/d3viz/crime_intensity_map.js"></script>
+            
             <h2 class="section-heading">Sizing Up a Crime</h2>
             <ul>
                 <li> Discussion about how to look at crimes: severity of crime and per person 
