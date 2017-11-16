@@ -1879,382 +1879,382 @@ time,crime_type,crime_description,crime_intensity
 2017-06,Property,Vandalism,0.005921562134148666
 2017-07,Property,Vandalism,0.005874904705571156
 2017-08,Property,Vandalism,0.00576116046277082
-2002-01,Society,Criminal Sexual Abuse,0.001412017152726982
-2002-02,Society,Criminal Sexual Abuse,0.0014058842145787185
-2002-03,Society,Criminal Sexual Abuse,0.0013971592688567492
-2002-04,Society,Criminal Sexual Abuse,0.0013992060796956655
-2002-05,Society,Criminal Sexual Abuse,0.0013721188891210898
-2002-06,Society,Criminal Sexual Abuse,0.0014034610299907423
-2002-07,Society,Criminal Sexual Abuse,0.0014131128349888485
-2002-08,Society,Criminal Sexual Abuse,0.0014005869791430987
-2002-09,Society,Criminal Sexual Abuse,0.0014310700173107524
-2002-10,Society,Criminal Sexual Abuse,0.0014311370685373788
-2002-11,Society,Criminal Sexual Abuse,0.0014264307714019096
-2002-12,Society,Criminal Sexual Abuse,0.001422796476669659
-2003-01,Society,Criminal Sexual Abuse,0.0014478810914438393
-2003-02,Society,Criminal Sexual Abuse,0.0014600778157583558
-2003-03,Society,Criminal Sexual Abuse,0.001448099703404287
-2003-04,Society,Criminal Sexual Abuse,0.0014429011488603467
-2003-05,Society,Criminal Sexual Abuse,0.0014472332673560935
-2003-06,Society,Criminal Sexual Abuse,0.0014186245397305414
-2003-07,Society,Criminal Sexual Abuse,0.0014015618130050513
-2003-08,Society,Criminal Sexual Abuse,0.0014034353323426783
-2003-09,Society,Criminal Sexual Abuse,0.001389641917122597
-2003-10,Society,Criminal Sexual Abuse,0.0014051412131636414
-2003-11,Society,Criminal Sexual Abuse,0.0014078001164278527
-2003-12,Society,Criminal Sexual Abuse,0.0013917724826646685
-2004-01,Society,Criminal Sexual Abuse,0.0013603075899792838
-2004-02,Society,Criminal Sexual Abuse,0.0013487352362050455
-2004-03,Society,Criminal Sexual Abuse,0.0013475624924823258
-2004-04,Society,Criminal Sexual Abuse,0.0013414850814067937
-2004-05,Society,Criminal Sexual Abuse,0.0013294785403296277
-2004-06,Society,Criminal Sexual Abuse,0.001315404302100576
-2004-07,Society,Criminal Sexual Abuse,0.0012860938356165925
-2004-08,Society,Criminal Sexual Abuse,0.0012869471412462463
-2004-09,Society,Criminal Sexual Abuse,0.0012831119058910325
-2004-10,Society,Criminal Sexual Abuse,0.0012541944994844823
-2004-11,Society,Criminal Sexual Abuse,0.001240220092137325
-2004-12,Society,Criminal Sexual Abuse,0.0012314562782651105
-2005-01,Society,Criminal Sexual Abuse,0.001248927065612098
-2005-02,Society,Criminal Sexual Abuse,0.001239006538975162
-2005-03,Society,Criminal Sexual Abuse,0.0012359975129046148
-2005-04,Society,Criminal Sexual Abuse,0.001232334667610464
-2005-05,Society,Criminal Sexual Abuse,0.0012391716817778742
-2005-06,Society,Criminal Sexual Abuse,0.0012347999579876614
-2005-07,Society,Criminal Sexual Abuse,0.0012404584050963977
-2005-08,Society,Criminal Sexual Abuse,0.0012368739457321815
-2005-09,Society,Criminal Sexual Abuse,0.0012542520170212925
-2005-10,Society,Criminal Sexual Abuse,0.0012420600025892276
-2005-11,Society,Criminal Sexual Abuse,0.0012373713244197158
-2005-12,Society,Criminal Sexual Abuse,0.001240014182858696
-2006-01,Society,Criminal Sexual Abuse,0.0012178974884317732
-2006-02,Society,Criminal Sexual Abuse,0.0012155885446457073
-2006-03,Society,Criminal Sexual Abuse,0.001205064241133277
-2006-04,Society,Criminal Sexual Abuse,0.001200010689909013
-2006-05,Society,Criminal Sexual Abuse,0.0011856226746490498
-2006-06,Society,Criminal Sexual Abuse,0.001180269357749204
-2006-07,Society,Criminal Sexual Abuse,0.001164867896931722
-2006-08,Society,Criminal Sexual Abuse,0.0011495269087529333
-2006-09,Society,Criminal Sexual Abuse,0.0011169873581203657
-2006-10,Society,Criminal Sexual Abuse,0.0011102721243433796
-2006-11,Society,Criminal Sexual Abuse,0.0010927854071106852
-2006-12,Society,Criminal Sexual Abuse,0.0010920762417104195
-2007-01,Society,Criminal Sexual Abuse,0.001087717942635424
-2007-02,Society,Criminal Sexual Abuse,0.001076126478560262
-2007-03,Society,Criminal Sexual Abuse,0.0010809921445239508
-2007-04,Society,Criminal Sexual Abuse,0.0010756830169016585
-2007-05,Society,Criminal Sexual Abuse,0.001085197236121391
-2007-06,Society,Criminal Sexual Abuse,0.0010895022989689386
-2007-07,Society,Criminal Sexual Abuse,0.0010883340526416001
-2007-08,Society,Criminal Sexual Abuse,0.0010729493436946258
-2007-09,Society,Criminal Sexual Abuse,0.0010625964758493223
-2007-10,Society,Criminal Sexual Abuse,0.0010618388337755946
-2007-11,Society,Criminal Sexual Abuse,0.0010588715539487773
-2007-12,Society,Criminal Sexual Abuse,0.001053915817663206
-2008-01,Society,Criminal Sexual Abuse,0.0010624696673801658
-2008-02,Society,Criminal Sexual Abuse,0.0010625345045652541
-2008-03,Society,Criminal Sexual Abuse,0.0010499204056649955
-2008-04,Society,Criminal Sexual Abuse,0.0010498773433738086
-2008-05,Society,Criminal Sexual Abuse,0.0010345724112416394
-2008-06,Society,Criminal Sexual Abuse,0.001027827081448432
-2008-07,Society,Criminal Sexual Abuse,0.0010365270715959624
-2008-08,Society,Criminal Sexual Abuse,0.0010419902250069955
-2008-09,Society,Criminal Sexual Abuse,0.0010498049170365625
-2008-10,Society,Criminal Sexual Abuse,0.001042581338627851
-2008-11,Society,Criminal Sexual Abuse,0.001057422058880373
-2008-12,Society,Criminal Sexual Abuse,0.0010645175971127248
-2009-01,Society,Criminal Sexual Abuse,0.0010351617238646452
-2009-02,Society,Criminal Sexual Abuse,0.001034550749151206
-2009-03,Society,Criminal Sexual Abuse,0.0010393034880066996
-2009-04,Society,Criminal Sexual Abuse,0.001023979905193454
-2009-05,Society,Criminal Sexual Abuse,0.001010846041523346
-2009-06,Society,Criminal Sexual Abuse,0.0009720441129894153
-2009-07,Society,Criminal Sexual Abuse,0.0009514993911257353
-2009-08,Society,Criminal Sexual Abuse,0.000946032911739296
-2009-09,Society,Criminal Sexual Abuse,0.0009263344670719075
-2009-10,Society,Criminal Sexual Abuse,0.000919023544190601
-2009-11,Society,Criminal Sexual Abuse,0.0009011092423980993
-2009-12,Society,Criminal Sexual Abuse,0.0008835453062291753
-2010-01,Society,Criminal Sexual Abuse,0.0008836398597631904
-2010-02,Society,Criminal Sexual Abuse,0.0008636538326161587
-2010-03,Society,Criminal Sexual Abuse,0.0008426487112773682
-2010-04,Society,Criminal Sexual Abuse,0.0008304502608849274
-2010-05,Society,Criminal Sexual Abuse,0.000824763796046201
-2010-06,Society,Criminal Sexual Abuse,0.0008343687810100659
-2010-07,Society,Criminal Sexual Abuse,0.0008128524385635774
-2010-08,Society,Criminal Sexual Abuse,0.0008227625483211034
-2010-09,Society,Criminal Sexual Abuse,0.0008202626496490676
-2010-10,Society,Criminal Sexual Abuse,0.0008319549244969236
-2010-11,Society,Criminal Sexual Abuse,0.0008235353358120322
-2010-12,Society,Criminal Sexual Abuse,0.0008186159419608859
-2011-01,Society,Criminal Sexual Abuse,0.0008205757907227143
-2011-02,Society,Criminal Sexual Abuse,0.0008240932304040785
-2011-03,Society,Criminal Sexual Abuse,0.0008214935975038953
-2011-04,Society,Criminal Sexual Abuse,0.0008247640607173022
-2011-05,Society,Criminal Sexual Abuse,0.0008264696273441237
-2011-06,Society,Criminal Sexual Abuse,0.0008204525072283528
-2011-07,Society,Criminal Sexual Abuse,0.0008239805149324052
-2011-08,Society,Criminal Sexual Abuse,0.0007907180186184802
-2011-09,Society,Criminal Sexual Abuse,0.000782302982995036
-2011-10,Society,Criminal Sexual Abuse,0.0007599026401290444
-2011-11,Society,Criminal Sexual Abuse,0.0007673887590278755
-2011-12,Society,Criminal Sexual Abuse,0.0007686339881463304
-2012-01,Society,Criminal Sexual Abuse,0.0007941128832136442
-2012-02,Society,Criminal Sexual Abuse,0.0007909191028610236
-2012-03,Society,Criminal Sexual Abuse,0.0008057179047611117
-2012-04,Society,Criminal Sexual Abuse,0.0007951573449635494
-2012-05,Society,Criminal Sexual Abuse,0.0007908016557013443
-2012-06,Society,Criminal Sexual Abuse,0.0007918497666511945
-2012-07,Society,Criminal Sexual Abuse,0.0007825056510144704
-2012-08,Society,Criminal Sexual Abuse,0.0007698122955486867
-2012-09,Society,Criminal Sexual Abuse,0.0007642654323838219
-2012-10,Society,Criminal Sexual Abuse,0.0007610549999750105
-2012-11,Society,Criminal Sexual Abuse,0.000749517923802688
-2012-12,Society,Criminal Sexual Abuse,0.0007368629674798889
-2013-01,Society,Criminal Sexual Abuse,0.000716823698808113
-2013-02,Society,Criminal Sexual Abuse,0.0007214288076941859
-2013-03,Society,Criminal Sexual Abuse,0.0007038022898767496
-2013-04,Society,Criminal Sexual Abuse,0.0007062656155657053
-2013-05,Society,Criminal Sexual Abuse,0.0007014346237720265
-2013-06,Society,Criminal Sexual Abuse,0.0006882287864046583
-2013-07,Society,Criminal Sexual Abuse,0.0006902980658800049
-2013-08,Society,Criminal Sexual Abuse,0.000707492472064378
-2013-09,Society,Criminal Sexual Abuse,0.0007112824719247382
-2013-10,Society,Criminal Sexual Abuse,0.0007186404022021171
-2013-11,Society,Criminal Sexual Abuse,0.0007226743687973353
-2013-12,Society,Criminal Sexual Abuse,0.0007277783160140396
-2014-01,Society,Criminal Sexual Abuse,0.0007172681347473622
-2014-02,Society,Criminal Sexual Abuse,0.0007092301740872069
-2014-03,Society,Criminal Sexual Abuse,0.0007037629174909757
-2014-04,Society,Criminal Sexual Abuse,0.0007117909501312915
-2014-05,Society,Criminal Sexual Abuse,0.0007092298909369086
-2014-06,Society,Criminal Sexual Abuse,0.0007211977767293162
-2014-07,Society,Criminal Sexual Abuse,0.0007077770051678205
-2014-08,Society,Criminal Sexual Abuse,0.000708297802884503
-2014-09,Society,Criminal Sexual Abuse,0.0007034680964995017
-2014-10,Society,Criminal Sexual Abuse,0.000707672231408642
-2014-11,Society,Criminal Sexual Abuse,0.0007005772032981053
-2014-12,Society,Criminal Sexual Abuse,0.0007008419315749353
-2015-01,Society,Criminal Sexual Abuse,0.0007068381010775952
-2015-02,Society,Criminal Sexual Abuse,0.0007073746111315314
-2015-03,Society,Criminal Sexual Abuse,0.0007117963046387955
-2015-04,Society,Criminal Sexual Abuse,0.0006952704104075495
-2015-05,Society,Criminal Sexual Abuse,0.0006920182276398388
-2015-06,Society,Criminal Sexual Abuse,0.0006821434748277393
-2015-07,Society,Criminal Sexual Abuse,0.0006856650693658338
-2015-08,Society,Criminal Sexual Abuse,0.0006743293410070279
-2015-09,Society,Criminal Sexual Abuse,0.0006829478409236291
-2015-10,Society,Criminal Sexual Abuse,0.0006807356087753235
-2015-11,Society,Criminal Sexual Abuse,0.0006885208508146628
-2015-12,Society,Criminal Sexual Abuse,0.0006923148579204938
-2016-01,Society,Criminal Sexual Abuse,0.0006942513501493046
-2016-02,Society,Criminal Sexual Abuse,0.0007102970421301557
-2016-03,Society,Criminal Sexual Abuse,0.000707503842378221
-2016-04,Society,Criminal Sexual Abuse,0.000711774705529334
-2016-05,Society,Criminal Sexual Abuse,0.0007057791289471596
-2016-06,Society,Criminal Sexual Abuse,0.0007081519039843496
-2016-07,Society,Criminal Sexual Abuse,0.0007198856352860323
-2016-08,Society,Criminal Sexual Abuse,0.0007206131391360636
-2016-09,Society,Criminal Sexual Abuse,0.0007164413005016139
-2016-10,Society,Criminal Sexual Abuse,0.0007169510652432478
-2016-11,Society,Criminal Sexual Abuse,0.0007035492078604112
-2016-12,Society,Criminal Sexual Abuse,0.0006923095315673189
-2017-01,Society,Criminal Sexual Abuse,0.0006659304297618684
-2017-02,Society,Criminal Sexual Abuse,0.0006553480240649636
-2017-03,Society,Criminal Sexual Abuse,0.0006560831670025027
-2017-04,Society,Criminal Sexual Abuse,0.0006565173629643882
-2017-05,Society,Criminal Sexual Abuse,0.0006661051250634892
-2017-06,Society,Criminal Sexual Abuse,0.0006593234109653344
-2017-07,Society,Criminal Sexual Abuse,0.0006510852712417584
-2017-08,Society,Criminal Sexual Abuse,0.0006337227348117136
-2002-01,Society,Disorderly Conduct,0.00023493986236876893
-2002-02,Society,Disorderly Conduct,0.00023355500896436322
-2002-03,Society,Disorderly Conduct,0.00023429509880985237
-2002-04,Society,Disorderly Conduct,0.00022797652389831103
-2002-05,Society,Disorderly Conduct,0.0002225201830014835
-2002-06,Society,Disorderly Conduct,0.0002207978919792967
-2002-07,Society,Disorderly Conduct,0.00022988062015050215
-2002-08,Society,Disorderly Conduct,0.00022467146493763705
-2002-09,Society,Disorderly Conduct,0.0002267017974590183
-2002-10,Society,Disorderly Conduct,0.00023097525077639665
-2002-11,Society,Disorderly Conduct,0.00022253313553246513
-2002-12,Society,Disorderly Conduct,0.00021977213484320133
-2003-01,Society,Disorderly Conduct,0.0002273856445667387
-2003-02,Society,Disorderly Conduct,0.00022766489136037197
-2003-03,Society,Disorderly Conduct,0.00023001144003603887
-2003-04,Society,Disorderly Conduct,0.00023328023100825448
-2003-05,Society,Disorderly Conduct,0.0002361077039724882
-2003-06,Society,Disorderly Conduct,0.00023639764115743805
-2003-07,Society,Disorderly Conduct,0.00022862361183305496
-2003-08,Society,Disorderly Conduct,0.00023236035522768692
-2003-09,Society,Disorderly Conduct,0.00023770731349178226
-2003-10,Society,Disorderly Conduct,0.00023724790326908082
-2003-11,Society,Disorderly Conduct,0.00024430143595607613
-2003-12,Society,Disorderly Conduct,0.0002465895689151821
-2004-01,Society,Disorderly Conduct,0.00024103514718665033
-2004-02,Society,Disorderly Conduct,0.0002523797918963103
-2004-03,Society,Disorderly Conduct,0.00026120217810102604
-2004-04,Society,Disorderly Conduct,0.0002665657268744285
-2004-05,Society,Disorderly Conduct,0.0002716850097373333
-2004-06,Society,Disorderly Conduct,0.00028482975840450164
-2004-07,Society,Disorderly Conduct,0.00028951981107694813
-2004-08,Society,Disorderly Conduct,0.0002989096448391745
-2004-09,Society,Disorderly Conduct,0.0003015239053814643
-2004-10,Society,Disorderly Conduct,0.0003104824889947796
-2004-11,Society,Disorderly Conduct,0.00031931356027255307
-2004-12,Society,Disorderly Conduct,0.0003274350775577735
-2005-01,Society,Disorderly Conduct,0.000333466374986095
-2005-02,Society,Disorderly Conduct,0.00033460909559648335
-2005-03,Society,Disorderly Conduct,0.0003377901240950436
-2005-04,Society,Disorderly Conduct,0.0003428195974796437
-2005-05,Society,Disorderly Conduct,0.00034696022876323074
-2005-06,Society,Disorderly Conduct,0.00034734355417010034
-2005-07,Society,Disorderly Conduct,0.00036410174841455914
-2005-08,Society,Disorderly Conduct,0.0003739468132499413
-2005-09,Society,Disorderly Conduct,0.0003760101260693581
-2005-10,Society,Disorderly Conduct,0.00037665718505111334
-2005-11,Society,Disorderly Conduct,0.0003735734613632346
-2005-12,Society,Disorderly Conduct,0.0003752082986929723
-2006-01,Society,Disorderly Conduct,0.0003808954921793456
-2006-02,Society,Disorderly Conduct,0.00037920799181762695
-2006-03,Society,Disorderly Conduct,0.0003937175892915344
-2006-04,Society,Disorderly Conduct,0.00040112706953180147
-2006-05,Society,Disorderly Conduct,0.0004121574766089533
-2006-06,Society,Disorderly Conduct,0.0004215749171720041
-2006-07,Society,Disorderly Conduct,0.0004284577148547628
-2006-08,Society,Disorderly Conduct,0.00042458016559415653
-2006-09,Society,Disorderly Conduct,0.00043790893506607013
-2006-10,Society,Disorderly Conduct,0.0004519433611525224
-2006-11,Society,Disorderly Conduct,0.0004634749525057005
-2006-12,Society,Disorderly Conduct,0.00047035199824202505
-2007-01,Society,Disorderly Conduct,0.00047127140450273957
-2007-02,Society,Disorderly Conduct,0.0004712242188305126
-2007-03,Society,Disorderly Conduct,0.00046810164734958725
-2007-04,Society,Disorderly Conduct,0.00046995083731314727
-2007-05,Society,Disorderly Conduct,0.0004669717700529671
-2007-06,Society,Disorderly Conduct,0.00046401929129947454
-2007-07,Society,Disorderly Conduct,0.0004640506436649051
-2007-08,Society,Disorderly Conduct,0.00046120313315207615
-2007-09,Society,Disorderly Conduct,0.0004571805202440031
-2007-10,Society,Disorderly Conduct,0.00045495271299330025
-2007-11,Society,Disorderly Conduct,0.0004491286134875043
-2007-12,Society,Disorderly Conduct,0.00044569476040923726
-2008-01,Society,Disorderly Conduct,0.00043658769601726433
-2008-02,Society,Disorderly Conduct,0.00043499837706355705
-2008-03,Society,Disorderly Conduct,0.0004194015412663264
-2008-04,Society,Disorderly Conduct,0.0004168024695612683
-2008-05,Society,Disorderly Conduct,0.0004167809388462306
-2008-06,Society,Disorderly Conduct,0.0004097023144301471
-2008-07,Society,Disorderly Conduct,0.00040170000394401233
-2008-08,Society,Disorderly Conduct,0.0004084558037904461
-2008-09,Society,Disorderly Conduct,0.0004076245041006861
-2008-10,Society,Disorderly Conduct,0.00040389508210617774
-2008-11,Society,Disorderly Conduct,0.0004025980429713485
-2008-12,Society,Disorderly Conduct,0.0003958024231949813
-2009-01,Society,Disorderly Conduct,0.00040292821452002917
-2009-02,Society,Disorderly Conduct,0.0004101000207020885
-2009-03,Society,Disorderly Conduct,0.0004219173968144498
-2009-04,Society,Disorderly Conduct,0.000415940163116321
-2009-05,Society,Disorderly Conduct,0.0004185063840844157
-2009-06,Society,Disorderly Conduct,0.00041426496482358454
-2009-07,Society,Disorderly Conduct,0.0004078541730594359
-2009-08,Society,Disorderly Conduct,0.0004078863353587572
-2009-09,Society,Disorderly Conduct,0.0004075968532944162
-2009-10,Society,Disorderly Conduct,0.0004066416229928129
-2009-11,Society,Disorderly Conduct,0.00040615745366770744
-2009-12,Society,Disorderly Conduct,0.0004088484541855549
-2010-01,Society,Disorderly Conduct,0.00041731714474779855
-2010-02,Society,Disorderly Conduct,0.0004214414917248357
-2010-03,Society,Disorderly Conduct,0.00042972326822370135
-2010-04,Society,Disorderly Conduct,0.0004430103865249584
-2010-05,Society,Disorderly Conduct,0.0004505866554777194
-2010-06,Society,Disorderly Conduct,0.00047317801229095226
-2010-07,Society,Disorderly Conduct,0.0004824122653591331
-2010-08,Society,Disorderly Conduct,0.0004875816827271347
-2010-09,Society,Disorderly Conduct,0.000491818413262027
-2010-10,Society,Disorderly Conduct,0.0004986272047574919
-2010-11,Society,Disorderly Conduct,0.000502835007886866
-2010-12,Society,Disorderly Conduct,0.0005049122443761159
-2011-01,Society,Disorderly Conduct,0.0005003536209397335
-2011-02,Society,Disorderly Conduct,0.0004983569660550098
-2011-03,Society,Disorderly Conduct,0.0004876539339854434
-2011-04,Society,Disorderly Conduct,0.0004818422882477778
-2011-05,Society,Disorderly Conduct,0.00048213907781166756
-2011-06,Society,Disorderly Conduct,0.0004820289335379756
-2011-07,Society,Disorderly Conduct,0.0004921033154687068
-2011-08,Society,Disorderly Conduct,0.0005035700934118078
-2011-09,Society,Disorderly Conduct,0.0005083650758721446
-2011-10,Society,Disorderly Conduct,0.0005025306079457411
-2011-11,Society,Disorderly Conduct,0.0005094146459004252
-2011-12,Society,Disorderly Conduct,0.0005210017630346364
-2012-01,Society,Disorderly Conduct,0.0005204264846501005
-2012-02,Society,Disorderly Conduct,0.0005309418293797838
-2012-03,Society,Disorderly Conduct,0.0005447686013965997
-2012-04,Society,Disorderly Conduct,0.0005509776290117741
-2012-05,Society,Disorderly Conduct,0.0005518441454509816
-2012-06,Society,Disorderly Conduct,0.0005530819671721311
-2012-07,Society,Disorderly Conduct,0.0005514312748691026
-2012-08,Society,Disorderly Conduct,0.0005439171879426602
-2012-09,Society,Disorderly Conduct,0.0005402282325059477
-2012-10,Society,Disorderly Conduct,0.0005417677924545273
-2012-11,Society,Disorderly Conduct,0.0005394930887029198
-2012-12,Society,Disorderly Conduct,0.0005381004949681098
-2013-01,Society,Disorderly Conduct,0.0005505411978631421
-2013-02,Society,Disorderly Conduct,0.0005422591041229981
-2013-03,Society,Disorderly Conduct,0.0005427518062909394
-2013-04,Society,Disorderly Conduct,0.0005545671166002316
-2013-05,Society,Disorderly Conduct,0.0005661246933532731
-2013-06,Society,Disorderly Conduct,0.0005711854485748078
-2013-07,Society,Disorderly Conduct,0.0005704638079576014
-2013-08,Society,Disorderly Conduct,0.0005701204493687862
-2013-09,Society,Disorderly Conduct,0.0005706599200091565
-2013-10,Society,Disorderly Conduct,0.0005735165725209016
-2013-11,Society,Disorderly Conduct,0.0005673813881848566
-2013-12,Society,Disorderly Conduct,0.0005649654859906793
-2014-01,Society,Disorderly Conduct,0.0005558971915580618
-2014-02,Society,Disorderly Conduct,0.0005549319798189504
-2014-03,Society,Disorderly Conduct,0.0005422626577885268
-2014-04,Society,Disorderly Conduct,0.000535285807329004
-2014-05,Society,Disorderly Conduct,0.0005294908299553494
-2014-06,Society,Disorderly Conduct,0.0005305031651926848
-2014-07,Society,Disorderly Conduct,0.0005425698509290135
-2014-08,Society,Disorderly Conduct,0.0005614365574153349
-2014-09,Society,Disorderly Conduct,0.0005706960507680297
-2014-10,Society,Disorderly Conduct,0.0005744281684851273
-2014-11,Society,Disorderly Conduct,0.0005815207539080832
-2014-12,Society,Disorderly Conduct,0.0005825635611143243
-2015-01,Society,Disorderly Conduct,0.0005889338112679492
-2015-02,Society,Disorderly Conduct,0.0005960533394537508
-2015-03,Society,Disorderly Conduct,0.0006055405081413752
-2015-04,Society,Disorderly Conduct,0.0005963168174575875
-2015-05,Society,Disorderly Conduct,0.0005878217521057608
-2015-06,Society,Disorderly Conduct,0.000579113333162505
-2015-07,Society,Disorderly Conduct,0.0005611304158089354
-2015-08,Society,Disorderly Conduct,0.0005430544086260386
-2015-09,Society,Disorderly Conduct,0.0005336457755848201
-2015-10,Society,Disorderly Conduct,0.0005308424081239803
-2015-11,Society,Disorderly Conduct,0.0005293809043589707
-2015-12,Society,Disorderly Conduct,0.0005218637892683258
-2016-01,Society,Disorderly Conduct,0.0004992252290125397
-2016-02,Society,Disorderly Conduct,0.00047787114760300474
-2016-03,Society,Disorderly Conduct,0.00046217261377608964
-2016-04,Society,Disorderly Conduct,0.000457059334951523
-2016-05,Society,Disorderly Conduct,0.000443507054607009
-2016-06,Society,Disorderly Conduct,0.000436367045336599
-2016-07,Society,Disorderly Conduct,0.0004240953396421815
-2016-08,Society,Disorderly Conduct,0.0004046391982111981
-2016-09,Society,Disorderly Conduct,0.0003898310430657303
-2016-10,Society,Disorderly Conduct,0.0003838353525506247
-2016-11,Society,Disorderly Conduct,0.0003772027971536357
-2016-12,Society,Disorderly Conduct,0.0003726899201035117
-2017-01,Society,Disorderly Conduct,0.0003853373556160386
-2017-02,Society,Disorderly Conduct,0.0003958349272958521
-2017-03,Society,Disorderly Conduct,0.0003940762221910281
-2017-04,Society,Disorderly Conduct,0.0003956618637615455
-2017-05,Society,Disorderly Conduct,0.00039790940180186695
-2017-06,Society,Disorderly Conduct,0.00038885885319673625
-2017-07,Society,Disorderly Conduct,0.0003944510583607065
-2017-08,Society,Disorderly Conduct,0.0003959114927567145
+2002-01,Society,Criminal Sexual Abuse,0.0014396898450210784
+2002-02,Society,Criminal Sexual Abuse,0.0014330411713364111
+2002-03,Society,Criminal Sexual Abuse,0.0014245855025764378
+2002-04,Society,Criminal Sexual Abuse,0.001424956901107528
+2002-05,Society,Criminal Sexual Abuse,0.0013985704065964679
+2002-06,Society,Criminal Sexual Abuse,0.001429910256532487
+2002-07,Society,Criminal Sexual Abuse,0.0014395133765977355
+2002-08,Society,Criminal Sexual Abuse,0.0014270183759818938
+2002-09,Society,Criminal Sexual Abuse,0.001459517057453339
+2002-10,Society,Criminal Sexual Abuse,0.0014598887346838685
+2002-11,Society,Criminal Sexual Abuse,0.0014553747865219163
+2002-12,Society,Criminal Sexual Abuse,0.001453098755974363
+2003-01,Society,Criminal Sexual Abuse,0.0014766103457288053
+2003-02,Society,Criminal Sexual Abuse,0.001488091088978973
+2003-03,Society,Criminal Sexual Abuse,0.0014760138636138356
+2003-04,Society,Criminal Sexual Abuse,0.0014712678861447527
+2003-05,Society,Criminal Sexual Abuse,0.0014764172970757308
+2003-06,Society,Criminal Sexual Abuse,0.0014452848511973587
+2003-07,Society,Criminal Sexual Abuse,0.0014284043247455936
+2003-08,Society,Criminal Sexual Abuse,0.0014296387203866913
+2003-09,Society,Criminal Sexual Abuse,0.0014141776841677667
+2003-10,Society,Criminal Sexual Abuse,0.001429981496948603
+2003-11,Society,Criminal Sexual Abuse,0.0014327708021016864
+2003-12,Society,Criminal Sexual Abuse,0.0014150807987440021
+2004-01,Society,Criminal Sexual Abuse,0.0013845553249249595
+2004-02,Society,Criminal Sexual Abuse,0.0013735524578579086
+2004-03,Society,Criminal Sexual Abuse,0.001371896291916707
+2004-04,Society,Criminal Sexual Abuse,0.0013653797889050558
+2004-05,Society,Criminal Sexual Abuse,0.0013507857355910668
+2004-06,Society,Criminal Sexual Abuse,0.0013370981337232698
+2004-07,Society,Criminal Sexual Abuse,0.001308174827632905
+2004-08,Society,Criminal Sexual Abuse,0.0013082976843387943
+2004-09,Society,Criminal Sexual Abuse,0.001307056153694651
+2004-10,Society,Criminal Sexual Abuse,0.00127703535393007
+2004-11,Society,Criminal Sexual Abuse,0.0012585039569750506
+2004-12,Society,Criminal Sexual Abuse,0.0012487376776613016
+2005-01,Society,Criminal Sexual Abuse,0.0012650947750164295
+2005-02,Society,Criminal Sexual Abuse,0.00125379474267133
+2005-03,Society,Criminal Sexual Abuse,0.0012500983042978346
+2005-04,Society,Criminal Sexual Abuse,0.0012460152864660892
+2005-05,Society,Criminal Sexual Abuse,0.0012523764746581437
+2005-06,Society,Criminal Sexual Abuse,0.0012469911883670897
+2005-07,Society,Criminal Sexual Abuse,0.001249994101693679
+2005-08,Society,Criminal Sexual Abuse,0.001246335917747401
+2005-09,Society,Criminal Sexual Abuse,0.0012615143740710153
+2005-10,Society,Criminal Sexual Abuse,0.0012490095140959662
+2005-11,Society,Criminal Sexual Abuse,0.0012470127866264034
+2005-12,Society,Criminal Sexual Abuse,0.0012497928924288856
+2006-01,Society,Criminal Sexual Abuse,0.0012281220910242145
+2006-02,Society,Criminal Sexual Abuse,0.0012276177931824599
+2006-03,Society,Criminal Sexual Abuse,0.0012178636594047639
+2006-04,Society,Criminal Sexual Abuse,0.0012145351091540873
+2006-05,Society,Criminal Sexual Abuse,0.001200227784816492
+2006-06,Society,Criminal Sexual Abuse,0.0011949788525020568
+2006-07,Society,Criminal Sexual Abuse,0.0011789651125159494
+2006-08,Society,Criminal Sexual Abuse,0.0011629165406876157
+2006-09,Society,Criminal Sexual Abuse,0.0011294291646619108
+2006-10,Society,Criminal Sexual Abuse,0.0011220042275794338
+2006-11,Society,Criminal Sexual Abuse,0.0011045256147539137
+2006-12,Society,Criminal Sexual Abuse,0.0011043040883635955
+2007-01,Society,Criminal Sexual Abuse,0.0011001941753889387
+2007-02,Society,Criminal Sexual Abuse,0.0010868140595477604
+2007-03,Society,Criminal Sexual Abuse,0.0010912066089306938
+2007-04,Society,Criminal Sexual Abuse,0.0010839811498497445
+2007-05,Society,Criminal Sexual Abuse,0.0010938654363604166
+2007-06,Society,Criminal Sexual Abuse,0.0010981765162001319
+2007-07,Society,Criminal Sexual Abuse,0.00109797800528352
+2007-08,Society,Criminal Sexual Abuse,0.0010830821899216233
+2007-09,Society,Criminal Sexual Abuse,0.0010720125823526334
+2007-10,Society,Criminal Sexual Abuse,0.0010719927262567177
+2007-11,Society,Criminal Sexual Abuse,0.0010678624735000726
+2007-12,Society,Criminal Sexual Abuse,0.0010611100641721215
+2008-01,Society,Criminal Sexual Abuse,0.0010657010731908744
+2008-02,Society,Criminal Sexual Abuse,0.001064204813557553
+2008-03,Society,Criminal Sexual Abuse,0.001049785163121853
+2008-04,Society,Criminal Sexual Abuse,0.0010487791287120396
+2008-05,Society,Criminal Sexual Abuse,0.0010294944676028151
+2008-06,Society,Criminal Sexual Abuse,0.0010210530100229613
+2008-07,Society,Criminal Sexual Abuse,0.0010264710065723958
+2008-08,Society,Criminal Sexual Abuse,0.0010292478797821693
+2008-09,Society,Criminal Sexual Abuse,0.0010346120841729198
+2008-10,Society,Criminal Sexual Abuse,0.0010250597503069796
+2008-11,Society,Criminal Sexual Abuse,0.0010387909961239305
+2008-12,Society,Criminal Sexual Abuse,0.0010466927182896416
+2009-01,Society,Criminal Sexual Abuse,0.0010195891702218817
+2009-02,Society,Criminal Sexual Abuse,0.0010198744422703367
+2009-03,Society,Criminal Sexual Abuse,0.001023525290090713
+2009-04,Society,Criminal Sexual Abuse,0.0010075562120098961
+2009-05,Society,Criminal Sexual Abuse,0.0009956744598961296
+2009-06,Society,Criminal Sexual Abuse,0.0009559537824859254
+2009-07,Society,Criminal Sexual Abuse,0.0009360522411747914
+2009-08,Society,Criminal Sexual Abuse,0.0009304736355218295
+2009-09,Society,Criminal Sexual Abuse,0.0009133282194743057
+2009-10,Society,Criminal Sexual Abuse,0.0009072927102913925
+2009-11,Society,Criminal Sexual Abuse,0.0008923658727695167
+2009-12,Society,Criminal Sexual Abuse,0.0008725691347460475
+2010-01,Society,Criminal Sexual Abuse,0.0008697292258632113
+2010-02,Society,Criminal Sexual Abuse,0.0008497393184839309
+2010-03,Society,Criminal Sexual Abuse,0.000830646556625822
+2010-04,Society,Criminal Sexual Abuse,0.0008195400574510738
+2010-05,Society,Criminal Sexual Abuse,0.0008154939568913036
+2010-06,Society,Criminal Sexual Abuse,0.0008253425122297668
+2010-07,Society,Criminal Sexual Abuse,0.000804315077772529
+2010-08,Society,Criminal Sexual Abuse,0.000796930688379952
+2010-09,Society,Criminal Sexual Abuse,0.0007912001188282494
+2010-10,Society,Criminal Sexual Abuse,0.000798391328310593
+2010-11,Society,Criminal Sexual Abuse,0.0007842132586294778
+2010-12,Society,Criminal Sexual Abuse,0.000780364826507602
+2011-01,Society,Criminal Sexual Abuse,0.0007843953697341094
+2011-02,Society,Criminal Sexual Abuse,0.0007870269151380496
+2011-03,Society,Criminal Sexual Abuse,0.0007803819639293415
+2011-04,Society,Criminal Sexual Abuse,0.000783938455249221
+2011-05,Society,Criminal Sexual Abuse,0.000783810232402927
+2011-06,Society,Criminal Sexual Abuse,0.0007808960911839518
+2011-07,Society,Criminal Sexual Abuse,0.0007864854526073292
+2011-08,Society,Criminal Sexual Abuse,0.0007730637925224001
+2011-09,Society,Criminal Sexual Abuse,0.0007685522782021036
+2011-10,Society,Criminal Sexual Abuse,0.0007511556431049693
+2011-11,Society,Criminal Sexual Abuse,0.0007633043990621228
+2011-12,Society,Criminal Sexual Abuse,0.0007663297821656023
+2012-01,Society,Criminal Sexual Abuse,0.0007929494988240731
+2012-02,Society,Criminal Sexual Abuse,0.0007918734855676007
+2012-03,Society,Criminal Sexual Abuse,0.0008113293277492339
+2012-04,Society,Criminal Sexual Abuse,0.0008017839375215181
+2012-05,Society,Criminal Sexual Abuse,0.0007996076522895896
+2012-06,Society,Criminal Sexual Abuse,0.000799976775217706
+2012-07,Society,Criminal Sexual Abuse,0.0007906314681659321
+2012-08,Society,Criminal Sexual Abuse,0.0007775983955474657
+2012-09,Society,Criminal Sexual Abuse,0.000772388867752842
+2012-10,Society,Criminal Sexual Abuse,0.0007688388181012764
+2012-11,Society,Criminal Sexual Abuse,0.000757300601494185
+2012-12,Society,Criminal Sexual Abuse,0.0007460420760896743
+2013-01,Society,Criminal Sexual Abuse,0.0007263397411144137
+2013-02,Society,Criminal Sexual Abuse,0.000731325932179521
+2013-03,Society,Criminal Sexual Abuse,0.0007140803849391236
+2013-04,Society,Criminal Sexual Abuse,0.0007168803354384276
+2013-05,Society,Criminal Sexual Abuse,0.0007132389410376504
+2013-06,Society,Criminal Sexual Abuse,0.000700928543492737
+2013-07,Society,Criminal Sexual Abuse,0.0007016485919723607
+2013-08,Society,Criminal Sexual Abuse,0.0007189343786819906
+2013-09,Society,Criminal Sexual Abuse,0.000722521771609407
+2013-10,Society,Criminal Sexual Abuse,0.0007299268342824839
+2013-11,Society,Criminal Sexual Abuse,0.0007340079573170812
+2013-12,Society,Criminal Sexual Abuse,0.0007377606038375815
+2014-01,Society,Criminal Sexual Abuse,0.0007269143355502882
+2014-02,Society,Criminal Sexual Abuse,0.0007178183629294656
+2014-03,Society,Criminal Sexual Abuse,0.0007123976220024218
+2014-04,Society,Criminal Sexual Abuse,0.0007190722842353132
+2014-05,Society,Criminal Sexual Abuse,0.0007168964111122913
+2014-06,Society,Criminal Sexual Abuse,0.0007288662558659241
+2014-07,Society,Criminal Sexual Abuse,0.0007162365319478736
+2014-08,Society,Criminal Sexual Abuse,0.000717548781774163
+2014-09,Society,Criminal Sexual Abuse,0.0007123377229255917
+2014-10,Society,Criminal Sexual Abuse,0.0007165441265343549
+2014-11,Society,Criminal Sexual Abuse,0.0007109870260800574
+2014-12,Society,Criminal Sexual Abuse,0.0007116384310733515
+2015-01,Society,Criminal Sexual Abuse,0.0007172753308878211
+2015-02,Society,Criminal Sexual Abuse,0.0007174523872751782
+2015-03,Society,Criminal Sexual Abuse,0.0007215144429961181
+2015-04,Society,Criminal Sexual Abuse,0.000705759850715251
+2015-05,Society,Criminal Sexual Abuse,0.0007009723369865593
+2015-06,Society,Criminal Sexual Abuse,0.0006914844824294807
+2015-07,Society,Criminal Sexual Abuse,0.0006957531775466656
+2015-08,Society,Criminal Sexual Abuse,0.0006847799465170327
+2015-09,Society,Criminal Sexual Abuse,0.0006930138431837162
+2015-10,Society,Criminal Sexual Abuse,0.0006911022975301967
+2015-11,Society,Criminal Sexual Abuse,0.0006973491265698665
+2015-12,Society,Criminal Sexual Abuse,0.0007014438201704833
+2016-01,Society,Criminal Sexual Abuse,0.0007054979924677916
+2016-02,Society,Criminal Sexual Abuse,0.0007233529055761591
+2016-03,Society,Criminal Sexual Abuse,0.0007207543696431343
+2016-04,Society,Criminal Sexual Abuse,0.0007248006906083978
+2016-05,Society,Criminal Sexual Abuse,0.0007173330187887873
+2016-06,Society,Criminal Sexual Abuse,0.0007178861299648708
+2016-07,Society,Criminal Sexual Abuse,0.000728813381724481
+2016-08,Society,Criminal Sexual Abuse,0.0007281058249633232
+2016-09,Society,Criminal Sexual Abuse,0.0007235493830789559
+2016-10,Society,Criminal Sexual Abuse,0.0007236178358950855
+2016-11,Society,Criminal Sexual Abuse,0.0007100753530815306
+2016-12,Society,Criminal Sexual Abuse,0.0006984977172514147
+2017-01,Society,Criminal Sexual Abuse,0.000670851388345038
+2017-02,Society,Criminal Sexual Abuse,0.0006600421479457853
+2017-03,Society,Criminal Sexual Abuse,0.0006604198957129514
+2017-04,Society,Criminal Sexual Abuse,0.000661285338637648
+2017-05,Society,Criminal Sexual Abuse,0.0006724485483626661
+2017-06,Society,Criminal Sexual Abuse,0.0006656668342645113
+2017-07,Society,Criminal Sexual Abuse,0.0006581606279985326
+2017-08,Society,Criminal Sexual Abuse,0.000641042069387687
+2002-01,Society,Disorderly Conduct,0.00023482091717526304
+2002-02,Society,Disorderly Conduct,0.00023343598471755448
+2002-03,Society,Disorderly Conduct,0.0002341759954045901
+2002-04,Society,Disorderly Conduct,0.00022785734122923466
+2002-05,Society,Disorderly Conduct,0.00022240092096302195
+2002-06,Society,Disorderly Conduct,0.00022067855046566792
+2002-07,Society,Disorderly Conduct,0.00022976119905571235
+2002-08,Society,Disorderly Conduct,0.00022455196415548036
+2002-09,Society,Disorderly Conduct,0.00022658221688307608
+2002-10,Society,Disorderly Conduct,0.00023097525077639668
+2002-11,Society,Disorderly Conduct,0.00022253313553246515
+2002-12,Society,Disorderly Conduct,0.00021977213484320135
+2003-01,Society,Disorderly Conduct,0.00022738564456673875
+2003-02,Society,Disorderly Conduct,0.00022766489136037202
+2003-03,Society,Disorderly Conduct,0.00023001144003603896
+2003-04,Society,Disorderly Conduct,0.00023328023100825456
+2003-05,Society,Disorderly Conduct,0.00023610770397248826
+2003-06,Society,Disorderly Conduct,0.00023639764115743813
+2003-07,Society,Disorderly Conduct,0.00022862361183305504
+2003-08,Society,Disorderly Conduct,0.000232360355227687
+2003-09,Society,Disorderly Conduct,0.00023770731349178234
+2003-10,Society,Disorderly Conduct,0.0002372479032690809
+2003-11,Society,Disorderly Conduct,0.00024430143595607624
+2003-12,Society,Disorderly Conduct,0.00024658956891518213
+2004-01,Society,Disorderly Conduct,0.0002410351471866504
+2004-02,Society,Disorderly Conduct,0.0002523797918963104
+2004-03,Society,Disorderly Conduct,0.00026120217810102615
+2004-04,Society,Disorderly Conduct,0.0002665657268744286
+2004-05,Society,Disorderly Conduct,0.0002716850097373334
+2004-06,Society,Disorderly Conduct,0.00028482975840450175
+2004-07,Society,Disorderly Conduct,0.00028951981107694824
+2004-08,Society,Disorderly Conduct,0.0002989096448391746
+2004-09,Society,Disorderly Conduct,0.00030152390538146435
+2004-10,Society,Disorderly Conduct,0.0003104824889947797
+2004-11,Society,Disorderly Conduct,0.0003193135602725531
+2004-12,Society,Disorderly Conduct,0.0003274350775577736
+2005-01,Society,Disorderly Conduct,0.00033346637498609505
+2005-02,Society,Disorderly Conduct,0.00033460909559648346
+2005-03,Society,Disorderly Conduct,0.00033779012409504373
+2005-04,Society,Disorderly Conduct,0.0003428195974796438
+2005-05,Society,Disorderly Conduct,0.0003469602287632308
+2005-06,Society,Disorderly Conduct,0.00034734355417010045
+2005-07,Society,Disorderly Conduct,0.0003641017484145592
+2005-08,Society,Disorderly Conduct,0.00037394681324994135
+2005-09,Society,Disorderly Conduct,0.0003760101260693582
+2005-10,Society,Disorderly Conduct,0.0003766571850511134
+2005-11,Society,Disorderly Conduct,0.0003735734613632347
+2005-12,Society,Disorderly Conduct,0.0003752082986929724
+2006-01,Society,Disorderly Conduct,0.00038089549217934564
+2006-02,Society,Disorderly Conduct,0.00037920799181762705
+2006-03,Society,Disorderly Conduct,0.0003937175892915345
+2006-04,Society,Disorderly Conduct,0.0004011270695318016
+2006-05,Society,Disorderly Conduct,0.0004119788160760906
+2006-06,Society,Disorderly Conduct,0.00042139613364722836
+2006-07,Society,Disorderly Conduct,0.0004282788081686193
+2006-08,Society,Disorderly Conduct,0.00042440113557684015
+2006-09,Society,Disorderly Conduct,0.00043772978154742436
+2006-10,Society,Disorderly Conduct,0.00045176408396203823
+2006-11,Society,Disorderly Conduct,0.0004632955514725157
+2006-12,Society,Disorderly Conduct,0.00047017247319492306
+2007-01,Society,Disorderly Conduct,0.00047109175527014843
+2007-02,Society,Disorderly Conduct,0.000471044445240504
+2007-03,Society,Disorderly Conduct,0.00046774185111016426
+2007-04,Society,Disorderly Conduct,0.000469590791669031
+2007-05,Society,Disorderly Conduct,0.0004667916223555592
+2007-06,Society,Disorderly Conduct,0.0004636587458072327
+2007-07,Society,Disorderly Conduct,0.0004636898477277879
+2007-08,Society,Disorderly Conduct,0.00046084208642191
+2007-09,Society,Disorderly Conduct,0.0004568192223718876
+2007-10,Society,Disorderly Conduct,0.0004545911636296065
+2007-11,Society,Disorderly Conduct,0.00044816751828188466
+2007-12,Society,Disorderly Conduct,0.0004447329952735342
+2008-01,Society,Disorderly Conduct,0.0004356252600168787
+2008-02,Society,Disorderly Conduct,0.0004340352692619326
+2008-03,Society,Disorderly Conduct,0.00041861916677077483
+2008-04,Society,Disorderly Conduct,0.00041523535495515475
+2008-05,Society,Disorderly Conduct,0.00041442798629933293
+2008-06,Society,Disorderly Conduct,0.0004075295018581844
+2008-07,Society,Disorderly Conduct,0.0003995265884829343
+2008-08,Society,Disorderly Conduct,0.00040628178510559326
+2008-09,Society,Disorderly Conduct,0.0004054498818571202
+2008-10,Society,Disorderly Conduct,0.00040171985596868155
+2008-11,Society,Disorderly Conduct,0.00040102527947592916
+2008-12,Society,Disorderly Conduct,0.0003942292226994647
+2009-01,Society,Disorderly Conduct,0.0004013545767815025
+2009-02,Society,Disorderly Conduct,0.00040852594547743633
+2009-03,Society,Disorderly Conduct,0.00042034288386035403
+2009-04,Society,Disorderly Conduct,0.00041515268765279084
+2009-05,Society,Disorderly Conduct,0.00041850638408441593
+2009-06,Society,Disorderly Conduct,0.0004142649648235847
+2009-07,Society,Disorderly Conduct,0.00040785417305943606
+2009-08,Society,Disorderly Conduct,0.0004078863353587574
+2009-09,Society,Disorderly Conduct,0.0004075968532944164
+2009-10,Society,Disorderly Conduct,0.0004066416229928131
+2009-11,Society,Disorderly Conduct,0.0004061574536677076
+2009-12,Society,Disorderly Conduct,0.00040884845418555506
+2010-01,Society,Disorderly Conduct,0.0004173171447477987
+2010-02,Society,Disorderly Conduct,0.00042074088107683883
+2010-03,Society,Disorderly Conduct,0.00042762084983111973
+2010-04,Society,Disorderly Conduct,0.0004409073813564354
+2010-05,Society,Disorderly Conduct,0.00044727914176858214
+2010-06,Society,Disorderly Conduct,0.0004698695749533866
+2010-07,Society,Disorderly Conduct,0.0004791048699165248
+2010-08,Society,Disorderly Conduct,0.00048427532852346206
+2010-09,Society,Disorderly Conduct,0.0004885130996418877
+2010-10,Society,Disorderly Conduct,0.0004953229310661022
+2010-11,Society,Disorderly Conduct,0.0004995317734700602
+2010-12,Society,Disorderly Conduct,0.0005016100485803451
+2011-01,Society,Disorderly Conduct,0.0004970524631120652
+2011-02,Society,Disorderly Conduct,0.000493886292927643
+2011-03,Society,Disorderly Conduct,0.00048458348579069296
+2011-04,Society,Disorderly Conduct,0.0004787728042674508
+2011-05,Society,Disorderly Conduct,0.00048027065647023297
+2011-06,Society,Disorderly Conduct,0.00048016109856957633
+2011-07,Society,Disorderly Conduct,0.0004902358498011376
+2011-08,Society,Disorderly Conduct,0.0005017029968990641
+2011-09,Society,Disorderly Conduct,0.0005064983483683085
+2011-10,Society,Disorderly Conduct,0.0005006642493049812
+2011-11,Society,Disorderly Conduct,0.0005075486559769965
+2011-12,Society,Disorderly Conduct,0.0005190498675704289
+2012-01,Society,Disorderly Conduct,0.0005184749746495527
+2012-02,Society,Disorderly Conduct,0.0005308555893357237
+2012-03,Society,Disorderly Conduct,0.0005446823783766472
+2012-04,Society,Disorderly Conduct,0.0005508914230092094
+2012-05,Society,Disorderly Conduct,0.0005517579564590886
+2012-06,Society,Disorderly Conduct,0.0005529957951841981
+2012-07,Society,Disorderly Conduct,0.0005513451155139364
+2012-08,Society,Disorderly Conduct,0.0005437448944904544
+2012-09,Society,Disorderly Conduct,0.0005400559643044651
+2012-10,Society,Disorderly Conduct,0.0005415955494963676
+2012-11,Society,Disorderly Conduct,0.0005393208709806862
+2012-12,Society,Disorderly Conduct,0.0005380143987212592
+2013-01,Society,Disorderly Conduct,0.0005504551142268623
+2013-02,Society,Disorderly Conduct,0.0005421730330935957
+2013-03,Society,Disorderly Conduct,0.0005426657478647223
+2013-04,Society,Disorderly Conduct,0.0005544810707735095
+2013-05,Society,Disorderly Conduct,0.0005660386601223571
+2013-06,Society,Disorderly Conduct,0.0005710576285623841
+2013-07,Society,Disorderly Conduct,0.0005703359553759518
+2013-08,Society,Disorderly Conduct,0.0005700786286883207
+2013-09,Society,Disorderly Conduct,0.0005706180886671236
+2013-10,Society,Disorderly Conduct,0.0005734747305118639
+2013-11,Society,Disorderly Conduct,0.0005673395355033727
+2013-12,Society,Disorderly Conduct,0.000564881759271927
+2014-01,Society,Disorderly Conduct,0.0005558134434726256
+2014-02,Society,Disorderly Conduct,0.0005548482103559223
+2014-03,Society,Disorderly Conduct,0.0005421788669369902
+2014-04,Society,Disorderly Conduct,0.000535201995078034
+2014-05,Society,Disorderly Conduct,0.0005294069962940127
+2014-06,Society,Disorderly Conduct,0.0005304612376513625
+2014-07,Society,Disorderly Conduct,0.000542527912671562
+2014-08,Society,Disorderly Conduct,0.0005613946084362752
+2014-09,Society,Disorderly Conduct,0.0005706540910618782
+2014-10,Society,Disorderly Conduct,0.0005743861980463964
+2014-11,Society,Disorderly Conduct,0.000581478772731281
+2014-12,Society,Disorderly Conduct,0.000582521569193955
+2015-01,Society,Disorderly Conduct,0.0005888918085985125
+2015-02,Society,Disorderly Conduct,0.0005952229771920063
+2015-03,Society,Disorderly Conduct,0.0006047099332151036
+2015-04,Society,Disorderly Conduct,0.0005954860297578296
+2015-05,Society,Disorderly Conduct,0.0005869907515234737
+2015-06,Society,Disorderly Conduct,0.000578282119588562
+2015-07,Society,Disorderly Conduct,0.0005602992022349924
+2015-08,Society,Disorderly Conduct,0.0005422231950520954
+2015-09,Society,Disorderly Conduct,0.000532814562010877
+2015-10,Society,Disorderly Conduct,0.0005299691380526106
+2015-11,Society,Disorderly Conduct,0.0005285076342876011
+2015-12,Society,Disorderly Conduct,0.0005209905191969562
+2016-01,Society,Disorderly Conduct,0.00049835195894117
+2016-02,Society,Disorderly Conduct,0.00047778703460815204
+2016-03,Society,Disorderly Conduct,0.0004620885007812369
+2016-04,Society,Disorderly Conduct,0.0004569752219566703
+2016-05,Society,Disorderly Conduct,0.00044342294161215626
+2016-06,Society,Disorderly Conduct,0.0004362829323417463
+2016-07,Society,Disorderly Conduct,0.0004240112266473288
+2016-08,Society,Disorderly Conduct,0.00040455508521634534
+2016-09,Society,Disorderly Conduct,0.0003895642481427327
+2016-10,Society,Disorderly Conduct,0.0003836106141250538
+2016-11,Society,Disorderly Conduct,0.0003769780587280647
+2016-12,Society,Disorderly Conduct,0.00037250723817536734
+2017-01,Society,Disorderly Conduct,0.00038515467368789417
+2017-02,Society,Disorderly Conduct,0.00039546956343956277
+2017-03,Society,Disorderly Conduct,0.00039371085833473876
+2017-04,Society,Disorderly Conduct,0.00039529649990525614
+2017-05,Society,Disorderly Conduct,0.0003975440379455776
+2017-06,Society,Disorderly Conduct,0.0003884934893404469
+2017-07,Society,Disorderly Conduct,0.00039408569450441716
+2017-08,Society,Disorderly Conduct,0.00039554612890042515
 2002-01,Society,Drug Abuse,0.012933502001414184
 2002-02,Society,Drug Abuse,0.01308154348095978
 2002-03,Society,Drug Abuse,0.013138060596501208
@@ -2631,382 +2631,194 @@ time,crime_type,crime_description,crime_intensity
 2017-06,Society,Gambling,4.226120453452258e-05
 2017-07,Society,Gambling,4.06534413185353e-05
 2017-08,Society,Gambling,4.111280223738881e-05
-2002-01,Society,Liquor License,0.00035598887567386947
-2002-02,Society,Liquor License,0.0003583770563984437
-2002-03,Society,Liquor License,0.00036566440274216696
-2002-04,Society,Liquor License,0.00037341974113772974
-2002-05,Society,Liquor License,0.00037159452218745717
-2002-06,Society,Liquor License,0.00038656703236675927
-2002-07,Society,Liquor License,0.000388148124179608
-2002-08,Society,Liquor License,0.00038336923000894044
-2002-09,Society,Liquor License,0.0003783284429660251
-2002-10,Society,Liquor License,0.0003787597424149589
-2002-11,Society,Liquor License,0.00037362883555235786
-2002-12,Society,Liquor License,0.0003764305142569004
-2003-01,Society,Liquor License,0.0003740275771218212
-2003-02,Society,Liquor License,0.0003821181745988926
-2003-03,Society,Liquor License,0.00037602123710038775
-2003-04,Society,Liquor License,0.00036154351094205877
-2003-05,Society,Liquor License,0.00035063736650873146
-2003-06,Society,Liquor License,0.00033231465213447576
-2003-07,Society,Liquor License,0.0003185031436524667
-2003-08,Society,Liquor License,0.0003193441728420941
-2003-09,Society,Liquor License,0.0003076614852125816
-2003-10,Society,Liquor License,0.0002935016323284417
-2003-11,Society,Liquor License,0.00028112669016907085
-2003-12,Society,Liquor License,0.0002656512787401295
-2004-01,Society,Liquor License,0.0002488651145782277
-2004-02,Society,Liquor License,0.00023256746201004723
-2004-03,Society,Liquor License,0.0002225931115250049
-2004-04,Society,Liquor License,0.00021437293012156977
-2004-05,Society,Liquor License,0.00020790915651091972
-2004-06,Society,Liquor License,0.0002035279058461407
-2004-07,Society,Liquor License,0.00020504844293657226
-2004-08,Society,Liquor License,0.0001973697169464604
-2004-09,Society,Liquor License,0.00020043958828211381
-2004-10,Society,Liquor License,0.00021577329301070256
-2004-11,Society,Liquor License,0.00023177412800739537
-2004-12,Society,Liquor License,0.0002455772619856829
-2005-01,Society,Liquor License,0.0002505299979992585
-2005-02,Society,Liquor License,0.0002738313899346395
-2005-03,Society,Liquor License,0.0003045719532388935
-2005-04,Society,Liquor License,0.00033228301222152815
-2005-05,Society,Liquor License,0.0003616993140724045
-2005-06,Society,Liquor License,0.0003828040050076017
-2005-07,Society,Liquor License,0.00039194566433370696
-2005-08,Society,Liquor License,0.0004011011357736081
-2005-09,Society,Liquor License,0.0004110801127916138
-2005-10,Society,Liquor License,0.000405812307714284
-2005-11,Society,Liquor License,0.00039863544142019287
-2005-12,Society,Liquor License,0.0003936221000052849
-2006-01,Society,Liquor License,0.0004084386602323141
-2006-02,Society,Liquor License,0.00040246305017933084
-2006-03,Society,Liquor License,0.0003878798449287383
-2006-04,Society,Liquor License,0.00038298732909186606
-2006-05,Society,Liquor License,0.0003629191880257427
-2006-06,Society,Liquor License,0.00036443641470868
-2006-07,Society,Liquor License,0.0003679456118543137
-2006-08,Society,Liquor License,0.000378005454283715
-2006-09,Society,Liquor License,0.00037991232290131635
-2006-10,Society,Liquor License,0.000380504029611708
-2006-11,Society,Liquor License,0.0003804372013639943
-2006-12,Society,Liquor License,0.00037971047248878677
-2007-01,Society,Liquor License,0.0003812936644811523
-2007-02,Society,Liquor License,0.00037539770031936687
-2007-03,Society,Liquor License,0.0003792942260654831
-2007-04,Society,Liquor License,0.0003710198466138501
-2007-05,Society,Liquor License,0.0003841261990973475
-2007-06,Society,Liquor License,0.00038273644793711096
-2007-07,Society,Liquor License,0.00038489624223806465
-2007-08,Society,Liquor License,0.00038546665774090384
-2007-09,Society,Liquor License,0.00038801598988426084
-2007-10,Society,Liquor License,0.0003935760639162739
-2007-11,Society,Liquor License,0.0004477698110971638
-2007-12,Society,Liquor License,0.0004750726110721659
-2008-01,Society,Liquor License,0.0005061834857239767
-2008-02,Society,Liquor License,0.0005407225671033892
-2008-03,Society,Liquor License,0.0005866344356151461
-2008-04,Society,Liquor License,0.000638475163846104
-2008-05,Society,Liquor License,0.0006908254775520328
-2008-06,Society,Liquor License,0.0007413996960076161
-2008-07,Society,Liquor License,0.0007966364410110899
-2008-08,Society,Liquor License,0.0008281676140118392
-2008-09,Society,Liquor License,0.0008619600331522891
-2008-10,Society,Liquor License,0.0009055309767871763
-2008-11,Society,Liquor License,0.0008755976150075436
-2008-12,Society,Liquor License,0.0008535464847818975
-2009-01,Society,Liquor License,0.0008349009402868095
-2009-02,Society,Liquor License,0.0008345574513464979
-2009-03,Society,Liquor License,0.0008175888323323728
-2009-04,Society,Liquor License,0.0007974078938795881
-2009-05,Society,Liquor License,0.0007635344417972869
-2009-06,Society,Liquor License,0.0007218871371477915
-2009-07,Society,Liquor License,0.00068989644587013
-2009-08,Society,Liquor License,0.0006726069365841928
-2009-09,Society,Liquor License,0.000632927677914487
-2009-10,Society,Liquor License,0.0005847769371123823
-2009-11,Society,Liquor License,0.0005445854118807336
-2009-12,Society,Liquor License,0.0005711907864750969
-2010-01,Society,Liquor License,0.0006429244617873472
-2010-02,Society,Liquor License,0.0006362739276568369
-2010-03,Society,Liquor License,0.0006269045998534037
-2010-04,Society,Liquor License,0.0006307019098577804
-2010-05,Society,Liquor License,0.0006169167264055227
-2010-06,Society,Liquor License,0.0006418526255154862
-2010-07,Society,Liquor License,0.0006527865344820043
-2010-08,Society,Liquor License,0.0008019757151593799
-2010-09,Society,Liquor License,0.0008878516214076977
-2010-10,Society,Liquor License,0.0009807500128710242
-2010-11,Society,Liquor License,0.0010756171607552531
-2010-12,Society,Liquor License,0.0010656614672333567
-2011-01,Society,Liquor License,0.0010601452705849767
-2011-02,Society,Liquor License,0.001081809114466197
-2011-03,Society,Liquor License,0.0011145253695850304
-2011-04,Society,Liquor License,0.0011756783722274833
-2011-05,Society,Liquor License,0.0011854766137237983
-2011-06,Society,Liquor License,0.001126007001712662
-2011-07,Society,Liquor License,0.0010739984146871829
-2011-08,Society,Liquor License,0.0008905120673557664
-2011-09,Society,Liquor License,0.0007871804787333026
-2011-10,Society,Liquor License,0.0006772473338129362
-2011-11,Society,Liquor License,0.0005799318805844299
-2011-12,Society,Liquor License,0.0005443615211490814
-2012-01,Society,Liquor License,0.0004431976741600999
-2012-02,Society,Liquor License,0.0003808810553899186
-2012-03,Society,Liquor License,0.0003077040538207771
-2012-04,Society,Liquor License,0.0001940701852149263
-2012-05,Society,Liquor License,0.00014958622842740002
-2012-06,Society,Liquor License,0.00014764849734766095
-2012-07,Society,Liquor License,0.00014166453987375017
-2012-08,Society,Liquor License,0.00013615925169976233
-2012-09,Society,Liquor License,0.0001378082547809575
-2012-10,Society,Liquor License,0.00013373547101590716
-2012-11,Society,Liquor License,0.0001363377568986335
-2012-12,Society,Liquor License,0.00013655610230217004
-2013-01,Society,Liquor License,0.00013415327185974915
-2013-02,Society,Liquor License,0.00012960691318281836
-2013-03,Society,Liquor License,0.0001274440170924376
-2013-04,Society,Liquor License,0.00012313815016378328
-2013-05,Society,Liquor License,0.00012426318167001004
-2013-06,Society,Liquor License,0.00012354080759102083
-2013-07,Society,Liquor License,0.00011899940686444977
-2013-08,Society,Liquor License,0.00011393498760970423
-2013-09,Society,Liquor License,0.00011005020369670319
-2013-10,Society,Liquor License,0.00010641102787541943
-2013-11,Society,Liquor License,0.00010278701947538217
-2013-12,Society,Liquor License,9.954273429078623e-05
-2014-01,Society,Liquor License,9.638227321346769e-05
-2014-02,Society,Liquor License,9.339032854226091e-05
-2014-03,Society,Liquor License,8.289996123864556e-05
-2014-04,Society,Liquor License,8.133633570717263e-05
-2014-05,Society,Liquor License,8.109784480015182e-05
-2014-06,Society,Liquor License,7.761789532664168e-05
-2014-07,Society,Liquor License,7.82213278496094e-05
-2014-08,Society,Liquor License,8.193836813749156e-05
-2014-09,Society,Liquor License,7.712668991085137e-05
-2014-10,Society,Liquor License,8.1396242791634e-05
-2014-11,Society,Liquor License,8.041025549637956e-05
-2014-12,Society,Liquor License,7.984649244197657e-05
-2015-01,Society,Liquor License,9.32523850661191e-05
-2015-02,Society,Liquor License,0.00010554101853125776
-2015-03,Society,Liquor License,0.0001185415364948707
-2015-04,Society,Liquor License,0.00011732412003440419
-2015-05,Society,Liquor License,0.00011189334505097134
-2015-06,Society,Liquor License,0.00011036138472821403
-2015-07,Society,Liquor License,0.00010927482191622843
-2015-08,Society,Liquor License,0.00010712894270984727
-2015-09,Society,Liquor License,0.00010740793939283149
-2015-10,Society,Liquor License,0.00010245299715611022
-2015-11,Society,Liquor License,9.975509729849158e-05
-2015-12,Society,Liquor License,9.838953780352175e-05
-2016-01,Society,Liquor License,8.390032912969307e-05
-2016-02,Society,Liquor License,7.148894368759483e-05
-2016-03,Society,Liquor License,6.118430499872626e-05
-2016-04,Society,Liquor License,6.499920082423215e-05
-2016-05,Society,Liquor License,7.490508558438759e-05
-2016-06,Society,Liquor License,7.652437657095213e-05
-2016-07,Society,Liquor License,7.760615807378098e-05
-2016-08,Society,Liquor License,7.609519183893602e-05
-2016-09,Society,Liquor License,7.664618805534086e-05
-2016-10,Society,Liquor License,8.041361242673902e-05
-2016-11,Society,Liquor License,7.916594030180238e-05
-2016-12,Society,Liquor License,7.990078389184338e-05
-2017-01,Society,Liquor License,7.79612555055774e-05
-2017-02,Society,Liquor License,8.060382978341163e-05
-2017-03,Society,Liquor License,8.197142612481868e-05
-2017-04,Society,Liquor License,7.496031307430029e-05
-2017-05,Society,Liquor License,6.714107171423473e-05
-2017-06,Society,Liquor License,6.546254492137891e-05
-2017-07,Society,Liquor License,6.781248243137707e-05
-2017-08,Society,Liquor License,6.714107171423473e-05
-2002-01,Society,Misc Non-Index Offense,0.010937880761781288
-2002-02,Society,Misc Non-Index Offense,0.011107759122929918
-2002-03,Society,Misc Non-Index Offense,0.011164675306235806
-2002-04,Society,Misc Non-Index Offense,0.011431069488328135
-2002-05,Society,Misc Non-Index Offense,0.011624570894964333
-2002-06,Society,Misc Non-Index Offense,0.011720135436809628
-2002-07,Society,Misc Non-Index Offense,0.01180435646592691
-2002-08,Society,Misc Non-Index Offense,0.011899372457173828
-2002-09,Society,Misc Non-Index Offense,0.011951404581050892
-2002-10,Society,Misc Non-Index Offense,0.012174690875668238
-2002-11,Society,Misc Non-Index Offense,0.01223333265610337
-2002-12,Society,Misc Non-Index Offense,0.012307883945389182
-2003-01,Society,Misc Non-Index Offense,0.01235657559681785
-2003-02,Society,Misc Non-Index Offense,0.012277231121020134
-2003-03,Society,Misc Non-Index Offense,0.012289868788307201
-2003-04,Society,Misc Non-Index Offense,0.012219447987449169
-2003-05,Society,Misc Non-Index Offense,0.012199137327930001
-2003-06,Society,Misc Non-Index Offense,0.012166651403491895
-2003-07,Society,Misc Non-Index Offense,0.012119686474683849
-2003-08,Society,Misc Non-Index Offense,0.012137422843171732
-2003-09,Society,Misc Non-Index Offense,0.012146837773188453
-2003-10,Society,Misc Non-Index Offense,0.01203591235116317
-2003-11,Society,Misc Non-Index Offense,0.012095546824426368
-2003-12,Society,Misc Non-Index Offense,0.012053273621795663
-2004-01,Society,Misc Non-Index Offense,0.012059087626421175
-2004-02,Society,Misc Non-Index Offense,0.012098999541364397
-2004-03,Society,Misc Non-Index Offense,0.012139796942578485
-2004-04,Society,Misc Non-Index Offense,0.012066793204836378
-2004-05,Society,Misc Non-Index Offense,0.012036259878414064
-2004-06,Society,Misc Non-Index Offense,0.01201910901842463
-2004-07,Society,Misc Non-Index Offense,0.01197723731510193
-2004-08,Society,Misc Non-Index Offense,0.01190606140570122
-2004-09,Society,Misc Non-Index Offense,0.011900030176894671
-2004-10,Society,Misc Non-Index Offense,0.011931969388799557
-2004-11,Society,Misc Non-Index Offense,0.01218700059110705
-2004-12,Society,Misc Non-Index Offense,0.012349652007390747
-2005-01,Society,Misc Non-Index Offense,0.012455355037851928
-2005-02,Society,Misc Non-Index Offense,0.012521285599143226
-2005-03,Society,Misc Non-Index Offense,0.012566847583811342
-2005-04,Society,Misc Non-Index Offense,0.012769911080642161
-2005-05,Society,Misc Non-Index Offense,0.012888862806644627
-2005-06,Society,Misc Non-Index Offense,0.013054626195968052
-2005-07,Society,Misc Non-Index Offense,0.013290158924773922
-2005-08,Society,Misc Non-Index Offense,0.013420250401150132
-2005-09,Society,Misc Non-Index Offense,0.013466458651485134
-2005-10,Society,Misc Non-Index Offense,0.013504137395083264
-2005-11,Society,Misc Non-Index Offense,0.013188268501111324
-2005-12,Society,Misc Non-Index Offense,0.013049620149778556
-2006-01,Society,Misc Non-Index Offense,0.012907172522150102
-2006-02,Society,Misc Non-Index Offense,0.012789047486667642
-2006-03,Society,Misc Non-Index Offense,0.012674017228420034
-2006-04,Society,Misc Non-Index Offense,0.01248661873266283
-2006-05,Society,Misc Non-Index Offense,0.012386246703728163
-2006-06,Society,Misc Non-Index Offense,0.012326037229897913
-2006-07,Society,Misc Non-Index Offense,0.012263757660090711
-2006-08,Society,Misc Non-Index Offense,0.012215418542489738
-2006-09,Society,Misc Non-Index Offense,0.012209786028744011
-2006-10,Society,Misc Non-Index Offense,0.012236571319158762
-2006-11,Society,Misc Non-Index Offense,0.012264334563807338
-2006-12,Society,Misc Non-Index Offense,0.012205679868546615
-2007-01,Society,Misc Non-Index Offense,0.012143858706234299
-2007-02,Society,Misc Non-Index Offense,0.012069647480457996
-2007-03,Society,Misc Non-Index Offense,0.012067970357558973
-2007-04,Society,Misc Non-Index Offense,0.012074176680075351
-2007-05,Society,Misc Non-Index Offense,0.012073372990343072
-2007-06,Society,Misc Non-Index Offense,0.012040589271942912
-2007-07,Society,Misc Non-Index Offense,0.011955956967065248
-2007-08,Society,Misc Non-Index Offense,0.01199180991015666
-2007-09,Society,Misc Non-Index Offense,0.011977863576340463
-2007-10,Society,Misc Non-Index Offense,0.011944379064220042
-2007-11,Society,Misc Non-Index Offense,0.012197015719316471
-2007-12,Society,Misc Non-Index Offense,0.012474812122520329
-2008-01,Society,Misc Non-Index Offense,0.012870767525725737
-2008-02,Society,Misc Non-Index Offense,0.013268587340447927
-2008-03,Society,Misc Non-Index Offense,0.01354010103428626
-2008-04,Society,Misc Non-Index Offense,0.013879690811388429
-2008-05,Society,Misc Non-Index Offense,0.01417076217168889
-2008-06,Society,Misc Non-Index Offense,0.01441012574224593
-2008-07,Society,Misc Non-Index Offense,0.014786156665887222
-2008-08,Society,Misc Non-Index Offense,0.015030107268948574
-2008-09,Society,Misc Non-Index Offense,0.015201253842146701
-2008-10,Society,Misc Non-Index Offense,0.015451838301331757
-2008-11,Society,Misc Non-Index Offense,0.015407277459181527
-2008-12,Society,Misc Non-Index Offense,0.01522487756549763
-2009-01,Society,Misc Non-Index Offense,0.01511926668634062
-2009-02,Society,Misc Non-Index Offense,0.01500682747580481
-2009-03,Society,Misc Non-Index Offense,0.014878157760432208
-2009-04,Society,Misc Non-Index Offense,0.014736203299637277
-2009-05,Society,Misc Non-Index Offense,0.014612217270992631
-2009-06,Society,Misc Non-Index Offense,0.014660573545887194
-2009-07,Society,Misc Non-Index Offense,0.014532320132936575
-2009-08,Society,Misc Non-Index Offense,0.014396733649943417
-2009-09,Society,Misc Non-Index Offense,0.014191314687229914
-2009-10,Society,Misc Non-Index Offense,0.013937072899783362
-2009-11,Society,Misc Non-Index Offense,0.013564491316320735
-2009-12,Society,Misc Non-Index Offense,0.013858131817072931
-2010-01,Society,Misc Non-Index Offense,0.014468488017717407
-2010-02,Society,Misc Non-Index Offense,0.014319756862923623
-2010-03,Society,Misc Non-Index Offense,0.014257424723245093
-2010-04,Society,Misc Non-Index Offense,0.014106798533263644
-2010-05,Society,Misc Non-Index Offense,0.013918177661901279
-2010-06,Society,Misc Non-Index Offense,0.013758817199589383
-2010-07,Society,Misc Non-Index Offense,0.013582463430822731
-2010-08,Society,Misc Non-Index Offense,0.014594651728882824
-2010-09,Society,Misc Non-Index Offense,0.015071363031433133
-2010-10,Society,Misc Non-Index Offense,0.015568461562936332
-2010-11,Society,Misc Non-Index Offense,0.016064265882155544
-2010-12,Society,Misc Non-Index Offense,0.016010759263740685
-2011-01,Society,Misc Non-Index Offense,0.01567353258370422
-2011-02,Society,Misc Non-Index Offense,0.015885546046180875
-2011-03,Society,Misc Non-Index Offense,0.016187131989908062
-2011-04,Society,Misc Non-Index Offense,0.01651806318585729
-2011-05,Society,Misc Non-Index Offense,0.016472238730741086
-2011-06,Society,Misc Non-Index Offense,0.016077608502283906
-2011-07,Society,Misc Non-Index Offense,0.015659851004553
-2011-08,Society,Misc Non-Index Offense,0.014109126544627268
-2011-09,Society,Misc Non-Index Offense,0.01329920627747117
-2011-10,Society,Misc Non-Index Offense,0.012407284980057186
-2011-11,Society,Misc Non-Index Offense,0.011701314268696255
-2011-12,Society,Misc Non-Index Offense,0.011083097053795886
-2012-01,Society,Misc Non-Index Offense,0.010168743086980845
-2012-02,Society,Misc Non-Index Offense,0.009600399794493446
-2012-03,Society,Misc Non-Index Offense,0.008815090097742177
-2012-04,Society,Misc Non-Index Offense,0.008012769194221862
-2012-05,Society,Misc Non-Index Offense,0.007677871631594501
-2012-06,Society,Misc Non-Index Offense,0.0075966370587176495
-2012-07,Society,Misc Non-Index Offense,0.007581664088073503
-2012-08,Society,Misc Non-Index Offense,0.007523786081187896
-2012-09,Society,Misc Non-Index Offense,0.007440482368338185
-2012-10,Society,Misc Non-Index Offense,0.007411218307921808
-2012-11,Society,Misc Non-Index Offense,0.0073302779348976355
-2012-12,Society,Misc Non-Index Offense,0.007257249439801095
-2013-01,Society,Misc Non-Index Offense,0.007278597525997404
-2013-02,Society,Misc Non-Index Offense,0.007239583341847543
-2013-03,Society,Misc Non-Index Offense,0.007222746616055315
-2013-04,Society,Misc Non-Index Offense,0.007205923077577534
-2013-05,Society,Misc Non-Index Offense,0.00717749981081331
-2013-06,Society,Misc Non-Index Offense,0.0071166499519901925
-2013-07,Society,Misc Non-Index Offense,0.007062184831401703
-2013-08,Society,Misc Non-Index Offense,0.0071081813680519395
-2013-09,Society,Misc Non-Index Offense,0.0071014021728008055
-2013-10,Society,Misc Non-Index Offense,0.007028512969237754
-2013-11,Society,Misc Non-Index Offense,0.007025710210987582
-2013-12,Society,Misc Non-Index Offense,0.006997443087830007
-2014-01,Society,Misc Non-Index Offense,0.006866805603601317
-2014-02,Society,Misc Non-Index Offense,0.006719357143031995
-2014-03,Society,Misc Non-Index Offense,0.006644576675118508
-2014-04,Society,Misc Non-Index Offense,0.006623963443918684
-2014-05,Society,Misc Non-Index Offense,0.006602409944439745
-2014-06,Society,Misc Non-Index Offense,0.006600187149294046
-2014-07,Society,Misc Non-Index Offense,0.006555334395298637
-2014-08,Society,Misc Non-Index Offense,0.006493013479934619
-2014-09,Society,Misc Non-Index Offense,0.0064965976868995405
-2014-10,Society,Misc Non-Index Offense,0.006507560762576035
-2014-11,Society,Misc Non-Index Offense,0.006492249335399265
-2014-12,Society,Misc Non-Index Offense,0.006495513761498513
-2015-01,Society,Misc Non-Index Offense,0.006876154544650033
-2015-02,Society,Misc Non-Index Offense,0.007212455145052333
-2015-03,Society,Misc Non-Index Offense,0.00743498538292861
-2015-04,Society,Misc Non-Index Offense,0.007415516329874902
-2015-05,Society,Misc Non-Index Offense,0.00738195511946557
-2015-06,Society,Misc Non-Index Offense,0.007319710159887005
-2015-07,Society,Misc Non-Index Offense,0.007307307544889586
-2015-08,Society,Misc Non-Index Offense,0.007244884383045838
-2015-09,Society,Misc Non-Index Offense,0.007148248560038509
-2015-10,Society,Misc Non-Index Offense,0.007098881101651441
-2015-11,Society,Misc Non-Index Offense,0.007044673619322799
-2015-12,Society,Misc Non-Index Offense,0.006965602593040305
-2016-01,Society,Misc Non-Index Offense,0.006512275298021656
-2016-02,Society,Misc Non-Index Offense,0.006123113393405067
-2016-03,Society,Misc Non-Index Offense,0.005816464249220985
-2016-04,Society,Misc Non-Index Offense,0.0057182848549501095
-2016-05,Society,Misc Non-Index Offense,0.0058802314124734275
-2016-06,Society,Misc Non-Index Offense,0.005829476767420657
-2016-07,Society,Misc Non-Index Offense,0.005739412538763191
-2016-08,Society,Misc Non-Index Offense,0.005687131311600739
-2016-09,Society,Misc Non-Index Offense,0.00567507648305838
-2016-10,Society,Misc Non-Index Offense,0.005636000970362448
-2016-11,Society,Misc Non-Index Offense,0.005615499608232263
-2016-12,Society,Misc Non-Index Offense,0.005645262001653239
-2017-01,Society,Misc Non-Index Offense,0.005696702518235449
-2017-02,Society,Misc Non-Index Offense,0.005751575595397497
-2017-03,Society,Misc Non-Index Offense,0.005774473718939935
-2017-04,Society,Misc Non-Index Offense,0.005845366506532444
-2017-05,Society,Misc Non-Index Offense,0.005631854166199186
-2017-06,Society,Misc Non-Index Offense,0.0055927736265604985
-2017-07,Society,Misc Non-Index Offense,0.00560351985008273
-2017-08,Society,Misc Non-Index Offense,0.005513378365739782
+2002-01,Society,Misc Non-Index Offense,0.01099369997075518
+2002-02,Society,Misc Non-Index Offense,0.011094101010100952
+2002-03,Society,Misc Non-Index Offense,0.011074809757246853
+2002-04,Society,Misc Non-Index Offense,0.011271172245346468
+2002-05,Society,Misc Non-Index Offense,0.011406385017938938
+2002-06,Society,Misc Non-Index Offense,0.011448746119079024
+2002-07,Society,Misc Non-Index Offense,0.011473643657835333
+2002-08,Society,Misc Non-Index Offense,0.011530412639423223
+2002-09,Society,Misc Non-Index Offense,0.011588291538700132
+2002-10,Society,Misc Non-Index Offense,0.011799525643472145
+2002-11,Society,Misc Non-Index Offense,0.011866716767407595
+2002-12,Society,Misc Non-Index Offense,0.01194876583477141
+2003-01,Society,Misc Non-Index Offense,0.012025640165041934
+2003-02,Society,Misc Non-Index Offense,0.011979806475919978
+2003-03,Society,Misc Non-Index Offense,0.012025710253220077
+2003-04,Society,Misc Non-Index Offense,0.012002126709639287
+2003-05,Society,Misc Non-Index Offense,0.012042151612003378
+2003-06,Society,Misc Non-Index Offense,0.012066218829112903
+2003-07,Society,Misc Non-Index Offense,0.01208281751020638
+2003-08,Society,Misc Non-Index Offense,0.012159047308329729
+2003-09,Society,Misc Non-Index Offense,0.012220427155464073
+2003-10,Society,Misc Non-Index Offense,0.012174959555012672
+2003-11,Society,Misc Non-Index Offense,0.01227741754370684
+2003-12,Society,Misc Non-Index Offense,0.012274499492235186
+2004-01,Society,Misc Non-Index Offense,0.01232591574111111
+2004-02,Society,Misc Non-Index Offense,0.012402230651241465
+2004-03,Society,Misc Non-Index Offense,0.012482301676760097
+2004-04,Society,Misc Non-Index Offense,0.012435622639401173
+2004-05,Society,Misc Non-Index Offense,0.012403261337908705
+2004-06,Society,Misc Non-Index Offense,0.01238028799073016
+2004-07,Society,Misc Non-Index Offense,0.012326362187098832
+2004-08,Society,Misc Non-Index Offense,0.012245058881396745
+2004-09,Society,Misc Non-Index Offense,0.01222157072217101
+2004-10,Society,Misc Non-Index Offense,0.01223130347148409
+2004-11,Society,Misc Non-Index Offense,0.012172002447791961
+2004-12,Society,Misc Non-Index Offense,0.012183593797259147
+2005-01,Society,Misc Non-Index Offense,0.012105805087305717
+2005-02,Society,Misc Non-Index Offense,0.012016774464430061
+2005-03,Society,Misc Non-Index Offense,0.01190363014153136
+2005-04,Society,Misc Non-Index Offense,0.011934510407184113
+2005-05,Society,Misc Non-Index Offense,0.011894429209760514
+2005-06,Society,Misc Non-Index Offense,0.01189616095810554
+2005-07,Society,Misc Non-Index Offense,0.011962803500637848
+2005-08,Society,Misc Non-Index Offense,0.012006175502671888
+2005-09,Society,Misc Non-Index Offense,0.011986250295528753
+2005-10,Society,Misc Non-Index Offense,0.011957006854327117
+2005-11,Society,Misc Non-Index Offense,0.011878451638108545
+2005-12,Society,Misc Non-Index Offense,0.011815716280469596
+2006-01,Society,Misc Non-Index Offense,0.01176884496346131
+2006-02,Society,Misc Non-Index Offense,0.011725652361925298
+2006-03,Society,Misc Non-Index Offense,0.011687092569864277
+2006-04,Society,Misc Non-Index Offense,0.011588222044072945
+2006-05,Society,Misc Non-Index Offense,0.011560252644869403
+2006-06,Society,Misc Non-Index Offense,0.011584546406420313
+2006-07,Society,Misc Non-Index Offense,0.01159819879057764
+2006-08,Society,Misc Non-Index Offense,0.011554335836984925
+2006-09,Society,Misc Non-Index Offense,0.011548341560069534
+2006-10,Society,Misc Non-Index Offense,0.011571085309164968
+2006-11,Society,Misc Non-Index Offense,0.011594713981179184
+2006-12,Society,Misc Non-Index Offense,0.011537894542256651
+2007-01,Society,Misc Non-Index Offense,0.01147514740199626
+2007-02,Society,Misc Non-Index Offense,0.011405508086009427
+2007-03,Society,Misc Non-Index Offense,0.011402455144363818
+2007-04,Society,Misc Non-Index Offense,0.011401807182972465
+2007-05,Society,Misc Non-Index Offense,0.011395368095496534
+2007-06,Society,Misc Non-Index Offense,0.011363069100335263
+2007-07,Society,Misc Non-Index Offense,0.01128133371455975
+2007-08,Society,Misc Non-Index Offense,0.011310618298992442
+2007-09,Society,Misc Non-Index Offense,0.011285070313429377
+2007-10,Society,Misc Non-Index Offense,0.011235501141519345
+2007-11,Society,Misc Non-Index Offense,0.011204528954854947
+2007-12,Society,Misc Non-Index Offense,0.011187115202111167
+2008-01,Society,Misc Non-Index Offense,0.011215083008789482
+2008-02,Society,Misc Non-Index Offense,0.011278113884620243
+2008-03,Society,Misc Non-Index Offense,0.011195203774215673
+2008-04,Society,Misc Non-Index Offense,0.011159543731185282
+2008-05,Society,Misc Non-Index Offense,0.011107430193505057
+2008-06,Society,Misc Non-Index Offense,0.01101781701010148
+2008-07,Society,Misc Non-Index Offense,0.010989258079822675
+2008-08,Society,Misc Non-Index Offense,0.010889328041074078
+2008-09,Society,Misc Non-Index Offense,0.0107731047790989
+2008-10,Society,Misc Non-Index Offense,0.010680209427930795
+2008-11,Society,Misc Non-Index Offense,0.010592224648343323
+2008-12,Society,Misc Non-Index Offense,0.010482858738708918
+2009-01,Society,Misc Non-Index Offense,0.010426384545995412
+2009-02,Society,Misc Non-Index Offense,0.010382290925831485
+2009-03,Society,Misc Non-Index Offense,0.010340445649688218
+2009-04,Society,Misc Non-Index Offense,0.010278259588564998
+2009-05,Society,Misc Non-Index Offense,0.010208452400654756
+2009-06,Society,Misc Non-Index Offense,0.01022355160849307
+2009-07,Society,Misc Non-Index Offense,0.010140312793297544
+2009-08,Society,Misc Non-Index Offense,0.010048237785744984
+2009-09,Society,Misc Non-Index Offense,0.010035643792540162
+2009-10,Society,Misc Non-Index Offense,0.010007529892346361
+2009-11,Society,Misc Non-Index Offense,0.009984455094445467
+2009-12,Society,Misc Non-Index Offense,0.009968655489988772
+2010-01,Society,Misc Non-Index Offense,0.009848740422947453
+2010-02,Society,Misc Non-Index Offense,0.009735526352598707
+2010-03,Society,Misc Non-Index Offense,0.00968488620233084
+2010-04,Society,Misc Non-Index Offense,0.009593413298133934
+2010-05,Society,Misc Non-Index Offense,0.009519703008479544
+2010-06,Society,Misc Non-Index Offense,0.009379892224341208
+2010-07,Society,Misc Non-Index Offense,0.00928455626556141
+2010-08,Society,Misc Non-Index Offense,0.009183686064398445
+2010-09,Society,Misc Non-Index Offense,0.00906132788835255
+2010-10,Society,Misc Non-Index Offense,0.008945504656385649
+2010-11,Society,Misc Non-Index Offense,0.008811592782275533
+2010-12,Society,Misc Non-Index Offense,0.008710507542313468
+2011-01,Society,Misc Non-Index Offense,0.008641102748889585
+2011-02,Society,Misc Non-Index Offense,0.008492846195057765
+2011-03,Society,Misc Non-Index Offense,0.008389359258428215
+2011-04,Society,Misc Non-Index Offense,0.008337925114818725
+2011-05,Society,Misc Non-Index Offense,0.008234149939974662
+2011-06,Society,Misc Non-Index Offense,0.008236960840261525
+2011-07,Society,Misc Non-Index Offense,0.008165737175231844
+2011-08,Society,Misc Non-Index Offense,0.008090798908874467
+2011-09,Society,Misc Non-Index Offense,0.00803629236610165
+2011-10,Society,Misc Non-Index Offense,0.007948948909470075
+2011-11,Society,Misc Non-Index Offense,0.007906589562265332
+2011-12,Society,Misc Non-Index Offense,0.007912262165070594
+2012-01,Society,Misc Non-Index Offense,0.007834662430019885
+2012-02,Society,Misc Non-Index Offense,0.00790708218377154
+2012-03,Society,Misc Non-Index Offense,0.007838739319867304
+2012-04,Society,Misc Non-Index Offense,0.0077175561518956015
+2012-05,Society,Misc Non-Index Offense,0.007675179169572765
+2012-06,Society,Misc Non-Index Offense,0.007594014026878636
+2012-07,Society,Misc Non-Index Offense,0.007579169271549273
+2012-08,Society,Misc Non-Index Offense,0.007521335916432608
+2012-09,Society,Misc Non-Index Offense,0.007438731795461412
+2012-10,Society,Misc Non-Index Offense,0.007409517309400088
+2012-11,Society,Misc Non-Index Offense,0.007327311929656391
+2012-12,Society,Misc Non-Index Offense,0.007255725980179243
+2013-01,Society,Misc Non-Index Offense,0.007277111436083788
+2013-02,Society,Misc Non-Index Offense,0.007237664231808956
+2013-03,Society,Misc Non-Index Offense,0.007221270193935937
+2013-04,Society,Misc Non-Index Offense,0.007203962422534757
+2013-05,Society,Misc Non-Index Offense,0.007185544141562097
+2013-06,Society,Misc Non-Index Offense,0.0071455655425035815
+2013-07,Society,Misc Non-Index Offense,0.007112218066068827
+2013-08,Society,Misc Non-Index Offense,0.007180013773995867
+2013-09,Society,Misc Non-Index Offense,0.00719079218362368
+2013-10,Society,Misc Non-Index Offense,0.007131186012660818
+2013-11,Society,Misc Non-Index Offense,0.007144827073094985
+2013-12,Society,Misc Non-Index Offense,0.007129568929386434
+2014-01,Society,Misc Non-Index Offense,0.007017405446975364
+2014-02,Society,Misc Non-Index Offense,0.006888494184218408
+2014-03,Society,Misc Non-Index Offense,0.006833055854791868
+2014-04,Society,Misc Non-Index Offense,0.006831556392781896
+2014-05,Society,Misc Non-Index Offense,0.006820798723199528
+2014-06,Society,Misc Non-Index Offense,0.006819616114666811
+2014-07,Society,Misc Non-Index Offense,0.006774550958802135
+2014-08,Society,Misc Non-Index Offense,0.0067126966198208975
+2014-09,Society,Misc Non-Index Offense,0.00671716504131173
+2014-10,Society,Misc Non-Index Offense,0.006734017895252936
+2014-11,Society,Misc Non-Index Offense,0.0067236128283412015
+2014-12,Society,Misc Non-Index Offense,0.006724763706816631
+2015-01,Society,Misc Non-Index Offense,0.006736077922111224
+2015-02,Society,Misc Non-Index Offense,0.00673652967704283
+2015-03,Society,Misc Non-Index Offense,0.006733886994324958
+2015-04,Society,Misc Non-Index Offense,0.006719976944103972
+2015-05,Society,Misc Non-Index Offense,0.006693614045975251
+2015-06,Society,Misc Non-Index Offense,0.006631891117707018
+2015-07,Society,Misc Non-Index Offense,0.006623201844991481
+2015-08,Society,Misc Non-Index Offense,0.0065636209455108745
+2015-09,Society,Misc Non-Index Offense,0.006468346534179009
+2015-10,Society,Misc Non-Index Offense,0.006425977928525204
+2015-11,Society,Misc Non-Index Offense,0.006370826005288971
+2015-12,Society,Misc Non-Index Offense,0.006293485465389323
+2016-01,Society,Misc Non-Index Offense,0.00619408298283658
+2016-02,Society,Misc Non-Index Offense,0.006104975760834562
+2016-03,Society,Misc Non-Index Offense,0.005982417316027101
+2016-04,Society,Misc Non-Index Offense,0.0058272204006558125
+2016-05,Society,Misc Non-Index Offense,0.005672078308085228
+2016-06,Society,Misc Non-Index Offense,0.005554327189387113
+2016-07,Society,Misc Non-Index Offense,0.005391717475511754
+2016-08,Society,Misc Non-Index Offense,0.005271161439103616
+2016-09,Society,Misc Non-Index Offense,0.0051957853320918615
+2016-10,Society,Misc Non-Index Offense,0.005085069004368659
+2016-11,Society,Misc Non-Index Offense,0.005001112197607574
+2016-12,Society,Misc Non-Index Offense,0.004969882774881149
+2017-01,Society,Misc Non-Index Offense,0.004963859315764646
+2017-02,Society,Misc Non-Index Offense,0.00498786087639763
+2017-03,Society,Misc Non-Index Offense,0.004982085580358881
+2017-04,Society,Misc Non-Index Offense,0.005033414971171661
+2017-05,Society,Misc Non-Index Offense,0.005052561867813132
+2017-06,Society,Misc Non-Index Offense,0.005013096799599347
+2017-07,Society,Misc Non-Index Offense,0.005014998865894311
+2017-08,Society,Misc Non-Index Offense,0.0049240883244011675
 2002-01,Society,Offenses Against Family,0.001398865353116523
 2002-02,Society,Offenses Against Family,0.001395232500995055
 2002-03,Society,Offenses Against Family,0.0014135096957365175
@@ -3383,194 +3195,194 @@ time,crime_type,crime_description,crime_intensity
 2017-06,Society,Prostitution ,0.00045297373965484726
 2017-07,Society,Prostitution ,0.0004425090744241074
 2017-08,Society,Prostitution ,0.00043709536337679624
-2002-01,Society,Weapons Violation,0.003473831827582071
-2002-02,Society,Weapons Violation,0.003503692667109814
-2002-03,Society,Weapons Violation,0.0035292214051299564
-2002-04,Society,Weapons Violation,0.003550993695466365
-2002-05,Society,Weapons Violation,0.0035479924252327074
-2002-06,Society,Weapons Violation,0.0035358161133830796
-2002-07,Society,Weapons Violation,0.003534429584538052
-2002-08,Society,Weapons Violation,0.0035785914377315154
-2002-09,Society,Weapons Violation,0.003634602725181949
-2002-10,Society,Weapons Violation,0.0036147882254366224
-2002-11,Society,Weapons Violation,0.00352593675164874
-2002-12,Society,Weapons Violation,0.003517620189490551
-2003-01,Society,Weapons Violation,0.003475139962415521
-2003-02,Society,Weapons Violation,0.0034402963208221174
-2003-03,Society,Weapons Violation,0.0034643042422760765
-2003-04,Society,Weapons Violation,0.003475298119576956
-2003-05,Society,Weapons Violation,0.0034456949636729526
-2003-06,Society,Weapons Violation,0.003492767347753087
-2003-07,Society,Weapons Violation,0.0035114152167017056
-2003-08,Society,Weapons Violation,0.003476578910547455
-2003-09,Society,Weapons Violation,0.0034243093800927953
-2003-10,Society,Weapons Violation,0.0034912756217055454
-2003-11,Society,Weapons Violation,0.0035371167686459844
-2003-12,Society,Weapons Violation,0.003551584782341362
-2004-01,Society,Weapons Violation,0.003579641623185483
-2004-02,Society,Weapons Violation,0.0035922736577776145
-2004-03,Society,Weapons Violation,0.003591642627097469
-2004-04,Society,Weapons Violation,0.003609615067342684
-2004-05,Society,Weapons Violation,0.0036730006931489966
-2004-06,Society,Weapons Violation,0.0036882947835072196
-2004-07,Society,Weapons Violation,0.0036850942093469953
-2004-08,Society,Weapons Violation,0.0037106180319824494
-2004-09,Society,Weapons Violation,0.0037213031221991896
-2004-10,Society,Weapons Violation,0.003641491789769333
-2004-11,Society,Weapons Violation,0.0036368566036577496
-2004-12,Society,Weapons Violation,0.0036579493966715877
-2005-01,Society,Weapons Violation,0.0036371768840288594
-2005-02,Society,Weapons Violation,0.003640285165518511
-2005-03,Society,Weapons Violation,0.0036451429391771628
-2005-04,Society,Weapons Violation,0.0036770173763951072
-2005-05,Society,Weapons Violation,0.0036823163404180966
-2005-06,Society,Weapons Violation,0.003650470351743803
-2005-07,Society,Weapons Violation,0.003668033946085306
-2005-08,Society,Weapons Violation,0.0036937241272701517
-2005-09,Society,Weapons Violation,0.003654598149415176
-2005-10,Society,Weapons Violation,0.0036895705061092826
-2005-11,Society,Weapons Violation,0.0036497512220994813
-2005-12,Society,Weapons Violation,0.003593672288003011
-2006-01,Society,Weapons Violation,0.0036064710243944704
-2006-02,Society,Weapons Violation,0.003590661613592905
-2006-03,Society,Weapons Violation,0.0035178353348475455
-2006-04,Society,Weapons Violation,0.003459050786731718
-2006-05,Society,Weapons Violation,0.003388502609652126
-2006-06,Society,Weapons Violation,0.003345332866860889
-2006-07,Society,Weapons Violation,0.0033407541859478626
-2006-08,Society,Weapons Violation,0.0033475874488952096
-2006-09,Society,Weapons Violation,0.0033963951441698505
-2006-10,Society,Weapons Violation,0.0033771283733609317
-2006-11,Society,Weapons Violation,0.003402251066761347
-2006-12,Society,Weapons Violation,0.003414439311965557
-2007-01,Society,Weapons Violation,0.0034328324759998387
-2007-02,Society,Weapons Violation,0.0033879570118701624
-2007-03,Society,Weapons Violation,0.003433063036566377
-2007-04,Society,Weapons Violation,0.003393952456329247
-2007-05,Society,Weapons Violation,0.0033931855832736433
-2007-06,Society,Weapons Violation,0.0034073615697863
-2007-07,Society,Weapons Violation,0.0033763613027763
-2007-08,Society,Weapons Violation,0.003306479871364382
-2007-09,Society,Weapons Violation,0.0032630333289702267
-2007-10,Society,Weapons Violation,0.003236664314569777
-2007-11,Society,Weapons Violation,0.0031820997855443725
-2007-12,Society,Weapons Violation,0.0031566947208253966
-2008-01,Society,Weapons Violation,0.0031082369010971556
-2008-02,Society,Weapons Violation,0.003122577487446448
-2008-03,Society,Weapons Violation,0.0031374632007976962
-2008-04,Society,Weapons Violation,0.0031866075698535876
-2008-05,Society,Weapons Violation,0.00323162661988726
-2008-06,Society,Weapons Violation,0.0032473477184548514
-2008-07,Society,Weapons Violation,0.003323730297400492
-2008-08,Society,Weapons Violation,0.003391834184984741
-2008-09,Society,Weapons Violation,0.003425792623619337
-2008-10,Society,Weapons Violation,0.0034904102147895596
-2008-11,Society,Weapons Violation,0.0035460677331785842
-2008-12,Society,Weapons Violation,0.0035579406556028414
-2009-01,Society,Weapons Violation,0.003565516994882389
-2009-02,Society,Weapons Violation,0.0036014237903227732
-2009-03,Society,Weapons Violation,0.003590684959776743
-2009-04,Society,Weapons Violation,0.0036344461902621645
-2009-05,Society,Weapons Violation,0.003698684515962807
-2009-06,Society,Weapons Violation,0.003758804606420801
-2009-07,Society,Weapons Violation,0.003769861169633215
-2009-08,Society,Weapons Violation,0.003799698832901482
-2009-09,Society,Weapons Violation,0.0038371601444983235
-2009-10,Society,Weapons Violation,0.0038176088927293957
-2009-11,Society,Weapons Violation,0.003831181099939239
-2009-12,Society,Weapons Violation,0.003840086270337368
-2010-01,Society,Weapons Violation,0.003856999108058212
-2010-02,Society,Weapons Violation,0.0038477859191215105
-2010-03,Society,Weapons Violation,0.003891493588485692
-2010-04,Society,Weapons Violation,0.003899902678436223
-2010-05,Society,Weapons Violation,0.0038577526235843906
-2010-06,Society,Weapons Violation,0.0038184164780795666
-2010-07,Society,Weapons Violation,0.003757652755871538
-2010-08,Society,Weapons Violation,0.0036920753722624903
-2010-09,Society,Weapons Violation,0.003665307311605474
-2010-10,Society,Weapons Violation,0.0036547111951737397
-2010-11,Society,Weapons Violation,0.0036073319163953867
-2010-12,Society,Weapons Violation,0.0035299731202809875
-2011-01,Society,Weapons Violation,0.003479308179517044
-2011-02,Society,Weapons Violation,0.0034585744544587452
-2011-03,Society,Weapons Violation,0.003414201402457976
-2011-04,Society,Weapons Violation,0.0033805061275083426
-2011-05,Society,Weapons Violation,0.0033804235972741048
-2011-06,Society,Weapons Violation,0.003424908720673
-2011-07,Society,Weapons Violation,0.003434397961027322
-2011-08,Society,Weapons Violation,0.003446691802151861
-2011-09,Society,Weapons Violation,0.003410576985099078
-2011-10,Society,Weapons Violation,0.0034234292636485895
-2011-11,Society,Weapons Violation,0.003436849284404643
-2011-12,Society,Weapons Violation,0.0035707107622639095
-2012-01,Society,Weapons Violation,0.0036063616808251864
-2012-02,Society,Weapons Violation,0.0036602097328141776
-2012-03,Society,Weapons Violation,0.0037211062216615035
-2012-04,Society,Weapons Violation,0.003684419764142565
-2012-05,Society,Weapons Violation,0.0036331930850836912
-2012-06,Society,Weapons Violation,0.003605786006392629
-2012-07,Society,Weapons Violation,0.0036114018884188578
-2012-08,Society,Weapons Violation,0.003623197488296779
-2012-09,Society,Weapons Violation,0.00370521204245427
-2012-10,Society,Weapons Violation,0.0036544379694450524
-2012-11,Society,Weapons Violation,0.0036749457990234266
-2012-12,Society,Weapons Violation,0.0036481635557806965
-2013-01,Society,Weapons Violation,0.0036460836954772453
-2013-02,Society,Weapons Violation,0.0036155075323540844
-2013-03,Society,Weapons Violation,0.003501135823800668
-2013-04,Society,Weapons Violation,0.0034953498857054903
-2013-05,Society,Weapons Violation,0.003477610362495778
-2013-06,Society,Weapons Violation,0.003449739692813245
-2013-07,Society,Weapons Violation,0.003399928845010671
-2013-08,Society,Weapons Violation,0.003361220356707405
-2013-09,Society,Weapons Violation,0.003241924889943512
-2013-10,Society,Weapons Violation,0.0031543718260842657
-2013-11,Society,Weapons Violation,0.003054869910715268
-2013-12,Society,Weapons Violation,0.00298226498252203
-2014-01,Society,Weapons Violation,0.0028781278293126857
-2014-02,Society,Weapons Violation,0.0027969481357948325
-2014-03,Society,Weapons Violation,0.0027874246498532183
-2014-04,Society,Weapons Violation,0.002788411153445514
-2014-05,Society,Weapons Violation,0.0028393878966409794
-2014-06,Society,Weapons Violation,0.002858874329815956
-2014-07,Society,Weapons Violation,0.002905012893836395
-2014-08,Society,Weapons Violation,0.0028402335857916016
-2014-09,Society,Weapons Violation,0.002822779113172799
-2014-10,Society,Weapons Violation,0.0028782291803976
-2014-11,Society,Weapons Violation,0.0029059724883062255
-2014-12,Society,Weapons Violation,0.0029257206491652634
-2015-01,Society,Weapons Violation,0.002978396964662005
-2015-02,Society,Weapons Violation,0.003024585423216647
-2015-03,Society,Weapons Violation,0.0031296427606812794
-2015-04,Society,Weapons Violation,0.003138570791247006
-2015-05,Society,Weapons Violation,0.0030981812795181436
-2015-06,Society,Weapons Violation,0.0030865785919177683
-2015-07,Society,Weapons Violation,0.0030930030595756283
-2015-08,Society,Weapons Violation,0.00314924127830242
-2015-09,Society,Weapons Violation,0.0031987142466503157
-2015-10,Society,Weapons Violation,0.0032043330157807822
-2015-11,Society,Weapons Violation,0.003220554027465094
-2015-12,Society,Weapons Violation,0.0031661378549149456
-2016-01,Society,Weapons Violation,0.0031009587202142624
-2016-02,Society,Weapons Violation,0.003115409355499871
-2016-03,Society,Weapons Violation,0.003061477383377066
-2016-04,Society,Weapons Violation,0.0030666461980510787
-2016-05,Society,Weapons Violation,0.003097735070625419
-2016-06,Society,Weapons Violation,0.00311250105240209
-2016-07,Society,Weapons Violation,0.003051523041882747
-2016-08,Society,Weapons Violation,0.0030437760892610233
-2016-09,Society,Weapons Violation,0.003066109806043937
-2016-10,Society,Weapons Violation,0.0030826261369230486
-2016-11,Society,Weapons Violation,0.0031344156281916933
-2016-12,Society,Weapons Violation,0.003212362804841186
-2017-01,Society,Weapons Violation,0.0033741740397486516
-2017-02,Society,Weapons Violation,0.003507816784487674
-2017-03,Society,Weapons Violation,0.003550914999490048
-2017-04,Society,Weapons Violation,0.0036496642321067812
-2017-05,Society,Weapons Violation,0.003715927465535188
-2017-06,Society,Weapons Violation,0.0038195106967542146
-2017-07,Society,Weapons Violation,0.004041859338479523
-2017-08,Society,Weapons Violation,0.00411560136392223
+2002-01,Society,Weapons Violation,0.0037016545227364283
+2002-02,Society,Weapons Violation,0.0037261611489748294
+2002-03,Society,Weapons Violation,0.0037496033694716293
+2002-04,Society,Weapons Violation,0.0037742151980234635
+2002-05,Society,Weapons Violation,0.0037749899270019716
+2002-06,Society,Weapons Violation,0.0037526397669959397
+2002-07,Society,Weapons Violation,0.003755507319304424
+2002-08,Society,Weapons Violation,0.003783119156582624
+2002-09,Society,Weapons Violation,0.00383063549499169
+2002-10,Society,Weapons Violation,0.0038016977451081355
+2002-11,Society,Weapons Violation,0.00370509702850304
+2002-12,Society,Weapons Violation,0.003690982453009163
+2003-01,Society,Weapons Violation,0.00364398919181592
+2003-02,Society,Weapons Violation,0.0036051452984566506
+2003-03,Society,Weapons Violation,0.003626040050462029
+2003-04,Society,Weapons Violation,0.003622837762439907
+2003-05,Society,Weapons Violation,0.0035862137354877436
+2003-06,Society,Weapons Violation,0.0036255993932914495
+2003-07,Society,Weapons Violation,0.003633903260092675
+2003-08,Society,Weapons Violation,0.0035975687470747955
+2003-09,Society,Weapons Violation,0.0035406914077947406
+2003-10,Society,Weapons Violation,0.003602787048558459
+2003-11,Society,Weapons Violation,0.0036522750070212924
+2003-12,Society,Weapons Violation,0.00367177830356757
+2004-01,Society,Weapons Violation,0.0036972364253702985
+2004-02,Society,Weapons Violation,0.003709848133471316
+2004-03,Society,Weapons Violation,0.0037070985191071573
+2004-04,Society,Weapons Violation,0.0037262811380954805
+2004-05,Society,Weapons Violation,0.003789038173675104
+2004-06,Society,Weapons Violation,0.0038051188719732507
+2004-07,Society,Weapons Violation,0.0038062484948599455
+2004-08,Society,Weapons Violation,0.003832563462210986
+2004-09,Society,Weapons Violation,0.0038433313047089956
+2004-10,Society,Weapons Violation,0.0037625425510733486
+2004-11,Society,Weapons Violation,0.003748397688786658
+2004-12,Society,Weapons Violation,0.0037625349400645684
+2005-01,Society,Weapons Violation,0.0037407562272240473
+2005-02,Society,Weapons Violation,0.0037455213560246546
+2005-03,Society,Weapons Violation,0.0037467836738437317
+2005-04,Society,Weapons Violation,0.003775241110478604
+2005-05,Society,Weapons Violation,0.0037790214739217066
+2005-06,Society,Weapons Violation,0.0037413472975828827
+2005-07,Society,Weapons Violation,0.003751953164043605
+2005-08,Society,Weapons Violation,0.0037806465266247554
+2005-09,Society,Weapons Violation,0.003744089999275809
+2005-10,Society,Weapons Violation,0.0037787306365135126
+2005-11,Society,Weapons Violation,0.0037534877645949956
+2005-12,Society,Weapons Violation,0.0036980227331084234
+2006-01,Society,Weapons Violation,0.003711883635267038
+2006-02,Society,Weapons Violation,0.003693294391255354
+2006-03,Society,Weapons Violation,0.0036218679617762944
+2006-04,Society,Weapons Violation,0.0035660165687207744
+2006-05,Society,Weapons Violation,0.0034917311940048075
+2006-06,Society,Weapons Violation,0.0034488394389016685
+2006-07,Society,Weapons Violation,0.0034458314709874065
+2006-08,Society,Weapons Violation,0.0034480896685596747
+2006-09,Society,Weapons Violation,0.003497548032308975
+2006-10,Society,Weapons Violation,0.003481259787273446
+2006-11,Society,Weapons Violation,0.0035012151390858585
+2006-12,Society,Weapons Violation,0.003512889250817194
+2007-01,Society,Weapons Violation,0.003529018729114727
+2007-02,Society,Weapons Violation,0.003483626496849964
+2007-03,Society,Weapons Violation,0.003527631282870613
+2007-04,Society,Weapons Violation,0.0034891704150047456
+2007-05,Society,Weapons Violation,0.0034873004622868013
+2007-06,Society,Weapons Violation,0.003507391480606103
+2007-07,Society,Weapons Violation,0.0034758753205647837
+2007-08,Society,Weapons Violation,0.0034025483615330162
+2007-09,Society,Weapons Violation,0.0033603410256951493
+2007-10,Society,Weapons Violation,0.0033328389465990416
+2007-11,Society,Weapons Violation,0.0032707572654381515
+2007-12,Society,Weapons Violation,0.003239390635496247
+2008-01,Society,Weapons Violation,0.0031866721222173914
+2008-02,Society,Weapons Violation,0.0031962936523905468
+2008-03,Society,Weapons Violation,0.0032022244492946566
+2008-04,Society,Weapons Violation,0.003241866728679938
+2008-05,Society,Weapons Violation,0.0032802496982429893
+2008-06,Society,Weapons Violation,0.003287047612414745
+2008-07,Society,Weapons Violation,0.0033584806931660576
+2008-08,Society,Weapons Violation,0.003422873572798857
+2008-09,Society,Weapons Violation,0.003444263316186488
+2008-10,Society,Weapons Violation,0.0034914108438015025
+2008-11,Society,Weapons Violation,0.003544168595799093
+2008-12,Society,Weapons Violation,0.0035566278521233056
+2009-01,Society,Weapons Violation,0.0035648590850134282
+2009-02,Society,Weapons Violation,0.003601509973868471
+2009-03,Society,Weapons Violation,0.003591249212277462
+2009-04,Society,Weapons Violation,0.0036356596116487276
+2009-05,Society,Weapons Violation,0.00370099165935875
+2009-06,Society,Weapons Violation,0.0037621240861424377
+2009-07,Society,Weapons Violation,0.0037744302528008814
+2009-08,Society,Weapons Violation,0.0038053819578701235
+2009-09,Society,Weapons Violation,0.003847479665850747
+2009-10,Society,Weapons Violation,0.0038392434186736483
+2009-11,Society,Weapons Violation,0.003859367235195823
+2009-12,Society,Weapons Violation,0.003869137987645235
+2010-01,Society,Weapons Violation,0.003877934822271787
+2010-02,Society,Weapons Violation,0.003868652107987496
+2010-03,Society,Weapons Violation,0.003912591757942377
+2010-04,Society,Weapons Violation,0.003921657597662932
+2010-05,Society,Weapons Violation,0.003883119095009594
+2010-06,Society,Weapons Violation,0.003842884641062652
+2010-07,Society,Weapons Violation,0.0037803631151150704
+2010-08,Society,Weapons Violation,0.0036905157203054526
+2010-09,Society,Weapons Violation,0.00365160727701297
+2010-10,Society,Weapons Violation,0.003613621243661411
+2010-11,Society,Weapons Violation,0.0035453534875547763
+2010-12,Society,Weapons Violation,0.0034645265188089167
+2011-01,Society,Weapons Violation,0.003419356722786511
+2011-02,Society,Weapons Violation,0.003394753879936021
+2011-03,Society,Weapons Violation,0.0033389247348256717
+2011-04,Society,Weapons Violation,0.0032964151971626968
+2011-05,Society,Weapons Violation,0.0032901806270360045
+2011-06,Society,Weapons Violation,0.003338819314720665
+2011-07,Society,Weapons Violation,0.0033545616916349982
+2011-08,Society,Weapons Violation,0.00339630238843846
+2011-09,Society,Weapons Violation,0.003376096010170512
+2011-10,Society,Weapons Violation,0.0034211518352201113
+2011-11,Society,Weapons Violation,0.0034583952512241257
+2011-12,Society,Weapons Violation,0.003601991698938821
+2012-01,Society,Weapons Violation,0.003644627382127455
+2012-02,Society,Weapons Violation,0.003708608994173998
+2012-03,Society,Weapons Violation,0.003785906225730883
+2012-04,Society,Weapons Violation,0.0037637111272195633
+2012-05,Society,Weapons Violation,0.0037196351507123187
+2012-06,Society,Weapons Violation,0.0036922110181332206
+2012-07,Society,Weapons Violation,0.0036985000425367323
+2012-08,Society,Weapons Violation,0.003712340010880619
+2012-09,Society,Weapons Violation,0.003794341500623101
+2012-10,Society,Weapons Violation,0.003735328238020037
+2012-11,Society,Weapons Violation,0.0037503409335663844
+2012-12,Society,Weapons Violation,0.0037221770257199185
+2013-01,Society,Weapons Violation,0.0037214567436755844
+2013-02,Society,Weapons Violation,0.003686073777966953
+2013-03,Society,Weapons Violation,0.003573061754281969
+2013-04,Society,Weapons Violation,0.003571374737210871
+2013-05,Society,Weapons Violation,0.0035552148404302563
+2013-06,Society,Weapons Violation,0.003526869210534785
+2013-07,Society,Weapons Violation,0.003473830533138297
+2013-08,Society,Weapons Violation,0.003431296000393807
+2013-09,Society,Weapons Violation,0.003306713564729994
+2013-10,Society,Weapons Violation,0.003223312316357051
+2013-11,Society,Weapons Violation,0.003124823510257317
+2013-12,Society,Weapons Violation,0.003048254758909204
+2014-01,Society,Weapons Violation,0.0029394215279624314
+2014-02,Society,Weapons Violation,0.0028583904150211903
+2014-03,Society,Weapons Violation,0.0028449422194479134
+2014-04,Society,Weapons Violation,0.002837152477185935
+2014-05,Society,Weapons Violation,0.0028869014439947775
+2014-06,Society,Weapons Violation,0.002903475360177085
+2014-07,Society,Weapons Violation,0.0029496253236353572
+2014-08,Society,Weapons Violation,0.002884857420856981
+2014-09,Society,Weapons Violation,0.0028696095353785444
+2014-10,Society,Weapons Violation,0.0029170205434205228
+2014-11,Society,Weapons Violation,0.002942577476733166
+2014-12,Society,Weapons Violation,0.0029623350053180316
+2015-01,Society,Weapons Violation,0.0030135147348083233
+2015-02,Society,Weapons Violation,0.003057445832262357
+2015-03,Society,Weapons Violation,0.003160285682745498
+2015-04,Society,Weapons Violation,0.003169954600798037
+2015-05,Society,Weapons Violation,0.0031259070042333847
+2015-06,Society,Weapons Violation,0.003115044836210346
+2015-07,Society,Weapons Violation,0.003124402956936245
+2015-08,Society,Weapons Violation,0.0031784409358620075
+2015-09,Society,Weapons Violation,0.003226447077675884
+2015-10,Society,Weapons Violation,0.0032320658468063504
+2015-11,Society,Weapons Violation,0.003249020271757672
+2015-12,Society,Weapons Violation,0.003193137272673504
+2016-01,Society,Weapons Violation,0.0031309328529771016
+2016-02,Society,Weapons Violation,0.003148699407382505
+2016-03,Society,Weapons Violation,0.0030966593826643653
+2016-04,Society,Weapons Violation,0.0030988945442703385
+2016-05,Society,Weapons Violation,0.0031283212156316188
+2016-06,Society,Weapons Violation,0.0031428059465468537
+2016-07,Society,Weapons Violation,0.003078331781236599
+2016-08,Society,Weapons Violation,0.003070162952322721
+2016-09,Society,Weapons Violation,0.003090015178443168
+2016-10,Society,Weapons Violation,0.0031040500186598143
+2016-11,Society,Weapons Violation,0.003155136382774867
+2016-12,Society,Weapons Violation,0.0032329429339936415
+2017-01,Society,Weapons Violation,0.003392413303669359
+2017-02,Society,Weapons Violation,0.003524586929357864
+2017-03,Society,Weapons Violation,0.0035668655218215983
+2017-04,Society,Weapons Violation,0.0036679859057834967
+2017-05,Society,Weapons Violation,0.0037360822519691
+2017-06,Society,Weapons Violation,0.003840258271024418
+2017-07,Society,Weapons Violation,0.004062014124913435
+2017-08,Society,Weapons Violation,0.004135756150356142
 2002-01,Violent,Aggravated Assault,0.006363263429692374
 2002-02,Violent,Aggravated Assault,0.006311064615970913
 2002-03,Violent,Aggravated Assault,0.006278962618245382
