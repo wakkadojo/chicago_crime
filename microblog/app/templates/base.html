@@ -53,13 +53,16 @@
     </nav>
 
     <!-- Page Header -->
+    <!-- 
     <header class="masthead" style="background-image: url('static/img/home-bg.jpg')">
+    -->
+    <header class="masthead" style="background-image: url('{{'static/img/' + background_img_name }}')">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="site-heading">
-              <h1>Jake Ellowitz</h1>
-              <span class="subheading">A man on no mission whatsoever</span>
+              <h1>{{title}}</h1>
+              <span class="subheading">{{subtitle}}</span>
             </div>
           </div>
         </div>
