@@ -8,7 +8,7 @@ def index():
     return render_template(
         "index.html", 
         title = "Jake Ellowitz",
-        subtitle = "A man on no mission whatsoever",
+        subtitle = "A Man on no Mission Whatsoever",
         background_img_name = "home-bg.jpg"
     )
 
