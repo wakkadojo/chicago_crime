@@ -124,10 +124,6 @@ function explore_city_container() {
                     .transition()
                     .attr("fill", d3.color("red").darker());
                 update_city_detail(d.properties.community);
-            }).on("mouseout", function(d) {
-                d3.select(this)
-                    .transition()
-                    .attr("fill", d => map_color(d.properties.crime_intensity_2017));
             });
 
         update_map("2017"); // act as initializer
@@ -214,6 +210,13 @@ function explore_city_container() {
         // update graph
         chi_map_int_svg.selectAll(".chicago_map").selectAll("path").transition()
             .attr("fill", d => map_color(d.properties["crime_intensity_" + year]))
+
+        chi_map_int_svg.selectAll(".chicago_map").selectAll("path")
+            .on("mouseout", function(d) {
+                d3.select(this)
+                    .transition()
+                    .attr("fill", d => map_color(d.properties["crime_intensity_" + year]));
+            });
     }
 
     // initialize the detail graph

@@ -68,7 +68,7 @@ While crime in Chicago has generally decreased dramatically over the last 15 yea
 <p>
 
 <p>
-We measure "Crime Intensity" in Chicago since 2002 broken into its major categories: Property Crime, Violent Crime, and Crime Against Society. We will soon elaborate more on "Crime Intensity", but for now think of it as:
+We measure "Crime Intensity" in Chicago since 2002 broken into its major categories: Property Crime, Violent Crime, and Crime Against Society. We will soon elaborate more on "Crime Intensity," but for now think of it as:
 </p>
  <blockquote style="text-align: center;">Crime Intensity = (# years served) / person if average prison sentence served in full for every crime reported</blockquote>
 
@@ -195,6 +195,160 @@ Most change from 2002 - 2007 then plateau
                 <li> Example of murder versus disorderly conduct of count versus weighted
                 <li> How did I get weights
             </ul>
+
+            <div id="crime_bubble_parent_div" style="width: 600px; height:300px; margin-left: auto; margin-right: auto; display: block;">
+                <div style="width: 300; text-align: center; float: left" class="d3axis">Crime shares by count</div>
+                <div style="width: 300; text-align: center; float: right" class="d3axis">Crime shares by average sentencing</div>
+                <svg width="300" height="300" id="crime_bubble_pct_svg" style="float: left"></svg>
+                <svg width="300" height="300" id="crime_bubble_severity_svg" style="float: right"></svg>
+                <div id="bubble_pct_hover_detail" style="height=100px; width=200px; text-align: center;" class="d3axis"></div>
+            </div>
+
+            <script tyle="text/javascript">
+
+function make_crime_pct_bubble() {
+
+    var parent_div = d3.select("#crime_bubble_parent_div"),
+        svg = parent_div.select("#crime_bubble_pct_svg"),
+        width = svg.attr("width"),
+        height = svg.attr("height"),
+        cluster_padding = height/20,
+        pct_thresh = 0.005;
+
+    var color = d3.scaleOrdinal(d3.schemeCategory10)
+
+    function get_bubble_id(description) { return "bubble_crime_pct_" + description.replace(/\W/g, '') + "_id"; }
+
+    function is_big_discrepancy(node) { 
+        return Math.abs(2*(node.pct_severity - node.pct_count)/(node.pct_severity + node.pct_count)) > 0.75;
+    } 
+
+    function get_opacity(node) { 
+        return is_big_discrepancy(node) ? "0.75" : "0.4"; 
+    } 
+
+    function get_nodes(csv_data, radius_field) {
+
+        var nodes = csv_data.map(function(d) {
+                var guess_x = height/2 + (Math.cos(color.domain().findIndex(c => c == d.crime_type) * 2 * Math.PI / color.domain().length) + (0.5 - Math.random())) * height * 0.3;
+                    guess_y = height/2 + (Math.sin(color.domain().findIndex(c => c == d.crime_type) * 2 * Math.PI / color.domain().length) + (0.5 - Math.random())) * height * 0.3;
+                    out = {
+                        cluster      : d.crime_type,
+                        description  : d.crime_description,
+                        pct_severity : +d.severity_pct,
+                        pct_count    : +d.crime_count_pct,
+                        r            : Math.sqrt(+d[radius_field]) * height / 4,
+                        x            : guess_x,
+                        y            : guess_y
+                    }
+                return out;
+            });
+
+        return nodes;
+    }
+
+    function get_sim_update(svg_id, nodes) {
+ 
+        function ticked() {
+
+            var u = parent_div.selectAll(svg_id)
+                .selectAll('circle')
+                .data(nodes)
+
+            u.enter().append('circle')
+              .merge(u)
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y)
+
+            u.exit().remove()
+        }
+
+        return ticked;
+    }
+
+    function build_sim(svg_id, nodes) {
+
+        var simulation = d3.forceSimulation(nodes)
+            .force("collision", d3.forceCollide().radius(d => d.r).iterations(5))
+            .force("charge", d3.forceManyBody().strength(height/30))
+            .force("center", d3.forceCenter(width/2, height/2))
+            .on("tick", get_sim_update(svg_id, nodes));
+    
+    }
+
+    function initialize_bubbles(svg_id, nodes) {
+
+        parent_div.selectAll(svg_id)
+            .selectAll("circle")
+            .data(nodes)
+          .enter().append("circle")
+            .style("fill", d => color(d.cluster))
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y)
+            .attr("r", d => d.r)
+            .attr("fill", d => color(d.cluster))
+            .attr("id", d => get_bubble_id(d.description))
+            .style("opacity", get_opacity)
+            .on("mouseover", function() {
+                parent_div.selectAll("#" + this.id)
+                    .transition()
+                    .style("opacity", "1")
+                    .style("fill", d3.color("red").darker())
+                
+                // update description
+                var description = "<b>" + this.__data__.description + "</b>",
+                    pct_count = "<b>" + Math.round(this.__data__.pct_count* 1000)/10 + "%</b>",
+                    pct_sev= "<b>" + Math.round(this.__data__.pct_severity * 1000)/10 + "%</b>"
+                parent_div.select("#bubble_pct_hover_detail")
+                    .style("font-weight", null)
+                    .style("color", "black")
+                    .html(description + " is " + pct_count + " of crime by frequency vs " + pct_sev + " when accounting for severity")
+
+            }).on("mouseout", function() {
+                parent_div.selectAll("#" + this.id)
+                    .transition()
+                    .style("opacity", get_opacity)
+                    .style("fill", d => color(d.cluster))
+
+                // restore description
+                parent_div.select("#bubble_pct_hover_detail")
+                    .style("font-weight", "bold")
+                    .style("color", "Grey")
+                    .html("Hover over a bubble to compare weighting methodologies")
+            })
+    }
+
+    d3.csv("static/data/recent_crime_ct_severity_stats.csv", function(csv_data) {
+
+        color.domain(csv_data.map(d => d.crime_type));
+
+        // filter out irrelevant categories for this viz (i.e. too small to see)
+        csv_data = csv_data.filter(d => d.severity_pct > pct_thresh || d.crime_count_pct > pct_thresh);
+
+        var pct_nodes = get_nodes(csv_data, "crime_count_pct"),
+            severity_nodes = get_nodes(csv_data, "severity_pct");
+
+        // build the pct bubbles
+        initialize_bubbles("#crime_bubble_pct_svg", pct_nodes);
+        build_sim("#crime_bubble_pct_svg", pct_nodes);
+
+        // build the severity bubbles
+        initialize_bubbles("#crime_bubble_severity_svg", severity_nodes)
+        build_sim("#crime_bubble_severity_svg", severity_nodes)
+
+    })
+
+    // initialize hover text
+    parent_div.select("#bubble_pct_hover_detail")
+        .style("font-weight", "bold")
+        .style("color", "Grey")
+        .text("Hover over a bubble to compare weighting methodologies")
+
+}
+
+make_crime_pct_bubble();
+
+            </script>
             
             <h2 class="section-heading">Crime Overview</h2>
             <ul>
