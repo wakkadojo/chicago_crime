@@ -223,12 +223,21 @@ function make_crime_method_compare() {
             .attr("transform", "translate(" + margin.left + ", " + margin.right + ")"),
         bubble_x_buffer = 10,
         bubble_y_buffer = 1,
-        bubble_y_offset = height/3;
+        bubble_y_offset = 100,
+        bubble_y_text_offset = 75;
 
     var color = d3.scaleOrdinal(d3.schemeCategory10)
 
     var r = function(pct) { return width * Math.sqrt(pct) / 10; }
         y_ctr = function(type) { return (color.domain().findIndex(c => c == type) + 0.5) * bubble_y_offset; }
+        y_ctr_selected = function(type, selected_type) { 
+            var type_idx = color.domain().findIndex(c => c == type),
+                selected_idx = color.domain().findIndex(c => c == selected_type);
+
+            return (color.domain().findIndex(c => c == type) + 0.5) * bubble_y_offset + (type_idx < selected_idx ? 0 : bubble_y_text_offset); 
+        }
+
+    function get_bubble_cluster_id(type) { return "bubble_cluster_" + type + "_id"; }
 
     // Draw
     d3.csv("static/data/recent_crime_ct_severity_stats.csv", function(csv_data) {
@@ -264,18 +273,108 @@ function make_crime_method_compare() {
 
         var pct_nodes = nodes_generic.map(function(old_d) {
                 var d = Object.assign({}, old_d);
-                d.y = y_ctr(d.cluster) - d.r_count - bubble_y_buffer;
+                d.y = - d.r_count - bubble_y_buffer;
                 d.r = d.r_count;
+                d.wgt_type = "count";
                 return d;
             }),
             sev_nodes = nodes_generic.map(function(old_d) {
                 var d = Object.assign({}, old_d);
-                d.y = y_ctr(d.cluster) + d.r_severity + bubble_y_buffer;
+                d.y = d.r_severity + bubble_y_buffer;
                 d.r = d.r_severity;
+                d.wgt_type = "severity";
                 return d;
             }),
-            nodes = pct_nodes.concat(sev_nodes)
+            nodes = pct_nodes.concat(sev_nodes),
+            nest_nodes = d3.nest()
+                .key(d => d.cluster)
+                .entries(nodes);
 
+        var initial_selection = color.domain()[0];
+
+        function select_type_event(selected_type) {
+            canvas.selectAll(".crime_share_bubble_cluster")
+                .transition()
+                .attr("transform", d => "translate(0," + y_ctr_selected(d.key, selected_type) + ")")
+
+            // update labels
+            var crime_labels = canvas.selectAll(".crime_bubble_label_container")
+                .selectAll("text")
+                .data(d => d.values.filter(x => x.wgt_type == "count" && x.cluster == selected_type))
+
+            crime_labels.enter().append("text")
+                .attr("class", "d3axis crime_label")
+                .attr("alignment-baseline", "middle")
+                .attr("transform", d => "translate(" + (d.x + d.r/1.4 + 4) + "," + (d.y - d.r/1.4 - 4) + ") rotate(-45)")
+                .style("font-size", "12")
+              .merge(crime_labels)
+                .text(d => d.description)
+
+            crime_labels.exit().remove()
+        }
+
+        // bounding area
+        var start_x = d3.min(nodes.map(d => d.x - d.r)),
+            end_x = d3.max(nodes.map(d => d.x + d.r)) + 220
+        
+        // initialize sections
+        var types = canvas.selectAll(".crime_share_bubble_cluster")
+            .data(nest_nodes)
+          .enter().append("g")
+            .attr("class", "crime_share_bubble_cluster")
+            .attr("transform", d => "translate(0," + y_ctr_selected(d.key, initial_selection) + ")")
+            .attr("id", d => get_bubble_cluster_id(d.key))
+        // add rects for hover
+        types.append("rect")
+            .attr("width", end_x + 10)
+            .attr("height", bubble_y_offset)
+            .attr("y", -bubble_y_offset/2)
+            .attr("opacity", "0")
+            .on("mouseover", function (d) { select_type_event(d.key); });
+        // add labels
+        types.append("g")
+            .append("text")
+            .attr("class", "d3axis")
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .text(d => d.key);
+        // create containers for individual crime labels
+        types.append("g")
+            .attr("class", "crime_bubble_label_container")
+        // add center line
+        types.append("line")
+            .attr("stroke", "black")
+            .attr("stroke-width", "1")
+            .attr("x1", start_x).attr("x2", end_x)
+            .attr("y1", "0").attr("y2", "0")
+
+        // draw bubbles
+        var crime_bubbles = types.append("g")
+            .selectAll("circle")
+            .data(d => d.values)
+          .enter().append("circle")
+            .style("fill", d => color(d.cluster))
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y)
+            .attr("r", d => d.r)
+
+        // initialize
+        select_type_event("Property")
+
+        /*
+        var crime_text = types.append("g")
+            .selectAll("text")
+            .data(d => d.values.filter(x => x.wgt_type == "count"))
+          .enter().append("text")
+            .attr("class", "d3axis crime_label")
+            .attr("alignment-baseline", "middle")
+            .attr("transform", d => "translate(" + (d.x + d.r/1.4 + 4) + "," + (d.y - d.r/1.4 - 4) + ") rotate(-45)")
+            .style("font-size", "12")
+            .attr("opacity", d => d.cluster == initial_selection ? "1.0" : "0.0")
+            .text(d => d.description)
+        */
+
+/*
         // Draw the circles
         canvas.append("g")
             .selectAll("circle")
@@ -336,7 +435,7 @@ function make_crime_method_compare() {
             .attr("text-anchor", "end")
             .attr("alignment-baseline", "hanging")
             .text("weighted by crime sentencing")
-
+*/
     });
 
 }
