@@ -51,10 +51,23 @@
     text-align: center; 
 }
 
-.archetype_name_tbl {
+.tbl_container {
+    width: 600; 
+    margin-left: auto; 
+    margin-right: auto; 
+    display: table; 
+    table-layout: fixed; 
+    border-top: 0.75px solid black; 
+    border-bottom: 0.75px solid black;
+}
+
+.tbl_header {
     font-size: 14px;
     font-weight: bold;
+    border-bottom: 1.5px solid black;
 }
+
+.archetype_name_tbl 
 .archetype_description_tbl {
     font-size: 14px;
 }
@@ -95,7 +108,7 @@ Most change from 2002 - 2007 then plateau
 </p>
             
             <svg width="600" height="300" id="crime_top_bot_timeseries_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
-            <table id="crime_top_bot_summary_tbl" cellpadding="5" class="d3axis" style="width: 600; margin-left: auto; margin-right: auto; display: table; table-layout: fixed; border-top: 0.75px solid black; border-bottom: 0.75px solid black;">
+            <table id="crime_top_bot_summary_tbl" cellpadding="5" class="d3axis tbl_container">
             <tr>
                 <td></td>
                 <td colspan=4 style="text-align: center;">
@@ -134,7 +147,6 @@ Most change from 2002 - 2007 then plateau
 
             <!-- slight break before autotext -->
             <p></p> 
-
             <div id="crime_top_bot_autotext_div" class="autotext" style="width: 600; height: 100; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
 
             <script type="text/javascript" src="static/js/d3viz/crime_concentration_summary.js"></script>
@@ -146,11 +158,11 @@ Most change from 2002 - 2007 then plateau
                 <li> Auto text: Crime summary + change, race, income changes
             </ul>
 
-            <table id="crime_archetype_tbl" cellpadding="5" class="d3axis" style="width: 600; margin-left: auto; margin-right: auto; display: table; table-layout: fixed; border-top: 0.75px solid black; border-bottom: 0.75px solid black;">
+            <table id="crime_archetype_tbl" cellpadding="5" class="d3axis tbl_container">
                 <col width="250">
                 <col width="350">
                 <tr>
-                <th class="archetype_name_tbl" style="text-align: center; border-bottom: 1.5px solid black;" colspan=2>Three Worlds in Chicago</th>
+                <th class="archetype_name_tbl tbl_header" style="text-align: center;" colspan=2>Three Worlds in Chicago</th>
                 </tr>
                 <tr>
                 <td id="affluents_arch_cell" class="archetype_selector_cell">
@@ -196,20 +208,35 @@ Most change from 2002 - 2007 then plateau
                 <li> How did I get weights
             </ul>
 
-            <div id="crime_bubble_parent_div" style="width: 600px; height:300px; margin-left: auto; margin-right: auto; display: block;">
-                <div style="width: 300; text-align: center; float: left" class="d3axis">Crime shares by count</div>
-                <div style="width: 300; text-align: center; float: right" class="d3axis">Crime shares by average sentencing</div>
-                <svg width="300" height="300" id="crime_bubble_pct_svg" style="float: left"></svg>
-                <svg width="300" height="300" id="crime_bubble_severity_svg" style="float: right"></svg>
-                <div id="bubble_pct_hover_detail" style="height=100px; width=200px; text-align: center;" class="d3axis"></div>
-            </div>
+
+            <p></p>
+            <table id="crime_bubble_parent_table" class="tbl_container" cellpadding="5">
+                <tr>
+                    <th colspan=2 style="text-align: center; border-bottom: 1.5px solid black;" class="d3axis tbl_header">Dark color &#8658; large discrepancy between naive- and severity-weighted</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;" class="d3axis">Prevelance by count</td>
+                    <td style="text-align: center;" class="d3axis">Prevelance by sentencing</td>
+                </tr>
+                <tr>
+                    <td><svg width="300" height="225" id="crime_bubble_pct_svg" style="float: left"></svg></td>
+                    <td><svg width="300" height="225" id="crime_bubble_severity_svg" style="float: right"></svg></td>
+                </tr>
+                <tr>
+                    <td colspan=2><svg width="600" height="30" id="crime_bubble_type_key_svg"></svg></td>
+                </tr>
+            </table>
+            <!-- slight break before autotext -->
+            <p></p> 
+            <div id="bubble_pct_hover_autotext_div" class="autotext" style="width: 600; height: 50; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
+            <p></p>
 
             <script tyle="text/javascript">
 
 function make_crime_pct_bubble() {
 
-    var parent_div = d3.select("#crime_bubble_parent_div"),
-        svg = parent_div.select("#crime_bubble_pct_svg"),
+    var parent_table = d3.select("#crime_bubble_parent_table"),
+        svg = parent_table.select("#crime_bubble_pct_svg"),
         width = svg.attr("width"),
         height = svg.attr("height"),
         cluster_padding = height/20,
@@ -224,20 +251,20 @@ function make_crime_pct_bubble() {
     } 
 
     function get_opacity(node) { 
-        return is_big_discrepancy(node) ? "0.75" : "0.4"; 
+        return is_big_discrepancy(node) ? "1" : "0.3"; 
     } 
 
     function get_nodes(csv_data, radius_field) {
 
         var nodes = csv_data.map(function(d) {
-                var guess_x = height/2 + (Math.cos(color.domain().findIndex(c => c == d.crime_type) * 2 * Math.PI / color.domain().length) + (0.5 - Math.random())) * height * 0.3;
-                    guess_y = height/2 + (Math.sin(color.domain().findIndex(c => c == d.crime_type) * 2 * Math.PI / color.domain().length) + (0.5 - Math.random())) * height * 0.3;
+                var guess_x = width/2 + (Math.cos(color.domain().findIndex(c => c == d.crime_type) * 2 * Math.PI / color.domain().length) + (0.5 - Math.random())) * width * 0.2;
+                    guess_y = width/2 + (Math.sin(color.domain().findIndex(c => c == d.crime_type) * 2 * Math.PI / color.domain().length) + (0.5 - Math.random())) * width * 0.2;
                     out = {
                         cluster      : d.crime_type,
                         description  : d.crime_description,
                         pct_severity : +d.severity_pct,
                         pct_count    : +d.crime_count_pct,
-                        r            : Math.sqrt(+d[radius_field]) * height / 4,
+                        r            : Math.sqrt(+d[radius_field]) * width / 4,
                         x            : guess_x,
                         y            : guess_y
                     }
@@ -251,7 +278,7 @@ function make_crime_pct_bubble() {
  
         function ticked() {
 
-            var u = parent_div.selectAll(svg_id)
+            var u = parent_table.selectAll(svg_id)
                 .selectAll('circle')
                 .data(nodes)
 
@@ -265,20 +292,94 @@ function make_crime_pct_bubble() {
 
         return ticked;
     }
+    
+    // cluster captain force
+    // from https://bl.ocks.org/mbostock/7881887
+    function cluster() {
+        
+        var nodes,
+            captains;
+        
+        function force(alpha) {
+            
+            nodes.forEach(function(d) {
+
+                var captain = captains[d.cluster];
+                if(captain === d) return;
+                
+                let x = d.x - captain.x,
+                    y = d.y - captain.y,
+                    l = Math.sqrt(x * x + y * y),
+                    r = d.r + captain.r;
+
+                if (l > r) {
+                    l = (l - r) / l * alpha;
+                    d.x -= x *= l;
+                    d.y -= y *= l;
+                    captain.x += x;
+                    captain.y += y;
+                }
+
+            });
+            
+        }
+
+        force.initialize = function (_) {
+            nodes = _;
+        }
+
+        force.captains = _ => {
+            captains = _ == null ? captains : _;
+            return force;
+        }
+
+        return force;
+    }
 
     function build_sim(svg_id, nodes) {
 
+        // cluster captains
+        var captains = {}
+        for(var i=0; i<nodes.length; i++) {
+            var node = nodes[i];
+            if(!(node.cluster in captains)) {
+                captains[node.cluster] = node;
+            } else if(captains[node.cluster].r < node.r) {
+                captains[node.cluster] = node;
+            }
+        }
+
         var simulation = d3.forceSimulation(nodes)
-            .force("collision", d3.forceCollide().radius(d => d.r).iterations(5))
-            .force("charge", d3.forceManyBody().strength(height/30))
+            .force("collision", d3.forceCollide().radius(d => d.r + 0.5).iterations(5))
+            .force("charge", d3.forceManyBody().strength(height/15))
             .force("center", d3.forceCenter(width/2, height/2))
+            .force("cluster", cluster().captains(captains))
             .on("tick", get_sim_update(svg_id, nodes));
+
+        return simulation;
     
     }
 
-    function initialize_bubbles(svg_id, nodes) {
+    function drag_started(d, sim) {
+        if (!d3.event.active) sim.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+    }
+    
+    function dragged(d, sim) {
+        d.fx = d3.event.x;
+        d.fy = d3.event.y;
+    }
+    
+    function drag_ended(d, sim) {
+        if (!d3.event.active) sim.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+    } 
 
-        parent_div.selectAll(svg_id)
+    function initialize_bubbles(svg_id, nodes, sim) {
+
+        parent_table.selectAll(svg_id)
             .selectAll("circle")
             .data(nodes)
           .enter().append("circle")
@@ -290,7 +391,7 @@ function make_crime_pct_bubble() {
             .attr("id", d => get_bubble_id(d.description))
             .style("opacity", get_opacity)
             .on("mouseover", function() {
-                parent_div.selectAll("#" + this.id)
+                parent_table.selectAll("#" + this.id)
                     .transition()
                     .style("opacity", "1")
                     .style("fill", d3.color("red").darker())
@@ -298,24 +399,33 @@ function make_crime_pct_bubble() {
                 // update description
                 var description = "<b>" + this.__data__.description + "</b>",
                     pct_count = "<b>" + Math.round(this.__data__.pct_count* 1000)/10 + "%</b>",
-                    pct_sev= "<b>" + Math.round(this.__data__.pct_severity * 1000)/10 + "%</b>"
-                parent_div.select("#bubble_pct_hover_detail")
+                    pct_sev= "<b>" + Math.round(this.__data__.pct_severity * 1000)/10 + "%</b>",
+                    over_under_est = "<b>" + (this.__data__.pct_severity > this.__data__.pct_count ? "underestimating" : "overestimating") + "</b>"
+
+                d3.select("#bubble_pct_hover_autotext_div")
                     .style("font-weight", null)
+                    .style("text-align", null)
                     .style("color", "black")
-                    .html(description + " is " + pct_count + " of crime by frequency vs " + pct_sev + " when accounting for severity")
+                    .html(description + " is " + pct_count + " of crime by frequency, " + over_under_est + " the " + pct_sev + " share when accounting for severity")
 
             }).on("mouseout", function() {
-                parent_div.selectAll("#" + this.id)
+                parent_table.selectAll("#" + this.id)
                     .transition()
                     .style("opacity", get_opacity)
                     .style("fill", d => color(d.cluster))
 
                 // restore description
-                parent_div.select("#bubble_pct_hover_detail")
+                d3.select("#bubble_pct_hover_autotext_div")
                     .style("font-weight", "bold")
                     .style("color", "Grey")
-                    .html("Hover over a bubble to compare weighting methodologies")
+                    .style("text-align", "center")
+                    .html("Hover over a bubble to compare")
             })
+            .call(d3.drag()
+                .on("start", d => drag_started(d, sim))
+                .on("drag", d => dragged(d, sim))
+                .on("end", d => drag_ended(d, sim))
+            )
     }
 
     d3.csv("static/data/recent_crime_ct_severity_stats.csv", function(csv_data) {
@@ -329,20 +439,54 @@ function make_crime_pct_bubble() {
             severity_nodes = get_nodes(csv_data, "severity_pct");
 
         // build the pct bubbles
-        initialize_bubbles("#crime_bubble_pct_svg", pct_nodes);
-        build_sim("#crime_bubble_pct_svg", pct_nodes);
+        var pct_sim = build_sim("#crime_bubble_pct_svg", pct_nodes);
+        initialize_bubbles("#crime_bubble_pct_svg", pct_nodes, pct_sim);
 
         // build the severity bubbles
-        initialize_bubbles("#crime_bubble_severity_svg", severity_nodes)
-        build_sim("#crime_bubble_severity_svg", severity_nodes)
+        var sev_sim = build_sim("#crime_bubble_severity_svg", severity_nodes);
+        initialize_bubbles("#crime_bubble_severity_svg", severity_nodes, sev_sim);
+
+        // Make the crime type key
+        var ordinal = d3.scaleOrdinal()
+            .domain(color.domain())
+            .range(color.range())
+
+        var key_svg = parent_table.select("#crime_bubble_type_key_svg")
+        
+        key_svg.append("g")
+            .attr("class", "legend_ordinal")
+
+        var legend_ordinal = d3.legendColor()
+            .scale(ordinal)
+            .orient("horizontal")
+            .shapePadding(80)
+
+        key_svg.select(".legend_ordinal")
+            .call(legend_ordinal)
+       
+        // place the labels where we want them 
+        key_svg.selectAll(".legendCells")
+            .selectAll(".label")
+            .attr("transform", "translate(20, 12)")
+            .attr("class", "d3axis")
+            .style("text-anchor", null)
+
+        // center the element
+        var key_to_center = key_svg.selectAll(".legendCells"),
+            key_width = key_to_center.node().getBBox().width,
+            parent_width = key_svg.attr("width"),
+            key_offset = (parent_width - key_width)/2;
+
+        key_to_center.attr("transform", "translate(" + key_offset + ", 0)")
 
     })
 
     // initialize hover text
-    parent_div.select("#bubble_pct_hover_detail")
+    d3.select("#bubble_pct_hover_autotext_div")
         .style("font-weight", "bold")
         .style("color", "Grey")
-        .text("Hover over a bubble to compare weighting methodologies")
+        .style("text-align", "center")
+        .html("Hover over a bubble to compare")
 
 }
 
