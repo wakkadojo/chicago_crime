@@ -210,6 +210,142 @@ Most change from 2002 - 2007 then plateau
 
 
             <p></p>
+            <svg width="600" height="600" id="crime_pct_severity_compare_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+            <script style="javascript">
+
+function make_crime_method_compare() {
+
+    var svg = d3.select("#crime_pct_severity_compare_svg")
+        margin = {top: 20, right: 20, bottom: 20, left: 20},
+        width = svg.attr("width") - margin.left - margin.right,
+        height = svg.attr("height") - margin.top - margin.bottom,
+        canvas = svg.append("g")
+            .attr("transform", "translate(" + margin.left + ", " + margin.right + ")"),
+        bubble_x_buffer = 10,
+        bubble_y_buffer = 1,
+        bubble_y_offset = height/3;
+
+    var color = d3.scaleOrdinal(d3.schemeCategory10)
+
+    var r = function(pct) { return width * Math.sqrt(pct) / 10; }
+        y_ctr = function(type) { return (color.domain().findIndex(c => c == type) + 0.5) * bubble_y_offset; }
+
+    // Draw
+    d3.csv("static/data/recent_crime_ct_severity_stats.csv", function(csv_data) {
+
+        color.domain(csv_data.map(d => d.crime_type));
+
+        var nodes_generic = csv_data.map(function(d) {
+            return {
+                cluster         : d.crime_type,
+                description     : d.crime_description,
+                severity_pct    : +d.severity_pct,
+                crime_count_pct : +d.crime_count_pct,
+                r_severity      : r(+d.severity_pct),
+                r_count         : r(+d.crime_count_pct)
+            }
+        }).sort(function(x, y) {
+            return d3.descending(x.crime_count_pct, y.crime_count_pct);
+        })
+
+
+        var increment_x = (node1, node2) => Math.max(node1.r_severity + node2.r_severity, node1.r_count + node2.r_count) + bubble_x_buffer,
+            last_node = color.domain().reduce(function(map, obj) {
+                map[obj] = {x : 0, r_severity : 0, r_count : 0};
+                return map;
+            }, {});
+            
+        for(var i=0; i<nodes_generic.length; i++) {
+            var ref = last_node[nodes_generic[i].cluster]
+
+            nodes_generic[i].x = ref.x + increment_x(nodes_generic[i], ref);
+            last_node[nodes_generic[i].cluster] = nodes_generic[i];
+        }
+
+        var pct_nodes = nodes_generic.map(function(old_d) {
+                var d = Object.assign({}, old_d);
+                d.y = y_ctr(d.cluster) - d.r_count - bubble_y_buffer;
+                d.r = d.r_count;
+                return d;
+            }),
+            sev_nodes = nodes_generic.map(function(old_d) {
+                var d = Object.assign({}, old_d);
+                d.y = y_ctr(d.cluster) + d.r_severity + bubble_y_buffer;
+                d.r = d.r_severity;
+                return d;
+            }),
+            nodes = pct_nodes.concat(sev_nodes)
+
+        // Draw the circles
+        canvas.append("g")
+            .selectAll("circle")
+            .data(nodes)
+          .enter().append("circle")
+            .style("fill", d => color(d.cluster))
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y)
+            .attr("r", d => d.r)
+        // Label the circles
+        canvas.append("g")
+            .selectAll("text")
+            .data(pct_nodes)
+          .enter().append("text")
+            .attr("class", "d3axis")
+            .attr("alignment-baseline", "middle")
+            .attr("transform", d => "translate(" + (d.x + d.r/1.4 + 4) + "," + (d.y - d.r/1.4 - 4) + ") rotate(-45)")
+            .style("font-size", "12")
+            .text(d => d.description)
+
+        // Draw lines + descriptions
+        var start_x = d3.min(nodes.map(d => d.x - d.r)),
+            end_x = d3.max(nodes.map(d => d.x + d.r)) + 220,
+            line_prep = color.domain().map(function(type) {
+                return { cluster : type, y : y_ctr(type) };
+            });
+        canvas.append("g")
+            .selectAll("line")
+            .data(line_prep)
+          .enter().append("line")
+            .attr("x1", start_x).attr("x2", end_x)
+            .attr("y1", d => d.y).attr("y2", d => d.y)
+            .attr("stroke", "black")
+            .attr("stroke-width", "1")
+        // Label lines: category
+        canvas.append("g")
+            .selectAll("text")
+            .data(line_prep)
+          .enter().append("text")
+            .attr("class", "d3axis")
+            .attr("text-anchor", "middle")
+            .attr("transform", d => "translate(0," + d.y + ") rotate(-90)")
+            .text(d => d.cluster)
+        // Label lines: count vs severity
+        var wgt_type_label = canvas.append("g")
+            .selectAll("text")
+            .data(line_prep.filter(d => d.cluster == "Property"))
+          .enter()
+        wgt_type_label.append("text")
+            .attr("class", "d3axis")
+            .attr("transform", d=> "translate(" + end_x + "," + (d.y - 6) + ")")
+            .attr("text-anchor", "end")
+            .attr("alignment-baseline", "baseline")
+            .text("weighted by count")
+        wgt_type_label.append("text")
+            .attr("class", "d3axis")
+            .attr("transform", d=> "translate(" + end_x + "," + (d.y + 6) + ")")
+            .attr("text-anchor", "end")
+            .attr("alignment-baseline", "hanging")
+            .text("weighted by crime sentencing")
+
+    });
+
+}
+
+make_crime_method_compare();
+
+            </script>
+
+            <p></p>
             <table id="crime_bubble_parent_table" class="tbl_container" cellpadding="5">
                 <tr>
                     <th colspan=2 style="text-align: center; border-bottom: 1.5px solid black;" class="d3axis tbl_header">Dark color &#8658; large discrepancy between naive- and severity-weighted</th>
@@ -231,7 +367,7 @@ Most change from 2002 - 2007 then plateau
             <div id="bubble_pct_hover_autotext_div" class="autotext" style="width: 600; height: 50; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
             <p></p>
 
-            <script tyle="text/javascript">
+            <script style="text/javascript">
 
 function make_crime_pct_bubble() {
 
@@ -387,7 +523,6 @@ function make_crime_pct_bubble() {
             .attr("cx", d => d.x)
             .attr("cy", d => d.y)
             .attr("r", d => d.r)
-            .attr("fill", d => color(d.cluster))
             .attr("id", d => get_bubble_id(d.description))
             .style("opacity", get_opacity)
             .on("mouseover", function() {

@@ -7,7 +7,7 @@ function make_archetypes() {
     function init_pop_map() {
 
         var ineq_map_svg = d3.select("#crime_ineq_selected_map"),
-            margin = {top: 20, bottom: 20, left: 20, right: 20}
+            margin = {top: 20, bottom: 20, left: 20, right: 20},
             width = ineq_map_svg.attr("width"),
             height = ineq_map_svg.attr("height");
 
@@ -20,7 +20,7 @@ function make_archetypes() {
 
         d3.json("static/data/chicago_centroid.json", function(neighb_data) {
 
-            projection.fitExtent([[0, margin.bottom], [width, height-margin.top]], neighb_data)
+            projection.fitExtent([[0, margin.bottom], [width, height - margin.top]], neighb_data)
 
             // plot chicago outline
             d3.json("static/data/chicago_outline.json", function(outline) {
