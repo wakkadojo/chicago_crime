@@ -210,7 +210,12 @@ Most change from 2002 - 2007 then plateau
 
 
             <p></p>
-            <svg width="600" height="600" id="crime_pct_severity_compare_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+            <svg width="600" height="400" id="crime_pct_severity_compare_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+            <!-- slight break before autotext -->
+            <p></p> 
+            <div id="crime_pct_severity_compare_autotext_div" class="autotext" style="width: 600; height: 120; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
+            <p></p>
+
             <script style="javascript">
 
 function make_crime_method_compare() {
@@ -292,30 +297,57 @@ function make_crime_method_compare() {
 
         var initial_selection = color.domain()[0];
 
-        function select_type_event(selected_type) {
+        function select_type_event(selected_type, crime_data) {
             canvas.selectAll(".crime_share_bubble_cluster")
                 .transition()
-                .attr("transform", d => "translate(0," + y_ctr_selected(d.key, selected_type) + ")")
+                .attr("transform", d => "translate(0," + y_ctr_selected(d.key, selected_type) + ")");
 
-            // update labels
+            // update individual crime labels
             var crime_labels = canvas.selectAll(".crime_bubble_label_container")
                 .selectAll("text")
-                .data(d => d.values.filter(x => x.wgt_type == "count" && x.cluster == selected_type))
+                .data(d => d.values.filter(x => x.wgt_type == "count" && x.cluster == selected_type));
 
             crime_labels.enter().append("text")
+              .merge(crime_labels)
+                .transition()
                 .attr("class", "d3axis crime_label")
                 .attr("alignment-baseline", "middle")
                 .attr("transform", d => "translate(" + (d.x + d.r/1.4 + 4) + "," + (d.y - d.r/1.4 - 4) + ") rotate(-45)")
                 .style("font-size", "12")
-              .merge(crime_labels)
-                .text(d => d.description)
+                .text(d => d.description);
 
-            crime_labels.exit().remove()
+            crime_labels.exit().remove();
+
+            // update description text
+            var label_text = [
+                {x: end_x, y: -6, v_align: "baseline", label: "weighted by count"},
+                {x: end_x, y: 6, v_align: "hanging", label: "weighted by crime sentencing"}
+            ]
+
+            var wgt_type_label = canvas.selectAll(".crime_share_wgt_type_container")
+                .selectAll("text")
+                .data(d => d.key == selected_type ? label_text : []);
+
+            wgt_type_label.enter().append("text")
+              .merge(wgt_type_label)
+                .transition()
+                .attr("class", "d3axis")
+                .attr("alignment-baseline", d => d.v_align)
+                .attr("text-anchor", "end")
+                .attr("transform", d => "translate(" + d.x + "," + d.y + ")")
+                .text(d => d.label)
+
+            wgt_type_label.exit().remove();
+
+            // update autotext
+            d3.select("#crime_pct_severity_compare_autotext_div")
+                .html(make_autotext(selected_type, crime_data))
+
         }
 
         // bounding area
         var start_x = d3.min(nodes.map(d => d.x - d.r)),
-            end_x = d3.max(nodes.map(d => d.x + d.r)) + 220
+            end_x = width
         
         // initialize sections
         var types = canvas.selectAll(".crime_share_bubble_cluster")
@@ -326,11 +358,11 @@ function make_crime_method_compare() {
             .attr("id", d => get_bubble_cluster_id(d.key))
         // add rects for hover
         types.append("rect")
-            .attr("width", end_x + 10)
+            .attr("width", width)
             .attr("height", bubble_y_offset)
             .attr("y", -bubble_y_offset/2)
             .attr("opacity", "0")
-            .on("mouseover", function (d) { select_type_event(d.key); });
+            .on("mouseover", function (d) { select_type_event(d.key, d.values); });
         // add labels
         types.append("g")
             .append("text")
@@ -338,6 +370,9 @@ function make_crime_method_compare() {
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
             .text(d => d.key);
+        // create containers for crime weight type labels
+        types.append("g")
+            .attr("class", "crime_share_wgt_type_container")
         // create containers for individual crime labels
         types.append("g")
             .attr("class", "crime_bubble_label_container")
@@ -345,7 +380,7 @@ function make_crime_method_compare() {
         types.append("line")
             .attr("stroke", "black")
             .attr("stroke-width", "1")
-            .attr("x1", start_x).attr("x2", end_x)
+            .attr("x1", start_x).attr("x2", width)
             .attr("y1", "0").attr("y2", "0")
 
         // draw bubbles
@@ -359,84 +394,57 @@ function make_crime_method_compare() {
             .attr("r", d => d.r)
 
         // initialize
-        select_type_event("Property")
+        select_type_event(nest_nodes[0].key, nest_nodes[0].values)
 
-        /*
-        var crime_text = types.append("g")
-            .selectAll("text")
-            .data(d => d.values.filter(x => x.wgt_type == "count"))
-          .enter().append("text")
-            .attr("class", "d3axis crime_label")
-            .attr("alignment-baseline", "middle")
-            .attr("transform", d => "translate(" + (d.x + d.r/1.4 + 4) + "," + (d.y - d.r/1.4 - 4) + ") rotate(-45)")
-            .style("font-size", "12")
-            .attr("opacity", d => d.cluster == initial_selection ? "1.0" : "0.0")
-            .text(d => d.description)
-        */
-
-/*
-        // Draw the circles
-        canvas.append("g")
-            .selectAll("circle")
-            .data(nodes)
-          .enter().append("circle")
-            .style("fill", d => color(d.cluster))
-            .attr("cx", d => d.x)
-            .attr("cy", d => d.y)
-            .attr("r", d => d.r)
-        // Label the circles
-        canvas.append("g")
-            .selectAll("text")
-            .data(pct_nodes)
-          .enter().append("text")
-            .attr("class", "d3axis")
-            .attr("alignment-baseline", "middle")
-            .attr("transform", d => "translate(" + (d.x + d.r/1.4 + 4) + "," + (d.y - d.r/1.4 - 4) + ") rotate(-45)")
-            .style("font-size", "12")
-            .text(d => d.description)
-
-        // Draw lines + descriptions
-        var start_x = d3.min(nodes.map(d => d.x - d.r)),
-            end_x = d3.max(nodes.map(d => d.x + d.r)) + 220,
-            line_prep = color.domain().map(function(type) {
-                return { cluster : type, y : y_ctr(type) };
-            });
-        canvas.append("g")
-            .selectAll("line")
-            .data(line_prep)
-          .enter().append("line")
-            .attr("x1", start_x).attr("x2", end_x)
-            .attr("y1", d => d.y).attr("y2", d => d.y)
-            .attr("stroke", "black")
-            .attr("stroke-width", "1")
-        // Label lines: category
-        canvas.append("g")
-            .selectAll("text")
-            .data(line_prep)
-          .enter().append("text")
-            .attr("class", "d3axis")
-            .attr("text-anchor", "middle")
-            .attr("transform", d => "translate(0," + d.y + ") rotate(-90)")
-            .text(d => d.cluster)
-        // Label lines: count vs severity
-        var wgt_type_label = canvas.append("g")
-            .selectAll("text")
-            .data(line_prep.filter(d => d.cluster == "Property"))
-          .enter()
-        wgt_type_label.append("text")
-            .attr("class", "d3axis")
-            .attr("transform", d=> "translate(" + end_x + "," + (d.y - 6) + ")")
-            .attr("text-anchor", "end")
-            .attr("alignment-baseline", "baseline")
-            .text("weighted by count")
-        wgt_type_label.append("text")
-            .attr("class", "d3axis")
-            .attr("transform", d=> "translate(" + end_x + "," + (d.y + 6) + ")")
-            .attr("text-anchor", "end")
-            .attr("alignment-baseline", "hanging")
-            .text("weighted by crime sentencing")
-*/
     });
+
+    // autotext
+    function make_autotext(selected_type, crime_data) {
+
+        var data = crime_data.filter(d => d.wgt_type == "severity")
+
+        var crime_type_description = "<b>" + (selected_type == "Society" ? "crimes against Society" : selected_type + " crimes") + "</b>",
+            total_pct_ct_num = d3.sum(data.map(d => d.crime_count_pct)),
+            total_pct_sev_num = d3.sum(data.map(d => d.severity_pct)),
+            total_pct_ct = "<b>" + (Math.round(1000*total_pct_ct_num)/10) + "%</b>",
+            total_pct_sev = "<b>" + (Math.round(1000*total_pct_sev_num)/10) + "%</b>",
+            over_under = Math.abs(total_pct_sev_num - total_pct_ct_num) < 0.05 ? "is <b>roughly similar</b> to" : (total_pct_sev_num > total_pct_ct_num ? "<b>underestimates</b>" : "<b>overestimates</b>")
+
+        // biggest diffs in category
+        var big_diffs = data.map(function(d) {
+                return {
+                    biggest       : Math.max(d.crime_count_pct, d.severity_pct),
+                    relative_diff : Math.abs(2*(d.severity_pct - d.crime_count_pct) / (d.severity_pct + d.crime_count_pct)),
+                    is_over       : d.crime_count_pct > d.severity_pct,
+                    description   : d.description
+                }
+            })
+            .filter(d => d.biggest > 0.01 && d.relative_diff > 0.5)
+            .sort(function(x, y) { return d3.descending(x.relative_diff, y.relative_diff) })
+
+        function make_over_crimes_text(arr, over) {
+                if(arr.length == 0) {
+                    return "does not " + (over ? "overestimate": "underestimate") + " any particular crime";
+                } else if(arr.length == 1) {
+                    return (over ? "overestimates" : "underestimates") + " <b>" + arr[0] + "</b>";
+                } else {
+                    return (over ? "overestimates" : "underestimates") + " <b>" + arr.filter(function(d, i) { return i < arr.length-1; }).join("</b>, <b>") + "</b> and <b>" + arr[arr.length-1] + "</b>";
+                }
+            }
+            
+        var over_crimes_arr = big_diffs.filter(d => d.is_over).map(d => d.description),
+            under_crimes_arr = big_diffs.filter(d => !d.is_over).map(d => d.description),
+            over_crimes = make_over_crimes_text(over_crimes_arr, true),
+            under_crimes = make_over_crimes_text(under_crimes_arr, false)
+
+
+        var autotext = "When weighting by crime frequency, " + crime_type_description + " represent " + total_pct_ct + " of total crime, which " + 
+            over_under + " the " + total_pct_sev + " fraction when accounting for severity. " +
+            "Within this category, looking at crimes by frequency " + under_crimes + ", and " + over_crimes + "."
+
+        return autotext;
+
+    }
 
 }
 
