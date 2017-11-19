@@ -10,7 +10,7 @@ var make_crime_intensity_time = function() {
     var x = d3.scaleTime().range([0, width]),
         y = d3.scaleLinear().range([height/2, 0]),
         y_bot = d3.scaleLinear().range([height, height/2 + margin.top]),
-        z = d3.scaleOrdinal(d3.schemeCategory10);        
+        z = d3.scaleOrdinal(d3.schemeCategory10),
         z_bot = d3.scaleOrdinal(d3.schemeCategory10);        
         
     var area = d3.area()
@@ -25,11 +25,11 @@ var make_crime_intensity_time = function() {
 
     var timeParse = d3.timeParse("%Y-%m");
 
-    var get_crime_type_line_id   = function(type) { return type + "_type_line"; }
-        get_crime_type_area_id   = function(type) { return type + "_type_area"; }
-        get_crime_type_legend_id = function(type) { return type + "_type_legend"; }
-        get_crime_detail_area_id = function(type) { return type + "_type_detail_area"; }
-        get_crime_detail_legend_id = function(type) { return type + "_type_detail_legend"; }
+    var get_crime_type_line_id   = function(type) { return type + "_type_line"; },
+        get_crime_type_area_id   = function(type) { return type + "_type_area"; },
+        get_crime_type_legend_id = function(type) { return type + "_type_legend"; },
+        get_crime_detail_area_id = function(type) { return type + "_type_detail_area"; },
+        get_crime_detail_legend_id = function(type) { return type + "_type_detail_legend"; },
         get_crime_detail_area_explanation_id = function() { return "type_detail_area_explanation"; }
 
     var crime_type_mouseover = function(type) {

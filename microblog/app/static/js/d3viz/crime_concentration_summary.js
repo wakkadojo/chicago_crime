@@ -194,12 +194,12 @@ function make_crime_concentration() {
             start_year = crime_change["Crime in most severe 25%"].start_year,
             low_reduction = Math.abs(crime_change["Crime in least severe 25%"].change_ratio*100).toFixed(0) + "%",
             high_reduction = Math.abs(crime_change["Crime in most severe 25%"].change_ratio*100).toFixed(0) + "%",
-            low_high_red_compare = low_reduction < high_reduction ? "less significant" : "more significant";
+            low_high_red_compare = low_reduction < high_reduction ? "less significant" : "more pronounced";
 
         var auto_text = 
             "Areas with high <b>" + crime_type_description + "</b> experience <b>" + high_low_ratio_end + "x</b> " +
-            "the crime as low crime areas. Inequality is <b>" + ratio_is_up + " " + value_change + "x</b> from " +
-            start_year + ". The <b>" + inequality_incr_decr + "</b> in inequality is because low crime areas saw a crime reduction " +
+            "the crime as low crime areas. Inequality between the worst and best areas is <b>" + ratio_is_up + " " + value_change + "x</b> from " +
+            start_year + ". This <b>" + inequality_incr_decr + "</b> is because low crime areas saw a crime reduction " +
             "of <b>" + low_reduction + "</b>, which is a <b>" + low_high_red_compare + "</b> decrease than the " + 
             "<b>" + high_reduction + "</b> reduction  seen in high crime areas."
 

@@ -51,7 +51,7 @@ function explore_city_container() {
             .append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var x = d3.scaleTime().range([0, detail_width]),
-        y = d3.scaleLinear().range([detail_height, 0])
+        y = d3.scaleLinear().range([detail_height, 0]),
         detail_color = d3.scaleOrdinal()
             .domain([0, 1])
             .range([d3.schemeCategory10[0], "black"]);
