@@ -252,7 +252,7 @@ function explore_city_container() {
             .call(d3.axisLeft(y).ticks(3))
             .append("text")
             .attr("text-anchor", "middle")
-            .attr("y", -margin.left/2)
+            .attr("y", -margin.left/1.5)
             .attr("x", -detail_height/2)
             .attr("transform", "rotate(-90)")
             .attr("fill", "black")

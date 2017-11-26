@@ -13,7 +13,7 @@ function make_archetypes() {
 
         var x = d3.scaleLinear(),
             y = d3.scaleLinear(),
-            r = d3.scaleSqrt().range([0, 16]),
+            r = d3.scaleSqrt().range([0, 20]),
             color = d3.scaleOrdinal(d3.schemeCategory10);
 
         var projection = d3.geoMercator()
@@ -79,7 +79,7 @@ function make_archetypes() {
 
             ineq_map_svg.append("g")
                 .attr("class", "pop_size_legend")
-                .attr("transform", "translate(" + 35 + "," + (height - 120) + ")");
+                .attr("transform", "translate(" + 35 + "," + (height - 140) + ")");
 
             var legend_size = d3.legendSize()
                 .scale(linear_size)
