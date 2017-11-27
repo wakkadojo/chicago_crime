@@ -185,7 +185,7 @@ function explore_city_container() {
             .attr("y", map_intensity_legend_width + 40)
             .attr("x", (-map_intensity_legend_height/2))
             .attr("fill", "black")
-            .text("Crime intensity");
+            .text("rime intensity");
         // end draw map of crime intensity
 
     });

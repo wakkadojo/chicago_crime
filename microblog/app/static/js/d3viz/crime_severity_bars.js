@@ -10,7 +10,7 @@ function make_crime_severity_bars () {
     // bar chart parameters
     var max_sev = 6,
         bar_width = width*0.55,
-        bar_height = 12,
+        bar_height = 14,
         bar_buffer = 6,
         type_buffer = 30,
         bar_scale = d3.scaleLinear().domain([0, max_sev]).range([0, bar_width]),
