@@ -20,3 +20,12 @@ def chicago():
         subtitle = "A Portrait of Crime Inequality",
         background_img_name = "chicago_skyline_style_xfer.jpg"
     )
+
+@app.route('/contact')
+def contact():
+    return render_template(
+        "contact.html",
+        title = "Contact Me",
+        subtitle = "And I will solve all of your problems",
+        background_img_name = "home-bg.jpg"
+    )
