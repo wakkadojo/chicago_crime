@@ -76,6 +76,10 @@
     font-size: 16px;
 }
 
+.legend_text_selected {
+    font-weight: bold;
+}
+
 </style>
 
 <h2 class="section-heading">Summary</h2>
@@ -93,9 +97,6 @@ We measure "Crime Intensity" in Chicago since 2002 broken into its major categor
 In line with the generally known reduction in crime, this analysis indeed shows a decline in crime by a marked 30% over the last 15 years (though there has also been a slight resurgence over the last few years). This is largely due to a decrease in Property Crime and Crimes against Society; Violent Crimes have remained closer to their 2002 levels. Feel free to explore the data in the figure below.
 </p>
 
-            <svg width="800" height="600" id="crime_type_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
-            <script type="text/javascript" src="static/js/d3viz/crime_type_summary.js"></script>
-
 <p>
 However, while crime has fallen, it has not fallen uniformly throughout the city. In fact, those feeling the worst crime are feeling a higher fraction now than they have in the past. By looking at how crime is distributed geographically throughout the city, we can get a sense of how concentrated crime is over time. 
 </p>
@@ -111,7 +112,7 @@ This can be explored in the figure below by clicking the different categories in
 Most change from 2002 - 2007 then plateau
 </p>
             
-            <svg width="800" height="400" id="crime_top_bot_timeseries_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+            <svg width="800" height="450" id="crime_top_bot_timeseries_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
             <table id="crime_top_bot_summary_tbl" cellpadding="5" class="d3axis tbl_container">
             <tr>
                 <td></td>
@@ -198,9 +199,6 @@ Most change from 2002 - 2007 then plateau
             something here explaining above. below can see crime trends by neighborhood.
             </p>
 
-            <svg width="800" height = "500" id="crime_chi_map_int_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
-            <svg width="600" height = "300" id="crime_geo_detail_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
-            <script type="text/javascript" src="static/js/d3viz/crime_intensity_map.js"></script>
             
             <h2 class="section-heading">sizing up a crime</h2>
             <ul>
@@ -213,11 +211,6 @@ Most change from 2002 - 2007 then plateau
             </ul>
 
             <p style="color: red;">note convictions data first degree murder 1000x as common as second degree murder. note no second degree murders in raw data. reached out to dataset owner to get confirm this is correct.</p>
-
-            <p></p>
-            <svg width="800" height="660" id="crime_severity_bar_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
-
-            <script type="text/javascript" src="static/js/d3viz/crime_severity_bars.js"></script>
 
             <p></p>
             <svg width="800" height="550" id="crime_pct_severity_compare_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
@@ -267,6 +260,19 @@ Most change from 2002 - 2007 then plateau
                 <li> <a href="http://convictions.smartchicagoapps.org/">http://convictions.smartchicagoapps.org/</a>
                 <li> <a href="http://tableaupicasso.com/chicago-crime-scene/">http://tableaupicasso.com/chicago-crime-scene/</a>
             </ul>
+
+            <h2 class="section-heading">Graveyard</h2>
+
+            <svg width="800" height="600" id="crime_type_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+            <script type="text/javascript" src="static/js/d3viz/crime_type_summary.js"></script>
+            <p></p>
+
+            <svg width="800" height = "500" id="crime_chi_map_int_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+            <svg width="600" height = "300" id="crime_geo_detail_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+            <script type="text/javascript" src="static/js/d3viz/crime_intensity_map.js"></script>
+            <p></p>
+            <svg width="800" height="660" id="crime_severity_bar_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+            <script type="text/javascript" src="static/js/d3viz/crime_severity_bars.js"></script>
 
 <!--
 

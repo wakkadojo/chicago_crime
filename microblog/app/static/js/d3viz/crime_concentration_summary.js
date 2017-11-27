@@ -1,13 +1,12 @@
 function make_crime_concentration() {
 
-    var crime_types = ['Property', 'Society', 'Violent', 'Total'];
+    var crime_types = ["Property", "Society", "Violent", "Total"],
+        ineq_types = ["Crime Gini coefficient", "Crime distribution"];
 
     var timeParse = d3.timeParse("%Y-%m");
 
-    var cols_crime_level_plot = new Set(["Crime in most severe 25%", "Chicago average", "Crime in least severe 25%"]);
-
     var crime_type_svg = d3.select("#crime_top_bot_timeseries_svg"),
-        margin = {top: 50, right: 20, bottom: 60, left: 80},
+        margin = {top: 100, right: 20, bottom: 60, left: 80},
         width = crime_type_svg.attr("width") - margin.left - margin.right,
         height = crime_type_svg.attr("height") - margin.top - margin.bottom,
         crime_type_g = crime_type_svg
@@ -26,58 +25,117 @@ function make_crime_concentration() {
 
     var get_crime_type_data_id = function(type) { return type + "_data_intensity_top_bot_id"; }
     var get_crime_type_legend_id = function(type) { return type + "_legend_intensity_top_bot_id"; }
+    var get_ineq_type_legend_id = function(ineq) { return ineq.replace(/\W/g, '') + "_legend_ineq_type_id"; }
     
+    // begin data preprocessing functions
+    function csv_single_type_preprocess_concentration(d) {
+        return {
+            "time"                       : timeParse(d.time),
+            "Chicago average"            : +d.chicago_crime,
+            "Crime in most severe 25%"   : +d.crime_top_avg,
+            "Crime in least severe 25%"  : +d.crime_bot_avg
+        }
+    }
+    
+    function csv_single_type_preprocess_gini(d) {
+        return {
+            "time"             : timeParse(d.time),
+            "Gini coefficient" : +d.gini_coefficient
+        }
+    }
 
-    // Begin legend
-    crime_type_g
-        .append("g")
-        .attr("class", "legend_ordinal");
+    // toggle preprocess variable
+    var csv_single_type_preprocess = csv_single_type_preprocess_concentration;
+    // end data preprocessing functions
 
-    var scale_ordinal = d3.scaleOrdinal()
-        .domain(z.domain())
-        .range(z.range());
+    // Begin ineq type legend
+    crime_type_g.append("g")
+        .attr("class", "legend_ordinal_ineq_type");
 
-    var legend_ordinal = d3.legendColor()
+    var scale_ordinal_ineq_type = d3.scaleOrdinal()
+        .domain(ineq_types)
+        .range(["black", "black"]);
+
+    var legend_ordinal_ineq_type = d3.legendColor()
         .orient("horizontal")
         .labelOffset("-18")
         .shape("line")
-        .shapeWidth("80")
-        .scale(scale_ordinal)
-        .on("cellclick", d => update_plot_type(d));
+        .shapePadding("2")
+        .shapeWidth("202")
+        .scale(scale_ordinal_ineq_type)
+        .on("cellclick", d => update_ineq_type(d));
 
-    crime_type_g.select(".legend_ordinal")
-        .attr("class", "d3axis")
-        .call(legend_ordinal);
+    crime_type_g.select(".legend_ordinal_ineq_type")
+        .call(legend_ordinal_ineq_type);
 
     // set legend id
-    crime_type_g.selectAll(".legendCells")
+    crime_type_g.selectAll(".legend_ordinal_ineq_type")
+        .selectAll(".cell")
+        .attr("id", d => get_ineq_type_legend_id(d))
+
+    // set line characteristics 
+    crime_type_g.selectAll(".legend_ordinal_ineq_type")
+        .selectAll("line")
+        .style("opacity", "0.5")
+        .style("stroke-width", "5")
+    // style text
+    crime_type_g.selectAll(".legend_ordinal_ineq_type")
+        .selectAll("text")
+        .attr("class", "d3axis")
+
+    // set offset
+    var legend_width_ineq_type = d3.select(".legend_ordinal_ineq_type").node().getBBox().width;
+
+    crime_type_g.selectAll(".legend_ordinal_ineq_type")
+        .attr("transform", "translate(" +  (width - legend_width_ineq_type)/2 + "," + -0.7*margin.top + ")")
+    // End ineq type Legend
+
+    // Begin crime type legend
+    crime_type_g
+        .append("g")
+        .attr("class", "legend_ordinal_crime_type");
+
+    var scale_ordinal_crime_type = d3.scaleOrdinal()
+        .domain(z.domain())
+        .range(z.range());
+
+    var legend_ordinal_crime_type = d3.legendColor()
+        .orient("horizontal")
+        .labelOffset("-18")
+        .shape("line")
+        .shapePadding("2")
+        .shapeWidth("100")
+        .scale(scale_ordinal_crime_type)
+        .on("cellclick", d => update_plot_type(d));
+
+    crime_type_g.select(".legend_ordinal_crime_type")
+        .call(legend_ordinal_crime_type);
+
+    // set legend id
+    crime_type_g.selectAll(".legend_ordinal_crime_type")
         .selectAll(".cell")
         .attr("id", d => get_crime_type_legend_id(d))
 
-    // set line characteristics
-    crime_type_g.selectAll(".legendCells")
+    // set line characteristics 
+    crime_type_g.selectAll(".legend_ordinal_crime_type")
         .selectAll("line")
         .style("opacity", "0.5")
         .style("stroke-width", "5")
 
+    // style text
+    crime_type_g.selectAll(".legend_ordinal_crime_type")
+        .selectAll("text")
+        .attr("class", "d3axis")
+
     // set offset
-    var legend_width = d3.select(".legendCells").node().getBBox().width;
+    var legend_width_crime_type = d3.select(".legend_ordinal_crime_type").node().getBBox().width;
 
-    crime_type_g.selectAll(".legendCells")
-        .attr("transform", "translate(" +  (width - legend_width)/2 + "," + -margin.top/2 + ")")
-    // End Legend
+    crime_type_g.selectAll(".legend_ordinal_crime_type")
+        .attr("transform", "translate(" +  (width - legend_width_crime_type)/2 + "," + -0.325*margin.top + ")")
+    // End crime type Legend
 
-    initialize_plot_type("Total");
+    initialize_plot("Total");
     initialize_summary_table();
-
-    function csv_single_type_preprocess(d) {
-        return {
-            "time"                       : timeParse(d.time),
-            "Crime in most severe 25%"   : +d.crime_top_avg,
-            "Crime in least severe 25%"  : +d.crime_bot_avg,
-            "Chicago average"            : +d.chicago_crime
-        }
-    }
 
     function initialize_summary_table() {
 
@@ -164,7 +222,7 @@ function make_crime_concentration() {
             });
     }
 
-    // Open question: have this reference the endpoint output or continue referencing the timeseries? 
+    // TODO: reference endpoints
     function make_auto_text(csv_data, type) {
 
         var crime_change_arr = csv_data.map(function(d) {
@@ -207,19 +265,24 @@ function make_crime_concentration() {
 
     }
 
-    function initialize_plot_type(type) {
+    function initialize_plot(type) {
     
         d3.csv("static/data/" + type + "_crimes_top_bot_25.csv", csv_single_type_preprocess, function(csv_data) {
 
-            csv_data = csv_timeseries_col_split(csv_data, cols_crime_level_plot);
+            var cols_to_plot = Object.keys(csv_data[0]).filter(d => d != "time")
+            csv_data = csv_timeseries_col_split(csv_data, cols_to_plot);
 
             x.domain(d3.extent(csv_data[0].values.map(d => d.time)));
-            y.domain([0, d3.max(csv_data.map(d => d3.max(d.values.map(col => col.value))))]);
+            // if only one line, zoom in on it
+            if(csv_data.length < 2)
+                y.domain(d3.extent(csv_data[0].values.map(d => d.value))).nice();
+            else
+                y.domain([0, d3.max(csv_data.map(d => d3.max(d.values.map(col => col.value))))]);
 
             // Begin make axes
             crime_type_g.append("g")
                 .attr("class", "d3axis")
-                .attr("id", "crime_type_top_bot_25_x_axis")
+                .attr("id", "plot_x_axis")
                 .attr("transform", "translate(0," + height + ")")
                 .call(d3.axisBottom(x))
                 .append("text")
@@ -230,7 +293,7 @@ function make_crime_concentration() {
            
             crime_type_g.append("g")
                 .attr("class", "d3axis")
-                .attr("id", "crime_type_top_bot_25_y_axis")
+                .attr("id", "plot_y_axis")
                 .call(d3.axisLeft(y).ticks(5))
                 .append("text")
                 .attr("text-anchor", "middle")
@@ -238,12 +301,13 @@ function make_crime_concentration() {
                 .attr("x", -height/2)
                 .attr("transform", "rotate(-90)")
                 .attr("fill", "black")
+                .attr("id", "plot_y_axis_label")
                 .text("Crime intensity");
             // End make axes
 
             // auto text
-            d3.select("#crime_top_bot_autotext_div")
-                .html(make_auto_text(csv_data, type))
+            //d3.select("#crime_top_bot_autotext_div")
+            //    .html(make_auto_text(csv_data, type))
 
             // begin plot each crime type over time
             crime_type_g.append("g")
@@ -273,7 +337,29 @@ function make_crime_concentration() {
             // end plot each crime type over time
         });
 
+        update_ineq_type_legend(ineq_types[ineq_types.length - 1]);
         update_active_legend(type);
+    }
+
+    function update_ineq_type(ineq) {
+        
+        // get selected crime_type
+        var selected_type = crime_type_g.selectAll(".legend_ordinal_crime_type")
+            .select(".legend_text_selected")
+            .text();
+
+        // update preprocessing function
+        if(ineq == "Crime distribution")
+            csv_single_type_preprocess = csv_single_type_preprocess_concentration;
+        else if(ineq == "Crime Gini coefficient")
+            csv_single_type_preprocess = csv_single_type_preprocess_gini;
+        // else nothing
+        
+        // update plot type
+        update_plot_type(selected_type);
+
+        // update ineq legend
+        update_ineq_type_legend(ineq)
     }
 
     function update_plot_type(type) {
@@ -281,19 +367,29 @@ function make_crime_concentration() {
         // Update data
         d3.csv("static/data/" + type + "_crimes_top_bot_25.csv", csv_single_type_preprocess, function(csv_data) {
 
-            csv_data = csv_timeseries_col_split(csv_data, cols_crime_level_plot);
+            var cols_to_plot = Object.keys(csv_data[0]).filter(d => d != "time")
+            csv_data = csv_timeseries_col_split(csv_data, cols_to_plot);
             
             x.domain(d3.extent(csv_data[0].values.map(d => d.time)));
-            y.domain([0, d3.max(csv_data.map(d => d3.max(d.values.map(col => col.value))))]);
+            // if only one line, zoom in on it
+            if(csv_data.length < 2)
+                y.domain(d3.extent(csv_data[0].values.map(d => d.value))).nice();
+            else
+                y.domain([0, d3.max(csv_data.map(d => d3.max(d.values.map(col => col.value))))]);
 
             // Begin make axes
-            crime_type_g.select("#crime_type_top_bot_25_x_axis")
+            crime_type_g.select("#plot_x_axis")
                 .transition()
                 .call(d3.axisBottom(x))
-           
-            crime_type_g.select("#crime_type_top_bot_25_y_axis")
+          
+            // y axis name: if only one variable, use it, otherwise assume it's crime 
+            crime_type_g.select("#plot_y_axis")
                 .transition()
                 .call(d3.axisLeft(y).ticks(5))
+            crime_type_g.select("#plot_y_axis_label")
+                .transition()
+                .text(csv_data.length > 1 ? "Crime intensity" : csv_data[0].id);
+
             // End make axes
             
             // begin plot each crime type over time
@@ -314,11 +410,11 @@ function make_crime_concentration() {
 
             svg_temp_path.exit().remove();
            
-            // labels 
+            // labels if length is nontrivial
             var svg_temp_text = crime_type_g
                 .selectAll("#crime_type_top_bot_text")
                 .selectAll("text")
-                .data(csv_data);
+                .data(csv_data.length > 1 ? csv_data : []);
 
             svg_temp_text.enter()
                 .append("text")
@@ -332,8 +428,8 @@ function make_crime_concentration() {
             svg_temp_text.exit().remove();
 
             // begin make auto text
-            d3.select("#crime_top_bot_autotext_div")
-                .html(make_auto_text(csv_data, type))
+            //d3.select("#crime_top_bot_autotext_div")
+            //    .html(make_auto_text(csv_data, type))
 
             // end plot each crime type over time
         });
@@ -343,9 +439,32 @@ function make_crime_concentration() {
 
     }
 
+    function update_ineq_type_legend(ineq) {
+
+        var legendCells = crime_type_g.selectAll(".legend_ordinal_ineq_type").transition();
+        var targetLegend = crime_type_g.selectAll("#" + get_ineq_type_legend_id(ineq)).transition();
+        
+        // dim all
+        legendCells.selectAll("line")
+            .style("opacity", "0.5");
+
+        // text to normal
+        legendCells.selectAll("text")
+            .attr("class", "d3axis");
+
+        // Darken the selected
+        targetLegend.selectAll("line")
+            .style("opacity", null);
+
+        // Bold the selected
+        targetLegend.selectAll("text")
+            .attr("class", "legend_text_selected d3axis");
+
+    }
+
     function update_active_legend(type) {
         
-        var legendCells = crime_type_g.selectAll(".legendCells").transition();
+        var legendCells = crime_type_g.selectAll(".legend_ordinal_crime_type").transition();
         var targetLegend = crime_type_g.selectAll("#" + get_crime_type_legend_id(type)).transition();
         
         // dim all
@@ -354,15 +473,15 @@ function make_crime_concentration() {
 
         // text to normal
         legendCells.selectAll("text")
-            .style("font-weight", null);
+            .attr("class", "d3axis");
 
         // Darken the selected
         targetLegend.selectAll("line")
-            .style("opacity", "1");
+            .style("opacity", null);
 
         // Bold the selected
         targetLegend.selectAll("text")
-            .style("font-weight", "bold");
+            .attr("class", "legend_text_selected d3axis");
     }
 
 }

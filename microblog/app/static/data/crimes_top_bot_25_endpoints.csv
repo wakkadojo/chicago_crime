@@ -6,6 +6,7 @@ Property,crime_bot_pctile_lvl,2002,0.07117592670677272,start
 Property,crime_top_avg,2002,0.18200729207341668,start
 Property,crime_top_pct,2002,0.4087542486884933,start
 Property,crime_top_pctile_lvl,2002,0.1426807853856195,start
+Property,gini_coefficient,2002,0.25947042568115525,start
 Society,chicago_crime,2002,0.02499794531896179,start
 Society,crime_bot_avg,2002,0.007790649754099126,start
 Society,crime_bot_pct,2002,0.07791290098740289,start
@@ -13,6 +14,7 @@ Society,crime_bot_pctile_lvl,2002,0.009811988683140382,start
 Society,crime_top_avg,2002,0.05436776181528741,start
 Society,crime_top_pct,2002,0.543722305189295,start
 Society,crime_top_pctile_lvl,2002,0.033499915685716475,start
+Society,gini_coefficient,2002,0.41513890877701937,start
 Total,chicago_crime,2002,0.18214565917988554,start
 Total,crime_bot_avg,2002,0.07821132998024798,start
 Total,crime_bot_pct,2002,0.10734723288547754,start
@@ -20,6 +22,7 @@ Total,crime_bot_pctile_lvl,2002,0.09680645348571448,start
 Total,crime_top_avg,2002,0.3283704031395535,start
 Total,crime_top_pct,2002,0.45069754148691743,start
 Total,crime_top_pctile_lvl,2002,0.250248981476765,start
+Total,gini_coefficient,2002,0.307035094876688,start
 Violent,chicago_crime,2002,0.04582942624838188,start
 Violent,crime_bot_avg,2002,0.012592661909832409,start
 Violent,crime_bot_pct,2002,0.06869310255808092,start
@@ -27,6 +30,7 @@ Violent,crime_bot_pctile_lvl,2002,0.01712649393995002,start
 Violent,crime_top_avg,2002,0.09777676612819576,start
 Violent,crime_top_pct,2002,0.5333732829114788,start
 Violent,crime_top_pctile_lvl,2002,0.07147718240416046,start
+Violent,gini_coefficient,2002,0.4135427549910683,start
 Property,chicago_crime,2017,0.07304120883379757,endpoint
 Property,crime_bot_avg,2017,0.03276956858490572,endpoint
 Property,crime_bot_pct,2017,0.11216123441861292,endpoint
@@ -34,6 +38,7 @@ Property,crime_bot_pctile_lvl,2017,0.04001841495686296,endpoint
 Property,crime_top_avg,2017,0.13190831440654907,endpoint
 Property,crime_top_pct,2017,0.4514859368863312,endpoint
 Property,crime_top_pctile_lvl,2017,0.10464515522111731,endpoint
+Property,gini_coefficient,2017,0.30772255336939314,endpoint
 Society,chicago_crime,2017,0.012199583068345753,endpoint
 Society,crime_bot_avg,2017,0.0031037809028914166,endpoint
 Society,crime_bot_pct,2017,0.06360424133970599,endpoint
@@ -41,6 +46,7 @@ Society,crime_bot_pctile_lvl,2017,0.004011263355353144,endpoint
 Society,crime_top_avg,2017,0.03192595796254699,endpoint
 Society,crime_top_pct,2017,0.6542428086207561,endpoint
 Society,crime_top_pctile_lvl,2017,0.015243315953338053,endpoint
+Society,gini_coefficient,2017,0.5133811486421749,endpoint
 Total,chicago_crime,2017,0.12039426553608304,endpoint
 Total,crime_bot_avg,2017,0.04763689289927111,endpoint
 Total,crime_bot_pct,2017,0.09891852549445967,endpoint
@@ -48,6 +54,7 @@ Total,crime_bot_pctile_lvl,2017,0.062119427237109705,endpoint
 Total,crime_top_avg,2017,0.2410352072525809,endpoint
 Total,crime_top_pct,2017,0.5005122257678064,endpoint
 Total,crime_top_pctile_lvl,2017,0.17357180514525733,endpoint
+Total,gini_coefficient,2017,0.35460312379683706,endpoint
 Violent,chicago_crime,2017,0.0351534736339397,endpoint
 Violent,crime_bot_avg,2017,0.009541671602249965,endpoint
 Violent,crime_bot_pct,2017,0.06785724578465091,endpoint
@@ -55,3 +62,4 @@ Violent,crime_bot_pctile_lvl,2017,0.0122240025097733,endpoint
 Violent,crime_top_avg,2017,0.08068693017087238,endpoint
 Violent,crime_top_pct,2017,0.573819041405992,endpoint
 Violent,crime_top_pctile_lvl,2017,0.05168426283203746,endpoint
+Violent,gini_coefficient,2017,0.44420892554379876,endpoint
