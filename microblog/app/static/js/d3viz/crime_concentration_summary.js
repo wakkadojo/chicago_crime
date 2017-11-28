@@ -280,12 +280,15 @@ function make_crime_concentration() {
                 high_low_ratio_start = (high_start / low_start).toFixed(1),
                 high_low_ratio_end = (high_end / low_end).toFixed(1),
                 value_change = Math.abs(high_low_ratio_end - high_low_ratio_start).toFixed(1),
-                ratio_is_up = high_low_ratio_start < high_low_ratio_end ? "up" : "down",
-                inequality_incr_decr = high_low_ratio_start < high_low_ratio_end ? "<b>increased</b>" : "<b>decreased</b>",
-                inequality_incr_decr_present = high_low_ratio_start < high_low_ratio_end ? "<b>increase</b>" : "<b>decrease</b>",
+                ratio_is_up_check = (high_start/low_start) < (high_end/low_end),
+                ratio_is_up = ratio_is_up_check ? "<b>up</b>" : "<b>down</b>",
+                ineq_change_sent_start = ratio_is_up_check ? "Meanwhile, crime inequality has been <b>on the rise</b>" : "Inequality has been <b>decreasing</b>",
+                inequality_incr_decr = ratio_is_up_check ? "<b>increased</b>" : "<b>decreased</b>",
+                inequality_incr_decr_present = ratio_is_up_check ? "<b>increase</b>" : "<b>decrease</b>",
                 // reductions
                 city_reduction = "<b>" + Math.abs((city_end/city_start - 1)*100).toFixed(0) + "%</b>",
                 low_reduction = "<b>" + Math.abs((low_end/low_start - 1)*100).toFixed(0) + "%</b>",
+                high_reduction = "<b>" + Math.abs((high_end/high_start - 1)*100).toFixed(0) + "%</b>",
                 // uptick
                 city_recent_change_value = (city_end/city_recent - 1).toFixed(2),
                 high_recent_change_value = (high_end/high_recent - 1).toFixed(2),
@@ -299,7 +302,6 @@ function make_crime_concentration() {
                 start_year = get_summary_table_value(csv_nest, type, "start", "crime_bot_avg", field = "year"),
                 end_year = get_summary_table_value(csv_nest, type, "endpoint", "crime_bot_avg", field = "year"),
                 year_diff = end_year - start_year,
-                high_reduction = "<b>" + Math.abs((high_end/high_start - 1)*100).toFixed(0) + "%</b>",
                 low_high_red_compare = low_reduction > high_reduction ? "less significant" : "more pronounced",
                 // gini and gini text
                 gini_start_value = get_summary_table_value(csv_nest, type, "start", "gini_coefficient"),
@@ -307,25 +309,23 @@ function make_crime_concentration() {
                 gini_start = "<b>" + gini_start_value.toFixed(2) + "</b>",
                 gini_end= "<b>" + gini_end_value.toFixed(2) + "</b>",
                 gini_incr_decr = gini_start_value < gini_end_value ? "<b>increased</b>" : "<b>decreased</b>",
-                pre_text_compare_to_ratio = Math.sign(gini_start_value - gini_end_value) == Math.sign(high_low_ratio_start - high_low_ratio_end) ?
-                    "triangulates <b>well</b>" : "<b>does not</b> triangulate",
+                gini_incr_decr_present = gini_start_value < gini_end_value ? "<b>increase</b>" : "<b>decrease</b>",
                 compare_to_ratio_change = Math.sign(gini_start_value - gini_end_value) == Math.sign(high_low_ratio_start - high_low_ratio_end) ?
                     "directionally <b>consistent</b>" : "directionally <b>inconsistent</b>";
 
             var autotext = 
-                city_crime_type_desc + " throughout the city has decreased by " + city_reduction + " since " + start_year + ". " +
+                city_crime_type_desc + " in Chicago has decreased by " + city_reduction + " since " + start_year + ". " +
                 uptick_text + " " +
-                '<div style="line-height: 0.6em;"><br></div>' +
-                "Presently, areas with high " + area_crime_type_desc + " experience <b>" + high_low_ratio_end + "x</b> " +
-                (type == "Total" ? "the" : "this type of") + " crime as compared to low-crime areas. " + 
-                "This inequality ratio is <b>" + ratio_is_up + " " + value_change + "x</b> since " +
-                start_year + ". It has " + inequality_incr_decr + " because high-crime areas saw a crime reduction " +
+                ineq_change_sent_start + " because high-crime areas saw a long-term reduction " +
                 "of " + high_reduction + ", which is a <b>" + low_high_red_compare + "</b> decrease than the " + 
-                low_reduction + " reduction experienced in low-crime areas." +
+                low_reduction + " reduction experienced in low-crime areas. " + 
                 '<div style="line-height: 0.6em;"><br></div>' +
-                "Over the last " + year_diff + " years, the " + city_crime_type_desc + " Gini coefficient has " + 
-                gini_incr_decr + " from " + gini_start + " to " + gini_end + ". " +
-                "This change is " + compare_to_ratio_change + " with the observed change in the high-to-low crime ratio.";
+                "Areas with high " + area_crime_type_desc + " presently experience <b>" + high_low_ratio_end + "x</b> " +
+                (type == "Total" ? "the" : "this type of") + " crime as compared to low-crime areas. " + 
+                "This inequality ratio is " + ratio_is_up + "&nbsp;" + "<b>" + value_change + "x</b> over the past " + year_diff + " years. " +
+                "The observed " + inequality_incr_decr_present + " is " + compare_to_ratio_change + " with the " + 
+                "change in the " + city_crime_type_desc + " Gini coefficient, which has "  + 
+                gini_incr_decr + " from " + gini_start + " to " + gini_end + " over the same period.";
 
             d3.select("#crime_top_bot_autotext_div")
                 .html(autotext)

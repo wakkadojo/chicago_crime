@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-clean-blog/blob/master/LICENSE)
  */
 body {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
     /*
@@ -14,7 +14,7 @@ body {
   }*/
 
 p {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   margin: 30px 0; }
@@ -228,7 +228,7 @@ header.masthead {
     margin: 0 0 10px; }
 
 .post-preview > .post-meta {
-  font-size: 18px;
+  font-size: 16px;
   font-style: italic;
   margin-top: 0;
   color: #777777; }
