@@ -88,14 +88,14 @@ function make_archetypes() {
                 .shapePadding("3")
                 .labelFormat(d => parseInt(d/1000) + "k")
                 .labelOffset("5")
-                .title("Pop. size");
+                .title("Population");
 
             ineq_map_svg.select(".pop_size_legend")
                 .call(legend_size);
 
             // fix the offset
             d3.selectAll(".pop_size_legend").selectAll(".legendCells")
-                .attr("transform", "translate(14, 5)")
+                .attr("transform", "translate(18, 5)")
 
             // initiate to click on first arch
             update_pop_map(first_arch_selected);
