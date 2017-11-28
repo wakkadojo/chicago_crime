@@ -325,8 +325,7 @@ function make_crime_concentration() {
                 '<div style="line-height: 0.6em;"><br></div>' +
                 "Over the last " + year_diff + " years, the " + city_crime_type_desc + " Gini coefficient has " + 
                 gini_incr_decr + " from " + gini_start + " to " + gini_end + ". " +
-                "This " + pre_text_compare_to_ratio + " with the simple crime inequality  ratio " +
-                "as the two are " + compare_to_ratio_change + ".";
+                "This change is " + compare_to_ratio_change + " with the observed change in the high-to-low crime ratio.";
 
             d3.select("#crime_top_bot_autotext_div")
                 .html(autotext)
