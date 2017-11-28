@@ -2,36 +2,42 @@ function make_archetypes() {
 
     var first_arch_selected = "affluents";
 
+    var ineq_map_html = d3.select("#crime_ineq_selected_map")
+        ineq_map_svg = ineq_map_html.select("svg"),
+        margin = {top: 15, bottom: 15, left: 15, right: 15},
+        width = ineq_map_svg.attr("width") - margin.left - margin.right,
+        height = ineq_map_svg.attr("height") - margin.top - margin.bottom,
+        ineq_map = ineq_map_svg.append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scaleLinear(),
+        y = d3.scaleLinear(),
+        r = d3.scaleSqrt().range([0, 20]),
+        color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    var projection = d3.geoMercator()
+
     function get_archetype_bubble_id(archetype) { return archetype + "_archetype_map_bubble_id"; }
+
+    function get_tooltip_id(neighborhood) { return neighborhood.replace(/\W/g, '') + "_map_mouseover_tooltip_id"; }
 
     function init_pop_map() {
 
-        var ineq_map_svg = d3.select("#crime_ineq_selected_map"),
-            margin = {top: 20, bottom: 20, left: 20, right: 20},
-            width = ineq_map_svg.attr("width"),
-            height = ineq_map_svg.attr("height");
-
-        var x = d3.scaleLinear(),
-            y = d3.scaleLinear(),
-            r = d3.scaleSqrt().range([0, 20]),
-            color = d3.scaleOrdinal(d3.schemeCategory10);
-
-        var projection = d3.geoMercator()
-
         d3.json("static/data/chicago_centroid.json", function(neighb_data) {
 
-            projection.fitExtent([[0, margin.bottom], [width, height - margin.top]], neighb_data)
+            projection.fitExtent([[0, margin.top], [width, height - margin.bottom]], neighb_data)
 
             // plot chicago outline
+            // this needs to be a nested async call to force it to fit the bubble projection
             d3.json("static/data/chicago_outline.json", function(outline) {
                 
                 var path = d3.geoPath()
                     .projection(projection);
 
-                ineq_map_svg.append("g")
+                ineq_map.append("g")
                     .selectAll("path")
                     .data(outline.features)
-                    .enter()
+                  .enter()
                     .append("path")
                     .attr("d", path)
                     .attr("stroke-width", "1")
@@ -44,32 +50,73 @@ function make_archetypes() {
             color.domain(neighb_data.features.map(d => d.properties.primary_race));
 
             // Draw map
-            ineq_map_svg.append("g")
+            ineq_map.append("g")
+                .attr("id", "map_bubble_container")
                 .selectAll("circle")
                 .data(neighb_data.features)
-                .enter()
+              .enter()
                 .append("circle")
                 .attr("cx", d => projection(d.geometry.coordinates)[0])
                 .attr("cy", d => projection(d.geometry.coordinates)[1])
                 .attr("r", d => r(d.properties.population))
                 .attr("fill", d => color(d.properties.primary_race))
                 .attr("id", d => get_archetype_bubble_id(d.properties.archetype))
-                .style("opacity", "0.3");
+                // TODO: migrate this fcn... it's too big for inline
+                .on("mouseover", function(d) {
+                    var coords = projection(d.geometry.coordinates),
+                        neighborhood = d.properties.community.toLowerCase(),
+                        tt = ineq_map.append("g")
+                            .attr("id", get_tooltip_id(d.properties.community))
+                            .style("opacity", "0")
+                            .style("pointer-events", "none");
+
+                    var tt_background = tt.append("rect"), // placeholder
+                        tt_text = tt.append("text")
+                            .attr("alignment-baseline", "middle")
+                            .attr("transform", "translate(" + coords[0] + "," + coords[1] + ")")
+                            .attr("class", "d3axis")
+                            .style("text-transform", "capitalize")
+                            .text(neighborhood),
+                        bbox = tt.node().getBBox();
+                    // set background location
+                    tt_background
+                        .attr("x", bbox.x)
+                        .attr("y", bbox.y)
+                        .attr("width", bbox.width)
+                        .attr("height", bbox.height)
+                        .attr("fill", "white")
+                        .attr("opacity", "0.85");
+
+                    // fancy fade-in
+                    tt.transition().style("opacity", "1")
+
+                })
+                .on("mouseout", function(d) {
+                    ineq_map.selectAll("#" + get_tooltip_id(d.properties.community))
+                        .transition()
+                        .style("opacity", "0") // fade out
+                        .remove()
+                })
 
             // Draw race legend
             var ordinal = d3.scaleOrdinal()
                 .domain(color.domain())
                 .range(color.range());
 
-            ineq_map_svg.append("g")
+            ineq_map.append("g")
                 .attr("class", "race_legend_ordinal")
                 .attr("transform", "translate(" + (width - margin.right - 70) + "," + (margin.top/2) + ")");
 
             var legend_ordinal = d3.legendColor()
                 .scale(ordinal)
+                .title("Main race")
 
-            ineq_map_svg.select(".race_legend_ordinal")
+            ineq_map.select(".race_legend_ordinal")
                 .call(legend_ordinal);
+            
+            // fix the offset
+            ineq_map.selectAll(".race_legend_ordinal").selectAll(".legendCells")
+                .attr("transform", "translate(5, 8)");
 
             // Draw population legend
             var pops_to_show = [ 10000, 70000 ];
@@ -77,7 +124,7 @@ function make_archetypes() {
                 .domain(pops_to_show)
                 .range(pops_to_show.map(r));
 
-            ineq_map_svg.append("g")
+            ineq_map.append("g")
                 .attr("class", "pop_size_legend")
                 .attr("transform", "translate(" + 35 + "," + (height - 140) + ")");
 
@@ -90,12 +137,15 @@ function make_archetypes() {
                 .labelOffset("5")
                 .title("Population");
 
-            ineq_map_svg.select(".pop_size_legend")
+            ineq_map.select(".pop_size_legend")
                 .call(legend_size);
 
             // fix the offset
-            d3.selectAll(".pop_size_legend").selectAll(".legendCells")
-                .attr("transform", "translate(18, 5)")
+            ineq_map.selectAll(".pop_size_legend").selectAll(".legendCells")
+                .attr("transform", "translate(20, 5)");
+            // fix the color
+            ineq_map.selectAll(".pop_size_legend").selectAll("circle")
+                .attr("fill", "Silver");
 
             // initiate to click on first arch
             update_pop_map(first_arch_selected);
@@ -105,12 +155,13 @@ function make_archetypes() {
     function update_pop_map(type) {
 
         // set opacity of all
-        d3.selectAll("#crime_ineq_selected_map")
+        ineq_map.selectAll("#map_bubble_container")
             .selectAll("circle")
+            .filter(d => d.properties.archetype != type)
             .style("opacity", "0.3")
 
         // darken selected
-        d3.selectAll("#crime_ineq_selected_map")
+        ineq_map.selectAll("#map_bubble_container")
             .selectAll("#" + get_archetype_bubble_id(type))
             .transition()
             .style("opacity", "1.0");
@@ -173,7 +224,7 @@ function make_archetypes() {
                     if(pop_chg_raw[0].value > 0.5 && pop_chg_raw[0].key != "flat")  {
                         return "<b>" + pop_chg_raw[0].key + "</b>"
                     } else if (pop_chg_raw[0].key == "flat") {
-                        return "<b>slightly " + pop_chg_raw[1].key + "</b>"
+                        return "<b>slowly " + pop_chg_raw[1].key + "</b>"
                     } else {
                         return ""
                     }
@@ -235,16 +286,17 @@ function make_archetypes() {
                 end = 1;
 
             var autotext = 
-                "The " + arch_text + " experience " +
-                crime_lvl + " crime levels with elevated " + elevated + " crime. " +
-                flat_text +
-                uptick_text +
+                "The " + arch_text + (type == "working" ? " is a " : " are a ") + 
+                pop_size_descr + ", " + race + " population in Chicago comprising " + pop_size_number + " of the city. " +
+                "Incomes are " + income + ", and, after adjusting for inflation, have " + income_chg_primary + " " + income_chg_secondary + " since 2002." + 
                 
                 '<div style="line-height: 0.6em;"><br></div>' + 
 
-                "The " + arch_text + (type == "working" ? " is a " : " are a ") + 
-                pop_size_descr + ", " + race + " population in Chicago comprising " + pop_size_number + " of the city. " +
-                "Incomes are " + income + ", and, after adjusting for inflation, have " + income_chg_primary + " " + income_chg_secondary + " since 2002."
+                "The " + arch_text + " experience " +
+                crime_lvl + " crime levels with elevated " + elevated + " crime. " +
+                flat_text +
+                uptick_text;
+
 
             return autotext;
       
