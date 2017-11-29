@@ -12,6 +12,8 @@ function csv_timeseries_col_split(csv_data, cols_to_plot) {
 
 function add_tooltip(svg, x, y, text, id = null) {
 
+    var x_buffer = 10;
+
     var tt = svg.append("g")
             .style("opacity", "0")
             .style("pointer-events", "none");
@@ -29,9 +31,9 @@ function add_tooltip(svg, x, y, text, id = null) {
 
     // set background location
     tt_background
-        .attr("x", bbox.x)
+        .attr("x", bbox.x - x_buffer/3)
         .attr("y", bbox.y)
-        .attr("width", bbox.width)
+        .attr("width", bbox.width + x_buffer)
         .attr("height", bbox.height)
         .attr("fill", "white")
         .attr("opacity", "0.85");

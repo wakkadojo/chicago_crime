@@ -87,36 +87,35 @@
 }
 
 </style>
+            <h2 class="section-heading">Summary</h2>
+            
+            <h2 class="section-heading">Sizing up crime</h2>
+            <ul>
+                <li> Weight by sentencing vs count, discussion of this
+                <li> What's big, what's small
+                <li> Note on difference of ILCS and IUCR: reported versus court decision can differ -- example is first degree murder (ref email from data owner)
+            </ul>
+            
+            <svg width="800" height="550" id="crime_pct_severity_compare_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+            <p></p> 
+            <div id="crime_pct_severity_compare_autotext_div" class="autotext" style="width: 800; height: 140; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
+            <script style="javascript" src="static/js/d3viz/crime_weighting_diff.js"></script>
+            <p></p>
 
-<h2 class="section-heading">Summary</h2>
+            <h2 class="section-heading">Inequality on the rise</h2>
+            <ul>
+                <li> crime intensity: normalize total crime severity to population
+                <li> differentiate areas by community area + rationale why I used this
+                <li> Summarize: crime went down, inequality up
+                <li> Inequality 1: ratio of worst to best
+                <li> Inequality 2: Gini (link to external, this is not meant to teach what gini is)
+                <li> Discussion on magnitude of changes
+                <li> Note on timeseries: rolling year total to avoid seasonality
+            </ul>
 
-<p>
-While crime in Chicago has generally decreased dramatically over the last 15 years, how is the progress distributed among the population? How is it distributed among the type of crime? These questions are the motivation for the investigations outlined below, where we analyze overall crime through time in the city, the "crime inequality" itself, and how the "crime inequality" in the city as varied since the early 2000's.
-<p>
-
-<p>
-We measure "Crime Intensity" in Chicago since 2002 broken into its major categories: Property Crime, Violent Crime, and Crime Against Society. We will soon elaborate more on "Crime Intensity," but for now think of it as:
-</p>
- <blockquote style="text-align: center;">Crime Intensity = (# years served) / person if average prison sentence served in full for every crime reported</blockquote>
-
-<p>
-In line with the generally known reduction in crime, this analysis indeed shows a decline in crime by a marked 30% over the last 15 years (though there has also been a slight resurgence over the last few years). This is largely due to a decrease in Property Crime and Crimes against Society; Violent Crimes have remained closer to their 2002 levels. Feel free to explore the data in the figure below.
-</p>
-
-<p>
-However, while crime has fallen, it has not fallen uniformly throughout the city. In fact, those feeling the worst crime are feeling a higher fraction now than they have in the past. By looking at how crime is distributed geographically throughout the city, we can get a sense of how concentrated crime is over time. 
-</p>
-
-<p>
-Again, the nature of this measurement will be elaborated below, but the signal can be seen when clearly looking at how much crime is felt by the worst quartile (worst 25%) as compared to the safest quartile. Among all crimes ("Total") since 2002, crime concentration among the worst areas went from 4.5x that of the safest areas to 5.5x. This was driven by an increase in crime inequality across the board (there was no single category driver).
-</p>
-
-<p>
-This can be explored in the figure below by clicking the different categories in the legend.
-</p>
-<p style="color: red;">
-Most change from 2002 - 2007 then plateau
-</p>
+            </p>
+             <blockquote style="text-align: center;">Crime Intensity = (# years served) / person if average prison sentence served in full for every crime reported</blockquote>
+            <p>
             
             <svg width="800" height="450" id="crime_top_bot_timeseries_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
             <p></p>
@@ -154,20 +153,16 @@ Most change from 2002 - 2007 then plateau
                 <td id="Total_tbl_column"></td>
             </tr>
             </table>
-
-            <!-- slight break before autotext -->
             <p></p> 
             <div id="crime_top_bot_autotext_div" class="autotext" style="width: 800; height: 200; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
-
             <script type="text/javascript" src="static/js/d3viz/crime_concentration_summary.js"></script>
-            
-            <h2 class="section-heading">Explore the City</h2>
-            <ul>
-                <li> plot of crime versus income now and in past + diff
-                <li> geography graph
-                <li> auto text: crime summary + change, race, income changes
-            </ul>
 
+            <h2 class="section-heading">Three worlds in Chicago</h2>
+            <ul>
+                <li> Summarize
+                <li> Note segregation
+            </ul>
+            
             <table id="crime_archetype_tbl" cellpadding="5" class="d3axis tbl_container">
                 <col width="225">
                 <col width="575">
@@ -196,60 +191,16 @@ Most change from 2002 - 2007 then plateau
             <!-- slight break before autotext -->
             <p></p> 
             
-            <div id="archetype_autotext_div" class="autotext" style="width: 800; height: 200; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
-
+            <div id="archetype_autotext_div" class="autotext" style="width: 800; height: 125; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
             <script type="text/javascript" src="static/js/d3viz/archetype.js"></script>
 
-            <p>
-            something here explaining above. below can see crime trends by neighborhood.
-            </p>
-
-            
-            <h2 class="section-heading">sizing up a crime</h2>
-            <ul>
-                <li> discussion about how to look at crimes: severity of crime and per person 
-                <li> discuss data sourcing: intensity and population
-                <li> table of crime intensity
-                <li> discussion: what does intensity measure
-                <li> example of murder versus disorderly conduct of count versus weighted
-                <li> how did i get weights
-            </ul>
-
-            <p style="color: red;">note convictions data first degree murder 1000x as common as second degree murder. note no second degree murders in raw data. reached out to dataset owner to get confirm this is correct.</p>
-
-            <p></p>
-            <svg width="800" height="550" id="crime_pct_severity_compare_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
-            <!-- slight break before autotext -->
-            <p></p> 
-            <div id="crime_pct_severity_compare_autotext_div" class="autotext" style="width: 800; height: 140; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
-            <script style="javascript" src="static/js/d3viz/crime_weighting_diff.js"></script>
-            <p></p>
-
-
-            </script>
-            
-            <h2 class="section-heading">Crime Overview</h2>
-            <ul>
-                <li> Rolling mean to avoid seasonality
-                <li> Graph of total to category to FBI code name
-                <li> Effects of income
-                <li> Effects of race
-            </ul>
-            
-            <h2 class="section-heading">Crime Inequality</h2>
-            <ul>
-                <li> How to determine inequality: who is impacted and geographic proxy
-                <li> What is the Gini coefficient: top x% crime scroller
-                <li> [Optional] Analysis of time of day?
-            </ul>
-            
             <h2 class="section-heading">Next Steps</h2>
             <ul>
+                <li> Exploration of drivers and understanding top reasons why inequality has changed
+                <li> Get a better measure of crime severity + how to source it (such as working with CPD to get real convictions info)
                 <li> Holistic measurements of wealth, including real estate value, foreclosures + how to source it
                 <li> Relationship between crime and demographics change -- which populations are growing and shrinking? Which age groups? Which income levels?
                 <li> Effects of education + how to source it
-                <li> Better measurement of income + how to source it (IRS)
-                <li> Get a better measure of crime severity + how to source it
             </ul>
 
             <h2 class="section-heading">Data Sources and Source Code</h2>
@@ -266,6 +217,8 @@ Most change from 2002 - 2007 then plateau
                 <li> <a href="http://tableaupicasso.com/chicago-crime-scene/">http://tableaupicasso.com/chicago-crime-scene/</a>
             </ul>
 
+
+            <!--
             <h2 class="section-heading">Graveyard</h2>
 
             <svg width="800" height="600" id="crime_type_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
@@ -278,6 +231,8 @@ Most change from 2002 - 2007 then plateau
             <p></p>
             <svg width="800" height="660" id="crime_severity_bar_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
             <script type="text/javascript" src="static/js/d3viz/crime_severity_bars.js"></script>
+
+            -->
 
 <!--
 

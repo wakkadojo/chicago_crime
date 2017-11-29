@@ -189,8 +189,8 @@ function make_crime_weighting_diff() {
             .attr("cy", d => d.y)
             .attr("r", d => d.r)
             .on("mouseover", function(d) {
-                var x = d.x + d.r/1.4 + 4,
-                    y = d.y + d.r/1.4 + 4;
+                var x = d.x + d.r/1.4 + 7,
+                    y = d.y + d.r/1.4 + 7;
 
                 var tt_text = '<tspan style="font-weight: bolder;" alignment-baseline="middle">' + d.mean_severity.toFixed(2) + "</tspan> year average sentencing";
 
