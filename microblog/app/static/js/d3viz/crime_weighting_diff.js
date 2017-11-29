@@ -6,7 +6,7 @@ function make_crime_weighting_diff() {
         height = svg.attr("height") - margin.top - margin.bottom,
         canvas = svg.append("g")
             .attr("transform", "translate(" + margin.left + ", " + margin.right + ")"),
-        bubble_x_buffer = 20,
+        bubble_x_buffer = 17,
         bubble_y_buffer = 1,
         bubble_y_offset = 150,
         bubble_y_text_offset = 75;
