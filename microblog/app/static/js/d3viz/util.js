@@ -9,3 +9,35 @@ function csv_timeseries_col_split(csv_data, cols_to_plot) {
         };
     });
 }
+
+function add_tooltip(svg, x, y, text, id = null) {
+
+    var tt = svg.append("g")
+            .style("opacity", "0")
+            .style("pointer-events", "none");
+
+    if(id != null)
+        tt.attr("id", id)
+
+    var tt_background = tt.append("rect"), // placeholder
+        tt_text = tt.append("text")
+            .attr("alignment-baseline", "middle")
+            .attr("transform", "translate(" + x + "," + y + ")")
+            .attr("class", "d3tooltiptext")
+            .html(text),
+        bbox = tt.node().getBBox();
+
+    // set background location
+    tt_background
+        .attr("x", bbox.x)
+        .attr("y", bbox.y)
+        .attr("width", bbox.width)
+        .attr("height", bbox.height)
+        .attr("fill", "white")
+        .attr("opacity", "0.85");
+
+    // fancy fade-in
+    tt.transition().style("opacity", "1")
+
+    return tt;
+}

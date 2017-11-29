@@ -61,35 +61,17 @@ function make_archetypes() {
                 .attr("r", d => r(d.properties.population))
                 .attr("fill", d => color(d.properties.primary_race))
                 .attr("id", d => get_archetype_bubble_id(d.properties.archetype))
-                // TODO: migrate this fcn... it's too big for inline
                 .on("mouseover", function(d) {
                     var coords = projection(d.geometry.coordinates),
-                        neighborhood = d.properties.community.toLowerCase(),
-                        tt = ineq_map.append("g")
-                            .attr("id", get_tooltip_id(d.properties.community))
-                            .style("opacity", "0")
-                            .style("pointer-events", "none");
+                        neighborhood = d.properties.community.toLowerCase();
 
-                    var tt_background = tt.append("rect"), // placeholder
-                        tt_text = tt.append("text")
-                            .attr("alignment-baseline", "middle")
-                            .attr("transform", "translate(" + coords[0] + "," + coords[1] + ")")
-                            .attr("class", "d3axis")
-                            .style("text-transform", "capitalize")
-                            .text(neighborhood),
-                        bbox = tt.node().getBBox();
-                    // set background location
-                    tt_background
-                        .attr("x", bbox.x)
-                        .attr("y", bbox.y)
-                        .attr("width", bbox.width)
-                        .attr("height", bbox.height)
-                        .attr("fill", "white")
-                        .attr("opacity", "0.85");
+                    var tt = add_tooltip(ineq_map, 
+                                         coords[0], 
+                                         coords[1], 
+                                         neighborhood, 
+                                         id = get_tooltip_id(d.properties.community));
 
-                    // fancy fade-in
-                    tt.transition().style("opacity", "1")
-
+                    tt.select("text").style("text-transform", "capitalize")
                 })
                 .on("mouseout", function(d) {
                     ineq_map.selectAll("#" + get_tooltip_id(d.properties.community))

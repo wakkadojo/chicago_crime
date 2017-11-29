@@ -13,6 +13,8 @@ function make_crime_weighting_diff() {
 
     var color = d3.scaleOrdinal(d3.schemeCategory10)
 
+    var selected_type_global = null;
+
     var r = function(pct) { return Math.max(2, width * Math.sqrt(pct) / 10); },
         y_ctr = function(type) { return (color.domain().findIndex(c => c == type) + 0.5) * bubble_y_offset; },
         y_ctr_selected = function(type, selected_type) { 
@@ -23,6 +25,8 @@ function make_crime_weighting_diff() {
         }
 
     function get_bubble_cluster_id(type) { return "bubble_cluster_" + type + "_id"; }
+
+    function get_tooltip_id(crime) { return crime.replace(/\W/g, '') + "_weight_tooltip_id"; }
 
     // Draw
     d3.csv("static/data/recent_crime_ct_severity_stats.csv", function(csv_data) {
@@ -35,6 +39,7 @@ function make_crime_weighting_diff() {
                 description     : d.crime_description,
                 severity_pct    : +d.severity_pct,
                 crime_count_pct : +d.crime_count_pct,
+                mean_severity   : +d.mean_severity,
                 r_severity      : r(+d.severity_pct),
                 r_count         : r(+d.crime_count_pct)
             }
@@ -75,9 +80,11 @@ function make_crime_weighting_diff() {
                 .key(d => d.cluster)
                 .entries(nodes);
 
-        var initial_selection = color.domain()[0];
+        var initial_selection = color.domain()[0],
+            selected_type_global = initial_selection;
 
         function select_type_event(selected_type, crime_data) {
+            
             canvas.selectAll(".crime_share_bubble_cluster")
                 .transition()
                 .attr("transform", d => "translate(0," + y_ctr_selected(d.key, selected_type) + ")");
@@ -90,10 +97,10 @@ function make_crime_weighting_diff() {
             crime_labels.enter().append("text")
               .merge(crime_labels)
                 .transition()
-                .attr("class", "d3axis crime_label")
+                .attr("class", "d3tooltiptext crime_label")
                 .attr("alignment-baseline", "middle")
                 .attr("transform", d => "translate(" + (d.x + d.r/1.4 + 4) + "," + (d.y - d.r/1.4 - 4) + ") rotate(-45)")
-                .style("font-size", "14")
+                .attr("pointer-events", "none")
                 .text(d => d.description);
 
             crime_labels.exit().remove();
@@ -121,13 +128,13 @@ function make_crime_weighting_diff() {
 
             // update autotext
             d3.select("#crime_pct_severity_compare_autotext_div")
-                .html(make_autotext(selected_type, crime_data))
+                .html(make_autotext(selected_type, crime_data));
 
         }
 
         // bounding area
         var start_x = d3.min(nodes.map(d => d.x - d.r)),
-            end_x = width
+            end_x = width;
         
         // initialize sections
         var types = canvas.selectAll(".crime_share_bubble_cluster")
@@ -135,7 +142,7 @@ function make_crime_weighting_diff() {
           .enter().append("g")
             .attr("class", "crime_share_bubble_cluster")
             .attr("transform", d => "translate(0," + y_ctr_selected(d.key, initial_selection) + ")")
-            .attr("id", d => get_bubble_cluster_id(d.key))
+            .attr("id", d => get_bubble_cluster_id(d.key));
         // add labels
         types.append("g")
             .append("text")
@@ -145,17 +152,33 @@ function make_crime_weighting_diff() {
             .text(d => d.key);
         // create containers for crime weight type labels
         types.append("g")
-            .attr("class", "crime_share_wgt_type_container")
+            .attr("class", "crime_share_wgt_type_container");
         // create containers for individual crime labels
         types.append("g")
-            .attr("class", "crime_bubble_label_container")
+            .attr("class", "crime_bubble_label_container");
         // add center line
         types.append("line")
             .attr("stroke", "black")
             .attr("stroke-width", "1")
             .attr("x1", start_x).attr("x2", width)
-            .attr("y1", "0").attr("y2", "0")
+            .attr("y1", "0").attr("y2", "0");
 
+        // add rects on top for hover  
+        // -- note that we use a global variable to track if the item is already selected and a transition is underway
+        // -- that is because there is choppiness if we constantly enter / exit the selection to recalculate
+        //    the transition that's already in progress
+        types.append("rect")
+            .attr("id", "mouse_hover_type_selection")
+            .attr("width", width)
+            .attr("height", bubble_y_offset)
+            .attr("y", -bubble_y_offset/2)
+            .attr("opacity", "0")
+            .on("mouseover", function (d) { 
+                if(d.key != selected_type_global)
+                    select_type_event(d.key, d.values); 
+                selected_type_global = d.key;
+            });
+        
         // draw bubbles
         var crime_bubbles = types.append("g")
             .selectAll("circle")
@@ -165,18 +188,24 @@ function make_crime_weighting_diff() {
             .attr("cx", d => d.x)
             .attr("cy", d => d.y)
             .attr("r", d => d.r)
-        
-        // add rects on top for hover  
-        // -- note if this isn't top layer then mouse events over other elements produce choppiness
-        types.append("rect")
-            .attr("width", width)
-            .attr("height", bubble_y_offset)
-            .attr("y", -bubble_y_offset/2)
-            .attr("opacity", "0")
-            .on("mouseover", function (d) { select_type_event(d.key, d.values); });
+            .on("mouseover", function(d) {
+                var x = d.x + d.r/1.4 + 4,
+                    y = d.y + d.r/1.4 + 4;
+
+                var tt_text = '<tspan style="font-weight: bolder;" alignment-baseline="middle">' + d.mean_severity.toFixed(2) + "</tspan> year average sentencing";
+
+                var tt = add_tooltip(d3.select(this.parentNode), x, y, tt_text, id = get_tooltip_id(d.description))
+            })
+            .on("mouseout", function(d) {
+                d3.select(this.parentNode)
+                    .selectAll("#" + get_tooltip_id(d.description))
+                    .transition()
+                    .style("opacity", "0")
+                    .remove()
+            })
 
         // initialize
-        select_type_event(nest_nodes[0].key, nest_nodes[0].values)
+        select_type_event(nest_nodes[0].key, nest_nodes[0].values);
 
     });
 
