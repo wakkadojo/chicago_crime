@@ -249,7 +249,7 @@ function make_crime_weighting_diff() {
             under_crimes = make_over_crimes_text(under_crimes_arr, false)
 
 
-        var autotext = "When measuring total crime by count, " + crime_type_description + " represent " + total_pct_ct + " of total crime, which " + 
+        var autotext = "When measuring crime volume by the number of incidents, " + crime_type_description + " represent " + total_pct_ct + " of crime, which " + 
             over_under + " the " + total_pct_sev + " fraction when accounting for crime severity. " +
             "Within this category, considering crime volume solely by count " + under_crimes + ", and " + over_crimes + "."
 
