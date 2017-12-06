@@ -20,6 +20,30 @@
 
 <!-- TODO: migrate style touches! --> 
 <style> 
+
+.exhibit_container {
+    margin-left: auto; 
+    margin-right: auto; 
+    padding: 5px;
+    width: 810px; /* 800 + 2*padding */
+    display: block; 
+    background-color: whitesmoke
+}
+
+.exhibit_header {
+    font-size: 24;
+    font-weight: 400;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: maroon;
+    line-height: 0.75em;
+}
+
+.exhibit_description {
+    font-style: italic;
+    color: #777;
+    margin-bottom: 20px;
+}
+
 .d3axis { 
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 16px; 
@@ -28,7 +52,7 @@
 
 .autotext { 
     font-size: 16px; 
-    font-weight: 400; 
+    font-weight: 300; 
     line-height: 1.4;
 }
 
@@ -95,11 +119,18 @@
                 <li> What's big, what's small
                 <li> Note on difference of ILCS and IUCR: reported versus court decision can differ -- example is first degree murder (ref email from data owner)
             </ul>
+
+<div class="exhibit_container">
+<div class="exhibit_header">Exhibit 1: Sizing crimes by severity transforms prevalence</div>
+<div class="exhibit_description">Hover mouse over crime category for details, hover over single bubble for crime sentencing</div>
             
-            <svg width="800" height="550" id="crime_pct_severity_compare_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+            <svg width="800" height="550" id="crime_pct_severity_compare_svg"></svg>
             <p></p> 
-            <div id="crime_pct_severity_compare_autotext_div" class="autotext" style="width: 800; height: 140; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
+            <div id="crime_pct_severity_compare_autotext_div" class="autotext" style="width: 800; height: 100; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
             <script style="javascript" src="static/js/d3viz/crime_weighting_diff.js"></script>
+
+</div>
+
             <p></p>
 
             <h2 class="section-heading">Inequality on the rise</h2>
@@ -116,6 +147,10 @@
             </p>
              <blockquote style="text-align: center;">Crime Intensity = (# years served) / person if average prison sentence served in full for every crime reported</blockquote>
             <p>
+            
+<div class="exhibit_container">
+<div class="exhibit_header">Exhibit 2: Crime inequality on the rise</div>
+<div class="exhibit_description">Click on graph legend or summary table to explore crime categories and measures</div>
             
             <svg width="800" height="450" id="crime_top_bot_timeseries_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
             <p></p>
@@ -154,21 +189,24 @@
             </tr>
             </table>
             <p></p> 
-            <div id="crime_top_bot_autotext_div" class="autotext" style="width: 800; height: 200; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
+            <div id="crime_top_bot_autotext_div" class="autotext" style="width: 800; height: 170; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
             <script type="text/javascript" src="static/js/d3viz/crime_concentration_summary.js"></script>
+</div>
 
             <h2 class="section-heading">Three worlds in Chicago</h2>
             <ul>
                 <li> Summarize
                 <li> Note segregation
             </ul>
+
             
-            <table id="crime_archetype_tbl" cellpadding="5" class="d3axis tbl_container">
+<div class="exhibit_container">
+<div class="exhibit_header">Exhibit 3: Three worlds in Chicago</div>
+<div class="exhibit_description">Click on the three archetypes to explore, hover over bubble for neighborhood name</div>
+
+            <table id="crime_archetype_tbl" cellpadding="5">
                 <col width="225">
                 <col width="575">
-                <tr>
-                <th class="archetype_name_tbl tbl_header" style="text-align: center;" colspan=2>Three Worlds in Chicago</th>
-                </tr>
                 <tr>
                 <td id="affluents_arch_cell" class="archetype_selector_cell">
                     <div class="archetype_name_tbl">The Affluents</div>
@@ -193,6 +231,8 @@
             
             <div id="archetype_autotext_div" class="autotext" style="width: 800; height: 125; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
             <script type="text/javascript" src="static/js/d3viz/archetype.js"></script>
+
+</div>
 
             <h2 class="section-heading">Next Steps</h2>
             <ul>
