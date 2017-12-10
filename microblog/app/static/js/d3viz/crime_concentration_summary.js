@@ -214,8 +214,8 @@ function make_crime_concentration() {
                 d3.select("#top_bot_tbl_change")
                     .select("#" + ct + "_tbl_column")
                     .text(select_summary_table_text(
-                        (gini_end < gini_start ? "-" : "+") + Math.abs(gini_end - gini_start).toFixed(2),
-                        (crime_ratio_end < crime_ratio_start ? "-" : "+") + Math.abs(crime_ratio_end-crime_ratio_start).toFixed(1) + "x"
+                        (gini_end < gini_start ? "-" : "+") + Math.abs(gini_end.toFixed(2) - gini_start.toFixed(2)).toFixed(2),
+                        (crime_ratio_end < crime_ratio_start ? "-" : "+") + Math.abs(crime_ratio_end.toFixed(1)-crime_ratio_start.toFixed(1)).toFixed(1) + "x"
                     ));
 
                 // mouse interactions
@@ -359,7 +359,7 @@ function make_crime_concentration() {
                 .attr("text-anchor", "middle")
                 .attr("transform", "translate(" + (width/2.0) + "," + 40 + ")")
                 .attr("fill", "black")
-                .text("time");
+                .text("Time");
            
             crime_type_g.append("g")
                 .attr("class", "d3axis")

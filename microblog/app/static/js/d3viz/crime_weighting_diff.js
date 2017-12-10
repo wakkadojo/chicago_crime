@@ -65,6 +65,7 @@ function make_crime_weighting_diff() {
                 var d = Object.assign({}, old_d);
                 d.y = - d.r_count - bubble_y_buffer;
                 d.r = d.r_count;
+                d.pct = d.crime_count_pct;
                 d.wgt_type = "count";
                 return d;
             }),
@@ -72,7 +73,8 @@ function make_crime_weighting_diff() {
                 var d = Object.assign({}, old_d);
                 d.y = d.r_severity + bubble_y_buffer;
                 d.r = d.r_severity;
-                d.wgt_type = "severity";
+                d.pct = d.severity_pct;
+                d.wgt_type = "sentencing";
                 return d;
             }),
             nodes = pct_nodes.concat(sev_nodes),
@@ -192,7 +194,9 @@ function make_crime_weighting_diff() {
                 var x = d.x + d.r/1.4 + 7,
                     y = d.y + d.r/1.4 + 7;
 
-                var tt_text = '<tspan style="font-weight: bolder;" alignment-baseline="middle">' + d.mean_severity.toFixed(2) + "</tspan> year average sentencing";
+                var tt_text = 
+                    '<tspan x="0" dy="1.2em"><tspan style="font-weight: bolder;">' + parseInt(100*d.pct + 0.5) + "%</tspan> of all crime when weighted by " + d.wgt_type + "</tspan>" +
+                    (d.wgt_type == "count" ? "" : '<tspan x="0" dy="1.2em">Average sentencing is <tspan style="font-weight: bolder;">' + d.mean_severity.toFixed(2) + "</tspan> years</tspan>");
 
                 var tt = add_tooltip(d3.select(this.parentNode), x, y, tt_text, id = get_tooltip_id(d.description))
             })
@@ -212,7 +216,7 @@ function make_crime_weighting_diff() {
     // autotext
     function make_autotext(selected_type, crime_data) {
 
-        var data = crime_data.filter(d => d.wgt_type == "severity")
+        var data = crime_data.filter(d => d.wgt_type == "sentencing")
 
         var crime_type_description = "<b>" + (selected_type == "Society" ? "crimes against Society" : selected_type + " crimes") + "</b>",
             total_pct_ct_num = d3.sum(data.map(d => d.crime_count_pct)),

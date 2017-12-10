@@ -25,7 +25,7 @@ function make_archetypes() {
 
         d3.json("static/data/chicago_centroid.json", function(neighb_data) {
 
-            projection.fitExtent([[0, margin.top], [width, height - margin.bottom]], neighb_data)
+            projection.fitExtent([[margin.left, margin.top], [width, height - margin.bottom]], neighb_data)
 
             // plot chicago outline
             // this needs to be a nested async call to force it to fit the bubble projection
@@ -87,18 +87,18 @@ function make_archetypes() {
 
             ineq_map.append("g")
                 .attr("class", "race_legend_ordinal")
-                .attr("transform", "translate(" + (width - margin.right - 70) + "," + (margin.top/2) + ")");
+                .attr("transform", "translate(" + (width - margin.right - 100) + "," + (margin.top/2) + ")");
 
             var legend_ordinal = d3.legendColor()
                 .scale(ordinal)
-                .title("Main race")
+                .title("Race")
 
             ineq_map.select(".race_legend_ordinal")
                 .call(legend_ordinal);
             
             // fix the offset
             ineq_map.selectAll(".race_legend_ordinal").selectAll(".legendCells")
-                .attr("transform", "translate(5, 8)");
+                .attr("transform", "translate(0, 8)");
 
             // Draw population legend
             var pops_to_show = [ 10000, 70000 ];
@@ -108,7 +108,7 @@ function make_archetypes() {
 
             ineq_map.append("g")
                 .attr("class", "pop_size_legend")
-                .attr("transform", "translate(" + 35 + "," + (height - 140) + ")");
+                .attr("transform", "translate(" + 70 + "," + (height - 140) + ")");
 
             var legend_size = d3.legendSize()
                 .scale(linear_size)

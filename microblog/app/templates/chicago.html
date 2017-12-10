@@ -35,13 +35,13 @@
     font-weight: 400;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: maroon;
-    line-height: 0.75em;
 }
 
 .exhibit_description {
     font-style: italic;
     color: #777;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    line-height: 1em;
 }
 
 .d3axis { 
@@ -102,7 +102,7 @@
     font-weight: bold;
 }
 
-.archetype_description_tbl {
+.arcetype_description_tbl {
     font-size: 16px;
 }
 
@@ -111,98 +111,133 @@
 }
 
 </style>
-            <h2 class="section-heading">Summary</h2>
-            
-            <h2 class="section-heading">Sizing up crime</h2>
-            <ul>
-                <li> Weight by sentencing vs count, discussion of this
-                <li> What's big, what's small
-                <li> Note on difference of ILCS and IUCR: reported versus court decision can differ -- example is first degree murder (ref email from data owner)
-            </ul>
+
+<h2 class="section-heading">Executive Summary</h2>
+
+<ul>
+    <li>
+    <li> 
+    <li> 
+</ul>
+
+<h2 class="section-heading">Introduction</h1>
+
+<ul>
+    <li> Inequality in America: wealth. GDP growing, markets peaking, but median incomes are stubborn
+    <li> Inequality in America: education -- high school graduation rates, college, problem of high cost of college and impending automation wave (education crisis)
+    <li> Here we look at inequality in a different lens, considering the crime inequality in Chicago, and how that inequality has been chaning over the past 15 years. 
+    <li> We are able to do this by synthesizing the millions of crimes that have occurred over the past decades.
+    <li> Goals of crime synthesis
+        <ul>
+            <li> Understand how crime inequality is changing
+        </ul>
+    <li> Within this framework, we look to understand how crime is now, and how things have been changing over time
+</ul>
+
+<h2 class="section-heading">Principles of Crime Synthesis</h2>
+<ul>
+    <li> Weight by sentencing vs count, discussion of this
+    <li> What's big, what's small
+    <li> Note on difference of ILCS and IUCR: reported versus court decision can differ -- example is first degree murder (ref email from data owner)
+    <li> Principles for crime synthesis: 
+        <ul>
+            <li> Focus on what the pieces tell you, not the pieces themselves -- major crime categories, seasonality adjustments, major crime areas
+            <li> All crimes not created equal -- in order to compare and attribute crimes in an apples-to-apples way, we need to do more than just count them.
+            <li> Crimes affect a community -- when crimes are happening around you, you are affected indirectly (culture, children) or directly (a victim)
+        </ul>
+</ul>
 
 <div class="exhibit_container">
-<div class="exhibit_header">Exhibit 1: Sizing crimes by severity transforms prevalence</div>
-<div class="exhibit_description">Hover mouse over crime category for details, hover over single bubble for crime sentencing</div>
+    <div class="exhibit_header"><b>Exhibit 1:</b> Sizing crimes by severity transforms prevalence</div>
+    <div class="exhibit_description">
+        <div>Bubble size indicates how prevalent a given crime is for the specified weighting</div>
+        <div>Hover mouse over crime category (Property/Society/Violent) for a breakout of crime descriptions</div>
+        <div>Hover over single bubble for details</div>
+    </div>
             
-            <svg width="800" height="550" id="crime_pct_severity_compare_svg"></svg>
-            <p></p> 
-            <div id="crime_pct_severity_compare_autotext_div" class="autotext" style="width: 800; height: 100; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
-            <script style="javascript" src="static/js/d3viz/crime_weighting_diff.js"></script>
+    <svg width="800" height="550" id="crime_pct_severity_compare_svg"></svg>
+    <div id="crime_pct_severity_compare_autotext_div" class="autotext" style="width: 800; height: 100; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
+    <script style="javascript" src="static/js/d3viz/crime_weighting_diff.js"></script>
 
 </div>
 
-            <p></p>
+<p></p>
 
-            <h2 class="section-heading">Inequality on the rise</h2>
-            <ul>
-                <li> crime intensity: normalize total crime severity to population
-                <li> differentiate areas by community area + rationale why I used this
-                <li> Summarize: crime went down, inequality up
-                <li> Inequality 1: ratio of worst to best
-                <li> Inequality 2: Gini (link to external, this is not meant to teach what gini is)
-                <li> Discussion on magnitude of changes
-                <li> Note on timeseries: rolling year total to avoid seasonality
-            </ul>
+<h2 class="section-heading">Measuring Crime Inequality</h2>
+<ul>
+    <li> crime intensity: normalize total crime severity to population
+    <li> differentiate areas by community area + rationale why I used this
+    <li> Summarize: crime went down, inequality up
+    <li> Inequality 1: ratio of worst to best
+    <li> Inequality 2: Gini (link to external, this is not meant to teach what gini is)
+    <li> Discussion on magnitude of changes
+    <li> Note on timeseries: rolling year total to avoid seasonality
+</ul>
 
-            </p>
-             <blockquote style="text-align: center;">Crime Intensity = (# years served) / person if average prison sentence served in full for every crime reported</blockquote>
-            <p>
+</p>
+ <blockquote style="text-align: center;">Crime Intensity = (# years served) / person if average prison sentence served in full for every crime reported</blockquote>
+<p>
             
 <div class="exhibit_container">
-<div class="exhibit_header">Exhibit 2: Crime inequality on the rise</div>
-<div class="exhibit_description">Click on graph legend or summary table to explore crime categories and measures</div>
+    <div class="exhibit_header"><b>Exhibit 2:</b> Crime inequality on the rise</div>
+    <div class="exhibit_description">
+        <div>Click on graph legend or summary table to explore crime categories and measures</div>
+    </div>
             
-            <svg width="800" height="450" id="crime_top_bot_timeseries_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
-            <p></p>
-            <table id="crime_top_bot_summary_tbl" cellpadding="2" class="d3axis tbl_container">
-            <tr>
-                <td></td>
-                <td colspan=4 style="text-align: center;" id="tbl_top_bot_value_description">&nbsp;</td>
-            </tr>
-            <tr id="top_bot_tbl_header" class="tbl_header">
-                <th></th>
-                <th id="Property_tbl_column">Property</th>
-                <th id="Society_tbl_column">Society</th>
-                <th id="Violent_tbl_column">Violent</th>
-                <th id="Total_tbl_column">Total</th>
-            </tr>
-            <tr id="top_bot_tbl_change">
-                <th>Change</th>
-                <td id="Property_tbl_column"></td>
-                <td id="Society_tbl_column"></td>
-                <td id="Violent_tbl_column"></td>
-                <td id="Total_tbl_column"></td>
-            </tr>
-            <tr id="top_bot_tbl_endpoint">
-                <th id="tbl_top_bot_end_year">&nbsp;</th>
-                <td id="Property_tbl_column"></td>
-                <td id="Society_tbl_column"></td>
-                <td id="Violent_tbl_column"></td>
-                <td id="Total_tbl_column"></td>
-            </tr>
-            <tr id="top_bot_tbl_start">
-                <th id="tbl_top_bot_start_year">&nbsp;</th>
-                <td id="Property_tbl_column"></td>
-                <td id="Society_tbl_column"></td>
-                <td id="Violent_tbl_column"></td>
-                <td id="Total_tbl_column"></td>
-            </tr>
-            </table>
-            <p></p> 
-            <div id="crime_top_bot_autotext_div" class="autotext" style="width: 800; height: 170; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
-            <script type="text/javascript" src="static/js/d3viz/crime_concentration_summary.js"></script>
+    <svg width="800" height="450" id="crime_top_bot_timeseries_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+    <div style="line-height: 0.6em;">&nbsp;</div>
+    <table id="crime_top_bot_summary_tbl" cellpadding="2" class="d3axis tbl_container" style="width: 650px;">
+    <tr>
+        <td></td>
+        <td colspan=4 style="text-align: center;" id="tbl_top_bot_value_description">&nbsp;</td>
+    </tr>
+    <tr id="top_bot_tbl_header" class="tbl_header">
+        <th></th>
+        <th id="Property_tbl_column">Property</th>
+        <th id="Society_tbl_column">Society</th>
+        <th id="Violent_tbl_column">Violent</th>
+        <th id="Total_tbl_column">Total</th>
+    </tr>
+    <tr id="top_bot_tbl_change">
+        <th>Change</th>
+        <td id="Property_tbl_column"></td>
+        <td id="Society_tbl_column"></td>
+        <td id="Violent_tbl_column"></td>
+        <td id="Total_tbl_column"></td>
+    </tr>
+    <tr id="top_bot_tbl_endpoint">
+        <th id="tbl_top_bot_end_year">&nbsp;</th>
+        <td id="Property_tbl_column"></td>
+        <td id="Society_tbl_column"></td>
+        <td id="Violent_tbl_column"></td>
+        <td id="Total_tbl_column"></td>
+    </tr>
+    <tr id="top_bot_tbl_start">
+        <th id="tbl_top_bot_start_year">&nbsp;</th>
+        <td id="Property_tbl_column"></td>
+        <td id="Society_tbl_column"></td>
+        <td id="Violent_tbl_column"></td>
+        <td id="Total_tbl_column"></td>
+    </tr>
+    </table>
+    <p></p> 
+    <div id="crime_top_bot_autotext_div" class="autotext" style="width: 800; height: 170; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
+    <script type="text/javascript" src="static/js/d3viz/crime_concentration_summary.js"></script>
 </div>
 
-            <h2 class="section-heading">Three worlds in Chicago</h2>
-            <ul>
-                <li> Summarize
-                <li> Note segregation
-            </ul>
+<h2 class="section-heading">Three Worlds in Chicago</h2>
+<ul>
+    <li> Summarize
+    <li> Note segregation
+</ul>
 
             
 <div class="exhibit_container">
-<div class="exhibit_header">Exhibit 3: Three worlds in Chicago</div>
-<div class="exhibit_description">Click on the three archetypes to explore, hover over bubble for neighborhood name</div>
+<div class="exhibit_header"><b>Exhibit 3:</b> Three worlds in Chicago</div>
+<div class="exhibit_description">
+    <div>Click on the three archetypes to explore</div>
+    <div>Hover over a bubble on the map for neighborhood details</div>
+</div>
 
             <table id="crime_archetype_tbl" cellpadding="5">
                 <col width="225">
@@ -210,10 +245,10 @@
                 <tr>
                 <td id="affluents_arch_cell" class="archetype_selector_cell">
                     <div class="archetype_name_tbl">The Affluents</div>
-                    <div class="archetype_description_tbl">Growing population of top-earners seeing the best improvements in crime and income</div>
+                    <div class="archetype_description_tbl">Growing population of top-earners seeing the best long-term improvements in crime and income</div>
                 </td>
                     <td rowspan=3 id="crime_ineq_selected_map">
-                        <svg width="450" height="450" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+                        <svg width="550" height="450" style="margin-left: auto; margin-right: auto; display: block;"></svg>
                     </td>
                 </tr>
                 <tr><td id="working_arch_cell" class="archetype_selector_cell">
