@@ -134,18 +134,40 @@
     <li> Within this framework, we look to understand how crime is now, and how things have been changing over time
 </ul>
 
-<h2 class="section-heading">Principles of Crime Synthesis</h2>
+<h2 class="section-heading">Synthesizing Crimes</h2>
+
+<p>
+Understanding crime holistically definitively means we need to focus on themes rather than details -- that is, we need to look at aggregates of crime. This requires an apples-to-apples comparison of crimes. Typically, municipalities report their total crime in terms of crime occurrence (the number of crimes per year). This was wholly unsatisfying.
+</p>
+
+<p>
+For example, there were <font color="red">XX</font> incidents of Vandalism in 2017 and <font color="red">YY</font> incidents of Robbery. Which is a bigger problem? How much total crime was there? If there are 500 fewer Vandalism incidents, but 500 more Robbery incidents (Robbery being a far more serious crime), has crime stayed constant, or has it increased?
+</p>
+
+<p>
+Furthermore, in order to look at crime distributions and inequality, we need to say which Chicagoans are being affected by which crimes.
+</p>
+
+<p>
+This motivates a framework for synthesizing crime rates, so that we can aggregate crimes of different types, and be able to look at and compare broad groups of crimes. Note that here we are interested in the long-term behavior of crime in Chicago.
+</p>
 <ul>
-    <li> Weight by sentencing vs count, discussion of this
-    <li> What's big, what's small
-    <li> Note on difference of ILCS and IUCR: reported versus court decision can differ -- example is first degree murder (ref email from data owner)
-    <li> Principles for crime synthesis: 
+    <li> Focus on what the pieces tell you, not the pieces themselves
         <ul>
-            <li> Focus on what the pieces tell you, not the pieces themselves -- major crime categories, seasonality adjustments, major crime areas
-            <li> All crimes not created equal -- in order to compare and attribute crimes in an apples-to-apples way, we need to do more than just count them.
-            <li> Crimes affect a community -- when crimes are happening around you, you are affected indirectly (culture, children) or directly (a victim)
+            <li> Look at Total city crime and the three major crime categories: Property, Crimes Against Society, and Violent Crimes
+            <li> Seasonally adjust the crime rates to remove distracting repeated annual variation
         </ul>
+    <li> All crimes not created equal: in order to compare and attribute crimes we weight crimes by how severe they are
+    <li> Crimes affect a community: when crimes are happening around you, you are affected indirectly (culture, children) or directly (a victim)
 </ul>
+
+<p>
+In order to size up a single crime as reported we used the average crime sentencing from a dataset of Cook County crime sentencing heroically gathered by the <a href="http://convictions.smartchicagoapps.org/#intro">Convicted in Cook</a> team. The convictions data for 2005 to 2009 was gathered by working with the Chicago courts over a 2 year period. Note, however, there's a difference between crime convictions according to the Illinois Compiled Statutes (ILCS codes) and the crime as reported via the Illinois Uniform Crime Reporting (IUCR codes). These are not exactly corresponding, since much of the sentencing is determiined in court as details of the case (actual infringement, crime intent, etc.) are elucidated. Nevertheless, we could correspond the sentencing information (ILCS) with the reported crime (IUCR) via another <a href="https://github.com/sc3/python-iucr">heroic effort</a>.
+</p>
+
+<p>
+Below you can see how weighting crimes by their sentencing in fact changes how prevalent different crimes are. In particular, Property crimes are underestimated when looking at frequency alone. Crime against Society is dramatically reduced when weighting by crime severity, which is understandable as these are not Index crimes (serious crimes or crimes with malicious intent). We also show a slightly more granular view of the crimes in the three major crime categories to get a sense of their composition. 
+</p>
 
 <div class="exhibit_container">
     <div class="exhibit_header"><b>Exhibit 1:</b> Sizing crimes by severity transforms prevalence</div>
@@ -161,9 +183,16 @@
 
 </div>
 
-<p></p>
+<p>
+Other decisions regarding crime synthesis were handling seasonality and crime distribution among the population. Seasonality was removed by looking at crimes via a one year moving average -- this is a simple way to remove both seasonal variation and random variation. We assumed that a population in a <a href="https://en.wikipedia.org/wiki/Community_areas_in_Chicago">Chicago Community Area</a> were equally affected by crimes in the community area. Community areas were used because they have not been redistricted through time, unlike things like Chicago Wards or Congressional Districts, and because they correspond to familiar neighborhoods.
+</p>
 
-<h2 class="section-heading">Measuring Crime Inequality</h2>
+<h2 class="section-heading">Measuring Crime and Crime Inequality</h2>
+
+<p>
+XXX
+</p>
+
 <ul>
     <li> crime intensity: normalize total crime severity to population
     <li> differentiate areas by community area + rationale why I used this
@@ -235,7 +264,7 @@
 <div class="exhibit_container">
 <div class="exhibit_header"><b>Exhibit 3:</b> Three worlds in Chicago</div>
 <div class="exhibit_description">
-    <div>Click on the three archetypes to explore</div>
+    <div>Click on the three archetypes on the left to explore</div>
     <div>Hover over a bubble on the map for neighborhood details</div>
 </div>
 
