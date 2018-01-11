@@ -1,11 +1,11 @@
 function make_crime_concentration() {
 
     var crime_types = ["Property", "Society", "Violent", "Total"],
-        ineq_types = ["Crime Gini coefficient", "Crime distribution"],
+        ineq_types = ["Crime Gini coefficient", "Crime ratio"],
         ineq_properties = {
             "Crime Gini coefficient" : {csv_preprocess: csv_single_type_preprocess_gini
                                         },
-            "Crime distribution"     : {csv_preprocess: csv_single_type_preprocess_concentration
+            "Crime ratio"            : {csv_preprocess: csv_single_type_preprocess_concentration
                                         }
         };
 
@@ -186,13 +186,13 @@ function make_crime_concentration() {
 
                 function select_summary_table_text(gini_text, concentration_text) {
                     return {"Crime Gini coefficient" : gini_text, 
-                            "Crime distribution"     : concentration_text
+                            "Crime ratio"            : concentration_text
                            }[ineq];
                 }
 
                 function select_value_description() {
                     return {"Crime Gini coefficient" : "Crime Gini coefficients",
-                            "Crime distribution"     : "Ratio of (crime in most severe 25%) to (crime in least severe 25%)"
+                            "Crime ratio"            : "Ratio of (crime in most severe 25%) to (crime in least severe 25%)"
                            }[ineq];
                 }
 
@@ -282,7 +282,7 @@ function make_crime_concentration() {
                 value_change = Math.abs(high_low_ratio_end - high_low_ratio_start).toFixed(1),
                 ratio_is_up_check = (high_start/low_start) < (high_end/low_end),
                 ratio_is_up = ratio_is_up_check ? "<b>up</b>" : "<b>down</b>",
-                ineq_change_sent_start = ratio_is_up_check ? "Meanwhile, crime inequality has been <b>on the rise</b>" : "Inequality has been <b>decreasing</b>",
+                ineq_change_sent_start = ratio_is_up_check ? "Meanwhile, this type of crime inequality has been <b>on the rise</b>" : "This type of inequality has been <b>decreasing</b>",
                 inequality_incr_decr = ratio_is_up_check ? "<b>increased</b>" : "<b>decreased</b>",
                 inequality_incr_decr_present = ratio_is_up_check ? "<b>increase</b>" : "<b>decrease</b>",
                 // reductions
@@ -322,7 +322,7 @@ function make_crime_concentration() {
                 '<div style="line-height: 0.6em;"><br></div>' +
                 "Areas with high " + area_crime_type_desc + " presently experience <b>" + high_low_ratio_end + "x</b> " +
                 (type == "Total" ? "the" : "this type of") + " crime as compared to low-crime areas. " + 
-                "This inequality ratio is " + ratio_is_up + "&nbsp;" + "<b>" + value_change + "x</b> over the past " + year_diff + " years. " +
+                "This crime ratio is " + ratio_is_up + "&nbsp;" + "<b>" + value_change + "x</b> over the past " + year_diff + " years. " +
                 "The observed " + inequality_incr_decr_present + " is " + compare_to_ratio_change + " with the " + 
                 "change in the " + city_crime_type_desc + " Gini coefficient, which has "  + 
                 gini_incr_decr + " from " + gini_start + " to " + gini_end + " over the same period.";

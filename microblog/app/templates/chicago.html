@@ -16,7 +16,7 @@
           <!-- <div class="col-lg-8 col-md-10 mx-auto"> -->
           <div class="col-md-10 mx-auto">
 
-<p style="color: red;">Dont forget to turn off debug flask</p>
+<p style="color: red;"><b>Draft</b></p>
 
 <!-- TODO: migrate style touches! --> 
 <style> 
@@ -40,8 +40,8 @@
 .exhibit_description {
     font-style: italic;
     color: #777;
-    margin-bottom: 30px;
-    line-height: 1em;
+    margin-bottom: 20px;
+    line-height: 1.2em;
 }
 
 .d3axis { 
@@ -102,7 +102,7 @@
     font-weight: bold;
 }
 
-.arcetype_description_tbl {
+.archetype_description_table {
     font-size: 16px;
 }
 
@@ -146,15 +146,12 @@ For example, there were <font color="red">XX</font> incidents of Vandalism in 20
 
 <p>
 Furthermore, in order to look at crime distributions and inequality, we need to say which Chicagoans are being affected by which crimes.
-</p>
-
-<p>
 This motivates a framework for synthesizing crime rates, so that we can aggregate crimes of different types, and be able to look at and compare broad groups of crimes. Note that here we are interested in the long-term behavior of crime in Chicago.
 </p>
 <ul>
     <li> Focus on what the pieces tell you, not the pieces themselves
         <ul>
-            <li> Look at Total city crime and the three major crime categories: Property, Crimes Against Society, and Violent Crimes
+            <li> Look at Total city crime and the three major crime categories: Property Crime, Crime against Society, and Violent Crime
             <li> Seasonally adjust the crime rates to remove distracting repeated annual variation
         </ul>
     <li> All crimes not created equal: in order to compare and attribute crimes we weight crimes by how severe they are
@@ -184,31 +181,70 @@ Below you can see how weighting crimes by their sentencing in fact changes how p
 </div>
 
 <p>
-Other decisions regarding crime synthesis were handling seasonality and crime distribution among the population. Seasonality was removed by looking at crimes via a one year moving average -- this is a simple way to remove both seasonal variation and random variation. We assumed that a population in a <a href="https://en.wikipedia.org/wiki/Community_areas_in_Chicago">Chicago Community Area</a> were equally affected by crimes in the community area. Community areas were used because they have not been redistricted through time, unlike things like Chicago Wards or Congressional Districts, and because they correspond to familiar neighborhoods.
+Other decisions regarding crime synthesis were handling seasonality and crime distribution among the population. We handled seasonality by looking at crimes via a one year moving average -- this is a simple way to remove both seasonal variation and random variation. We assumed that a population in a <a href="https://en.wikipedia.org/wiki/Community_areas_in_Chicago">Chicago Community Area</a> were equally affected by crimes in the community area. Community areas were used because they have not been redistricted through time, unlike things like Chicago Wards or Congressional Districts, and because they correspond to familiar neighborhoods.
 </p>
 
 <h2 class="section-heading">Measuring Crime and Crime Inequality</h2>
 
 <p>
-XXX
+To build on the above method of being able to compare crimes <i>relatively</i>, we need an <i>objective</i> measurement of how much crime any given person is experiencing in a given neighborhood. This measurement we call <i>Crime Intensity</i> and aims to measure how much total crime there is per person per year, and varies through time geographically throughout the city. From this, we can look at distributions among the Chicago population. In plain english, this means ... 
 </p>
+
+ <blockquote style="text-align: center; color: black;">Crime Intensity = (# years served) / person if average prison sentence served in full for every crime reported</blockquote>
+
+<p>Before we dive into the exhibit below capturing crime levels, distributions, and inequality over time, let us develop a little bit of intuition behind these numbers. Lets look at a Total Crime Intensity of 0.15, similar to the Chicago long term average, as an example. Assuming the fraction of the population in serving sentences is unchanged, this would correspond to 15% of the population serving sentences at any given time.
+</p>
+
+<p> That means, if every crime reported was served in full, 15% of Chicago would be in prison. This is clearly a huge number as nationally in the USA this rate is 1%. This is because, in fact, most crimes are unsolved, and most sentences are not served in full. When we look at the arrest rate for a reported crime (28% in Chicago), the fraction of prison sentence served (75% nationally) and the fraction of arrests leading to conviction (75% nationally), we end up with 2% of Chicago in prison. This is far closer to the national average. Further noting that Chicago is an urban population with a large Black population, which unfortunately has a far higher prison rate than other races, this objective Crime Intensity number makes a lot of sense.
+</p>
+
+<p>
+We present two ways of measuring crime inequality through time: 
+    <ol>
+        <li>The <b>crime ratio</b>: a simple measure of the amount of crime in high-crime neighborhoods as compared to that of low-crime neighborhoods
+        <li>The crime <b><a href="https://en.wikipedia.org/wiki/Gini_coefficient">Gini coefficient</a></b>, which borrows from measuring wealth inequality across a population
+    </ol>
+Examples of these measures is shown in Exhibit 2 to help understand how crime disrtributions in the city are represented by these measures.
+</p>
+
+<div class="exhibit_container">
+<div class="exhibit_header"><b>Exhibit 2:</b> Toy example of inequality measures</div>
+<div class="exhibit_description">
+    <div>
+        Play around by dragging the tops of the bars in the four neighborhoods
+            <ul>
+                <li>Can you make a Gini coefficient of 0?
+                <li>Given these dials, how high can you get the coefficient?
+                <li>Why can't you get the coefficient to be 1? 
+                    <ul><li>Hint: it's not only because we limited the minimum crime intensity in the example</ul>
+            </ul>
+    </div>
+</div>
+<div class="autotext" style="margin-bottom: 0.6em">
+In the top figure we show an interactive crime distribution for example neighborhoods of equal population. These distributions apply equal crime levels to the population in a given neighborhood, the same simplification used in the actual inequality measurements.
+</div>
+<div class="autotext">
+One way of looking at inequality is the <b>crime ratio</b>: a measurement of how much more crime there is in bad neighborhoods as compared to good ones. This is shown above the top figure.
+Another way to gauge inequality is with the <b>Gini coefficient</b>, which is related to the area under the "Lorenz curve" shown in the bottom figure. 
+    <ul>
+        <li>The measure lies between 0 and 1, where a higher value indicates more inequality
+        <li>A trianglular area in the bottom figure means crime is evenly distributed, and has a Gini coefficient of 0
+        <li>The Gini coefficient synthesizes the inequality across the <i>entire</i> population, versus the crime ratio just considering the edges
+    </ul>
+</div>
+<svg width="800" height="575" id="gini_example_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+<script style="javascript" src="static/js/d3viz/inequality_toy_example.js"></script>
+</div>
 
 <ul>
-    <li> crime intensity: normalize total crime severity to population
-    <li> differentiate areas by community area + rationale why I used this
-    <li> Summarize: crime went down, inequality up
-    <li> Inequality 1: ratio of worst to best
-    <li> Inequality 2: Gini (link to external, this is not meant to teach what gini is)
+    <li> Summarize: crime went down, inequality up because more reduction in low crime
+    <li> Click down into crime types
     <li> Discussion on magnitude of changes
-    <li> Note on timeseries: rolling year total to avoid seasonality
 </ul>
 
-</p>
- <blockquote style="text-align: center;">Crime Intensity = (# years served) / person if average prison sentence served in full for every crime reported</blockquote>
-<p>
             
 <div class="exhibit_container">
-    <div class="exhibit_header"><b>Exhibit 2:</b> Crime inequality on the rise</div>
+    <div class="exhibit_header"><b>Exhibit 3:</b> Crime inequality on the rise</div>
     <div class="exhibit_description">
         <div>Click on graph legend or summary table to explore crime categories and measures</div>
     </div>
@@ -254,6 +290,15 @@ XXX
     <script type="text/javascript" src="static/js/d3viz/crime_concentration_summary.js"></script>
 </div>
 
+<p>Color:
+<ul>
+    <li> Average crime intensity increase
+    <li> Stubbornness of Violent Crime (inequality hasn't changed but it hasn't decreased by much either)
+    <li> Because of flatness of Violent, and smallness of Society, driven mainly by Property, which mainly increased before 2008 then stayed constant
+</ul>
+</p>
+
+
 <h2 class="section-heading">Three Worlds in Chicago</h2>
 <ul>
     <li> Summarize
@@ -262,7 +307,7 @@ XXX
 
             
 <div class="exhibit_container">
-<div class="exhibit_header"><b>Exhibit 3:</b> Three worlds in Chicago</div>
+<div class="exhibit_header"><b>Exhibit 4:</b> Three worlds in Chicago</div>
 <div class="exhibit_description">
     <div>Click on the three archetypes on the left to explore</div>
     <div>Hover over a bubble on the map for neighborhood details</div>
@@ -298,8 +343,18 @@ XXX
 
 </div>
 
+            <h2 class="section-heading">Tradeoffs</h2>
+            <ul>
+                <li> Note on const approximation -- examples of gradients in crime, large intra-community crime variation, people working vs not ...
+                <li> Lack of exact sentencing data, mapping nontrivial
+                <li> Potentially missing other factors necessary for normalization (i.e. am I not apples to apples through time), such as shifting demographics, crime reporting policy changes, secular shifts in confounding variables like weather. Also missing things like contextualization relative to rest of USA or developed world.
+                <li> Note: believe none of these is significant enough to affect conclusions
+            </ul>
+
             <h2 class="section-heading">Next Steps</h2>
             <ul>
+                <li> Drivers, drivers, drivers..... politics? incomes? fleeing population?
+                <li> Challenges? Debt? Institutions? Education? Culture?
                 <li> Exploration of drivers and understanding top reasons why inequality has changed
                 <li> Get a better measure of crime severity + how to source it (such as working with CPD to get real convictions info)
                 <li> Holistic measurements of wealth, including real estate value, foreclosures + how to source it
