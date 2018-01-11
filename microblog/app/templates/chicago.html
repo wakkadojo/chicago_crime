@@ -115,9 +115,10 @@
 <h2 class="section-heading">Executive Summary</h2>
 
 <ul>
-    <li>
-    <li> 
-    <li> 
+    <li> Crime has decreased by over 30% since 2002
+    <li> The benefits of this decrease have largely been absent from the worst-off populations, leading to an increase in crime inequality
+    <li> Violent crime is a particular issue, as it has decreased the least of all major crime categories, and remains extremely concentrated in distressed areas
+    <li> ... (needs more?)
 </ul>
 
 <h2 class="section-heading">Introduction</h1>
@@ -125,7 +126,7 @@
 <ul>
     <li> Inequality in America: wealth. GDP growing, markets peaking, but median incomes are stubborn
     <li> Inequality in America: education -- high school graduation rates, college, problem of high cost of college and impending automation wave (education crisis)
-    <li> Here we look at inequality in a different lens, considering the crime inequality in Chicago, and how that inequality has been chaning over the past 15 years. 
+    <li> Here we look at inequality in a different lens, considering the crime inequality in Chicago, and how that inequality has been changing over the past 15 years. 
     <li> We are able to do this by synthesizing the millions of crimes that have occurred over the past decades.
     <li> Goals of crime synthesis
         <ul>
@@ -159,7 +160,7 @@ This motivates a framework for synthesizing crime rates, so that we can aggregat
 </ul>
 
 <p>
-In order to size up a single crime as reported we used the average crime sentencing from a dataset of Cook County crime sentencing heroically gathered by the <a href="http://convictions.smartchicagoapps.org/#intro">Convicted in Cook</a> team. The convictions data for 2005 to 2009 was gathered by working with the Chicago courts over a 2 year period. Note, however, there's a difference between crime convictions according to the Illinois Compiled Statutes (ILCS codes) and the crime as reported via the Illinois Uniform Crime Reporting (IUCR codes). These are not exactly corresponding, since much of the sentencing is determiined in court as details of the case (actual infringement, crime intent, etc.) are elucidated. Nevertheless, we could correspond the sentencing information (ILCS) with the reported crime (IUCR) via another <a href="https://github.com/sc3/python-iucr">heroic effort</a>.
+In order to size up a single crime as reported we used the average crime sentencing from a dataset of Cook County crime sentencing heroically gathered by the <a href="http://convictions.smartchicagoapps.org/#intro">Convicted in Cook</a> team. The convictions data for 2005 to 2009 was gathered by working with the Chicago courts over a 2 year period. Note, however, there's a difference between crime convictions according to the Illinois Compiled Statutes (ILCS codes) and the crime as reported via the Illinois Uniform Crime Reporting (IUCR codes). These are not exactly corresponding, since much of the sentencing is determined in court as details of the case (actual infringement, crime intent, etc.) are elucidated. Nevertheless, we could correspond the sentencing information (ILCS) with the reported crime (IUCR) via another <a href="https://github.com/sc3/python-iucr">heroic effort</a>.
 </p>
 
 <p>
@@ -181,13 +182,13 @@ Below you can see how weighting crimes by their sentencing in fact changes how p
 </div>
 
 <p>
-Other decisions regarding crime synthesis were handling seasonality and crime distribution among the population. We handled seasonality by looking at crimes via a one year moving average -- this is a simple way to remove both seasonal variation and random variation. We assumed that a population in a <a href="https://en.wikipedia.org/wiki/Community_areas_in_Chicago">Chicago Community Area</a> were equally affected by crimes in the community area. Community areas were used because they have not been redistricted through time, unlike things like Chicago Wards or Congressional Districts, and because they correspond to familiar neighborhoods.
+Other decisions regarding crime synthesis were handling seasonality and crime distribution among the population. We handled seasonality by looking at crimes via a one year moving average -- this is a simple way to remove both seasonal variation and random variation. We assumed that the population in a <a href="https://en.wikipedia.org/wiki/Community_areas_in_Chicago">Chicago Community Area</a> was equally affected by crimes in the community area. Community areas were used because they have not been redistricted through time, unlike regions like Chicago Wards or Congressional Districts, and because Community Areas correspond to familiar neighborhoods.
 </p>
 
 <h2 class="section-heading">Measuring Crime and Crime Inequality</h2>
 
 <p>
-To build on the above method of being able to compare crimes <i>relatively</i>, we need an <i>objective</i> measurement of how much crime any given person is experiencing in a given neighborhood. This measurement we call <i>Crime Intensity</i> and aims to measure how much total crime there is per person per year, and varies through time geographically throughout the city. From this, we can look at distributions among the Chicago population. In plain english, this means ... 
+To build on the above method of being able to compare crimes <i>relatively</i>, we need an <i>objective</i> measurement of how much crime any given person is experiencing in a given neighborhood. This measurement we call <i>Crime Intensity</i> and aims to measure how much total crime there is per person per year, and varies through time geographically throughout the city. From this, we can look at distributions among the Chicago population. In plain English, this means ... 
 </p>
 
  <blockquote style="text-align: center; color: black;">Crime Intensity = (# years served) / person if average prison sentence served in full for every crime reported</blockquote>
@@ -204,7 +205,7 @@ We present two ways of measuring crime inequality through time:
         <li>The <b>crime ratio</b>: a simple measure of the amount of crime in high-crime neighborhoods as compared to that of low-crime neighborhoods
         <li>The crime <b><a href="https://en.wikipedia.org/wiki/Gini_coefficient">Gini coefficient</a></b>, which borrows from measuring wealth inequality across a population
     </ol>
-Examples of these measures is shown in Exhibit 2 to help understand how crime disrtributions in the city are represented by these measures.
+Examples of these measures is shown below to help understand how crime distributions in the city are represented by these measures.
 </p>
 
 <div class="exhibit_container">
@@ -228,7 +229,7 @@ One way of looking at inequality is the <b>crime ratio</b>: a measurement of how
 Another way to gauge inequality is with the <b>Gini coefficient</b>, which is related to the area under the "Lorenz curve" shown in the bottom figure. 
     <ul>
         <li>The measure lies between 0 and 1, where a higher value indicates more inequality
-        <li>A trianglular area in the bottom figure means crime is evenly distributed, and has a Gini coefficient of 0
+        <li>A triangular area in the bottom figure means crime is evenly distributed, and has a Gini coefficient of 0
         <li>The Gini coefficient synthesizes the inequality across the <i>entire</i> population, versus the crime ratio just considering the edges
     </ul>
 </div>
@@ -236,17 +237,39 @@ Another way to gauge inequality is with the <b>Gini coefficient</b>, which is re
 <script style="javascript" src="static/js/d3viz/inequality_toy_example.js"></script>
 </div>
 
-<ul>
-    <li> Summarize: crime went down, inequality up because more reduction in low crime
-    <li> Click down into crime types
-    <li> Discussion on magnitude of changes
-</ul>
+<p>
 
+Since 2002, where our measurements begin, crime throughout the city has reduced dramatically, yet inequality still remains high and rising.
+
+<ul>
+    <li> Crime is felt highly unevenly throughout the city: the high crime quartile experiences over <b>5x</b> the crime as the low-crime quartile
+    <li> This inequality has increased measurably since 2002, where our measurements begin
+    <li> Total crime is down by over 30%, and dramatic progress has been made against crime in general in Chicago
+</ul>
+</p>
+
+<p>
+Adding some color to these measurements, the increase in Total crime inequality has been driven mainly by an increase in Property crime inequality before 2008. This can clearly be seen in the measurements of the crime Gini coefficient over time. Property crime is the main driver because Violent crimes have been stubborn, where inequality has remained disturbingly high and crime levels have barely decreased. Furthermore, while inequality has soared in Crime against Society, its total crime share is roughly 10% of all crime in the city, rendering Crime against Society as largely irrelevant.
+</p>
+
+<p>
+It also is worth mentioning that, while not shown here, the average severity of a crime has in fact increased over time. This is due to the fact that nonviolent crimes have dropped whereas violent crimes, which typically are higher severity than the average crime, have only mildly decreased.
+</p>
+
+<p>
+In essence a reasonable analogy to the behavior we see with Crime is in fact US incomes. Over the past decades in the US, as noted in <a href="https://fred.stlouisfed.org/series/MEHOINUSA672N">research by the Fed</a>, median incomes in the USA have remained flat despite significant economic growth. That is, the benefits of economic growth has not translated into higher earnings overall. This is not to say that the crime situation in Chicago is a result of diverging classes in the US, but the parallel is nonetheless interesting.
+</p>
+
+<p>
+Feel free to interactively explore these measurements below. You are able to look at crime levels as well as inequality measures across different categories and through time.
+</p>
             
 <div class="exhibit_container">
-    <div class="exhibit_header"><b>Exhibit 3:</b> Crime inequality on the rise</div>
+    <div class="exhibit_header"><b>Exhibit 3:</b> Crime down amid rising inequality</div>
     <div class="exhibit_description">
-        <div>Click on graph legend or summary table to explore crime categories and measures</div>
+        <div>Click on graph legend <b>Gini coefficient</b> or <b>Crime ratio</b> to explore the different inequality measures</div>
+        <div>Click on graph legend crime type to view inequality measures for crime sub-categories</div>
+        <div>Can also click table to view different crime sub-categories</div>
     </div>
             
     <svg width="800" height="450" id="crime_top_bot_timeseries_svg" style="margin-left: auto; margin-right: auto; display: block;"></svg>
@@ -290,21 +313,18 @@ Another way to gauge inequality is with the <b>Gini coefficient</b>, which is re
     <script type="text/javascript" src="static/js/d3viz/crime_concentration_summary.js"></script>
 </div>
 
-<p>Color:
-<ul>
-    <li> Average crime intensity increase
-    <li> Stubbornness of Violent Crime (inequality hasn't changed but it hasn't decreased by much either)
-    <li> Because of flatness of Violent, and smallness of Society, driven mainly by Property, which mainly increased before 2008 then stayed constant
-</ul>
+<h2 class="section-heading">Painting Crime Measurements on the Chicago Canvas</h2>
+
+<p>
+To put the illuminate the crime levels and crime inequality we measured, lets paint a portrait of the different communities in the city in the context of the crime experienced. Strikingly, but unfortunately not incredibly surprising, looking at the high-, average-, and low-crime groups of neighborhoods divides the city into three geographically and demographically segregated worlds:
+    <ul>
+        <li><b>Affluents:</b> A mostly white population, and the only subgroup experiencing population growth. This archetype has low crime rates, has experienced dramatic increases in earnings, and has surprisingly experienced a recent uptick in crime.
+        <li><b>Diverse Middle Class:</b> A mixed-race middle-class population comprising half the city and representative of the mean crime trends.
+        <li><b>Distressed:</b> Predominantly Black population with the highest crime rate and elevated Violent crime. The only archetype with shrinking incomes and some neighborhoods that experienced little to no crime reduction since 2002.
+    </ul>
+
+These archetypes can be explored in the following exhibit.
 </p>
-
-
-<h2 class="section-heading">Three Worlds in Chicago</h2>
-<ul>
-    <li> Summarize
-    <li> Note segregation
-</ul>
-
             
 <div class="exhibit_container">
 <div class="exhibit_header"><b>Exhibit 4:</b> Three worlds in Chicago</div>
@@ -327,11 +347,11 @@ Another way to gauge inequality is with the <b>Gini coefficient</b>, which is re
                 </tr>
                 <tr><td id="working_arch_cell" class="archetype_selector_cell">
                     <div class="archetype_name_tbl">The Diverse Working Class</div>
-                    <div class="archetype_description_tbl">Middle class of chicago experiencing modest income and marked crime improvements</div>
+                    <div class="archetype_description_tbl">Middle class of Chicago experiencing modest income and marked crime improvements</div>
                 </td></tr>
                 <tr><td id="distressed_arch_cell" class="archetype_selector_cell">
                     <div class="archetype_name_tbl">The Distressed</div>
-                    <div class="archetype_description_tbl">Crime is high, it is flat or decreasing slowly, and incomes are flat or decreasing</div>
+                    <div class="archetype_description_tbl">Crime is high, flat or decreasing slowly, and incomes are flat or decreasing</div>
                 </td></tr>
             </table>
 
@@ -343,10 +363,10 @@ Another way to gauge inequality is with the <b>Gini coefficient</b>, which is re
 
 </div>
 
-            <h2 class="section-heading">Tradeoffs</h2>
+            <h2 class="section-heading">Challenges, Unknowns, and Caveats</h2>
             <ul>
                 <li> Note on const approximation -- examples of gradients in crime, large intra-community crime variation, people working vs not ...
-                <li> Lack of exact sentencing data, mapping nontrivial
+                <li> Lack of exact sentencing data, mapping to ILCS was nontrivial and made approximations
                 <li> Potentially missing other factors necessary for normalization (i.e. am I not apples to apples through time), such as shifting demographics, crime reporting policy changes, secular shifts in confounding variables like weather. Also missing things like contextualization relative to rest of USA or developed world.
                 <li> Note: believe none of these is significant enough to affect conclusions
             </ul>

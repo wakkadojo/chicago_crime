@@ -18,6 +18,11 @@ p {
   font-weight: 300;
   line-height: 1.25;
   margin: 20px 0; }
+p a { 
+  text-decoration: underline; }
+
+li a {
+  text-decoration: underline; }
 
 h1,
 h2,
@@ -30,7 +35,6 @@ h6 {
 
 a {
   color: #333333;
-  text-decoration: underline;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   transition: all 0.2s; }
