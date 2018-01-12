@@ -12,7 +12,7 @@ from app import app
 #        background_img_name = "home-bg.jpg"
 #    )
 
-#@app.route('/')
+@app.route('/')
 @app.route('/index')
 @app.route('/chicago')
 def chicago():
