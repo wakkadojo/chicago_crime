@@ -16,10 +16,20 @@
           <!-- <div class="col-lg-8 col-md-10 mx-auto"> -->
           <div class="col-md-10 mx-auto">
 
-<p style="color: red;"><b>Draft</b></p>
+<p style="color: red;"><b><b>Draft</b></b></p>
 
 <!-- TODO: migrate style touches! --> 
 <style> 
+
+.exec_container {
+    padding: 5px;
+    background-color: whitesmoke
+}
+
+.exec_header {
+    margin-top: 0px;
+    color: maroon;
+}
 
 .exhibit_container {
     margin-left: auto; 
@@ -112,37 +122,49 @@
 
 </style>
 
-<h2 class="section-heading">Executive Summary</h2>
+<div class="exec_container">
+<h2 class="section-heading exec_header">Executive Summary</h2>
 
+<p>
 <ul>
-    <li> Crime has decreased by over 30% since 2002
-    <li> The benefits of this decrease have largely been absent from the worst-off populations, leading to an increase in crime inequality
-    <li> Violent crime is a particular issue, as it has decreased the least of all major crime categories, and remains extremely concentrated in distressed areas
-    <li> ... (needs more?)
-</ul>
-
-<h2 class="section-heading">Introduction</h1>
-
-<ul>
-    <li> Inequality in America: wealth. GDP growing, markets peaking, but median incomes are stubborn
-    <li> Inequality in America: education -- high school graduation rates, college, problem of high cost of college and impending automation wave (education crisis)
-    <li> Here we look at inequality in a different lens, considering the crime inequality in Chicago, and how that inequality has been changing over the past 15 years. 
-    <li> We are able to do this by synthesizing the millions of crimes that have occurred over the past decades.
-    <li> Goals of crime synthesis
+    <li> Crime in Chicago has decreased by over 30% since 2002
+    <li> Simultaneously, the crime Gini coefficient nontrivially increased from 0.31 to 0.35, indicating a rise in crime inequality
         <ul>
-            <li> Understand how crime inequality is changing
+        <li> Crimes rates among the worst-off populations have decreased slower than average, with virtually no crime reduction in some neighborhoods
         </ul>
-    <li> Within this framework, we look to understand how crime is now, and how things have been changing over time
+    <li> Violent crime is a particular issue, as it has decreased the least of all major crime categories, and remains extremely concentrated in distressed areas
+        <ul>
+        <li> Because of the Violent crime holdout, the typical crime in Chicago has worsened in recent years
+        </ul>
+    <li> Crime measurements accounted for the seriousness, or severity, of crimes as opposed the most common municpal disclosures which simply report total crime count per person
 </ul>
+</p>
+
+</div>
+
+<h2 class="section-heading">Wealth Inequality Motivates a Look at Crime Inequality</h2>
+
+<p><font color="red">Do I want this to be so gradeur.. or should I just focus on crime?</font></p>
+
+<p><font color="red">Need to inline references</font></p>
+
+<p>
+In the fifty years following WWI, the US experienced a remarkable renormalization of wealth shepherded by enormous population and productivity gains, the creation of a middle class, and general quality of life improvements for nearly the entire population. However, more recently, as the US became increasingly developed, capital has begun concentrating back to the wealthiest populations</p>
+
+<p>The concentration of wealth from the 1960's through the 1990's happened while real median incomes continued to rise, meaning the continued economic growth was shared in some part with the general population. However, from the 2000's to the present, real median incomes in the US have stagnated while the US economy has in general expanded. As of the last 20 years, virtually all of the benefits of economic growth have been channelled to the wealthiest Americans, bolstering wealth inequality.
+</p>
+
+<p>This prompted a look at crime and crime equality, with a lens on Chicago: a city with particularly unfortunate class gaps in wealth, education, and crime. How concentrated is crime among the distressed? How has the concentration changed over time? Have conditions been broadly improving? These are the sort of questions explored below. While not attempting to venture into the interplay between crime and income, why observed crime trends have transpired, or what the future holds, we hope that you can get a taste of the fact that crime equality, like wealth equality, too is eroding, and that some populations are being left behind.
+</p>
 
 <h2 class="section-heading">Synthesizing Crimes</h2>
 
 <p>
-Understanding crime holistically definitively means we need to focus on themes rather than details -- that is, we need to look at aggregates of crime. This requires an apples-to-apples comparison of crimes. Typically, municipalities report their total crime in terms of crime occurrence (the number of crimes per year). This was wholly unsatisfying.
+The central dataset for this study is a nearly <a href="https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2">comprehensive dataset of reported crimes in Chicago since 2001</a>, generously provided by the CPD. Note, however, that this dataset contains over 6.5 million reported incidents as of January 2018, and these incidents come in hundreds of different varieties. There's a lot of data here, and it needs to be synthesized. That is, we need to look at aggregates of crime. This requires an apples-to-apples comparison of crimes. Typically, municipalities report their total crime in terms of crime occurrence (the number of crimes per year). This was wholly unsatisfying.
 </p>
 
 <p>
-For example, there were <font color="red">XX</font> incidents of Vandalism in 2017 and <font color="red">YY</font> incidents of Robbery. Which is a bigger problem? How much total crime was there? If there are 500 fewer Vandalism incidents, but 500 more Robbery incidents (Robbery being a far more serious crime), has crime stayed constant, or has it increased?
+For example, there were <font color="red">XX</font> incidents of Vandalism and <font color="red">YY</font> incidents of Robbery in 2017. Which is a bigger problem? How much total crime was there? If there are 500 fewer Vandalism incidents, but 500 more Robbery incidents (Robbery being a far more serious crime), has crime stayed constant, or has it increased?
 </p>
 
 <p>
@@ -150,18 +172,11 @@ Furthermore, in order to look at crime distributions and inequality, we need to 
 This motivates a framework for synthesizing crime rates, so that we can aggregate crimes of different types, and be able to look at and compare broad groups of crimes. Note that here we are interested in the long-term behavior of crime in Chicago.
 </p>
 <ul>
-    <li> Focus on what the pieces tell you, not the pieces themselves
-        <ul>
-            <li> Look at Total city crime and the three major crime categories: Property Crime, Crime against Society, and Violent Crime
-            <li> Seasonally adjust the crime rates to remove distracting repeated annual variation
-        </ul>
+    <li> Focus on categories rather than details; look at Total city crime and the three major crime types: Property Crime, Crime against Society, and Violent Crime
+    <li> Seasonally adjust the crime rates to remove distracting mean-reverting, periodic variation
     <li> All crimes not created equal: in order to compare and attribute crimes we weight crimes by how severe they are
     <li> Crimes affect a community: when crimes are happening around you, you are affected indirectly (culture, children) or directly (a victim)
 </ul>
-
-<p>
-In order to size up a single crime as reported we used the average crime sentencing from a dataset of Cook County crime sentencing heroically gathered by the <a href="http://convictions.smartchicagoapps.org/#intro">Convicted in Cook</a> team. The convictions data for 2005 to 2009 was gathered by working with the Chicago courts over a 2 year period. Note, however, there's a difference between crime convictions according to the Illinois Compiled Statutes (ILCS codes) and the crime as reported via the Illinois Uniform Crime Reporting (IUCR codes). These are not exactly corresponding, since much of the sentencing is determined in court as details of the case (actual infringement, crime intent, etc.) are elucidated. Nevertheless, we could correspond the sentencing information (ILCS) with the reported crime (IUCR) via another <a href="https://github.com/sc3/python-iucr">heroic effort</a>.
-</p>
 
 <p>
 Below you can see how weighting crimes by their sentencing in fact changes how prevalent different crimes are. In particular, Property crimes are underestimated when looking at frequency alone. Crime against Society is dramatically reduced when weighting by crime severity, which is understandable as these are not Index crimes (serious crimes or crimes with malicious intent). We also show a slightly more granular view of the crimes in the three major crime categories to get a sense of their composition. 
@@ -181,11 +196,18 @@ Below you can see how weighting crimes by their sentencing in fact changes how p
 
 </div>
 
+<h2 class="section-subheading">Click Down on Data Sources and Aggregation Specifics (optional)</h2>
 <p>
-Other decisions regarding crime synthesis were handling seasonality and crime distribution among the population. We handled seasonality by looking at crimes via a one year moving average -- this is a simple way to remove both seasonal variation and random variation. We assumed that the population in a <a href="https://en.wikipedia.org/wiki/Community_areas_in_Chicago">Chicago Community Area</a> was equally affected by crimes in the community area. Community areas were used because they have not been redistricted through time, unlike regions like Chicago Wards or Congressional Districts, and because Community Areas correspond to familiar neighborhoods.
+Regarding seasonality, we looked at crimes via a one year moving average -- this is a simple way to remove both seasonal variation and random variation. Note that because our data begins in 2001, our one year moving average begins on January 2002, and represents crimes for the <i>preceding</i> year and is a lagging indicator.</p>
+
+<p>To produce crime distributions at a point in time, we assumed that the people in a <a href="https://en.wikipedia.org/wiki/Community_areas_in_Chicago">Chicago Community Area</a> were uniformly affected by recent crimes in their Community Area. Community areas were used because they have not been redistricted through time, unlike regions like Chicago Wards or Congressional Districts, and because Community Areas correspond to familiar neighborhoods.
 </p>
 
-<h2 class="section-heading">Measuring Crime and Crime Inequality</h2>
+<p>
+In order to size up a single crime as reported we used the average crime sentencing from a dataset of Cook County crime sentencing heroically gathered by the <a href="http://convictions.smartchicagoapps.org/#intro">Convicted in Cook</a> team. The convictions data for 2005 to 2009 was gathered by working with the Chicago courts over a 2 year period. Note, however, there's a difference between crime convictions according to the Illinois Compiled Statutes (ILCS codes) and the crime as reported via the Illinois Uniform Crime Reporting (IUCR codes). These are not exactly corresponding, since much of the sentencing is determined in court as details of the case (actual infringement, crime intent, etc.) are elucidated. Nevertheless, we could correspond the sentencing information (ILCS) with the reported crime (IUCR) via another <a href="https://github.com/sc3/python-iucr">heroic effort</a>. Demographics information were gathered from <a href="http://www.robparal.com/ChicagoCommunityAreaData.html">aggregations by Rob Paral</a>, where Census and American Community Survey data were summarized to Chicago Community Areas from Census Tracts.
+</p>
+
+<h2 class="section-heading">Measuring Crime and Crime Inequality Through Time</h2>
 
 <p>
 To build on the above method of being able to compare crimes <i>relatively</i>, we need an <i>objective</i> measurement of how much crime any given person is experiencing in a given neighborhood. This measurement we call <i>Crime Intensity</i> and aims to measure how much total crime there is per person per year, and varies through time geographically throughout the city. From this, we can look at distributions among the Chicago population. In plain English, this means ... 
@@ -193,10 +215,10 @@ To build on the above method of being able to compare crimes <i>relatively</i>, 
 
  <blockquote style="text-align: center; color: black;">Crime Intensity = (# years served) / person if average prison sentence served in full for every crime reported</blockquote>
 
-<p>Before we dive into the exhibit below capturing crime levels, distributions, and inequality over time, let us develop a little bit of intuition behind these numbers. Lets look at a Total Crime Intensity of 0.15, similar to the Chicago long term average, as an example. Assuming the fraction of the population in serving sentences is unchanged, this would correspond to 15% of the population serving sentences at any given time.
+<p>Before we dive into the exhibit below capturing crime levels, distributions, and inequality over time, let us develop a little bit of intuition behind these numbers. Lets consider a Total Crime Intensity of 0.15, similar to the Chicago long term average (as you will see in Exhibit 3), as an example. Assuming the fraction of the population in serving sentences is unchanged, this would correspond to 15% of the population serving sentences at any given time.
 </p>
 
-<p> That means, if every crime reported was served in full, 15% of Chicago would be in prison. This is clearly a huge number as nationally in the USA this rate is 1%. This is because, in fact, most crimes are unsolved, and most sentences are not served in full. When we look at the arrest rate for a reported crime (28% in Chicago), the fraction of prison sentence served (75% nationally) and the fraction of arrests leading to conviction (75% nationally), we end up with 2% of Chicago in prison. This is far closer to the national average. Further noting that Chicago is an urban population with a large Black population, which unfortunately has a far higher prison rate than other races, this objective Crime Intensity number makes a lot of sense.
+<p> That means, if every crime reported was served in full, our measurement indicates 15% of Chicago would be in prison. This is clearly a huge number as nationally in the USA this rate is 1%. This is because, in fact, most crimes are unsolved, and most sentences are not served in full. When we look at the arrest rate for a reported crime (28% in Chicago), the fraction of prison sentence served (75% nationally) and the fraction of arrests leading to conviction (75% nationally), we end up with 2% of Chicago in prison. This is far closer to the national average. Further noting that Chicago is an urban population with a large Black population, which unfortunately has a far higher prison rate than other races, this objective Crime Intensity number makes a lot of sense.
 </p>
 
 <p>
@@ -242,7 +264,7 @@ Another way to gauge inequality is with the <b>Gini coefficient</b>, which is re
 Since 2002, where our measurements begin, crime throughout the city has reduced dramatically, yet inequality still remains high and rising.
 
 <ul>
-    <li> Crime is felt highly unevenly throughout the city: the high crime quartile experiences over <b>5x</b> the crime as the low-crime quartile
+    <li> Crime is felt highly unevenly throughout the city: the high crime quartile experiences over 5x the crime as the low-crime quartile
     <li> This inequality has increased measurably since 2002, where our measurements begin
     <li> Total crime is down by over 30%, and dramatic progress has been made against crime in general in Chicago
 </ul>
@@ -254,10 +276,6 @@ Adding some color to these measurements, the increase in Total crime inequality 
 
 <p>
 It also is worth mentioning that, while not shown here, the average severity of a crime has in fact increased over time. This is due to the fact that nonviolent crimes have dropped whereas violent crimes, which typically are higher severity than the average crime, have only mildly decreased.
-</p>
-
-<p>
-In essence a reasonable analogy to the behavior we see with Crime is in fact US incomes. Over the past decades in the US, as noted in <a href="https://fred.stlouisfed.org/series/MEHOINUSA672N">research by the Fed</a>, median incomes in the USA have remained flat despite significant economic growth. That is, the benefits of economic growth has not translated into higher earnings overall. This is not to say that the crime situation in Chicago is a result of diverging classes in the US, but the parallel is nonetheless interesting.
 </p>
 
 <p>
@@ -363,38 +381,44 @@ These archetypes can be explored in the following exhibit.
 
 </div>
 
-            <h2 class="section-heading">Challenges, Unknowns, and Caveats</h2>
-            <ul>
-                <li> Note on const approximation -- examples of gradients in crime, large intra-community crime variation, people working vs not ...
-                <li> Lack of exact sentencing data, mapping to ILCS was nontrivial and made approximations
-                <li> Potentially missing other factors necessary for normalization (i.e. am I not apples to apples through time), such as shifting demographics, crime reporting policy changes, secular shifts in confounding variables like weather. Also missing things like contextualization relative to rest of USA or developed world.
-                <li> Note: believe none of these is significant enough to affect conclusions
-            </ul>
+<h2 class="section-heading">Challenges, Unknowns, and Caveats</h2>
 
-            <h2 class="section-heading">Next Steps</h2>
-            <ul>
-                <li> Drivers, drivers, drivers..... politics? incomes? fleeing population?
-                <li> Challenges? Debt? Institutions? Education? Culture?
-                <li> Exploration of drivers and understanding top reasons why inequality has changed
-                <li> Get a better measure of crime severity + how to source it (such as working with CPD to get real convictions info)
-                <li> Holistic measurements of wealth, including real estate value, foreclosures + how to source it
-                <li> Relationship between crime and demographics change -- which populations are growing and shrinking? Which age groups? Which income levels?
-                <li> Effects of education + how to source it
-            </ul>
+<p> There were many measurement decisions made to compile these results, producing bases to the ideal concepts of crime levels and distributions. While we do not believe any of the below is significant enough to radically alter the conclusions of the work, we present some of the implications and exploration of key measurement decisions or unknowns.
+</p>
 
-            <h2 class="section-heading">Data Sources and Source Code</h2>
-            <ul>
-                <li> Link to github source
-                <li> Explanations of major data sourcing
-            </ul>
-            
-            <h2 class="section-heading">Related Work Investigating Crime in Chicago</h2>
-            <ul>
-                <li> <a href="http://crime.chicagotribune.com/">http://crime.chicagotribune.com/</a>
-                <li> <a href="http://www.chicagohealthatlas.org/">http://www.chicagohealthatlas.org/</a>
-                <li> <a href="http://convictions.smartchicagoapps.org/">http://convictions.smartchicagoapps.org/</a>
-                <li> <a href="http://tableaupicasso.com/chicago-crime-scene/">http://tableaupicasso.com/chicago-crime-scene/</a>
-            </ul>
+<p>Regarding the approximation that crime is felt uniformly in a neighborhood, there are multiple ways that this approximation is challenged. For example, in areas with high changes in crime, where for example bordering neighborhoods have very different crime levels. Furthermore, other demographic factors like working versus unemployed or different age groups will all effect how crime is concentrated even within a single neighborhood.
+</p>
+
+<p>We also did not have exact sentencing data, as it would have been difficult to source the resulting sentence from the Office of the Chief Judge in Cook County. As such, we resorted to associating crime with a separate dataset whose correspondence (ILCS to IUCR) with the base dataset was nontrivial. The sentencing dataset might not have been representative, or the mapping to our base dataset might have introduced errors.</p>
+
+<p>Also, as the nature of crime, crime inequality, and changes through time were all not fundamentally understood, there is a possibility that there are confounding variables that, once appropriately taken into account, affect the normalization and alter the crime measurements. Some examples of this include shifting demographics (like an aging population), changes in crime policy or crime reporting standards, or hysterisis from external driving factors like the weather.
+</p>
+
+<h2 class="section-heading">Next Steps</h2>
+
+<p><font color="red">Still brainstorming what to put below</font></p>
+
+<ul>
+    <li> Drivers? Challenges? Debt? Institutions? Education? Culture?
+    <li> Get a better measure of crime severity + how to source it (such as working with CPD to get real convictions info)
+    <li> Additional data triangulations, such as holistic measurements of wealth, including real estate value, foreclosures + how to source it, education trends
+    <li> Relationship between crime and demographics change -- which populations are growing and shrinking? Which age groups? Which income levels?
+    <li> What is happening in the rest of the USA? Is it the same or different than Chicago? Can this help identify drivers?
+</ul>
+
+<h2 class="section-heading">More on Data Sources and Source Code</h2>
+<ul>
+    <li> Link to github source
+    <li> More details on how data was munged? 
+</ul>
+
+<h2 class="section-heading">Related Work Investigating Crime in Chicago</h2>
+<ul>
+    <li> <a href="http://crime.chicagotribune.com/">http://crime.chicagotribune.com/</a>
+    <li> <a href="http://www.chicagohealthatlas.org/">http://www.chicagohealthatlas.org/</a>
+    <li> <a href="http://convictions.smartchicagoapps.org/">http://convictions.smartchicagoapps.org/</a>
+    <li> <a href="http://tableaupicasso.com/chicago-crime-scene/">http://tableaupicasso.com/chicago-crime-scene/</a>
+</ul>
 
 
             <!--
