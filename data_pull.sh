@@ -27,3 +27,6 @@ echo -e "${echo_fmt_set}NIBRS mapping already curated and present in repository$
 
 # Demographics data in github already; adapted from http://www.robparal.com/ChicagoCommunityAreaData.html
 echo -e "${echo_fmt_set}Rob Paral demographics already curated and present in repository${echo_fmt_reset}"
+
+# Income data in github already; adapted from http://www.robparal.com/ChicagoCommunityAreaData.html
+echo -e "${echo_fmt_set}Rob Paral income already curated and present in repository${echo_fmt_reset}"
