@@ -7,7 +7,7 @@ echo_fmt_reset="\e[0m\n"
 echo -e "${echo_fmt_set}Pulling data dependencies...${echo_fmt_reset}"
 
 echo -e "${echo_fmt_set}==> Pulling raw reported crimes..."
-#wget "https://data.cityofchicago.org/api/views/ijzp-q8t2/rows.csv" -O data/chicago_crime_data.csv
+wget "https://data.cityofchicago.org/api/views/ijzp-q8t2/rows.csv" -O data/chicago_crime_data.csv
 
 echo -e "${echo_fmt_set}==> Pulling Chicago Community Area geography...${echo_fmt_reset}"
 # community area geo json
