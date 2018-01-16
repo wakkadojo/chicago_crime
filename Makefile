@@ -1,7 +1,7 @@
 HOST=$(shell hostname)
 BASEDIR=$(shell pwd)
 DATADIR=$(BASEDIR)/data
-nbx := jupyter nbconvert --execute --to notebook
+nbx := jupyter nbconvert --execute --ExecutePreprocessor.timeout=1000 --to notebook
 
 .PHONY: data
 
