@@ -10,6 +10,10 @@ echo -e "${echo_fmt_set}Pulling data dependencies...${echo_fmt_reset}"
 echo -e "${echo_fmt_set}==> Pulling raw reported crimes...${echo_fmt_reset}"
 wget "https://data.cityofchicago.org/api/views/ijzp-q8t2/rows.csv" -O data/chicago_crime_data.csv
 
+# Beat geo json
+echo -e "${echo_fmt_set}==> Pulling Chicago police beat geography...${echo_fmt_reset}"
+wget "https://data.cityofchicago.org/api/geospatial/aerh-rz74?method=export&format=GeoJSON" -O data/chicago_beat_geo_data.json
+
 # community area geo json
 echo -e "${echo_fmt_set}==> Pulling Chicago Community Area geography...${echo_fmt_reset}"
 wget "https://data.cityofchicago.org/api/geospatial/cauq-8yn6?method=export&format=GeoJSON" -O data/chicago_commarea_geo_data.json
