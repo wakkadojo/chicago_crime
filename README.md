@@ -14,7 +14,11 @@ make data
 make process
 ```
 
-**Note that in order to run the entire analysis, you will need 10GB of RAM**, as it is not set up to process subsets: the code processes all 7-ish million crimes at once, each containing multiple string fields and all of this with significant python overhead.
+**Note that in order to run the entire analysis, you will need 10GB of RAM**, as it is not set up to process subsets: the code processes all 7-ish million crimes at once, each containing multiple string fields and all of this with significant python overhead. 
+
+The total time to pull the data dependencies is roughly 10 minutes on a 1MB/s connection. Note that some data dependencies (chiefly Rob Paral's census data aggregations) are not systematic, but can be made so with some work.
+
+The total time to run the calculations is roughly 25 minutes on a medium powered laptop.
 
 ## Hosting the website
 
