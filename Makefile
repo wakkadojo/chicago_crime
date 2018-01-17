@@ -6,9 +6,9 @@ nbx := jupyter nbconvert --execute --ExecutePreprocessor.timeout=1000 --to noteb
 .PHONY: data
 
 process:
-	#$(nbx) Crime_Severity.ipynb
-	#$(nbx) Rob_Paral_Data_Preprocessing.ipynb
-	#$(nbx) Crime_Preprocess.ipynb
+	$(nbx) Crime_Severity.ipynb
+	$(nbx) Rob_Paral_Data_Preprocessing.ipynb
+	$(nbx) Crime_Preprocess.ipynb
 	$(nbx) City_Profile.ipynb
 
 data:
