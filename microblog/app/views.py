@@ -14,7 +14,7 @@ from app import app
 
 @app.route('/')
 @app.route('/index')
-@app.route('/chicago')
+#@app.route('/chicago')
 def chicago():
     return render_template(
         "chicago.html", 
