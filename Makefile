@@ -14,3 +14,15 @@ process:
 data:
 	./data_pull.sh
 
+dependencies:
+	pip install numpy
+	pip install rtree
+	pip install pandas
+	pip install geopandas
+	pip install shapely
+	pip install matplotlib
+	pip install seaborn
+	pip install flask
+	pip install git+https://github.com/sc3/python-iucr.git
+	pip install git+https://github.com/sc3/python-ilcs.git
+	pip install nbconvert
