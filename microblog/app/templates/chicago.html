@@ -49,7 +49,7 @@
 
 .exhibit_description {
     font-style: italic;
-    color: #777;
+    color: #333;
     margin-bottom: 20px;
     line-height: 1.2em;
 }
@@ -128,9 +128,9 @@
 <p>
 <ul>
     <li> Crime in Chicago has decreased by over 30% since 2002
-    <li> Simultaneously, the crime Gini coefficient nontrivially increased from 0.31 to 0.35, indicating a rise in crime inequality
+    <li> Crimes rates among the worst-off populations have decreased slower than average, with virtually no crime reduction in some neighborhoods; this is directly responsible for the increase in crime inequality
         <ul>
-        <li> Crimes rates among the worst-off populations have decreased slower than average, with virtually no crime reduction in some neighborhoods
+        <li> We further measured the crime inequality with a crime Gini coefficient, which also captured this trend
         </ul>
     <li> Violent crime is a particular issue, as it has decreased the least of all major crime categories, and remains extremely concentrated in distressed areas
         <ul>
@@ -142,19 +142,68 @@
 
 </div>
 
+<h2 class="section-heading">Painting Crime Measurements on the Chicago Canvas</h2>
+
+<p>
+To illuminate the crime levels and crime inequality we measured, lets look at the different communities in the city in the context of the crime they experience. Strikingly, but not surprisingly, the high-, average-, and low-crime neighborhoods divide the city into three geographically and demographically segregated worlds:
+    <ul>
+        <li><b>Affluents:</b> A mostly white population, and the only subgroup experiencing population growth; this archetype has low crime rates, has experienced dramatic increases in earnings, and has surprisingly experienced a recent uptick in crime
+        <li><b>Diverse Middle Class:</b> A mixed-race middle-class population comprising half the city and representative of the mean crime trends
+        <li><b>Distressed:</b> Predominantly Black population with the highest crime rate and elevated Violent crime; The only archetype with shrinking incomes and some neighborhoods that experienced little to no crime reduction since 2002
+    </ul>
+</p>
+            
+<div class="exhibit_container">
+<div class="exhibit_header"><b>Exhibit 1:</b> Three worlds in Chicago</div>
+<div class="exhibit_description">
+    <div>Click on the three archetypes on the left to explore</div>
+    <div>Hover over a bubble on the map for neighborhood details</div>
+</div>
+
+            <table id="crime_archetype_tbl" cellpadding="5">
+                <col width="225">
+                <col width="575">
+                <tr>
+                <td id="affluents_arch_cell" class="archetype_selector_cell">
+                    <div class="archetype_name_tbl">The Affluents</div>
+                    <div class="archetype_description_tbl">Growing population of top-earners seeing the best long-term improvements in crime and income</div>
+                </td>
+                    <td rowspan=3 id="crime_ineq_selected_map">
+                        <svg width="550" height="450" style="margin-left: auto; margin-right: auto; display: block;"></svg>
+                    </td>
+                </tr>
+                <tr><td id="working_arch_cell" class="archetype_selector_cell">
+                    <div class="archetype_name_tbl">The Diverse Working Class</div>
+                    <div class="archetype_description_tbl">Middle class of Chicago experiencing modest income and marked crime improvements</div>
+                </td></tr>
+                <tr><td id="distressed_arch_cell" class="archetype_selector_cell">
+                    <div class="archetype_name_tbl">The Distressed</div>
+                    <div class="archetype_description_tbl">Crime is high, flat or decreasing slowly, and incomes are flat or decreasing</div>
+                </td></tr>
+            </table>
+
+            <!-- slight break before autotext -->
+            <p></p> 
+            
+            <div id="archetype_autotext_div" class="autotext" style="width: 800; height: 125; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
+            <script type="text/javascript" src="static/js/d3viz/archetype.js"></script>
+
+</div>
+
+
 <h2 class="section-heading">Wealth Inequality Motivates a Look at Crime Inequality</h2>
 
 <p><font color="red">Do I want this to be so gradeur.. or should I just focus on crime?</font></p>
 
 <p><font color="red">Need to inline references</font></p>
 
-<p>
-In the fifty years following WWI, the US experienced a remarkable renormalization of wealth shepherded by enormous population and productivity gains, the creation of a middle class, and general quality of life improvements for nearly the entire population. However, more recently, as the US became increasingly developed, capital has begun concentrating back to the wealthiest populations</p>
+<p>We begin jumping into the crime measurements by noting what initially piqued interest in a look at crime equality in Chicago: wealth equality. While the growth of the middle class provided dramatic quality of life improvements and productivity growth in the first half of the 20th century, it, and wealth equality, has been under siege in the US for decades.
+</p>
 
 <p>The concentration of wealth from the 1960's through the 1990's happened while real median incomes continued to rise, meaning the continued economic growth was shared in some part with the general population. However, from the 2000's to the present, real median incomes in the US have stagnated while the US economy has in general expanded. As of the last 20 years, virtually all of the benefits of economic growth have been channelled to the wealthiest Americans, bolstering wealth inequality.
 </p>
 
-<p>This prompted a look at crime and crime equality, with a lens on Chicago: a city with particularly unfortunate class gaps in wealth, education, and crime. How concentrated is crime among the distressed? How has the concentration changed over time? Have conditions been broadly improving? These are the sort of questions explored below. While not attempting to venture into the interplay between crime and income, why observed crime trends have transpired, or what the future holds, we hope that you can get a taste of the fact that crime equality, like wealth equality, too is eroding, and that some populations are being left behind.
+<p>This prompted us to dive into crime and crime equality, with a lens on Chicago: a city with particularly unfortunate class gaps in wealth, education, and crime. How concentrated is crime among the distressed? How has the concentration changed over time? Have conditions been broadly improving? These are the sort of questions explored below. While not attempting to venture into the interplay between crime and income, why observed crime trends have transpired, or what the future holds, we hope that you can get a taste of the fact that crime equality, like wealth equality, too is eroding, and that some populations are being left behind.
 </p>
 
 <h2 class="section-heading">Synthesizing Crimes</h2>
@@ -183,7 +232,7 @@ Below you can see how weighting crimes by their sentencing in fact changes how p
 </p>
 
 <div class="exhibit_container">
-    <div class="exhibit_header"><b>Exhibit 1:</b> Sizing crimes by severity transforms prevalence</div>
+    <div class="exhibit_header"><b>Exhibit 2:</b> Sizing crimes by severity transforms prevalence</div>
     <div class="exhibit_description">
         <div>Bubble size indicates how prevalent a given crime is for the specified weighting</div>
         <div>Hover mouse over crime category (Property/Society/Violent) for a breakout of crime descriptions</div>
@@ -215,7 +264,7 @@ To build on the above method of being able to compare crimes <i>relatively</i>, 
 
  <blockquote style="text-align: center; color: black;">Crime Intensity = (# years served) / person if average prison sentence served in full for every crime reported</blockquote>
 
-<p>Before we dive into the exhibit below capturing crime levels, distributions, and inequality over time, let us develop a little bit of intuition behind these numbers. Lets consider a Total Crime Intensity of 0.15, similar to the Chicago long term average (as you will see in Exhibit 3), as an example. Assuming the fraction of the population in serving sentences is unchanged, this would correspond to 15% of the population serving sentences at any given time.
+<p>Before we dive into the exhibit below capturing crime levels, distributions, and inequality over time, let us develop a little bit of intuition behind these numbers. Lets consider a Total Crime Intensity of 0.15, similar to the Chicago long term average (as you will see in Exhibit 4), as an example. Assuming the fraction of the population in serving sentences is unchanged, this would correspond to 15% of the population serving sentences at any given time.
 </p>
 
 <p> That means, if every crime reported was served in full, our measurement indicates 15% of Chicago would be in prison. This is clearly a huge number as nationally in the USA this rate is 1%. This is because, in fact, most crimes are unsolved, and most sentences are not served in full. When we look at the arrest rate for a reported crime (28% in Chicago), the fraction of prison sentence served (75% nationally) and the fraction of arrests leading to conviction (75% nationally), we end up with 2% of Chicago in prison. This is far closer to the national average. Further noting that Chicago is an urban population with a large Black population, which unfortunately has a far higher prison rate than other races, this objective Crime Intensity number makes a lot of sense.
@@ -231,7 +280,7 @@ Examples of these measures is shown below to help understand how crime distribut
 </p>
 
 <div class="exhibit_container">
-<div class="exhibit_header"><b>Exhibit 2:</b> Toy example of inequality measures</div>
+<div class="exhibit_header"><b>Exhibit 3:</b> Toy example of inequality measures</div>
 <div class="exhibit_description">
     <div>
         Play around by dragging the tops of the bars in the four neighborhoods
@@ -283,7 +332,7 @@ Feel free to interactively explore these measurements below. You are able to loo
 </p>
             
 <div class="exhibit_container">
-    <div class="exhibit_header"><b>Exhibit 3:</b> Crime down amid rising inequality</div>
+    <div class="exhibit_header"><b>Exhibit 4:</b> Crime down amid rising inequality</div>
     <div class="exhibit_description">
         <div>Click on graph legend <b>Gini coefficient</b> or <b>Crime ratio</b> to explore the different inequality measures</div>
         <div>Click on graph legend crime type to view inequality measures for crime sub-categories</div>
@@ -330,57 +379,6 @@ Feel free to interactively explore these measurements below. You are able to loo
     <div id="crime_top_bot_autotext_div" class="autotext" style="width: 800; height: 170; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
     <script type="text/javascript" src="static/js/d3viz/crime_concentration_summary.js"></script>
 </div>
-
-<h2 class="section-heading">Painting Crime Measurements on the Chicago Canvas</h2>
-
-<p>
-To put the illuminate the crime levels and crime inequality we measured, lets paint a portrait of the different communities in the city in the context of the crime experienced. Strikingly, but unfortunately not incredibly surprising, looking at the high-, average-, and low-crime groups of neighborhoods divides the city into three geographically and demographically segregated worlds:
-    <ul>
-        <li><b>Affluents:</b> A mostly white population, and the only subgroup experiencing population growth. This archetype has low crime rates, has experienced dramatic increases in earnings, and has surprisingly experienced a recent uptick in crime.
-        <li><b>Diverse Middle Class:</b> A mixed-race middle-class population comprising half the city and representative of the mean crime trends.
-        <li><b>Distressed:</b> Predominantly Black population with the highest crime rate and elevated Violent crime. The only archetype with shrinking incomes and some neighborhoods that experienced little to no crime reduction since 2002.
-    </ul>
-
-These archetypes can be explored in the following exhibit.
-</p>
-            
-<div class="exhibit_container">
-<div class="exhibit_header"><b>Exhibit 4:</b> Three worlds in Chicago</div>
-<div class="exhibit_description">
-    <div>Click on the three archetypes on the left to explore</div>
-    <div>Hover over a bubble on the map for neighborhood details</div>
-</div>
-
-            <table id="crime_archetype_tbl" cellpadding="5">
-                <col width="225">
-                <col width="575">
-                <tr>
-                <td id="affluents_arch_cell" class="archetype_selector_cell">
-                    <div class="archetype_name_tbl">The Affluents</div>
-                    <div class="archetype_description_tbl">Growing population of top-earners seeing the best long-term improvements in crime and income</div>
-                </td>
-                    <td rowspan=3 id="crime_ineq_selected_map">
-                        <svg width="550" height="450" style="margin-left: auto; margin-right: auto; display: block;"></svg>
-                    </td>
-                </tr>
-                <tr><td id="working_arch_cell" class="archetype_selector_cell">
-                    <div class="archetype_name_tbl">The Diverse Working Class</div>
-                    <div class="archetype_description_tbl">Middle class of Chicago experiencing modest income and marked crime improvements</div>
-                </td></tr>
-                <tr><td id="distressed_arch_cell" class="archetype_selector_cell">
-                    <div class="archetype_name_tbl">The Distressed</div>
-                    <div class="archetype_description_tbl">Crime is high, flat or decreasing slowly, and incomes are flat or decreasing</div>
-                </td></tr>
-            </table>
-
-            <!-- slight break before autotext -->
-            <p></p> 
-            
-            <div id="archetype_autotext_div" class="autotext" style="width: 800; height: 125; margin-left: auto; margin-right: auto; display: table;">&nbsp;</div>
-            <script type="text/javascript" src="static/js/d3viz/archetype.js"></script>
-
-</div>
-
 <h2 class="section-heading">Challenges, Unknowns, and Caveats</h2>
 
 <p> There were many measurement decisions made to compile these results, producing bases to the ideal concepts of crime levels and distributions. While we do not believe any of the below is significant enough to radically alter the conclusions of the work, we present some of the implications and exploration of key measurement decisions or unknowns.
