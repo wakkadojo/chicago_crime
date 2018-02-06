@@ -3,6 +3,7 @@ from flask_sendgrid import SendGrid
 from app import app
 import os
 import json
+import sys
 
 @app.route('/')
 @app.route('/index')
@@ -15,16 +16,19 @@ def chicago():
     )
 
 def send_email(name, email, message):
+
+    app_tmp = Flask(__name__)
+    sys.stderr.write(os.environ['SENDGRID_KEY'])
+
     msg = 'Name: ' + name + '\n\n'
     msg += 'Email: ' + email + '\n\n'
     msg += message
 
-    if os.path.exists('app/static/mail/sendgrid_api.json'):
+    if os.path.exists('static/mail/sendgrid_api.json'):
 
-        with open('app/static/mail/sendgrid_api.json') as f:
+        with open('static/mail/sendgrid_api.json') as f:
             api_key = json.loads(f.read())['key']
 
-        app_tmp = Flask(__name__)
         app_tmp.config['SENDGRID_API_KEY'] = api_key
         app_tmp.config['SENDGRID_DEFAULT_FROM'] = 'chicago@crimeinequality.com'
         sendgrid = SendGrid(app_tmp)
