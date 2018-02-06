@@ -23,6 +23,7 @@ dependencies:
 	pip install matplotlib
 	pip install seaborn
 	pip install flask
+	pip install flask-sendgrid
 	pip install jupyter
 	pip install git+https://github.com/sc3/python-iucr.git
 	pip install git+https://github.com/sc3/python-ilcs.git
