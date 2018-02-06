@@ -34,7 +34,7 @@ function make_inequality_toy_example() {
 
     var canvas = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")"),
         bar_canvas = canvas.append("g").attr("transform", "translate(" + ((width - axis_width)/2) + ",0)"),
-        lorenz_canvas = canvas.append("g").attr("transform", "translate(" + ((width - axis_width)/2) + "," + (125 + bar_base + axis_height) + ")");
+        lorenz_canvas = canvas.append("g").attr("transform", "translate(" + ((width - axis_width)/2) + "," + (120 + bar_base + axis_height) + ")");
 
     var drag = d3.drag()
         .on("drag", function(d) {
@@ -183,6 +183,16 @@ function make_inequality_toy_example() {
         .attr("transform", "translate("+(axis_width/2)+"," + (-axis_height - 30) + ")")
         .attr("class", "d3axis")
         .attr("text-anchor", "middle")
+    
+    // bar instruction
+    bar_canvas.append("text")
+        .attr("id", "bar_instruction")
+        .attr("transform", "translate("+((neighbs.length*(bar_width+bar_buffer) - bar_buffer)/2)+"," + 
+              (axis_height/3)+ ")")
+        .attr("fill", "lightgrey")
+        .attr("font-weight", "bold")
+        .attr("text-anchor", "middle")
+        .text("Drag tops of bars to vary neighborhood crime intensity")
         
     // bar labels
     bar_canvas.append("g")
@@ -225,12 +235,13 @@ function make_inequality_toy_example() {
         .attr("text-anchor", "middle")
         .attr("fill", "black")
         .text("Crime intensity")
+    /*
     bar_canvas.append("text")
         .attr("class", "d3axis")
         .attr("transform", "translate(" + (axis_width/2) + "," + (bar_base + 40) + ")")
         .attr("text-anchor", "middle")
         .attr("fill", "black")
-        .text("(Drag tops of bars to change height)")
+        .text("(Drag tops of bars to change height)")*/
 
     bar_canvas.append("line")
         .attr("x1", -bar_buffer/2).attr("x2", neighbs.length*(bar_width + bar_buffer) - bar_buffer/2)
