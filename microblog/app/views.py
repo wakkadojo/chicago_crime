@@ -17,26 +17,19 @@ def chicago():
 
 def send_email(name, email, message):
 
-    app_tmp = Flask(__name__)
-    sys.stderr.write(os.environ['SENDGRID_KEY'])
-
     msg = 'Name: ' + name + '\n\n'
     msg += 'Email: ' + email + '\n\n'
     msg += message
 
-    if os.path.exists('static/mail/sendgrid_api.json'):
-
-        with open('static/mail/sendgrid_api.json') as f:
-            api_key = json.loads(f.read())['key']
-
-        app_tmp.config['SENDGRID_API_KEY'] = api_key
-        app_tmp.config['SENDGRID_DEFAULT_FROM'] = 'chicago@crimeinequality.com'
-        sendgrid = SendGrid(app_tmp)
-        sendgrid.send_email(
-            to_email=[{'email': 'jake.ellowitz@gmail.com'}],
-            subject='Chicago Crime Inequality',
-            text=msg
-        )
+    app_tmp = Flask(__name__)
+    app_tmp.config['SENDGRID_API_KEY'] = os.environ['SENDGRID_KEY']
+    app_tmp.config['SENDGRID_DEFAULT_FROM'] = 'chicago@crimeinequality.com'
+    sendgrid = SendGrid(app_tmp)
+    sendgrid.send_email(
+        to_email=[{'email': 'jake.ellowitz@gmail.com'}],
+        subject='Chicago Crime Inequality',
+        text=msg
+    )
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
