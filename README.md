@@ -34,6 +34,8 @@ The `microblog` directory is your root page to host a flask server. This code al
 * matplotlib
 * seaborn
 * flask
+* flask-sendgrid
+* json
 * jupyter
 * github.com/sc3/python-iucr.git
 * github.com/sc3/python-ilcs.git
